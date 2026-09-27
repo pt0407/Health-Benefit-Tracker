@@ -99,6 +99,20 @@ def test_run_raises_on_api_error():
         agent.run(PROFILE)
 
 
+def test_insurance_check_endpoint_maps_missing_api_key_to_502(monkeypatch):
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    monkeypatch.delenv("ANTHROPIC_AUTH_TOKEN", raising=False)
+    client = anthropic.Anthropic(max_retries=0, http_client=httpx2.Client(transport=httpx2.MockTransport(
+        lambda request: pytest.fail("request should not be sent without a key"))))
+    app.dependency_overrides[get_insurance_agent] = lambda: InsuranceAgent(client=client, model="test-model")
+    try:
+        res = TestClient(app).post("/api/insurance-check", json=SAMPLE_PROFILE)
+    finally:
+        app.dependency_overrides.clear()
+    assert res.status_code == 502
+    assert "API key" in res.json()["detail"]
+
+
 def test_insurance_check_endpoint():
     app.dependency_overrides[get_insurance_agent] = lambda: InsuranceAgent(
         client=fake_client(), model="test-model"

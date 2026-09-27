@@ -118,6 +118,12 @@ class InsuranceAgent:
             )
         except anthropic.APIError as e:
             raise InsuranceAgentError(f"Claude API error: {e}") from e
+        except TypeError as e:
+            # With no ANTHROPIC_API_KEY the SDK raises TypeError while building
+            # the request, not APIError. Other TypeErrors are real bugs.
+            if "authentication" not in str(e):
+                raise
+            raise InsuranceAgentError("Claude API key is not configured") from e
         except pydantic.ValidationError as e:
             # parse() validates eagerly, so a refusal or truncated reply
             # surfaces here rather than through stop_reason.
