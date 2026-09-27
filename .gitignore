@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Secrets
+.env
+*.env
+!.env.example
+
+# Generated vector DB (rebuild with data/scripts/)
+chroma_db/
+
+# Raw scraped downloads (regenerate with data/scripts/)
+data/raw/
+
+# Node
+node_modules/
+frontend/dist/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/

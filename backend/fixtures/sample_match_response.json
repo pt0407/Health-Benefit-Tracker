@@ -1,0 +1,70 @@
+{
+  "matched_programs": [
+    {
+      "program_id": "snap_federal",
+      "program": "SNAP (Food Assistance)",
+      "confidence": "high",
+      "reason": "Your household income is about 100% of the federal poverty level, below SNAP's 130% limit for a household of 4.",
+      "monthly_value_usd": 281,
+      "application_url": "https://www.yourtexasbenefits.com",
+      "next_step": "Apply online at YourTexasBenefits.com",
+      "next_steps": [
+        {
+          "step": 1,
+          "action": "Apply online at YourTexasBenefits.com",
+          "url": "https://www.yourtexasbenefits.com",
+          "time_required": "20–30 minutes"
+        },
+        {
+          "step": 2,
+          "action": "Gather these documents before you start",
+          "documents": [
+            "Photo ID (driver's license or passport)",
+            "Proof of income (pay stubs, last 30 days)",
+            "Proof of address (utility bill or lease)",
+            "Social Security numbers for all household members"
+          ]
+        },
+        {
+          "step": 3,
+          "action": "Attend your phone or in-person interview",
+          "note": "You will be contacted within 7 days to schedule"
+        }
+      ],
+      "processing_time": "Up to 30 days",
+      "tip": "Apply even if you're unsure — the caseworker will verify eligibility",
+      "source": "USDA FNS"
+    },
+    {
+      "program_id": "chip_tx",
+      "program": "CHIP — Children's Health Insurance",
+      "confidence": "high",
+      "reason": "You have 2 children under 19 and household income is below Texas's 200% FPL limit.",
+      "monthly_value_usd": 120,
+      "application_url": "https://www.yourtexasbenefits.com",
+      "next_step": "Apply for children's coverage at YourTexasBenefits.com",
+      "next_steps": [],
+      "processing_time": "Up to 45 days",
+      "source": "Texas HHSC"
+    },
+    {
+      "program_id": "liheap_federal",
+      "program": "LIHEAP — Energy Assistance",
+      "confidence": "medium",
+      "reason": "Your income is below 150% FPL. Funding is limited and first-come, first-served.",
+      "monthly_value_usd": 117,
+      "application_url": "https://www.tdhca.texas.gov/help-for-texans",
+      "next_step": "Contact your local energy assistance provider",
+      "next_steps": [],
+      "processing_time": "Varies by provider",
+      "source": "HHS ACF"
+    }
+  ],
+  "total_estimated_annual_value": 6216,
+  "total_estimated_monthly_value": 518,
+  "program_count": 3,
+  "warnings": [
+    "You're near the SNAP income cliff. If your household income rises above $41,795/year, you may lose eligibility."
+  ],
+  "generated_at": "2026-09-27T14:32:00Z"
+}

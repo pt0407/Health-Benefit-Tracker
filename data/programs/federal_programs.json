@@ -1,0 +1,24 @@
+[
+  {
+    "program_id": "snap_federal",
+    "name": "SNAP (Food Stamps)",
+    "type": "federal",
+    "category": "nutrition",
+    "description": "Monthly food assistance loaded onto an EBT card for low-income households.",
+    "eligibility": {
+      "income_limit_pct_fpl": 130,
+      "citizenship_required": false,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": 281,
+    "application_url": "https://www.benefits.gov/benefit/361",
+    "documents_needed": ["ID", "Proof of income", "Utility bills"],
+    "processing_time_days": 30,
+    "source": "USDA FNS",
+    "last_updated": "2025-01-01"
+  }
+]
