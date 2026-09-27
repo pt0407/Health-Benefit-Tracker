@@ -14,7 +14,7 @@ check it off when the PR merges. See `docs/BUILD_PLAN.md` §8 for details.
 - [ ] Hard-rule eligibility matcher — **Person 1**
 - [ ] RAG retrieval engine — **Person 2**
 - [ ] Wire quiz frontend to backend API — **Person 3**
-- [ ] Insurance agent — **Person 4**
+- [x] Insurance agent — **Person 4** (endpoint live; pass RAG context once BenefitsRAG lands)
 
 ## Week 5–6: Polish
 - [ ] Results dashboard with program cards — **Person 3**
