@@ -53,10 +53,16 @@ URL: https://www.healthcare.gov
 
 Medicare — age 65+, or under 65 after receiving SSDI for 24 months (or with
 ALS/ESRD). Apply through Social Security. URL: https://www.medicare.gov
-- Medicare Savings Programs and Extra Help (Part D Low Income Subsidy) lower
-  costs for Medicare enrollees with limited income and resources.
+
+Medicare Savings Programs and Extra Help (Part D Low Income Subsidy) — a
+separate program from Medicare itself. Lowers premiums, deductibles, copays
+and drug costs for Medicare enrollees with limited income and resources.
+The quiz does not ask about resources, so this is "medium" confidence at best.
+URL: https://www.medicare.gov
 
 Medicaid for the Elderly and People with Disabilities (TX) — age 65+ or
 with a disability, SSI-level income and limited resources ($2,000 individual
 / $3,000 couple). People receiving SSI get Medicaid automatically.
+The quiz does not ask about resources, so unless the person receives SSI,
+eligibility is "medium" confidence at best.
 """
