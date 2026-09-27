@@ -34,6 +34,15 @@ THRESHOLDS_PCT_FPL = {
     "ACA subsidy ceiling": 400,
 }
 
+# States TX_INSURANCE_RULES covers. Other states get an explanatory note
+# instead of a model call.
+SUPPORTED_STATES = {"TX"}
+UNSUPPORTED_STATE_NOTE = (
+    "BenefitsFinder can only check health coverage for Texas right now, so we "
+    "can't tell which programs you qualify for in your state yet. You can "
+    "compare Marketplace plans and savings at https://www.healthcare.gov."
+)
+
 # How close (in % FPL points) income must be to a threshold to warn about it.
 NEAR_THRESHOLD_PCT = 10
 
@@ -119,6 +128,9 @@ class InsuranceAgent:
         )
 
     def run(self, profile: UserProfile, rag_context: str = "") -> InsuranceResult:
+        # The rules are Texas-only; don't let the model apply them elsewhere.
+        if profile.state.upper() not in SUPPORTED_STATES:
+            return InsuranceResult(qualifies_for=[], notes=UNSUPPORTED_STATE_NOTE)
         try:
             response = self.client.messages.parse(
                 model=self.model,

@@ -99,6 +99,16 @@ def test_run_raises_on_api_error():
         agent.run(PROFILE)
 
 
+def test_run_skips_model_for_unsupported_state():
+    captured = []
+    profile = PROFILE.model_copy(update={"state": "CA"})
+    result = InsuranceAgent(client=fake_client(captured=captured), model="test-model").run(profile)
+
+    assert captured == []
+    assert result.qualifies_for == []
+    assert "Texas" in result.notes
+
+
 def test_insurance_check_endpoint_maps_missing_api_key_to_502(monkeypatch):
     monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
     monkeypatch.delenv("ANTHROPIC_AUTH_TOKEN", raising=False)
