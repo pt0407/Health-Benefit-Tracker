@@ -13,6 +13,7 @@ Design:
 """
 
 import json
+import re
 
 import anthropic
 import pydantic
@@ -33,6 +34,14 @@ THRESHOLDS_PCT_FPL = {
     "CHIP Perinatal": 202,
     "ACA subsidy ceiling": 400,
 }
+
+# False claims the model keeps making despite the prompt. Any sentence that
+# matches is removed from the result after parsing.
+FALSE_CLAIM_PATTERNS = [
+    # Pregnancy is not a Special Enrollment Period trigger; having a baby is.
+    re.compile(r"pregnan[^.!?]*special enrollment|special enrollment[^.!?]*pregnan", re.IGNORECASE),
+]
+_SENTENCE_END = re.compile(r"(?<=[.!?])(\s+)")
 
 # States TX_INSURANCE_RULES covers. Other states get an explanatory note
 # instead of a model call.
@@ -72,6 +81,11 @@ credits specifically: "medium" if employment_status is "employed" (we don't \
 know whether they have an affordable employer plan), otherwise "high" when \
 income is 100-400% FPL. An employer plan never affects Medicaid or CHIP \
 confidence.
+- `citizenship`: "not_citizen" means not a US citizen or green-card holder. \
+The person may still be lawfully present (e.g. on a visa), so never say they \
+aren't. Treat lawful presence as unknown for "not_citizen" and \
+"prefer_not_to_say": programs that require it are "medium" at most, and say \
+it depends on their immigration status.
 - `reason`: one or two plain-English sentences a non-expert can follow. Say \
 who in the household it covers (e.g. "your two children"). Count adults as \
 household_size minus the number of children; if there are two or more \
@@ -156,4 +170,29 @@ class InsuranceAgent:
             raise InsuranceAgentError("Claude declined to answer this request")
         if response.stop_reason == "max_tokens" or response.parsed_output is None:
             raise InsuranceAgentError(f"Incomplete response (stop_reason={response.stop_reason})")
-        return response.parsed_output
+        return strip_false_claims(response.parsed_output)
+
+
+def _strip_sentences(text: str | None) -> str | None:
+    if not text:
+        return text
+    # Split keeping the whitespace after each sentence so paragraphs survive.
+    parts = _SENTENCE_END.split(text)
+    sentences, seps = parts[0::2], parts[1::2] + [""]
+    kept = [s + sep for s, sep in zip(sentences, seps)
+            if not any(p.search(s) for p in FALSE_CLAIM_PATTERNS)]
+    return "".join(kept).strip()
+
+
+def strip_false_claims(result: InsuranceResult) -> InsuranceResult:
+    """Drop sentences matching FALSE_CLAIM_PATTERNS from every text field."""
+    programs = [
+        p.model_copy(update={f: _strip_sentences(getattr(p, f)) for f in ("reason", "next_step", "tip")})
+        for p in result.qualifies_for
+    ]
+    warnings = [w for w in (_strip_sentences(w) for w in result.near_threshold_warnings) if w]
+    return result.model_copy(update={
+        "qualifies_for": programs,
+        "near_threshold_warnings": warnings,
+        "notes": _strip_sentences(result.notes),
+    })

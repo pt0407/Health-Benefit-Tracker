@@ -99,6 +99,18 @@ def test_run_raises_on_api_error():
         agent.run(PROFILE)
 
 
+def test_run_strips_pregnancy_sep_claim():
+    output = json.loads(json.dumps(AGENT_OUTPUT))
+    output["qualifies_for"][0]["next_step"] = (
+        "Apply at YourTexasBenefits.com. Being pregnant opens a Special Enrollment Period."
+    )
+    output["notes"] = "First paragraph.\n\nPregnancy qualifies you for special enrollment. Last sentence."
+    result = InsuranceAgent(client=fake_client(text=json.dumps(output)), model="test-model").run(PROFILE)
+
+    assert result.qualifies_for[0].next_step == "Apply at YourTexasBenefits.com."
+    assert result.notes == "First paragraph.\n\nLast sentence."
+
+
 def test_run_skips_model_for_unsupported_state():
     captured = []
     profile = PROFILE.model_copy(update={"state": "CA"})
