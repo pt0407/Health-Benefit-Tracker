@@ -1,7 +1,9 @@
 import json
+from functools import lru_cache
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 
+from agents.insurance_agent import InsuranceAgent, InsuranceAgentError
 from config import FIXTURES_DIR, PROGRAMS_DIR
 from models.match_result import InsuranceResult, MatchResponse
 from models.program import Program
@@ -37,7 +39,17 @@ def get_program(program_id: str) -> Program:
     raise HTTPException(status_code=404, detail="Program not found")
 
 
+@lru_cache
+def get_insurance_agent() -> InsuranceAgent:
+    return InsuranceAgent()
+
+
 @router.post("/insurance-check", response_model=InsuranceResult)
-def insurance_check(profile: UserProfile) -> InsuranceResult:
-    # TODO(Person 4): call the insurance agent.
-    raise HTTPException(status_code=501, detail="Insurance agent not implemented yet")
+def insurance_check(
+    profile: UserProfile, agent: InsuranceAgent = Depends(get_insurance_agent)
+) -> InsuranceResult:
+    # TODO(Person 2): pass RAG context once BenefitsRAG is implemented.
+    try:
+        return agent.run(profile)
+    except InsuranceAgentError as e:
+        raise HTTPException(status_code=502, detail=str(e)) from e
