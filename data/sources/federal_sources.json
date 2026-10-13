@@ -60,7 +60,7 @@
   },
   "medicaid_federal": {
     "verified_on": "2026-10-13",
-    "figures_effective": "Income bands are from the Medicaid.gov Texas state profile table headed 'as of December 1, 2023' (read 2026-10-13). Processing standard is 42 CFR 435.912 as shown on eCFR; immigration rule as shown on HealthCare.gov.",
+    "figures_effective": "Income bands are from the Medicaid.gov Texas state profile table headed 'as of December 1, 2023' (read 2026-10-13). Processing standard is 42 CFR 435.912 as shown on eCFR; immigration rule as shown on HealthCare.gov. Estimated monthly value is MACPAC Exhibit 22, FY 2023 (published February 2026).",
     "fields": {
       "description": {
         "urls": [
@@ -88,6 +88,29 @@
         ],
         "evidence": "only people with the following immigration statuses are now eligible for full",
         "note": "HealthCare.gov lists Lawful Permanent Resident, Cuban or Haitian entrant, and COFA migrant; depending on the state, lawfully residing pregnant women and children may be eligible. Medicaid.gov Texas profile footnote says other criteria apply 'with respect to citizenship, immigration status and residency'. U.S. citizens are not named in the HealthCare.gov list but the status rule is the qualifying-status rule. The Medicaid.gov Texas profile footnote is at https://www.medicaid.gov/state-overviews/stateprofile.html?state=Texas (read, not matched against this snippet)."
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.macpac.gov/wp-content/uploads/2026/01/EXHIBIT-22.-Medicaid-Benefit-Spending-Per-Full-Year-Equivalent-FYE-Enrollee-by-State-and-Eligibility-Group-FY-2023.pdf"
+        ],
+        "evidence": "Texas9 7,958 8,701",
+        "note": "MACPAC MACStats Exhibit 22 (Medicaid and CHIP Data Book, February 2026), FY 2023, Texas row, Total, All enrollees column = $7,958 per full-year equivalent enrollee; the Full-benefit enrollees column is $8,701 and the lower All enrollees figure is used. Medicaid benefit spending only (MACPAC analysis of T-MSIS and CMS-64 data); excludes administrative costs. Texas footnote 9 concerns the new adult group, not this column. 7958 / 12 = 663.17, rounded to 663. This is government spending averaged over all Texas enrollees, not a benefit paid to the household. FY 2023 is the most recent year in the exhibit.",
+        "estimated": true,
+        "estimate": {
+          "method": "per_enrollee_spending",
+          "represents": "Government Medicaid benefit spending per full-year equivalent Texas enrollee (all groups, all enrollees), per month, not cash paid to the household.",
+          "formula": "round(annual_spending_per_enrollee / 12)",
+          "inputs": [
+            {
+              "name": "annual_spending_per_enrollee",
+              "value": 7958,
+              "unit": "USD per year",
+              "period": "FY 2023",
+              "url": "https://www.macpac.gov/wp-content/uploads/2026/01/EXHIBIT-22.-Medicaid-Benefit-Spending-Per-Full-Year-Equivalent-FYE-Enrollee-by-State-and-Eligibility-Group-FY-2023.pdf",
+              "evidence": "Texas9 7,958 8,701"
+            }
+          ]
+        }
       },
       "processing_time_days": {
         "urls": [
@@ -173,8 +196,8 @@
     }
   },
   "liheap_federal": {
-    "verified_on": "2026-10-12",
-    "figures_effective": "Texas CEAP eligibility at 150% of the 2026 federal poverty income guidelines, effective January 26, 2026 (TDHCA). The LIHEAP model plan PDF that TDHCA links as '2027 LIHEAP Plan' is headed Federal Fiscal Year 2026.",
+    "verified_on": "2026-10-13",
+    "figures_effective": "Texas CEAP eligibility at 150% of the 2026 federal poverty income guidelines, effective January 26, 2026 (TDHCA). The LIHEAP model plan PDF that TDHCA links as '2027 LIHEAP Plan' is headed Federal Fiscal Year 2026. Estimated monthly value is the ACF Texas FY2023 state profile (data as of April 30, 2024).",
     "fields": {
       "description": {
         "urls": [
@@ -210,18 +233,42 @@
       },
       "estimated_monthly_value_usd": {
         "urls": [
-          "https://acf.gov/ocs/programs-services/liheap",
-          "https://www.tdhca.texas.gov/sites/default/files/community-affairs/docs/27-LIHEAP.pdf"
+          "https://liheappm.acf.gov/sites/default/files/private/congress/profiles/2023/FY2023TexasProfile-508Compliant.pdf"
         ],
-        "evidence": "",
-        "note": "Null: no average or typical monthly benefit was found on a readable official page. The ACF fact sheet link on the LIHEAP page returned 404. The Texas plan gives maximum benefits, not averages, and LIHEAP is seasonal or one-time rather than monthly."
+        "evidence": "Cooling Assistance served 75,317 households with reported average benefits of $1,751",
+        "note": "ACF LIHEAP Texas FY2023 State Profile (data current as of April 30, 2024): Heating Assistance served 47,945 households with reported average benefits of $2,750 (regular LIHEAP funds); Cooling Assistance served 75,317 households with average benefits of $1,751 (regular funds). Year-round crisis average ($3,502) is excluded because it is not a regular benefit. No combined average is published, so the lower figure is used (tie-break). min(2750, 1751) / 12 = 145.9, rounded to 146. Possibly stale at source: FY2024 and FY2025 profile files were not found at the same address; the ACF Texas page (https://liheapch.acf.gov/profiles/Texas.htm, last updated 04/20/2026) lists households served in FY 2024 but no average.",
+        "estimated": true,
+        "estimate": {
+          "method": "official_average",
+          "represents": "Average yearly LIHEAP household benefit in Texas (fiscal year 2023, lower of cooling and heating), spread evenly over 12 months; actual help is seasonal or one-time, not a monthly payment.",
+          "formula": "round(min(heating_avg, cooling_avg) / 12)",
+          "inputs": [
+            {
+              "name": "heating_avg",
+              "value": 2750,
+              "unit": "USD per household per year",
+              "period": "FY 2023 (data as of April 30, 2024)",
+              "url": "https://liheappm.acf.gov/sites/default/files/private/congress/profiles/2023/FY2023TexasProfile-508Compliant.pdf",
+              "evidence": "Heating Assistance served 47,945 households with reported average benefits of $2,750"
+            },
+            {
+              "name": "cooling_avg",
+              "value": 1751,
+              "unit": "USD per household per year",
+              "period": "FY 2023 (data as of April 30, 2024)",
+              "url": "https://liheappm.acf.gov/sites/default/files/private/congress/profiles/2023/FY2023TexasProfile-508Compliant.pdf",
+              "evidence": "Cooling Assistance served 75,317 households with reported average benefits of $1,751"
+            }
+          ]
+        }
       },
       "processing_time_days": {
         "urls": [
           "https://www.tdhca.texas.gov/sites/default/files/community-affairs/docs/27-LIHEAP.pdf"
         ],
         "evidence": "",
-        "note": "Null: the Texas plan states response times only for crisis cases (48 hours, 18 hours if life threatening), not a standard processing time for regular applications."
+        "note": "Null: the Texas LIHEAP plan re-read 2026-10-13 states response times only for crisis cases (48 hours, 18 hours if life threatening), which are not the regular standard. The plan's other time limits (written denial notice within 10 calendar days of a determination, appeal windows) are not a processing standard for applications. TDHCA community affairs pages checked in Phase 1 state none.",
+        "null_reason": "no_official_basis"
       },
       "application_url": {
         "urls": [
@@ -233,8 +280,8 @@
     }
   },
   "medicare_extra_help_federal": {
-    "verified_on": "2026-10-12",
-    "figures_effective": "2026 income and resource limits (Medicare.gov, 'Income and resource limits in 2026'); Medicare.gov also shows 2027 cost-sharing for the upcoming year; SSA POMS HI 03001.020 effective 02/11/2026.",
+    "verified_on": "2026-10-13",
+    "figures_effective": "2026 income and resource limits (Medicare.gov, 'Income and resource limits in 2026'); Medicare.gov also shows 2027 cost-sharing for the upcoming year; SSA POMS HI 03001.020 effective 02/11/2026. Estimated monthly value is from SSA publication EN-05-10508, August 2026.",
     "fields": {
       "description": {
         "urls": [
@@ -262,18 +309,36 @@
       },
       "estimated_monthly_value_usd": {
         "urls": [
-          "https://www.medicare.gov/basics/costs/help/drug-costs"
+          "https://www.ssa.gov/pubs/EN-05-10508.pdf"
         ],
-        "evidence": "",
-        "note": "Null: Medicare.gov shows plan premium, deductible and copay amounts but no average or typical dollar value of the benefit."
+        "evidence": "Extra Help is estimated to be worth about $5,700 per year.",
+        "note": "SSA publication EN-05-10508, 'Understanding the Extra Help with Your Medicare Prescription Drug Plan', August 2026; read in the built-in browser from ssa.gov (text extracted from the PDF). SSA states it per beneficiary per year. 5700 / 12 = 475.",
+        "estimated": true,
+        "estimate": {
+          "method": "official_average",
+          "represents": "SSA's stated average yearly worth of Extra Help per beneficiary, spread evenly over 12 months; individual amounts depend on plan and drug use.",
+          "formula": "round(yearly_worth / 12)",
+          "inputs": [
+            {
+              "name": "yearly_worth",
+              "value": 5700,
+              "unit": "USD per year",
+              "period": "August 2026 publication",
+              "url": "https://www.ssa.gov/pubs/EN-05-10508.pdf",
+              "evidence": "Extra Help is estimated to be worth about $5,700 per year."
+            }
+          ]
+        }
       },
       "processing_time_days": {
         "urls": [
+          "https://www.ssa.gov/pubs/EN-05-10508.pdf",
           "https://www.ssa.gov/medicare/part-d-extra-help",
           "https://www.medicare.gov/basics/costs/help/drug-costs"
         ],
         "evidence": "",
-        "note": "Null: no processing time was stated on the SSA Extra Help page or Medicare.gov."
+        "note": "Null: re-read 2026-10-13. The SSA Extra Help application page, SSA publication EN-05-10508 (August 2026), Medicare.gov drug-costs page and the Medicare.gov Extra Help fact sheet state no time to decide an application. Only a 10 day reply window after a pre-decisional notice, a 30 day review-form window and a 60 day appeal window appear, and those are not processing standards.",
+        "null_reason": "no_official_basis"
       },
       "documents_needed": {
         "urls": [
@@ -292,7 +357,7 @@
     }
   },
   "ssdi_federal": {
-    "verified_on": "2026-10-12",
+    "verified_on": "2026-10-13",
     "figures_effective": "2026 SGA and work-credit figures (SSA); average disabled-worker benefit for August 2026 (Monthly Statistical Snapshot released September 2026); processing FAQ dated March 5, 2024.",
     "fields": {
       "description": {
@@ -321,6 +386,14 @@
         "evidence": "must have a disability that affects your ability to work for a year or more",
         "note": "Every path to SSDI requires a qualifying disability or blindness (SSA Who can get Disability). The page https://www.ssa.gov/benefits/disability/qualify.html says the same in other words (a medical condition that meets Social Security's strict definition of disability) and does not repeat the snippet."
       },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.ssa.gov/disability/eligibility"
+        ],
+        "evidence": "",
+        "note": "Null: SSDI has no percent-of-poverty income test. Eligibility rests on a disability and work credits; earnings above the substantial gainful activity amount ($1,690 a month in 2026, $2,830 if blind) can block eligibility, but that is a dollar earnings test on work, not an FPL limit.",
+        "null_reason": "no_income_test"
+      },
       "estimated_monthly_value_usd": {
         "urls": [
           "https://www.ssa.gov/policy/docs/quickfacts/stat_snapshot/"
@@ -333,7 +406,23 @@
           "https://www.ssa.gov/faqs/en/questions/KA-01801.html"
         ],
         "evidence": "it generally takes 6 to 8 months for an initial decision",
-        "note": "Upper bound 8 months converted at 30 days per month = 240 days. FAQ is dated March 5, 2024; SSA's performance pages say the average initial decision time has been falling (values are in charts, not text). Possibly stale at source."
+        "note": "Upper bound 8 months converted at 30 days per month = 240 days. FAQ is dated March 5, 2024; SSA's performance pages say the average initial decision time has been falling (values are in charts, not text). Possibly stale at source.",
+        "estimated": true,
+        "estimate": {
+          "method": "unit_conversion",
+          "represents": "SSA's stated upper bound of 8 months for an initial decision, converted to days at 30 days per month.",
+          "formula": "months * 30",
+          "inputs": [
+            {
+              "name": "months",
+              "value": 8,
+              "unit": "months",
+              "period": "FAQ dated March 5, 2024",
+              "url": "https://www.ssa.gov/faqs/en/questions/KA-01801.html",
+              "evidence": "it generally takes 6 to 8 months for an initial decision"
+            }
+          ]
+        }
       },
       "documents_needed": {
         "urls": [
