@@ -22,6 +22,7 @@ REBUILD_COMMAND = "python data/scripts/index_to_chromadb.py"
 MAX_CHUNKS_PER_PROGRAM = 2
 HUB_PENALTY = 0.5
 SEED_BONUS = 1.0  # large enough that seeded chunks sort ahead of every unseeded chunk
+FACET_DEPTH = 8  # a facet only credits chunks ranked within its top few: deeper matches are loose and noisy
 RRF_K = 10  # reciprocal rank fusion constant; small so rank position matters on a small corpus
 
 # Facet weights. Conditions the household actually has outrank generic needs.
@@ -167,7 +168,7 @@ class BenefitsRAG:
             if ranked and weight >= CORE_NEED:
                 # Round-robin seat: the best match for each household need or situation is always in play.
                 seeds.add(ranked[0]["id"])
-            for rank, hit in enumerate(ranked, start=1):
+            for rank, hit in enumerate(ranked[:FACET_DEPTH], start=1):
                 scores[hit["id"]] = scores.get(hit["id"], 0.0) + weight / (RRF_K + rank)
                 if weight != CORE_NEED:  # food and utility matches are what those programs are for
                     generic[hit["id"]] = generic.get(hit["id"], 0.0) + 1.0 / (RRF_K + rank)
