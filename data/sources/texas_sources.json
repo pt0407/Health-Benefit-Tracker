@@ -1,6 +1,6 @@
 {
   "chip_tx": {
-    "verified_on": "2026-10-12",
+    "verified_on": "2026-10-13",
     "figures_effective": "Income limit from Texas Works Handbook C-131.1 (Revision 26-2, effective April 1, 2026) with dollar figures dated March 1, 2026. HHSC CHIP page, read 2026-10-12.",
     "fields": {
       "description": {
@@ -43,10 +43,34 @@
       },
       "estimated_monthly_value_usd": {
         "urls": [
-          "https://www.hhs.texas.gov/services/health/medicaid-chip/medicaid-chip-members/chip"
+          "https://www.hhs.texas.gov/sites/default/files/documents/texas-medicaid-chip-reference-guide-15th-edition.pdf"
         ],
-        "evidence": "",
-        "note": "null: the agency publishes no dollar value for CHIP coverage."
+        "evidence": "81K people enrolled in CHIP in 2023",
+        "note": "Texas Medicaid and CHIP Reference Guide, 15th edition, Chapter 4 growth trends: CHIP annual expenditures 2023 are $299 million and CHIP caseload is 81 thousand (both rounded as published). 299000000 / 81000 / 12 = 307.6, stored as 308. The two figures are on the same page of the guide but are rounded and may cover slightly different 2023 periods (federal fiscal year spending, annual caseload).",
+        "estimated": true,
+        "estimate": {
+          "method": "per_enrollee_spending",
+          "represents": "Texas government CHIP spending per month for each enrollee, not cash paid to the household.",
+          "formula": "round(annual_chip_spending / chip_enrollment / 12)",
+          "inputs": [
+            {
+              "name": "annual_chip_spending",
+              "value": 299000000,
+              "unit": "USD per year",
+              "period": "CHIP annual expenditures, 2023, as shown in the guide chart",
+              "url": "https://www.hhs.texas.gov/sites/default/files/documents/texas-medicaid-chip-reference-guide-15th-edition.pdf",
+              "evidence": "$299 million"
+            },
+            {
+              "name": "chip_enrollment",
+              "value": 81000,
+              "unit": "enrollees",
+              "period": "CHIP enrollment, 2023",
+              "url": "https://www.hhs.texas.gov/sites/default/files/documents/texas-medicaid-chip-reference-guide-15th-edition.pdf",
+              "evidence": "81K people enrolled in CHIP in 2023"
+            }
+          ]
+        }
       },
       "application_url": {
         "urls": [
@@ -72,7 +96,7 @@
     }
   },
   "childrens_medicaid_tx": {
-    "verified_on": "2026-10-12",
+    "verified_on": "2026-10-13",
     "figures_effective": "Income limits from Texas Works Handbook C-131.1 (Revision 26-2, effective April 1, 2026) with dollar figures dated March 1, 2026. HHSC Children's Medicaid page, read 2026-10-12.",
     "fields": {
       "description": {
@@ -114,10 +138,26 @@
       },
       "estimated_monthly_value_usd": {
         "urls": [
-          "https://www.hhs.texas.gov/services/health/medicaid-chip/medicaid-chip-programs-services/programs-children-adults-disabilities/programs-children-families/childrens-medicaid-star"
+          "https://www.hhs.texas.gov/sites/default/files/documents/texas-medicaid-chip-reference-guide-15th-edition.pdf"
         ],
-        "evidence": "",
-        "note": "null: the agency publishes no dollar value for Children's Medicaid coverage."
+        "evidence": "Average cost per client per month is based on full-benefit clients only.",
+        "note": "Texas HHSC Medicaid and CHIP Reference Guide, 15th edition, Quick Facts \"Trends in Caseload and Spending for Major Medicaid Client Categories\": cost per client per month is $261 (non-disabled children), $588 (non-disabled adults), $2,228 (age and disability-related). The extracted text lists the three values without row labels; the mapping was checked because each value times its caseload share (73%, 13%, 14%) reproduces its spending share (32%, 13%, 55%) in that table.",
+        "estimated": true,
+        "estimate": {
+          "method": "per_enrollee_spending",
+          "represents": "Texas government Medicaid spending per month for each non-disabled child enrollee, not cash paid to the household.",
+          "formula": "round(avg_cost_per_client_per_month)",
+          "inputs": [
+            {
+              "name": "avg_cost_per_client_per_month",
+              "value": 261,
+              "unit": "USD per month",
+              "period": "Quick Facts trend table, 15th edition (data current as of August 2024); year not labeled in the page text read, caseload figures in the guide are for 2023",
+              "url": "https://www.hhs.texas.gov/sites/default/files/documents/texas-medicaid-chip-reference-guide-15th-edition.pdf",
+              "evidence": "Average cost per client per month is based on full-benefit clients only."
+            }
+          ]
+        }
       },
       "application_url": {
         "urls": [
@@ -143,7 +183,7 @@
     }
   },
   "medicaid_pregnant_women_tx": {
-    "verified_on": "2026-10-12",
+    "verified_on": "2026-10-13",
     "figures_effective": "Income limit from Texas Works Handbook C-131.1 (Revision 26-2, effective April 1, 2026) with dollar figures dated March 1, 2026. HHSC pregnant women page, read 2026-10-12.",
     "fields": {
       "description": {
@@ -179,10 +219,26 @@
       },
       "estimated_monthly_value_usd": {
         "urls": [
-          "https://www.hhs.texas.gov/services/health/medicaid-chip/medicaid-chip-programs-services/medicaid-pregnant-women-chip-perinatal"
+          "https://www.hhs.texas.gov/sites/default/files/documents/texas-medicaid-chip-reference-guide-15th-edition.pdf"
         ],
-        "evidence": "",
-        "note": "null: the agency publishes no dollar value for this coverage."
+        "evidence": "Average cost per client per month is based on full-benefit clients only.",
+        "note": "Texas HHSC Medicaid and CHIP Reference Guide, 15th edition, Quick Facts \"Trends in Caseload and Spending for Major Medicaid Client Categories\": cost per client per month is $261 (non-disabled children), $588 (non-disabled adults), $2,228 (age and disability-related). The extracted text lists the three values without row labels; the mapping was checked because each value times its caseload share (73%, 13%, 14%) reproduces its spending share (32%, 13%, 55%) in that table.",
+        "estimated": true,
+        "estimate": {
+          "method": "per_enrollee_spending",
+          "represents": "Texas government Medicaid spending per month for each non-disabled adult enrollee (the general adult figure; HHSC publishes no pregnancy-specific figure), not cash paid to the household.",
+          "formula": "round(avg_cost_per_client_per_month)",
+          "inputs": [
+            {
+              "name": "avg_cost_per_client_per_month",
+              "value": 588,
+              "unit": "USD per month",
+              "period": "Quick Facts trend table, 15th edition (data current as of August 2024); year not labeled in the page text read, caseload figures in the guide are for 2023",
+              "url": "https://www.hhs.texas.gov/sites/default/files/documents/texas-medicaid-chip-reference-guide-15th-edition.pdf",
+              "evidence": "Average cost per client per month is based on full-benefit clients only."
+            }
+          ]
+        }
       },
       "application_url": {
         "urls": [
@@ -203,12 +259,28 @@
           "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/a-140-expedited-service"
         ],
         "evidence": "eligibility determined no later than 15 business days from the date HHSC receives the application",
-        "note": "Stored as 21 calendar days. The handbook states 15 business days (original wording: '15 business days'); converted as 15 * 7 / 5 = 21, rounded up, because processing_time_days means calendar days. Handbook section D-230 says the 15th working day after the file date for a pregnant woman's application."
+        "note": "Stored as 21 calendar days. The handbook states 15 business days (original wording: '15 business days'); converted as 15 * 7 / 5 = 21, rounded up, because processing_time_days means calendar days. Handbook section D-230 says the 15th working day after the file date for a pregnant woman's application.",
+        "estimated": true,
+        "estimate": {
+          "method": "unit_conversion",
+          "represents": "The stated 15 business day standard converted to calendar days (5 business days = 7 calendar days), rounded up.",
+          "formula": "ceil(business_days * 7 / 5)",
+          "inputs": [
+            {
+              "name": "business_days",
+              "value": 15,
+              "unit": "business days",
+              "period": "current agency standard",
+              "url": "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/a-140-expedited-service",
+              "evidence": "eligibility determined no later than 15 business days from the date HHSC receives the application"
+            }
+          ]
+        }
       }
     }
   },
   "chip_perinatal_tx": {
-    "verified_on": "2026-10-12",
+    "verified_on": "2026-10-13",
     "figures_effective": "Income limit from Texas Works Handbook C-131.1 (Revision 26-2, effective April 1, 2026) with dollar figures dated March 1, 2026. HHSC CHIP Perinatal FAQs, read 2026-10-12.",
     "fields": {
       "description": {
@@ -244,10 +316,34 @@
       },
       "estimated_monthly_value_usd": {
         "urls": [
-          "https://www.hhs.texas.gov/providers/health-services-providers/chip-perinatal-providers/chip-perinatal-faqs"
+          "https://www.hhs.texas.gov/sites/default/files/documents/texas-medicaid-chip-reference-guide-15th-edition.pdf"
         ],
-        "evidence": "",
-        "note": "null: the agency publishes no dollar value for this coverage."
+        "evidence": "81K people enrolled in CHIP in 2023",
+        "note": "Texas Medicaid and CHIP Reference Guide, 15th edition, Chapter 4 growth trends: CHIP annual expenditures 2023 are $299 million and CHIP caseload is 81 thousand (both rounded as published). 299000000 / 81000 / 12 = 307.6, stored as 308. The two figures are on the same page of the guide but are rounded and may cover slightly different 2023 periods (federal fiscal year spending, annual caseload).",
+        "estimated": true,
+        "estimate": {
+          "method": "per_enrollee_spending",
+          "represents": "General Texas CHIP spending per month for each enrollee (HHSC publishes no CHIP Perinatal-specific figure; CHIP Perinatal is part of the CHIP total), not cash paid to the household.",
+          "formula": "round(annual_chip_spending / chip_enrollment / 12)",
+          "inputs": [
+            {
+              "name": "annual_chip_spending",
+              "value": 299000000,
+              "unit": "USD per year",
+              "period": "CHIP annual expenditures, 2023, as shown in the guide chart",
+              "url": "https://www.hhs.texas.gov/sites/default/files/documents/texas-medicaid-chip-reference-guide-15th-edition.pdf",
+              "evidence": "$299 million"
+            },
+            {
+              "name": "chip_enrollment",
+              "value": 81000,
+              "unit": "enrollees",
+              "period": "CHIP enrollment, 2023",
+              "url": "https://www.hhs.texas.gov/sites/default/files/documents/texas-medicaid-chip-reference-guide-15th-edition.pdf",
+              "evidence": "81K people enrolled in CHIP in 2023"
+            }
+          ]
+        }
       },
       "application_url": {
         "urls": [
@@ -268,12 +364,28 @@
           "https://www.hhs.texas.gov/providers/health-services-providers/chip-perinatal-providers/chip-perinatal-faqs"
         ],
         "evidence": "staff have 15 business days to process the application from the day it is received",
-        "note": "Stored as 21 calendar days. The page states 15 business days (original wording: '15 business days'); converted as 15 * 7 / 5 = 21, rounded up, because processing_time_days means calendar days. Handbook section D-230: 15th working day."
+        "note": "Stored as 21 calendar days. The page states 15 business days (original wording: '15 business days'); converted as 15 * 7 / 5 = 21, rounded up, because processing_time_days means calendar days. Handbook section D-230: 15th working day.",
+        "estimated": true,
+        "estimate": {
+          "method": "unit_conversion",
+          "represents": "The stated 15 business day standard converted to calendar days (5 business days = 7 calendar days), rounded up.",
+          "formula": "ceil(business_days * 7 / 5)",
+          "inputs": [
+            {
+              "name": "business_days",
+              "value": 15,
+              "unit": "business days",
+              "period": "current agency standard",
+              "url": "https://www.hhs.texas.gov/providers/health-services-providers/chip-perinatal-providers/chip-perinatal-faqs",
+              "evidence": "staff have 15 business days to process the application from the day it is received"
+            }
+          ]
+        }
       }
     }
   },
   "emergency_medicaid_tx": {
-    "verified_on": "2026-10-12",
+    "verified_on": "2026-10-13",
     "figures_effective": "Income limits from Texas Works Handbook C-131.1 (Revision 26-2, effective April 1, 2026) with dollar figures dated March 1, 2026.",
     "fields": {
       "description": {
@@ -305,10 +417,11 @@
       },
       "estimated_monthly_value_usd": {
         "urls": [
-          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/a-820-regular-medicaid-coverage"
+          "https://www.hhs.texas.gov/sites/default/files/documents/texas-medicaid-chip-reference-guide-15th-edition.pdf"
         ],
         "evidence": "",
-        "note": "null: the agency publishes no dollar value; coverage is for the emergency only."
+        "note": "No official per-person or per-event spending figure for Texas Emergency Medicaid was found in the 15th edition Reference Guide (which only describes the program) or elsewhere. Coverage lasts only for the emergency, and a full-benefit adult figure would overstate it, so it is not used as a stand-in.",
+        "null_reason": "no_official_basis"
       },
       "application_url": {
         "urls": [
@@ -334,7 +447,7 @@
     }
   },
   "medicaid_elderly_disabled_tx": {
-    "verified_on": "2026-10-12",
+    "verified_on": "2026-10-13",
     "figures_effective": "Income and resource limits effective Jan. 1, 2026 (G-1300 Revision 26-1, Appendix XI dated 6-2026).",
     "fields": {
       "description": {
@@ -351,10 +464,34 @@
       "eligibility.income_limit_pct_fpl": {
         "urls": [
           "https://fhb.hhs.texas.gov/handbooks/medicaid-elderly-people-disabilities-handbook/g-1300-income-limits",
-          "https://fhb.hhs.texas.gov/handbooks/community-care-services-eligibility-handbook/appendix-xi-income-resource-limits"
+          "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines"
         ],
-        "evidence": "",
-        "note": "null: limits are published in dollars. The G-1300 introduction (Revision 12-4) mentions 300% of the federal poverty level but G-1320 on the same page defines the special limit as 300% of the SSI federal benefit rate ($2,982), so no percent of poverty is recorded."
+        "evidence": "Jan. 1, 2026 to Present $2,982 $5,964",
+        "note": "Estimate converting a dollar limit to a percent of the 2026 poverty guideline for one person. Uses the special income limit (300% of the SSI federal benefit rate, G-1320, Revision 26-1), the highest individual limit, used for nursing facility, waiver and attendant care programs. The SSI-based limit for community programs (G-1310) is $994 a month for one person, which is 74 percent by the same formula ($1,491 for a couple). Couple limits: $5,964 special, $1,491 SSI-based. 2982 * 12 / 15960 * 100 = 224.2, floored.",
+        "estimated": true,
+        "estimate": {
+          "method": "dollar_limit_to_pct_fpl",
+          "represents": "Highest individual monthly income limit (special income limit, $2,982) as a percent of the 2026 poverty guideline for one person; community programs use the lower SSI-based limit.",
+          "formula": "floor(monthly_limit * 12 / guideline_annual * 100)",
+          "inputs": [
+            {
+              "name": "monthly_limit",
+              "value": 2982,
+              "unit": "USD per month",
+              "period": "Jan. 1, 2026 to present (G-1320 Revision 26-1)",
+              "url": "https://fhb.hhs.texas.gov/handbooks/medicaid-elderly-people-disabilities-handbook/g-1300-income-limits",
+              "evidence": "Jan. 1, 2026 to Present $2,982 $5,964"
+            },
+            {
+              "name": "guideline_annual",
+              "value": 15960,
+              "unit": "USD per year",
+              "period": "2026 HHS poverty guideline, one person, 48 contiguous states",
+              "url": "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines",
+              "evidence": "Poverty guideline 1 $15,960"
+            }
+          ]
+        }
       },
       "eligibility.citizenship_required": {
         "urls": [
@@ -372,10 +509,26 @@
       },
       "estimated_monthly_value_usd": {
         "urls": [
-          "https://www.hhs.texas.gov/services/health/medicaid-chip/medicaid-chip-programs-services/programs-children-adults-disabilities/medicaid-elderly-people-disabilities"
+          "https://www.hhs.texas.gov/sites/default/files/documents/texas-medicaid-chip-reference-guide-15th-edition.pdf"
         ],
-        "evidence": "",
-        "note": "null: the agency publishes no dollar value for MEPD coverage."
+        "evidence": "Average cost per client per month is based on full-benefit clients only.",
+        "note": "Texas HHSC Medicaid and CHIP Reference Guide, 15th edition, Quick Facts \"Trends in Caseload and Spending for Major Medicaid Client Categories\": cost per client per month is $261 (non-disabled children), $588 (non-disabled adults), $2,228 (age and disability-related). The extracted text lists the three values without row labels; the mapping was checked because each value times its caseload share (73%, 13%, 14%) reproduces its spending share (32%, 13%, 55%) in that table.",
+        "estimated": true,
+        "estimate": {
+          "method": "per_enrollee_spending",
+          "represents": "Texas government Medicaid spending per month for each age-and-disability-related enrollee (aged and disabled combined in one published figure), not cash paid to the household.",
+          "formula": "round(avg_cost_per_client_per_month)",
+          "inputs": [
+            {
+              "name": "avg_cost_per_client_per_month",
+              "value": 2228,
+              "unit": "USD per month",
+              "period": "Quick Facts trend table, 15th edition (data current as of August 2024); year not labeled in the page text read, caseload figures in the guide are for 2023",
+              "url": "https://www.hhs.texas.gov/sites/default/files/documents/texas-medicaid-chip-reference-guide-15th-edition.pdf",
+              "evidence": "Average cost per client per month is based on full-benefit clients only."
+            }
+          ]
+        }
       },
       "application_url": {
         "urls": [
@@ -401,7 +554,7 @@
     }
   },
   "tanf_tx": {
-    "verified_on": "2026-10-12",
+    "verified_on": "2026-10-13",
     "figures_effective": "HHSC TANF page read 2026-10-12; handbook C-111 budgetary allowances effective Oct. 1, 2026 (Revision 26-4).",
     "fields": {
       "description": {
@@ -417,10 +570,34 @@
       "eligibility.income_limit_pct_fpl": {
         "urls": [
           "https://www.hhs.texas.gov/services/financial/cash/tanf-cash-help",
-          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/c-110-tanf"
+          "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines"
         ],
-        "evidence": "",
-        "note": "null: TANF income limits are dollar amounts by family size (HHSC page chart; C-111 recognizable needs column, for example $78 for one caretaker case). The handbook tests budgetary and recognizable needs, not a percent of poverty."
+        "evidence": "3 $130 $188 $206",
+        "note": "Estimate converting a dollar limit to a percent of the 2026 poverty guideline. Reference household: family of three with one caretaker (one parent, two children), HHSC Maximum Monthly Income Limit $188 a month. 188 * 12 / 27320 * 100 = 8.26, floored. Same formula for other published sizes with one caretaker: family of 1 with one caretaker: $78 a month = 5 percent (guideline $15,960); family of 2 with one caretaker: $163 a month = 9 percent (guideline $21,640); family of 4 with one caretaker: $226 a month = 8 percent (guideline $33,000); family of 5 with one caretaker: $251 a month = 7 percent (guideline $38,680). TANF actually tests dollar budgetary and recognizable needs, so this percent is a rough index only.",
+        "estimated": true,
+        "estimate": {
+          "method": "dollar_limit_to_pct_fpl",
+          "represents": "Maximum monthly income at which a family of three with one caretaker can still get TANF cash help ($188), as a percent of the 2026 poverty guideline for three people.",
+          "formula": "floor(monthly_limit * 12 / guideline_annual * 100)",
+          "inputs": [
+            {
+              "name": "monthly_limit",
+              "value": 188,
+              "unit": "USD per month",
+              "period": "current HHSC chart, family size 3, home with 1 parent or 1 caretaker",
+              "url": "https://www.hhs.texas.gov/services/financial/cash/tanf-cash-help",
+              "evidence": "3 $130 $188 $206"
+            },
+            {
+              "name": "guideline_annual",
+              "value": 27320,
+              "unit": "USD per year",
+              "period": "2026 HHS poverty guideline, three persons, 48 contiguous states",
+              "url": "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines",
+              "evidence": "2 $21,640 3 $27,320 4 $33,000"
+            }
+          ]
+        }
       },
       "eligibility.citizenship_required": {
         "urls": [
@@ -440,8 +617,32 @@
         "urls": [
           "https://www.hhs.texas.gov/services/financial/cash/tanf-cash-help"
         ],
-        "evidence": "",
-        "note": "null: the agency publishes only a maximum grant schedule by family size and household type, not an average benefit."
+        "evidence": "1 $130 $159 --------",
+        "note": "Midpoint of the lowest and highest maximum monthly TANF amounts on the HHSC chart: lowest $130 (child-only, family size 1), highest $545 (two caretakers, family size 5, row \"5 $403 $510 $545\"). (130 + 545) / 2 = 337.5, rounded to 338. This is not an average grant. ACF TANF FY2024 characteristics (Table 37, https://acf.gov/ofa/data/characteristics-and-financial-circumstances-tanf-recipients-fiscal-year-2024) shows a Texas monthly average of $613 per family, flagged \"TX policy on foster care policy\"; it exceeds the highest maximum grant on the HHSC page, so it was not used.",
+        "estimated": true,
+        "estimate": {
+          "method": "range_midpoint",
+          "represents": "Midpoint between the lowest ($130) and highest ($545) maximum monthly TANF grants Texas publishes; it is not an average actual grant.",
+          "formula": "round((lowest_max_grant + highest_max_grant) / 2)",
+          "inputs": [
+            {
+              "name": "lowest_max_grant",
+              "value": 130,
+              "unit": "USD per month",
+              "period": "current HHSC Maximum Monthly TANF Amount chart",
+              "url": "https://www.hhs.texas.gov/services/financial/cash/tanf-cash-help",
+              "evidence": "1 $130 $159 --------"
+            },
+            {
+              "name": "highest_max_grant",
+              "value": 545,
+              "unit": "USD per month",
+              "period": "current HHSC Maximum Monthly TANF Amount chart",
+              "url": "https://www.hhs.texas.gov/services/financial/cash/tanf-cash-help",
+              "evidence": "5 $403 $510 $545"
+            }
+          ]
+        }
       },
       "application_url": {
         "urls": [
@@ -467,7 +668,7 @@
     }
   },
   "unemployment_benefits_tx": {
-    "verified_on": "2026-10-12",
+    "verified_on": "2026-10-13",
     "figures_effective": "Weekly benefit amounts for claims starting October 4, 2026 (TWC table row).",
     "fields": {
       "description": {
@@ -485,7 +686,8 @@
           "https://www.twc.texas.gov/programs/unemployment-benefits/eligibility-benefit-amounts"
         ],
         "evidence": "",
-        "note": "null: eligibility rests on past wages, job separation and ongoing requirements, not a poverty-level income test."
+        "note": "null: eligibility rests on past wages, job separation and ongoing requirements, not a poverty-level income test.",
+        "null_reason": "no_income_test"
       },
       "eligibility.citizenship_required": {
         "urls": [
@@ -496,10 +698,26 @@
       },
       "estimated_monthly_value_usd": {
         "urls": [
-          "https://www.twc.texas.gov/programs/unemployment-benefits/eligibility-benefit-amounts"
+          "https://www.dol.gov/sites/dolgov/files/ETA/advisories/UIPL/2026/UIPL%2016-26/UIPL%2016-26.pdf"
         ],
-        "evidence": "Your WBA will be between $76 and $619",
-        "note": "null: TWC publishes only the minimum and maximum weekly benefit amount (October 4, 2026 row: $76 and $619), not an average. The range is in the description."
+        "evidence": "Texas $516.11 $258.06 $259.00",
+        "note": "U.S. Department of Labor UIPL 16-26 lists the Texas average weekly benefit amount (AWBA) as $516.11, calculated from ETA 5159 data, published for disasters declared Oct. 1 to Dec. 31, 2026. 516.11 * 52 / 12 = 2236.48, rounded to 2236. TWC itself publishes only the minimum and maximum ($76 and $619 for claims starting Oct. 4, 2026).",
+        "estimated": true,
+        "estimate": {
+          "method": "official_average",
+          "represents": "Average weekly unemployment benefit paid in Texas (U.S. Department of Labor figure) converted to a monthly amount; individual benefits range from $76 to $619 a week.",
+          "formula": "round(awba * 52 / 12)",
+          "inputs": [
+            {
+              "name": "awba",
+              "value": 516.11,
+              "unit": "USD per week",
+              "period": "Oct. 1 to Dec. 31, 2026 listing (UIPL 16-26)",
+              "url": "https://www.dol.gov/sites/dolgov/files/ETA/advisories/UIPL/2026/UIPL%2016-26/UIPL%2016-26.pdf",
+              "evidence": "Texas $516.11 $258.06 $259.00"
+            }
+          ]
+        }
       },
       "application_url": {
         "urls": [
@@ -520,7 +738,23 @@
           "https://www.twc.texas.gov/programs/unemployment-benefits/application-results"
         ],
         "evidence": "It takes about four weeks from the date you apply for benefits",
-        "note": "Four weeks converted at 7 days to 28."
+        "note": "Four weeks converted at 7 days to 28.",
+        "estimated": true,
+        "estimate": {
+          "method": "unit_conversion",
+          "represents": "TWC's stated time of about four weeks converted to days.",
+          "formula": "weeks * 7",
+          "inputs": [
+            {
+              "name": "weeks",
+              "value": 4,
+              "unit": "weeks",
+              "period": "current TWC statement",
+              "url": "https://www.twc.texas.gov/programs/unemployment-benefits/application-results",
+              "evidence": "It takes about four weeks from the date you apply for benefits"
+            }
+          ]
+        }
       }
     }
   }
