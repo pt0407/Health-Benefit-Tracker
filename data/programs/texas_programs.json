@@ -82,7 +82,7 @@
       "Proof of Texas residence (utility bill, rent receipt, or landlord letter)",
       "Unpaid medical bills or statements from the past three months"
     ],
-    "processing_time_days": 15,
+    "processing_time_days": 21,
     "source": "Texas Health and Human Services",
     "last_updated": "2026-10-12"
   },
@@ -107,7 +107,7 @@
       "Proof of income (paycheck stub from the last 60 days, last year's tax return, self-employment proof, employer letter, or Social Security statement)",
       "Proof of allowable expenses, if claimed (previous year's federal tax return; divorce decree or court order for alimony paid)"
     ],
-    "processing_time_days": 15,
+    "processing_time_days": 21,
     "source": "Texas Health and Human Services",
     "last_updated": "2026-10-12"
   },
