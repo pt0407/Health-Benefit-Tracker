@@ -1,1 +1,232 @@
-[]
+[
+  {
+    "program_id": "chip_tx",
+    "name": "Children's Health Insurance Program (CHIP)",
+    "type": "federal_state",
+    "category": "health",
+    "description": "CHIP gives low-cost health coverage to Texas children whose families earn too much for Medicaid but cannot afford private insurance. A child must be 18 or younger, live in Texas, be a U.S. citizen or qualified non-citizen, and be in a family within the income guidelines, which top out at 201% of the federal poverty level and apply once income is above the Children's Medicaid limit. A 90-day wait without other insurance applies unless a good-cause exemption is met. Coverage includes checkups, dental care, medicine, vaccines, hospital care, vision and hearing care, and specialists. Depending on income, families may pay an enrollment fee of $50 or less per year and small copays. Children with disabilities who earn too much may look at the Medicaid Buy-In for Children program.",
+    "eligibility": {
+      "income_limit_pct_fpl": 201,
+      "citizenship_required": true,
+      "age_min": null,
+      "age_max": 18,
+      "requires_children": true,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": null,
+    "application_url": "https://www.yourtexasbenefits.com/Learn/Home",
+    "documents_needed": [
+      "Proof of income (last two pay stubs or paychecks, employer statement, or self-employment records)",
+      "Proof of citizenship (U.S. passport, Certificate of Naturalization, U.S. birth certificate, hospital record of birth, or Medicare card)",
+      "Immigration status papers (resident card I-551, I-94, or USCIS papers), if applicable",
+      "Proof of identity (driver's license or Texas DPS ID)",
+      "Proof of Texas residence (utility bill, rent receipt, or landlord letter)",
+      "Unpaid medical bills or statements from the past three months"
+    ],
+    "processing_time_days": 45,
+    "source": "Texas Health and Human Services",
+    "last_updated": "2026-10-12"
+  },
+  {
+    "program_id": "childrens_medicaid_tx",
+    "name": "Children's Medicaid (STAR)",
+    "type": "state",
+    "category": "health",
+    "description": "Children's Medicaid provides free health coverage for Texas children in low-income families. A child must be 18 or younger (some children with disabilities who are 19 or 20 can also qualify), live in Texas, be a U.S. citizen or qualified non-citizen, and be in a family within the income guidelines. Monthly income limits depend on the child's age: 198% of the federal poverty level for children under 1, 144% for ages 1 to 5, and 133% for ages 6 to 18. Coverage includes checkups, dental care, medicine, vaccines, hospital care, vision and hearing care, and specialists, plus long-term services for children with disabilities. If family income is too high, HHSC automatically checks whether the child can get CHIP instead.",
+    "eligibility": {
+      "income_limit_pct_fpl": 198,
+      "citizenship_required": true,
+      "age_min": null,
+      "age_max": 18,
+      "requires_children": true,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": null,
+    "application_url": "https://www.yourtexasbenefits.com/Learn/Home",
+    "documents_needed": [
+      "Proof of income (last two pay stubs or paychecks, employer statement, or self-employment records)",
+      "Proof of citizenship (U.S. passport, Certificate of Naturalization, U.S. birth certificate, hospital record of birth, or Medicare card)",
+      "Immigration status papers (resident card I-551, I-94, or USCIS papers), if applicable",
+      "Proof of identity (driver's license or Texas DPS ID)",
+      "Proof of Texas residence (utility bill, rent receipt, or landlord letter)",
+      "Unpaid medical bills or statements from the past three months"
+    ],
+    "processing_time_days": 45,
+    "source": "Texas Health and Human Services",
+    "last_updated": "2026-10-12"
+  },
+  {
+    "program_id": "medicaid_pregnant_women_tx",
+    "name": "Medicaid for Pregnant Women (STAR)",
+    "type": "state",
+    "category": "health",
+    "description": "Medicaid for Pregnant Women gives free health coverage to low-income pregnant women in Texas during pregnancy and for up to 12 months after the baby is born. The applicant must live in Texas and be a U.S. citizen or qualified non-citizen, and family income must be at or below 198% of the federal poverty level, which was $2,634 a month for a family of one in the March 2026 table and rises with family size. It includes full Medicaid benefits such as prenatal visits and vitamins, labor and delivery, and checkups for the baby. HHSC must decide within 15 business days and does not require an interview. Women who do not qualify for Medicaid may qualify for CHIP Perinatal instead.",
+    "eligibility": {
+      "income_limit_pct_fpl": 198,
+      "citizenship_required": true,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": false,
+      "requires_pregnancy": true
+    },
+    "estimated_monthly_value_usd": null,
+    "application_url": "https://www.yourtexasbenefits.com/Learn/Home",
+    "documents_needed": [
+      "Proof of income (two pay stubs or paychecks from the last 60 days, employer statement, or self-employment records)",
+      "Proof of citizenship (U.S. passport, Certificate of Naturalization, U.S. birth certificate, hospital record of birth, or Medicare card)",
+      "Immigration status papers (resident card I-551, I-94, or USCIS papers), if applicable",
+      "Proof of identity (driver's license or Texas DPS ID)",
+      "Proof of Texas residence (utility bill, rent receipt, or landlord letter)",
+      "Unpaid medical bills or statements from the past three months"
+    ],
+    "processing_time_days": 15,
+    "source": "Texas Health and Human Services",
+    "last_updated": "2026-10-12"
+  },
+  {
+    "program_id": "chip_perinatal_tx",
+    "name": "CHIP Perinatal",
+    "type": "state",
+    "category": "health",
+    "description": "CHIP Perinatal covers prenatal care for the unborn child of a pregnant Texas woman who cannot get Medicaid and has no other health insurance. A woman qualifies if her household income is between 199% and 202% of the federal poverty level, or is at or below 202% but she does not qualify for Medicaid because of immigration status. Women who are U.S. citizens or qualified immigrants at or below 198% may qualify for Medicaid instead. Coverage includes prenatal visits, medicine such as prenatal vitamins, labor and delivery, and two doctor visits after the pregnancy ends. The 90-day waiting period, enrollment fees and copays of regular CHIP do not apply. A woman must apply before the baby is born, and HHSC has 15 business days to process the application.",
+    "eligibility": {
+      "income_limit_pct_fpl": 202,
+      "citizenship_required": false,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": false,
+      "requires_pregnancy": true
+    },
+    "estimated_monthly_value_usd": null,
+    "application_url": "https://www.yourtexasbenefits.com/Learn/Home",
+    "documents_needed": [
+      "Proof of income (paycheck stub from the last 60 days, last year's tax return, self-employment proof, employer letter, or Social Security statement)",
+      "Proof of allowable expenses, if claimed (previous year's federal tax return; divorce decree or court order for alimony paid)"
+    ],
+    "processing_time_days": 15,
+    "source": "Texas Health and Human Services",
+    "last_updated": "2026-10-12"
+  },
+  {
+    "program_id": "emergency_medicaid_tx",
+    "name": "Emergency Medicaid",
+    "type": "state",
+    "category": "health",
+    "description": "Emergency Medicaid pays for treatment of an emergency medical condition for Texans who would qualify for Medicaid except for their immigration status. It can cover pregnant women, children under 19, parents and caretaker relatives, and elderly or disabled adults who are non-immigrants, undocumented, or certain permanent residents who do not meet the alien status rules. Income limits follow the regular program: 198% of the federal poverty level for pregnant women and children under 1, 144% for ages 1 to 5, and 133% for ages 6 to 18; elderly or disabled adults must meet SSI rules other than citizenship. Only services needed to stabilize the emergency are covered, and the treating practitioner must certify it on Form H3038. Children get 12 months of coverage and pregnant women coverage through 12 months after delivery.",
+    "eligibility": {
+      "income_limit_pct_fpl": 198,
+      "citizenship_required": false,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": null,
+    "application_url": "https://www.yourtexasbenefits.com/Learn/Home",
+    "documents_needed": [
+      "Form H3038, Emergency Medical Services Certification, signed by the treating practitioner",
+      "Proof of identity (driver's license or Texas DPS ID)",
+      "Proof of income (pay stubs, employer statement, or self-employment records)",
+      "Proof of Texas residence (utility bill, rent receipt, or landlord letter)"
+    ],
+    "processing_time_days": 45,
+    "source": "Texas Health and Human Services",
+    "last_updated": "2026-10-12"
+  },
+  {
+    "program_id": "medicaid_elderly_disabled_tx",
+    "name": "Medicaid for the Elderly and People with Disabilities (MEPD)",
+    "type": "state",
+    "category": "health",
+    "description": "MEPD gives health coverage, and in many cases long-term care, to Texas seniors and to adults and children with disabilities who do not have health insurance. Applicants must live in Texas, be a U.S. citizen or qualified non-citizen, and be 65 or older or meet the Social Security definition of disability. Income and resource tests apply rather than a poverty-level percentage. From January 1, 2026 the SSI-based income limit is $994 a month for one person ($1,491 for a couple), and the special limit for nursing facility, waiver and attendant care programs is $2,982 ($5,964 for a couple). Countable resources must generally be $2,000 or less for one person ($3,000 for a couple). HHSC decides within 45 days, or within 90 days when disability must be established.",
+    "eligibility": {
+      "income_limit_pct_fpl": null,
+      "citizenship_required": true,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": null,
+    "application_url": "https://www.yourtexasbenefits.com/Learn/Home",
+    "documents_needed": [
+      "Proof of identity (driver's license or Texas DPS ID)",
+      "Immigration status papers (resident card I-551, I-94, or USCIS papers), if applicable",
+      "Social Security, SSI or pension award letter or pay stubs",
+      "Veterans benefits, workers' compensation or unemployment award letter or pay stubs",
+      "Legal representative papers (power of attorney, guardianship order, or court order), if applicable",
+      "Proof of Texas residence (utility bill, rent receipt, or landlord letter)"
+    ],
+    "processing_time_days": 90,
+    "source": "Texas Health and Human Services",
+    "last_updated": "2026-10-12"
+  },
+  {
+    "program_id": "tanf_tx",
+    "name": "Temporary Assistance for Needy Families (TANF) Cash Help",
+    "type": "federal_state",
+    "category": "cash",
+    "description": "TANF gives monthly cash payments to help Texas families with children pay for food, clothing, housing, utilities and other basics. It is for families with children age 18 or younger, either parents with their children or relatives caring for related children, who have little or no money. Eligibility depends on family income, the value of what the family owns or pays for, and child care and child support costs; accessible resources must be $1,000 or less. HHSC publishes income limits and maximum grants by family size and household type, with maximum monthly grants from $130 to $545 for family sizes 1 to 5 on its page. Parents must agree to work, child support, school and vaccine rules. One-time payments are available to families in crisis.",
+    "eligibility": {
+      "income_limit_pct_fpl": null,
+      "citizenship_required": true,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": true,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": null,
+    "application_url": "https://www.yourtexasbenefits.com/Learn/Home",
+    "documents_needed": [
+      "Proof of income (last two pay stubs or paychecks, employer statement, or self-employment records)",
+      "Bank account statements (most current for all accounts)",
+      "Proof a child is related to you (birth, hospital or baptismal certificate)",
+      "Proof of citizenship (U.S. passport, Certificate of Naturalization, U.S. birth certificate, hospital record of birth, or Medicare card)",
+      "Vaccine records for each child",
+      "Statement from a landlord or nonrelative neighbor that the child lives with you",
+      "Child support court papers or records, if anyone pays or gets child support",
+      "Copy of health insurance card or policy, if any"
+    ],
+    "processing_time_days": 45,
+    "source": "Texas Health and Human Services",
+    "last_updated": "2026-10-12"
+  },
+  {
+    "program_id": "unemployment_benefits_tx",
+    "name": "Unemployment Benefits",
+    "type": "state",
+    "category": "employment",
+    "description": "Texas unemployment benefits give temporary, partial income replacement to workers who lost their job or had their hours cut through no fault of their own. The program is paid for by employer taxes, not by workers. To qualify, a worker needs enough past wages earned in Texas and a qualifying job separation or hours reduction, must register for work search at WorkInTexas.com, and must be able, available and actively searching for work. People who are not U.S. citizens must be legally in the U.S. and authorized to work. The weekly benefit amount depends on past wages and currently ranges from $76 to $619; total benefits are capped at 26 times the weekly amount or 27 percent of base period wages, whichever is less. TWC says it takes about four weeks to learn whether you qualify.",
+    "eligibility": {
+      "income_limit_pct_fpl": null,
+      "citizenship_required": true,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": null,
+    "application_url": "https://www.twc.texas.gov/services/apply-benefits",
+    "documents_needed": [
+      "Social Security number",
+      "Valid state driver license or state ID card number",
+      "Last employer's business name, address and phone number",
+      "First and last dates worked for last employer",
+      "Hours worked and pay rate for the week you apply, if you worked",
+      "Information about the normal wage for the job you are seeking",
+      "DD Form 214 and service dates, if in the military in the past 18 months",
+      "Alien Registration number, if not a U.S. citizen or national"
+    ],
+    "processing_time_days": 28,
+    "source": "Texas Workforce Commission",
+    "last_updated": "2026-10-12"
+  }
+]
