@@ -8,6 +8,7 @@ data/scripts/README.md, and the per-field sources in data/sources/<name>_sources
 Output lines:
   PROBLEM <program_id> <field>: <message>
   UNCONFIRMED <program_id> <field>                                       (allowed, listed)
+  ESTIMATE <program_id> <field> <method> <value>                         (advisory: value is estimated or derived)
   EVIDENCE <FOUND|NOT_FOUND|NO_SNAPSHOT> <program_id> <field> <url>      (--check-evidence)
   URL <status> <program_id> <url>                                        (--check-urls)
   SUMMARY programs=<n> problems=<n>
@@ -16,7 +17,10 @@ Exit status is 1 only when problems > 0; the EVIDENCE and URL lines are advisory
 from __future__ import annotations
 
 import argparse
+import ast
 import json
+import math
+import operator
 import re
 import sys
 import time
@@ -41,6 +45,13 @@ SUFFIX = {"federal_programs.json": "_federal", "texas_programs.json": "_tx"}
 BOOL_FIELDS = {f"eligibility.{k}" for k in ("citizenship_required", "requires_children", "requires_disability", "requires_pregnancy")}
 NO_EVIDENCE = {"description", "application_url", "documents_needed"}
 EM_DASH = chr(0x2014)
+NUMERIC_FIELDS = ("eligibility.income_limit_pct_fpl", "estimated_monthly_value_usd", "processing_time_days")
+ESTIMATE_METHODS = {
+    "dollar_limit_to_pct_fpl", "per_enrollee_spending", "official_average", "range_midpoint", "unit_conversion", "official_basis",
+}
+NULL_REASONS = {"no_income_test", "not_applicable", "no_official_basis"}
+FORMULA_FUNCS = {"round": round, "floor": math.floor, "ceil": math.ceil, "min": min, "max": max}
+_BINOPS = {ast.Add: operator.add, ast.Sub: operator.sub, ast.Mult: operator.mul, ast.Div: operator.truediv}
 _QUOTES = str.maketrans({"‘": "'", "’": "'", "“": '"', "”": '"', "–": "-"})
 
 
@@ -166,6 +177,160 @@ def _check_record(rec, pid: str, fname: str, flag):
     return m
 
 
+def evaluate_formula(formula: str, values: dict) -> tuple[float, set]:
+    """Evaluate an estimate formula without eval(); return (result, names used).
+
+    Allowed: numbers, input names, + - * /, unary minus, parentheses, and calls to round, floor,
+    ceil, min, max. Anything else raises ValueError.
+    """
+    if len(formula) > 500:
+        raise ValueError("is longer than 500 characters")
+    try:
+        tree = ast.parse(formula.strip(), mode="eval")
+    except (SyntaxError, ValueError, RecursionError):
+        raise ValueError("is not a valid arithmetic expression") from None
+    used: set = set()
+
+    def walk(node):
+        if isinstance(node, ast.Expression):
+            return walk(node.body)
+        if isinstance(node, ast.Constant) and type(node.value) in (int, float):
+            return node.value
+        if isinstance(node, ast.Name):
+            if node.id not in values:
+                raise ValueError(f"uses {node.id!r}, which is not an input name")
+            used.add(node.id)
+            return values[node.id]
+        if isinstance(node, ast.BinOp) and type(node.op) in _BINOPS:
+            return _BINOPS[type(node.op)](walk(node.left), walk(node.right))
+        if isinstance(node, ast.UnaryOp) and isinstance(node.op, ast.USub):
+            return -walk(node.operand)
+        if isinstance(node, ast.Call):
+            if not (isinstance(node.func, ast.Name) and node.func.id in FORMULA_FUNCS) or node.keywords:
+                raise ValueError(f"may only call {', '.join(FORMULA_FUNCS)} with positional arguments")
+            return FORMULA_FUNCS[node.func.id](*[walk(a) for a in node.args])
+        op = getattr(node, "op", None)
+        raise ValueError(f"contains {type(op or node).__name__}, which is not allowed")
+
+    try:
+        result = walk(tree)
+    except RecursionError:
+        raise ValueError("is nested too deeply") from None
+    except (ArithmeticError, TypeError) as exc:
+        raise ValueError(f"cannot be evaluated ({type(exc).__name__}: {exc})") from None
+    if isinstance(result, bool) or not isinstance(result, (int, float)) or math.isnan(result):
+        raise ValueError("did not produce a number")
+    return result, used
+
+
+def _record_value(rec: dict, key: str):
+    src = rec.get("eligibility") if key.startswith("eligibility.") else rec
+    return src.get(key.split(".")[-1]) if isinstance(src, dict) else None
+
+
+def _is_number(val) -> bool:
+    return isinstance(val, (int, float)) and not isinstance(val, bool)
+
+
+def _text(val) -> str:
+    return val.strip() if isinstance(val, str) else ""
+
+
+def _check_estimate(pid: str, key: str, f: dict, value, flag) -> None:
+    est = f.get("estimate")
+    if not isinstance(est, dict):
+        flag(pid, key, "estimated is true but estimate is missing or not an object")
+        return
+    if est.get("method") not in ESTIMATE_METHODS:
+        flag(pid, key, f"estimate.method must be one of {sorted(ESTIMATE_METHODS)}")
+    if not _text(est.get("represents")):
+        flag(pid, key, "estimate.represents must be a non-empty sentence")
+    formula = _text(est.get("formula"))
+    if not formula:
+        flag(pid, key, "estimate.formula is missing")
+    inputs, values, inputs_ok = est.get("inputs"), {}, True
+    if not isinstance(inputs, list) or not inputs:
+        flag(pid, key, "estimate.inputs must be a non-empty list")
+        return
+    listed = urls_of(f)
+    for i, item in enumerate(inputs):
+        where = f"estimate.inputs[{i}]"
+        if not isinstance(item, dict):
+            flag(pid, key, f"{where} must be an object")
+            inputs_ok = False
+            continue
+        name = item.get("name")
+        if not (isinstance(name, str) and name.isidentifier()) or name in FORMULA_FUNCS:
+            flag(pid, key, f"{where}.name must be an identifier that is not a formula function")
+            inputs_ok = False
+        elif name in values:
+            flag(pid, key, f"{where}.name {name!r} is used twice")
+            inputs_ok = False
+        elif _is_number(item.get("value")):
+            values[name] = item["value"]
+        if not _is_number(item.get("value")):
+            flag(pid, key, f"{where}.value must be a number")
+            inputs_ok = False
+        for part in ("unit", "period"):
+            if not _text(item.get(part)):
+                flag(pid, key, f"{where}.{part} must be non-empty text")
+        url = item.get("url")
+        if not isinstance(url, str) or (msg := host_status(url)) is not None:
+            flag(pid, key, f"{where}.url: {msg if isinstance(url, str) else 'must be a URL string'}")
+        elif url not in listed:
+            flag(pid, key, f"{where}.url is not listed in this entry's urls")
+        words = len(_text(item.get("evidence")).split())
+        if not 1 <= words <= 15:
+            flag(pid, key, f"{where}.evidence has {words} words, need 1 to 15")
+    if not formula or not inputs_ok:
+        return
+    try:
+        result, used = evaluate_formula(formula, values)
+    except ValueError as exc:
+        flag(pid, key, f"estimate.formula {exc}")
+        return
+    for name in sorted(set(values) - used):
+        flag(pid, key, f"estimate input {name!r} is not used in the formula")
+    if _is_number(value) and abs(result - value) > 0.005:
+        flag(pid, key, f"estimate.formula gives {result:g} but the record value is {value:g}")
+
+
+def _check_marker(pid: str, key: str, f: dict, rec: dict, flag) -> bool:
+    """Check the estimate and null_reason markers on one sidecar field; True when it is estimated."""
+    numeric = key in NUMERIC_FIELDS
+    value = _record_value(rec, key) if numeric else None
+    est = f.get("estimated")
+    if "estimated" in f and not isinstance(est, bool):
+        flag(pid, key, "estimated must be true or false")
+    if (est is True or "estimate" in f) and not numeric:
+        flag(pid, key, f"estimated and estimate are allowed only on {', '.join(NUMERIC_FIELDS)}")
+    elif est is True:
+        if value is None:
+            flag(pid, key, "estimated is true but the record value is null")
+        _check_estimate(pid, key, f, value, flag)
+    elif "estimate" in f:
+        flag(pid, key, "estimate is present without estimated: true")
+    if "null_reason" in f:
+        if f["null_reason"] not in NULL_REASONS:
+            flag(pid, key, f"null_reason must be one of {sorted(NULL_REASONS)}")
+        if numeric and value is not None:
+            flag(pid, key, "null_reason is only allowed when the record value is null")
+    return numeric and est is True
+
+
+def _check_null_reasons(pid: str, rec: dict, fields: dict, flag) -> None:
+    for key in NUMERIC_FIELDS:
+        if _record_value(rec, key) is not None:
+            continue
+        f = fields.get(key)
+        reason = f.get("null_reason") if isinstance(f, dict) else None
+        allowed = NULL_REASONS if key == NUMERIC_FIELDS[0] else NULL_REASONS - {"no_income_test"}
+        if reason not in allowed:
+            flag(pid, key, f"null value needs a sidecar entry with null_reason, one of {sorted(allowed)}")
+        elif not _text(f.get("note")):
+            flag(pid, key, "null_reason entry needs a note giving the exact reason")
+
+
 def _check_sidecar(sidecar, sname: str, pid: str, rec: dict, model, flag, unconfirmed: list) -> None:
     entry = sidecar.get(pid) if sidecar else None
     fields = entry.get("fields") if isinstance(entry, dict) else None
@@ -176,6 +341,7 @@ def _check_sidecar(sidecar, sname: str, pid: str, rec: dict, model, flag, unconf
         if EM_DASH in text:
             flag(pid, f"sidecar.{path}", "contains an em dash")
     need = required_fields(rec) if model is not None else []
+    estimated = False
     for key in need:
         if key not in fields:
             flag(pid, key, "missing from sidecar")
@@ -184,6 +350,7 @@ def _check_sidecar(sidecar, sname: str, pid: str, rec: dict, model, flag, unconf
             flag(pid, key, "sidecar field must be an object")
             continue
         urls = urls_of(f)
+        estimated = _check_marker(pid, key, f, rec, flag) or estimated
         if not urls or len(urls) != len(f.get("urls")):
             flag(pid, key, "sidecar needs a non-empty list of url strings")
         for url in urls:
@@ -196,6 +363,10 @@ def _check_sidecar(sidecar, sname: str, pid: str, rec: dict, model, flag, unconf
                 flag(pid, key, "unconfirmed is allowed only on boolean eligibility fields")
         elif key in need and key not in NO_EVIDENCE and not str(f.get("evidence") or "").strip():
             flag(pid, key, "evidence is required")
+    if model is not None:
+        _check_null_reasons(pid, rec, fields, flag)
+        if estimated and "estimate" not in str(rec.get("description", "")).lower():
+            flag(pid, "description", "a field is estimated, so the description must contain the word 'estimate'")
 
 
 def urls_of(field: dict) -> list[str]:
@@ -239,6 +410,30 @@ def iter_sidecar_fields(data_dir):
             for key, f in (fields.items() if isinstance(fields, dict) else []):
                 if isinstance(f, dict):
                     yield pid, key, f
+
+
+def _fmt(val) -> str:
+    return str(int(val)) if isinstance(val, float) and val.is_integer() else str(val)
+
+
+def _estimates(data_dir) -> list[tuple[str, str, str, object]]:
+    values = {}
+    for path in sorted((Path(data_dir) / "programs").glob("*.json")):
+        for rec in _load(path, _ignore, list) or []:
+            if isinstance(rec, dict) and isinstance(rec.get("program_id"), str):
+                values[rec["program_id"]] = rec
+    rows = []
+    for pid, key, f in iter_sidecar_fields(data_dir):
+        if f.get("estimated") is True:
+            est = f.get("estimate")
+            method = est.get("method") if isinstance(est, dict) else None
+            rows.append((pid, key, method if isinstance(method, str) else "", _record_value(values.get(pid, {}), key)))
+    return rows
+
+
+def estimated_fields(data_dir) -> list[tuple[str, str, str]]:
+    """(program_id, field, method) for every sidecar field marked estimated: true."""
+    return [row[:3] for row in _estimates(data_dir)]
 
 
 def _norm(text: str) -> str:
@@ -335,6 +530,8 @@ def main(argv=None) -> int:
         print(f"PROBLEM {pid} {field}: {msg}")
     for pid, field in unconfirmed:
         print(f"UNCONFIRMED {pid} {field}")
+    for pid, field, method, value in _estimates(args.data_dir):
+        print(f"ESTIMATE {pid} {field} {method} {_fmt(value)}")
     if args.check_evidence:
         for row in check_evidence(args.data_dir):
             print("EVIDENCE", *row)

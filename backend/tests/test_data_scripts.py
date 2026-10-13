@@ -99,6 +99,159 @@ CASES = [
 ]
 
 
+VALUE = "estimated_monthly_value_usd"
+INCOME = "eligibility.income_limit_pct_fpl"
+
+
+def marker(**over):
+    """A valid estimate marker for the sample value of 100: round(annual / 12) with annual = 1200."""
+    est = {
+        "method": "per_enrollee_spending",
+        "represents": "Example government spending per enrollee, not cash paid to the household.",
+        "formula": "round(annual / 12)",
+        "inputs": [{"name": "annual", "value": 1200, "unit": "USD per year", "period": "example year",
+                    "url": OK_URL, "evidence": "example spending was 1200 dollars"}],
+    }
+    est.update(over)
+    return {"estimated": True, "estimate": est}
+
+
+def estimated(**over):
+    def edit(s):
+        fed(s)["description"] += " This is an estimate."
+        fields(s)[VALUE].update(marker(**over))
+    return edit
+
+
+def edit_input(**over):
+    def edit(s):
+        estimated()(s)
+        fields(s)[VALUE]["estimate"]["inputs"][0].update(over)
+    return edit
+
+
+def drop(*keys, field=VALUE):
+    def edit(s):
+        estimated()(s)
+        for k in keys:
+            fields(s)[field]["estimate"].pop(k)
+    return edit
+
+
+def null_value(s):
+    fed(s)[VALUE] = None
+
+
+def formula_case(formula, inputs=None):
+    def edit(s):
+        estimated(formula=formula)(s)
+        if inputs is not None:
+            fields(s)[VALUE]["estimate"]["inputs"] = inputs
+    return edit
+
+
+def number(name, value=1200):
+    return {"name": name, "value": value, "unit": "USD", "period": "example", "url": OK_URL, "evidence": "example"}
+
+
+MARKER_CASES = [
+    ("missing_formula", drop("formula"), VALUE, "formula is missing"),
+    ("missing_inputs", drop("inputs"), VALUE, "inputs must be a non-empty list"),
+    ("missing_represents", drop("represents"), VALUE, "represents"),
+    ("formula_result_differs", estimated(formula="round(annual / 10)"), VALUE, "gives 120 but the record value is 100"),
+    ("unknown_name", estimated(formula="round(yearly / 12)"), VALUE, "'yearly'"),
+    ("unused_input", formula_case("round(annual / 12)", [number("annual"), number("extra", 5)]), VALUE, "'extra' is not used"),
+    ("attribute_access", estimated(formula="annual.real / 12"), VALUE, "Attribute"),
+    ("other_function_call", estimated(formula="abs(annual) / 12"), VALUE, "may only call"),
+    ("dunder_call", estimated(formula="__import__('os').getcwd()"), VALUE, "may only call"),
+    ("power_operator", estimated(formula="annual ** 2"), VALUE, "Pow"),
+    ("string_constant", estimated(formula="'a' + annual"), VALUE, "Constant"),
+    ("syntax_error", estimated(formula="annual /"), VALUE, "valid arithmetic"),
+    ("division_by_zero", estimated(formula="annual / 0"), VALUE, "cannot be evaluated"),
+    ("bad_method", estimated(method="guess"), VALUE, "method must be one of"),
+    ("input_url_off_allowlist", edit_input(url="https://example.com/x"), VALUE, "allowlist"),
+    ("input_url_not_in_entry_urls", edit_input(url="https://www.example.gov/other"), VALUE, "not listed in this entry's urls"),
+    ("input_evidence_too_long", edit_input(evidence=" ".join(["word"] * 16)), VALUE, "need 1 to 15"),
+    ("input_evidence_empty", edit_input(evidence=""), VALUE, "need 1 to 15"),
+    ("input_value_not_number", edit_input(value="1200"), VALUE, "value must be a number"),
+    ("input_name_not_identifier", edit_input(name="annual spend"), VALUE, "identifier"),
+    ("input_name_is_function", edit_input(name="round"), VALUE, "identifier"),
+    ("duplicate_input_name", formula_case("annual / 12", [number("annual"), number("annual")]), VALUE, "used twice"),
+    ("estimated_on_boolean_field", lambda s: fields(s)["eligibility.citizenship_required"].update(marker()), "eligibility.citizenship_required", "allowed only on"),
+    ("estimate_without_estimated", lambda s: fields(s)[VALUE].update(estimate=marker()["estimate"]), VALUE, "without estimated: true"),
+    ("estimated_false_with_estimate", lambda s: fields(s)[VALUE].update(estimated=False, estimate=marker()["estimate"]), VALUE, "without estimated: true"),
+    ("estimated_without_estimate", lambda s: fields(s)[VALUE].update(estimated=True), VALUE, "estimate is missing"),
+    ("estimated_not_boolean", lambda s: fields(s)[VALUE].update(estimated="yes"), VALUE, "true or false"),
+    ("estimated_on_null_value", lambda s: (null_value(s), estimated()(s)), VALUE, "record value is null"),
+    ("estimated_without_evidence", lambda s: (estimated()(s), fields(s)[VALUE].update(evidence="")), VALUE, "evidence is required"),
+    ("description_lacks_estimate", lambda s: (estimated()(s), fed(s).update(description=DESC)), "description", "must contain the word 'estimate'"),
+    ("null_without_sidecar_entry", null_value, VALUE, "null_reason"),
+    ("null_entry_without_null_reason", lambda s: (null_value(s), fields(s).update({VALUE: {"urls": [OK_URL], "evidence": "", "note": "why"}})), VALUE, "null_reason"),
+    ("null_entry_bad_code", lambda s: (null_value(s), fields(s).update({VALUE: {"urls": [OK_URL], "evidence": "", "note": "why", "null_reason": "unknown"}})), VALUE, "null_reason must be one of"),
+    ("null_entry_without_note", lambda s: (null_value(s), fields(s).update({VALUE: {"urls": [OK_URL], "evidence": "", "null_reason": "not_applicable"}})), VALUE, "needs a note"),
+    ("no_income_test_on_other_field", lambda s: (null_value(s), fields(s).update({VALUE: {"urls": [OK_URL], "evidence": "", "note": "why", "null_reason": "no_income_test"}})), VALUE, "null_reason"),
+    ("null_reason_on_non_null_field", lambda s: fields(s)[VALUE].update(null_reason="not_applicable"), VALUE, "only allowed when the record value is null"),
+    ("income_value_zero", lambda s: fed(s)["eligibility"].update(income_limit_pct_fpl=0), INCOME, "outside"),
+]
+
+
+@pytest.mark.parametrize("mutate,field,fragment", [c[1:] for c in MARKER_CASES], ids=[c[0] for c in MARKER_CASES])
+def test_marker_rule_is_caught(tmp_path, mutate, field, fragment):
+    _, problems, _ = pp.validate(build(tmp_path, mutate))
+    assert any(f == field and fragment in msg for _, f, msg in problems), problems
+
+
+def null_entry(code):
+    return {"urls": [OK_URL], "evidence": "", "note": "example reason", "null_reason": code}
+
+
+def test_valid_marker_passes_and_is_listed(tmp_path):
+    data = build(tmp_path, estimated())
+    assert pp.validate(data) == (2, [], [])
+    assert pp.estimated_fields(data) == [(FED, VALUE, "per_enrollee_spending")]
+
+
+def test_valid_markers_on_all_three_numeric_fields_pass(tmp_path):
+    def edit(s):
+        estimated()(s)
+        fed(s)["eligibility"]["income_limit_pct_fpl"] = 75
+        fed(s)["processing_time_days"] = 21
+        fields(s)[INCOME].update(marker(method="dollar_limit_to_pct_fpl", formula="floor(monthly * 12 / guideline * 100)", inputs=[
+            {**number("monthly", 1500), "evidence": "limit is 1500 a month"}, {**number("guideline", 24000), "evidence": "example guideline"}]))
+        fields(s)["processing_time_days"].update(marker(method="unit_conversion", formula="weeks * 7", inputs=[number("weeks", 3)]))
+    data = build(tmp_path, edit)
+    assert pp.validate(data) == (2, [], [])
+    assert [m for _, _, m in pp.estimated_fields(data)] == ["dollar_limit_to_pct_fpl", "per_enrollee_spending", "unit_conversion"]
+
+
+def test_null_reason_entries_pass_for_each_code(tmp_path):
+    def edit(s):
+        fed(s)["eligibility"]["income_limit_pct_fpl"] = None
+        fed(s)[VALUE] = None
+        fed(s)["processing_time_days"] = None
+        fields(s).update({INCOME: null_entry("no_income_test"), VALUE: null_entry("no_official_basis"),
+                          "processing_time_days": null_entry("not_applicable")})
+    assert pp.validate(build(tmp_path, edit)) == (2, [], [])
+
+
+@pytest.mark.parametrize("formula,inputs,expected", [
+    ("-a + b * (c - 1) / 2", {"a": 4, "b": 3, "c": 5}, 2.0),
+    ("round(a / 3)", {"a": 10}, 3),
+    ("floor(a / 3) + ceil(a / 3)", {"a": 10}, 7),
+    ("min(a, b) + max(a, b)", {"a": 2, "b": 9}, 11),
+    ("(a + 1.5) * 2", {"a": 1}, 5.0),
+])
+def test_formula_evaluator_accepts_whitelisted_arithmetic(formula, inputs, expected):
+    result, used = pp.evaluate_formula(formula, inputs)
+    assert result == expected and used <= set(inputs)
+
+
+def test_cli_prints_estimate_lines_and_keeps_summary_last(tmp_path, capsys):
+    assert pp.main(["--data-dir", str(build(tmp_path, estimated()))]) == 0
+    lines = capsys.readouterr().out.splitlines()
+    assert lines == [f"ESTIMATE {FED} {VALUE} per_enrollee_spending 100", "SUMMARY programs=2 problems=0"]
+
+
 def test_valid_sample_passes(tmp_path):
     assert pp.validate(build(tmp_path)) == (2, [], [])
 
