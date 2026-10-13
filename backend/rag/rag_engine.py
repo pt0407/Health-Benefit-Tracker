@@ -20,10 +20,13 @@ from rag.store import COLLECTION_NAME, ChunkStore
 
 REBUILD_COMMAND = "python data/scripts/index_to_chromadb.py"
 MAX_CHUNKS_PER_PROGRAM = 2
+HUB_PENALTY = 0.5
+SEED_BONUS = 1.0  # large enough that seeded chunks sort ahead of every unseeded chunk
 RRF_K = 10  # reciprocal rank fusion constant; small so rank position matters on a small corpus
 
 # Facet weights. Conditions the household actually has outrank generic needs.
-SITUATION, BASIC_NEED, BACKGROUND = 1.0, 0.5, 0.25
+SITUATION, BASIC_NEED, BACKGROUND = 1.5, 0.5, 0.25
+CORE_NEED = 0.7  # food and utility bills: needs of every low-income household
 
 
 class IndexNotBuiltError(RuntimeError):
@@ -73,12 +76,15 @@ def _facets(profile: UserProfile) -> list[tuple[str, float]]:
     people = "1 person" if profile.household_size == 1 else f"{profile.household_size} people"
     income = "no income" if profile.annual_income == 0 else f"an annual income of ${profile.annual_income:,}"
     facets = [
-        (f"household of {people} with {income} that needs financial help", BASIC_NEED),
-        ("low-income household that needs help paying for groceries and food", BASIC_NEED),
+        (f"household of {people} with {income} that needs financial help", BACKGROUND),
+        ("low-income household that needs help paying for groceries and food", CORE_NEED),
         ("low-income household that needs help paying electricity, heating, cooling and other utility bills",
-         BASIC_NEED),
+         CORE_NEED),
         _HEALTH_BY_INSURANCE[profile.insurance_status],
     ]
+    if profile.has_children or profile.children_ages or profile.is_pregnant:
+        # The child and pregnancy facets below are sharper than the general coverage need.
+        facets[-1] = (facets[-1][0], BACKGROUND)
     ages = list(profile.children_ages)
     if profile.has_children or ages:
         kids = _children_phrase(ages)
@@ -99,7 +105,8 @@ def _facets(profile: UserProfile) -> list[tuple[str, float]]:
         facets.append(("adult with a disability who cannot work and needs monthly income and health coverage",
                        SITUATION))
     if profile.employment_status == "recently_unemployed":
-        facets.append(("person who recently lost a job and has little or no income while looking for work",
+        facets.append(("worker who recently lost a job through no fault of their own and needs weekly income replacement while "
+                       "looking for new work",
                        SITUATION))
     elif profile.employment_status == "unemployed":
         facets.append(("unemployed adult without a job who needs income while looking for work", SITUATION))
@@ -153,11 +160,24 @@ class BenefitsRAG:
         facets = _facets(profile)
         results = self._store.query([text for text, _ in facets], max(2 * k, 16), _where(profile, categories))
         scores: dict[str, float] = {}
+        generic: dict[str, float] = {}
+        seeds: set[str] = set()
         hits: dict[str, dict] = {}
         for (_, weight), ranked in zip(facets, results):
+            if ranked and weight >= CORE_NEED:
+                # Round-robin seat: the best match for each household need or situation is always in play.
+                seeds.add(ranked[0]["id"])
             for rank, hit in enumerate(ranked, start=1):
                 scores[hit["id"]] = scores.get(hit["id"], 0.0) + weight / (RRF_K + rank)
+                if weight != CORE_NEED:  # food and utility matches are what those programs are for
+                    generic[hit["id"]] = generic.get(hit["id"], 0.0) + 1.0 / (RRF_K + rank)
                 hits[hit["id"]] = hit
+        # Hub damping: a chunk that is a loose match for every facet is less specific than one that is
+        # a tight match for a few, so subtract part of its unweighted overall similarity.
+        for cid in scores:
+            scores[cid] -= HUB_PENALTY * generic.get(cid, 0.0)
+            if cid in seeds:
+                scores[cid] += SEED_BONUS
         chunks = []
         per_program: Counter = Counter()
         for cid in sorted(scores, key=lambda cid: (-scores[cid], cid)):
