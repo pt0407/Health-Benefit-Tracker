@@ -141,7 +141,7 @@
           "https://www.hhs.texas.gov/sites/default/files/documents/texas-medicaid-chip-reference-guide-15th-edition.pdf"
         ],
         "evidence": "Average cost per client per month is based on full-benefit clients only.",
-        "note": "Texas HHSC Medicaid and CHIP Reference Guide, 15th edition, Quick Facts \"Trends in Caseload and Spending for Major Medicaid Client Categories\": cost per client per month is $261 (non-disabled children), $588 (non-disabled adults), $2,228 (age and disability-related). The extracted text lists the three values without row labels; the mapping was checked because each value times its caseload share (73%, 13%, 14%) reproduces its spending share (32%, 13%, 55%) in that table.",
+        "note": "Texas HHSC Medicaid and CHIP Reference Guide, 15th edition, Quick Facts (page 3 of the guide), chart \"Trends in Caseload and Spending for Major Medicaid Client Categories\". Re-audit 2026-10-13: the chart rows are labeled in the PDF and the cost-per-client values sit on the same rows as their labels (Non-Disabled Children $261, Non-Disabled Adults $588, Age & Disability-Related $2,228; the Cost per Client column is footnoted full-benefit clients only). The chart labels no year for the cost column; the caseload shares in it (73, 13, 14 percent) match the guide's text for 2023. Used here: the Non-Disabled Children row, $261.",
         "estimated": true,
         "estimate": {
           "method": "per_enrollee_spending",
@@ -219,23 +219,23 @@
       },
       "estimated_monthly_value_usd": {
         "urls": [
-          "https://www.hhs.texas.gov/sites/default/files/documents/texas-medicaid-chip-reference-guide-15th-edition.pdf"
+          "https://www.macpac.gov/wp-content/uploads/2026/01/EXHIBIT-22.-Medicaid-Benefit-Spending-Per-Full-Year-Equivalent-FYE-Enrollee-by-State-and-Eligibility-Group-FY-2023.pdf"
         ],
-        "evidence": "Average cost per client per month is based on full-benefit clients only.",
-        "note": "Texas HHSC Medicaid and CHIP Reference Guide, 15th edition, Quick Facts \"Trends in Caseload and Spending for Major Medicaid Client Categories\": cost per client per month is $261 (non-disabled children), $588 (non-disabled adults), $2,228 (age and disability-related). The extracted text lists the three values without row labels; the mapping was checked because each value times its caseload share (73%, 13%, 14%) reproduces its spending share (32%, 13%, 55%) in that table.",
+        "evidence": "Texas9 7,958 8,701 4,310 4,299 67,810 67,810 5,736 8,770",
+        "note": "MACPAC MACStats Exhibit 22 (Medicaid and CHIP Data Book, February 2026), FY 2023, Texas row, Other adult group, All enrollees column = $5,736 per full-year equivalent enrollee (Full-benefit enrollees column is $8,770; the lower All enrollees figure is used per the tie-break). MACPAC footnote 4 defines Other adult as adults under 65 who qualify through a pathway other than disability or the new adult group, e.g. parents and caretakers, pregnancy. No pregnancy-only figure is published. 5736 / 12 = 478. Replaces the earlier Texas HHSC Quick Facts non-disabled adults figure ($588 a month), whose group definition did not name pregnancy. Government spending, not cash paid to the household.",
         "estimated": true,
         "estimate": {
           "method": "per_enrollee_spending",
-          "represents": "Texas government Medicaid spending per month for each non-disabled adult enrollee (the general adult figure; HHSC publishes no pregnancy-specific figure), not cash paid to the household.",
-          "formula": "round(avg_cost_per_client_per_month)",
+          "represents": "Government Medicaid benefit spending per full-year equivalent Texas enrollee in MACPAC's other adult group (includes pregnancy-related and parent and caretaker coverage; no pregnancy-only figure is published), per month, not cash paid to the household.",
+          "formula": "round(annual_spending_per_enrollee / 12)",
           "inputs": [
             {
-              "name": "avg_cost_per_client_per_month",
-              "value": 588,
-              "unit": "USD per month",
-              "period": "Quick Facts trend table, 15th edition (data current as of August 2024); year not labeled in the page text read, caseload figures in the guide are for 2023",
-              "url": "https://www.hhs.texas.gov/sites/default/files/documents/texas-medicaid-chip-reference-guide-15th-edition.pdf",
-              "evidence": "Average cost per client per month is based on full-benefit clients only."
+              "name": "annual_spending_per_enrollee",
+              "value": 5736,
+              "unit": "USD per year",
+              "period": "FY 2023",
+              "url": "https://www.macpac.gov/wp-content/uploads/2026/01/EXHIBIT-22.-Medicaid-Benefit-Spending-Per-Full-Year-Equivalent-FYE-Enrollee-by-State-and-Eligibility-Group-FY-2023.pdf",
+              "evidence": "Texas9 7,958 8,701 4,310 4,299 67,810 67,810 5,736 8,770"
             }
           ]
         }
@@ -512,7 +512,7 @@
           "https://www.hhs.texas.gov/sites/default/files/documents/texas-medicaid-chip-reference-guide-15th-edition.pdf"
         ],
         "evidence": "Average cost per client per month is based on full-benefit clients only.",
-        "note": "Texas HHSC Medicaid and CHIP Reference Guide, 15th edition, Quick Facts \"Trends in Caseload and Spending for Major Medicaid Client Categories\": cost per client per month is $261 (non-disabled children), $588 (non-disabled adults), $2,228 (age and disability-related). The extracted text lists the three values without row labels; the mapping was checked because each value times its caseload share (73%, 13%, 14%) reproduces its spending share (32%, 13%, 55%) in that table.",
+        "note": "Texas HHSC Medicaid and CHIP Reference Guide, 15th edition, Quick Facts (page 3 of the guide), chart \"Trends in Caseload and Spending for Major Medicaid Client Categories\". Re-audit 2026-10-13: the chart rows are labeled in the PDF and the cost-per-client values sit on the same rows as their labels (Non-Disabled Children $261, Non-Disabled Adults $588, Age & Disability-Related $2,228; the Cost per Client column is footnoted full-benefit clients only). The chart labels no year for the cost column; the caseload shares in it (73, 13, 14 percent) match the guide's text for 2023. Used here: the Age & Disability-Related row, $2,228 (aged and disabled combined).",
         "estimated": true,
         "estimate": {
           "method": "per_enrollee_spending",
