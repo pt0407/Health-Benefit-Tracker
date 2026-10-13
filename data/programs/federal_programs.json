@@ -37,7 +37,7 @@
     "name": "Medicaid",
     "type": "federal_state",
     "category": "health",
-    "description": "Medicaid is a joint federal and state program that provides free or low-cost health coverage to some low-income people, including families and children, pregnant women, older adults, and people with disabilities. Income limits differ by group. The Medicaid.gov Texas profile, with a table dated December 1, 2023, lists 198% of the federal poverty level for children ages 0 to 1 and for pregnant women, 144% for ages 1 to 5, 133% for ages 6 to 18, and 12% for parents and caretakers, with no expansion to other adults; separate CHIP is 201%. The figure recorded here is the highest Medicaid band. Texas runs Children's Medicaid, CHIP, Medicaid for Pregnant Women, CHIP Perinatal, Medicaid for Parents and Caretakers, and Medicaid for the Elderly and People with Disabilities. HealthCare.gov says a recent law change limits full Medicaid and CHIP to certain immigration statuses. States must decide most applications within 45 days, or 90 days when based on disability.",
+    "description": "Medicaid is a joint federal and state program that provides free or low-cost health coverage to some low-income people, including families and children, pregnant women, older adults, and people with disabilities. Income limits differ by group. The Medicaid.gov Texas profile, with a table dated December 1, 2023, lists 198% of the federal poverty level for children ages 0 to 1 and for pregnant women, 144% for ages 1 to 5, 133% for ages 6 to 18, and 12% for parents and caretakers, with no expansion to other adults; separate CHIP is 201%. The figure recorded here is the highest Medicaid band. Texas runs separate programs for children, pregnant women, parents and caretakers, and older adults and people with disabilities. HealthCare.gov says a recent law change limits full Medicaid and CHIP to certain immigration statuses. States must decide most applications within 45 days, or 90 days when based on disability. The monthly value shown is an estimate of government spending, not cash you receive: Medicaid benefit spending per Texas enrollee in fiscal year 2023, divided by 12.",
     "eligibility": {
       "income_limit_pct_fpl": 198,
       "citizenship_required": true,
@@ -47,7 +47,7 @@
       "requires_disability": false,
       "requires_pregnancy": false
     },
-    "estimated_monthly_value_usd": null,
+    "estimated_monthly_value_usd": 663,
     "application_url": "https://www.yourtexasbenefits.com/Learn/Home",
     "documents_needed": [
       "Proof of identity",
@@ -92,7 +92,7 @@
     "name": "Low Income Home Energy Assistance Program (LIHEAP)",
     "type": "federal",
     "category": "energy",
-    "description": "LIHEAP is a federal program that helps low-income households with home energy costs, including heating and cooling bills, energy crises, weatherization, and minor energy-related repairs. In Texas it runs as the Comprehensive Energy Assistance Program (CEAP) through the Texas Department of Housing and Community Affairs, which funds local provider organizations covering all 254 counties and does not accept applications from individuals. Texas calculates CEAP eligibility at 150% of the federal poverty income guidelines; for 2026 that is $23,940 a year for a one-person household and $49,500 for a household of four. Providers verify that household members are U.S. citizens or qualified non-citizens. Crisis help is provided within 48 hours for extreme weather or disasters and within 18 hours for life-threatening situations. Providers can run out of funds, so contact one early. LIHEAP does not charge a fee.",
+    "description": "LIHEAP is a federal program that helps low-income households with home energy costs, including heating and cooling bills, energy crises, weatherization, and minor energy-related repairs. In Texas it runs as the Comprehensive Energy Assistance Program (CEAP) through the Texas Department of Housing and Community Affairs, which funds local providers in all 254 counties and does not take applications from individuals. Texas calculates CEAP eligibility at 150% of the federal poverty income guidelines; for 2026 that is $23,940 a year for a one-person household and $49,500 for a household of four. Providers verify that household members are U.S. citizens or qualified non-citizens. Crisis help is provided within 48 hours for extreme weather or disasters and within 18 hours for life-threatening situations. Providers can run out of funds. LIHEAP does not charge a fee. The monthly value shown is an estimate: the lower of Texas's fiscal year 2023 average yearly household benefits ($1,751 cooling, $2,750 heating), spread over 12 months. Actual help is seasonal or one-time.",
     "eligibility": {
       "income_limit_pct_fpl": 150,
       "citizenship_required": true,
@@ -102,7 +102,7 @@
       "requires_disability": false,
       "requires_pregnancy": false
     },
-    "estimated_monthly_value_usd": null,
+    "estimated_monthly_value_usd": 146,
     "application_url": "https://www.tdhca.texas.gov/help-for-texans",
     "documents_needed": [
       "Government-issued identification",
@@ -112,14 +112,14 @@
     ],
     "processing_time_days": null,
     "source": "ACF Office of Community Services; Texas Department of Housing and Community Affairs",
-    "last_updated": "2026-10-12"
+    "last_updated": "2026-10-13"
   },
   {
     "program_id": "medicare_extra_help_federal",
     "name": "Medicare Part D Extra Help (Low-Income Subsidy)",
     "type": "federal",
     "category": "health",
-    "description": "Extra Help is a Medicare program that lowers Medicare drug plan (Part D) premiums, deductibles, and copays for people with limited income and resources. To qualify you generally need Medicare Part A or Part B, must live in one of the 50 states or the District of Columbia, and must have income below 150% of the federal poverty level. In 2026 Medicare lists the limits as $23,940 of income for an individual and $32,460 for a married couple, with resource limits of $18,090 and $36,100. You get Extra Help automatically if you have full Medicaid, help from a Medicare Savings Program, or SSI. Others can apply through the Social Security Administration online or by phone. To join a Medicare drug plan you must be a U.S. citizen or have a qualifying immigration status. Extra Help is not available in the U.S. territories.",
+    "description": "Extra Help is a Medicare program that lowers Medicare drug plan (Part D) premiums, deductibles, and copays for people with limited income and resources. To qualify you generally need Medicare Part A or Part B, must live in one of the 50 states or the District of Columbia, and must have income below 150% of the federal poverty level. In 2026 Medicare lists the limits as $23,940 of income for an individual and $32,460 for a married couple, with resource limits of $18,090 and $36,100. You get Extra Help automatically if you have full Medicaid, help from a Medicare Savings Program, or SSI. Others can apply through the Social Security Administration online or by phone. To join a Medicare drug plan you must be a U.S. citizen or have a qualifying immigration status. Extra Help is not available in the U.S. territories. The monthly value shown is an estimate: SSA's stated yearly worth of Extra Help, about $5,700, divided by 12. It is an average, not your own amount.",
     "eligibility": {
       "income_limit_pct_fpl": 150,
       "citizenship_required": true,
@@ -129,7 +129,7 @@
       "requires_disability": false,
       "requires_pregnancy": false
     },
-    "estimated_monthly_value_usd": null,
+    "estimated_monthly_value_usd": 475,
     "application_url": "https://www.ssa.gov/medicare/part-d-extra-help",
     "documents_needed": [
       "Bank statements and tax returns",
@@ -138,14 +138,14 @@
     ],
     "processing_time_days": null,
     "source": "Centers for Medicare & Medicaid Services; Social Security Administration",
-    "last_updated": "2026-10-12"
+    "last_updated": "2026-10-13"
   },
   {
     "program_id": "ssdi_federal",
     "name": "Social Security Disability Insurance (SSDI)",
     "type": "federal",
     "category": "disability",
-    "description": "SSDI, which the Social Security Administration also calls Disability, pays a monthly benefit and, later, Medicare to people who cannot work because of a medical condition. You need a disability or blindness that affects your ability to work for a year or more or will result in death, and enough work history under Social Security. Generally that means working at least 5 of the last 10 years, with exceptions for people under 24. In 2026, you generally cannot qualify if you earn more than $1,690 a month ($2,830 if blind). There is usually a five-month waiting period before payments start, and Medicare begins 2 years after entitlement. The average disabled-worker benefit was $1,635.90 a month in August 2026, but your own amount depends on your earnings record. SSA says an initial decision generally takes 6 to 8 months. You must be a U.S. citizen or a lawfully present noncitizen. Disability benefits convert to retirement benefits at full retirement age.",
+    "description": "SSDI, which the Social Security Administration also calls Disability, pays a monthly benefit and, later, Medicare to people who cannot work because of a medical condition. You need a disability or blindness that affects your ability to work for a year or more or will result in death, and enough work history under Social Security. Generally that means working at least 5 of the last 10 years, with exceptions for people under 24. In 2026, you generally cannot qualify if you earn more than $1,690 a month ($2,830 if blind). There is usually a five-month waiting period before payments start, and Medicare begins 2 years after entitlement. The average disabled-worker benefit was $1,635.90 a month in August 2026, but your own amount depends on your earnings record. SSA says an initial decision generally takes 6 to 8 months. You must be a U.S. citizen or a lawfully present noncitizen. Disability benefits convert to retirement benefits at full retirement age. The 240 day processing figure is an estimate that converts 8 months at 30 days each.",
     "eligibility": {
       "income_limit_pct_fpl": null,
       "citizenship_required": true,
@@ -169,6 +169,6 @@
     ],
     "processing_time_days": 240,
     "source": "Social Security Administration",
-    "last_updated": "2026-10-12"
+    "last_updated": "2026-10-13"
   }
 ]
