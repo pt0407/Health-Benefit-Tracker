@@ -79,8 +79,8 @@
         "urls": [
           "https://www.medicaid.gov/state-overviews/stateprofile.html?state=Texas"
         ],
-        "evidence": "Pregnant Women Eligibility Level Medicaid 198%",
-        "note": "Highest Medicaid MAGI band in the Texas profile (Eligibility in Texas section, table dated December 1, 2023, so possibly stale at source). Bands: Medicaid ages 0-1 198%, ages 1-5 144%, ages 6-18 133%, pregnant women Medicaid 198%, parent/caretaker 12%, expansion to adults No. Separate CHIP is 201% and is not counted here because it is a different program (chip_tx). Read in the built-in browser pane 2026-10-13; the section is collapsed until clicked."
+        "evidence": "Income eligibility levels are tied to the federal poverty level (FPL).",
+        "note": "Highest Medicaid MAGI band in the Texas profile (Eligibility in Texas section, table dated December 1, 2023, so possibly stale at source). Bands: Medicaid ages 0-1 198%, ages 1-5 144%, ages 6-18 133%, pregnant women Medicaid 198%, parent/caretaker 12%, expansion to adults No. Separate CHIP is 201% and is not counted here because it is a different program (chip_tx). Read in the built-in browser pane 2026-10-13; the section is collapsed until clicked. The percentages are filled in by the page's scripts, so they are absent from the plain HTML snapshot and the machine evidence check can only match the sentence above; the rendered rows read 'Medicaid Ages 0-1 198%', 'Separate CHIP 201%', 'Pregnant Women Medicaid 198%' and 'Parent/Caretaker 12%'."
       },
       "eligibility.citizenship_required": {
         "urls": [
