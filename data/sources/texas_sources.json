@@ -203,7 +203,7 @@
           "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/a-140-expedited-service"
         ],
         "evidence": "eligibility determined no later than 15 business days from the date HHSC receives the application",
-        "note": "Stored as 15, which the handbook states in business days (about 21 calendar days). Handbook section D-230 says the 15th working day after the file date for a pregnant woman's application."
+        "note": "Stored as 21 calendar days. The handbook states 15 business days (original wording: '15 business days'); converted as 15 * 7 / 5 = 21, rounded up, because processing_time_days means calendar days. Handbook section D-230 says the 15th working day after the file date for a pregnant woman's application."
       }
     }
   },
@@ -268,7 +268,7 @@
           "https://www.hhs.texas.gov/providers/health-services-providers/chip-perinatal-providers/chip-perinatal-faqs"
         ],
         "evidence": "staff have 15 business days to process the application from the day it is received",
-        "note": "Stored as 15, which the page states in business days (about 21 calendar days). Handbook section D-230: 15th working day."
+        "note": "Stored as 21 calendar days. The page states 15 business days (original wording: '15 business days'); converted as 15 * 7 / 5 = 21, rounded up, because processing_time_days means calendar days. Handbook section D-230: 15th working day."
       }
     }
   },
