@@ -15,28 +15,24 @@
       },
       "eligibility.income_limit_pct_fpl": {
         "urls": [
-          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/b-470-categorically-eligible-households",
-          "https://www.fna.usda.gov/snap/recipient/eligibility",
-          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/c-120-supplemental-nutrition-assistance-program"
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/b-470-categorically-eligible-households"
         ],
         "evidence": "gross income less than or equal to 165 percent of the Federal Poverty Income Limit",
-        "note": "Texas gross income limit for categorically eligible households (Texas Works Handbook B-471, revision 15-4); the C-121 table effective Oct. 1, 2026 has a 165% column that it calls the income limit for categorically eligible households. Federal baseline: USDA table header 'Gross monthly income (130% of poverty)' and 'Net monthly income (100% of poverty)'. Households with an elderly or disabled member only face the net test. Recorded the Texas applicable limit per Appendix A4; federal baseline is stated in the description."
+        "note": "Texas gross income limit for categorically eligible households (Texas Works Handbook B-471, revision 15-4); the C-121 table effective Oct. 1, 2026 has a 165% column that it calls the income limit for categorically eligible households. Federal baseline: USDA table header 'Gross monthly income (130% of poverty)' and 'Net monthly income (100% of poverty)'. Households with an elderly or disabled member only face the net test. Recorded the Texas applicable limit per Appendix A4; federal baseline is stated in the description. Also read, not matched against this snippet: the federal baseline table at https://www.fna.usda.gov/snap/recipient/eligibility and the 165% column of table C-121 at https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/c-120-supplemental-nutrition-assistance-program."
       },
       "eligibility.citizenship_required": {
         "urls": [
-          "https://www.fna.usda.gov/snap/recipient/eligibility",
-          "https://www.fna.usda.gov/snap/recipient/eligibility/non-citizen"
+          "https://www.fna.usda.gov/snap/recipient/eligibility"
         ],
         "evidence": "limits eligibility for SNAP benefits to U.S. citizens and certain lawfully present non-citizens",
-        "note": "USDA banner on the eligibility page and on the non-citizen policy page says both are being updated for the One Big Beautiful Bill Act of 2025 changes to non-citizen eligibility. The specific non-citizen criteria listed on the eligibility page may therefore be out of date."
+        "note": "USDA banner on the eligibility page and on the non-citizen policy page says both are being updated for the One Big Beautiful Bill Act of 2025 changes to non-citizen eligibility. The specific non-citizen criteria listed on the eligibility page may therefore be out of date. The non-citizen page https://www.fna.usda.gov/snap/recipient/eligibility/non-citizen carries only the banner and does not repeat the snippet."
       },
       "estimated_monthly_value_usd": {
         "urls": [
-          "https://www.fna.usda.gov/pd/supplemental-nutrition-assistance-program-snap",
-          "https://www.fna.usda.gov/sites/default/files/resource-files/snap-4fymonthly-9.xlsx"
+          "https://www.fna.usda.gov/sites/default/files/resource-files/snap-4fymonthly-9.pdf"
         ],
-        "evidence": "FY 2026 | Average Monthly Benefit Per Household | 348.89",
-        "note": "National average monthly benefit per household, ANNUAL SUMMARY row for FY 2026 in USDA SNAP National View Summary (data as of September 11, 2026; monthly data through June 2026). Original cell value 348.8948 rounded to cents. FY 2025 full year was 353.42 and June 2026 was 342.35. This is a national average; USDA publishes no Texas-specific average. The data files redirect from www.fna.usda.gov to a CDN host."
+        "evidence": "FY 2026 38,228,473 20,725,049 65,077,763,468 189.15 348.89",
+        "note": "National average monthly benefit per household: ANNUAL SUMMARY row for FY 2026 in the PDF of the USDA SNAP National View Summary (data as of September 11, 2026; monthly data through June 2026). Row columns: participation persons, participation households, benefit costs, average monthly benefit per person (189.15), average monthly benefit per household (348.89). The Excel version of the same table shows 348.8948, rounded to cents. FY 2025 full year was 353.42 and June 2026 was 342.35. This is a national average; USDA publishes no Texas-specific average. The PDF and Excel files are linked from https://www.fna.usda.gov/pd/supplemental-nutrition-assistance-program-snap and redirect from www.fna.usda.gov to a CDN host."
       },
       "processing_time_days": {
         "urls": [
@@ -81,26 +77,24 @@
       },
       "eligibility.income_limit_pct_fpl": {
         "urls": [
-          "https://www.medicaid.gov/state-overviews/stateprofile.html?state=Texas",
-          "https://www.healthcare.gov/medicaid-chip/"
+          "https://www.medicaid.gov/state-overviews/stateprofile.html?state=Texas"
         ],
         "evidence": "Income eligibility levels are tied to the federal poverty level (FPL).",
-        "note": "Null on purpose: this is an overview record. HealthCare.gov says eligible income levels may be different from state to state, and Medicaid.gov says limits differ by group (children, pregnant women, parents, other adults). Texas group limits belong to the Texas records. The Medicaid.gov Texas profile table loaded blank for the percentages, so no Texas figure was taken from it."
+        "note": "Null on purpose: this is an overview record. HealthCare.gov says eligible income levels may be different from state to state, and Medicaid.gov says limits differ by group (children, pregnant women, parents, other adults). Texas group limits belong to the Texas records. The Medicaid.gov Texas profile table loaded blank for the percentages, so no Texas figure was taken from it. The HealthCare.gov statement that income levels may differ from state to state is at https://www.healthcare.gov/medicaid-chip/ (read, not matched against this snippet)."
       },
       "eligibility.citizenship_required": {
         "urls": [
-          "https://www.healthcare.gov/medicaid-chip/",
-          "https://www.medicaid.gov/state-overviews/stateprofile.html?state=Texas"
+          "https://www.healthcare.gov/medicaid-chip/"
         ],
         "evidence": "only people with the following immigration statuses are now eligible for full",
-        "note": "HealthCare.gov lists Lawful Permanent Resident, Cuban or Haitian entrant, and COFA migrant; depending on the state, lawfully residing pregnant women and children may be eligible. Medicaid.gov Texas profile footnote says other criteria apply 'with respect to citizenship, immigration status and residency'. U.S. citizens are not named in the HealthCare.gov list but the status rule is the qualifying-status rule."
+        "note": "HealthCare.gov lists Lawful Permanent Resident, Cuban or Haitian entrant, and COFA migrant; depending on the state, lawfully residing pregnant women and children may be eligible. Medicaid.gov Texas profile footnote says other criteria apply 'with respect to citizenship, immigration status and residency'. U.S. citizens are not named in the HealthCare.gov list but the status rule is the qualifying-status rule. The Medicaid.gov Texas profile footnote is at https://www.medicaid.gov/state-overviews/stateprofile.html?state=Texas (read, not matched against this snippet)."
       },
       "processing_time_days": {
         "urls": [
-          "https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-C/part-435/subpart-J/subject-group-ECFR2b847721e0bfa03/section-435.912"
+          "https://www.ecfr.gov/api/renderer/v1/content/enhanced/current/title-42?part=435&section=435.912"
         ],
         "evidence": "45 days for all other applicants",
-        "note": "42 CFR 435.912(c)(3): 90 days for applicants who apply on the basis of disability and 45 days for all other applicants. Two standards for different applicant groups, not one range; recorded 45 as the standard for most applicants and gave both in the description."
+        "note": "42 CFR 435.912(c)(3): 90 days for applicants who apply on the basis of disability and 45 days for all other applicants. Two standards for different applicant groups, not one range; recorded 45 as the standard for most applicants and gave both in the description. Cited through the eCFR renderer service because plain HTTP to the regular page https://www.ecfr.gov/current/title-42/part-435/section-435.912 returns a bot-check page instead of the regulation; both show the same text."
       },
       "documents_needed": {
         "urls": [
@@ -136,12 +130,10 @@
       },
       "eligibility.income_limit_pct_fpl": {
         "urls": [
-          "https://www.fna.usda.gov/wic/faqs",
-          "https://www.hhs.texas.gov/providers/wic-providers/wic-general-information",
-          "https://www.fna.usda.gov/wic/fr-042926"
+          "https://www.fna.usda.gov/wic/faqs"
         ],
         "evidence": "must fall at or below 185 percent of the U.S. Poverty Income Guidelines",
-        "note": "Federal maximum; states may set lower limits but not above 185% or below 100%. Texas HHSC states 'Households with incomes at or below 185 percent of the federal poverty income level are eligible', and the Texas WIC monthly figures ($2,461 for 1, $5,088 for 4) match the federal 185% column. Gross income. Applicants and children who receive Medicaid, SNAP or TANF can meet the income test."
+        "note": "Federal maximum; states may set lower limits but not above 185% or below 100%. Texas HHSC states 'Households with incomes at or below 185 percent of the federal poverty income level are eligible', and the Texas WIC monthly figures ($2,461 for 1, $5,088 for 4) match the federal 185% column. Gross income. Applicants and children who receive Medicaid, SNAP or TANF can meet the income test. Also read, not matched against this snippet: https://www.hhs.texas.gov/providers/wic-providers/wic-general-information (Texas 185 percent statement) and the Federal Register notice page https://www.fna.usda.gov/wic/fr-042926 (annual income eligibility guidelines)."
       },
       "eligibility.citizenship_required": {
         "urls": [
@@ -152,26 +144,24 @@
       },
       "estimated_monthly_value_usd": {
         "urls": [
-          "https://www.fna.usda.gov/pd/wic-program",
-          "https://www.fna.usda.gov/sites/default/files/resource-files/25wifyavgfd-costs-9.xlsx"
+          "https://www.fna.usda.gov/sites/default/files/resource-files/25wifyavgfd-costs-9.pdf"
         ],
-        "evidence": "Texas | FY 2025 | 50.4878",
-        "note": "USDA WIC PROGRAM: AVERAGE MONTHLY BENEFIT PER PERSON, Texas row, FY 2025 column (data as of September 11, 2026). Original cell value 50.4878 rounded to cents. National FY 2025 average is 64.89. Per participant, not per household. The workbook says FY 2025 data are preliminary. The data file redirects from www.fna.usda.gov to a CDN host."
+        "evidence": "Texas 25.15 36.99 46.01 46.71 50.49",
+        "note": "USDA WIC PROGRAM: AVERAGE MONTHLY BENEFIT PER PERSON (PDF), Texas row; columns are FY 2021 to FY 2025, so 50.49 is FY 2025 (data as of September 11, 2026). The Excel version shows 50.4878, rounded to cents. National FY 2025 average is 64.89. Per participant, not per household. The workbook says FY 2025 data are preliminary and the PDF says data are subject to revision. The files are linked from https://www.fna.usda.gov/pd/wic-program and redirect from www.fna.usda.gov to a CDN host."
       },
       "processing_time_days": {
         "urls": [
-          "https://www.ecfr.gov/current/title-7/subtitle-B/chapter-II/subchapter-A/part-246/subpart-C/section-246.7"
+          "https://www.ecfr.gov/api/renderer/v1/content/enhanced/current/title-7?part=246&section=246.7"
         ],
         "evidence": "All other applicants shall be notified of their eligibility or ineligibility within 20 days",
-        "note": "7 CFR 246.7: applicants at special nutritional risk (including eligible pregnant women) within 10 days, extendable to 15; all other applicants within 20 days of the first request for benefits. Used the 20 day upper bound."
+        "note": "7 CFR 246.7: applicants at special nutritional risk (including eligible pregnant women) within 10 days, extendable to 15; all other applicants within 20 days of the first request for benefits. Used the 20 day upper bound. Cited through the eCFR renderer service because plain HTTP to the regular page https://www.ecfr.gov/current/title-7/part-246/section-246.7 returns a bot-check page instead of the regulation; both show the same text."
       },
       "documents_needed": {
         "urls": [
-          "https://www.fna.usda.gov/wic/apply",
-          "https://www.texaswic.org/apply"
+          "https://www.fna.usda.gov/wic/apply"
         ],
         "evidence": "Proof of address",
-        "note": "USDA How to Apply page lists identification for each person enrolling, proof of address, and proof of SNAP/Medicaid/TANF enrollment or proof of income. Texas WIC apply page says the local office will list what is needed, typically proof of address, benefits programs, income and identification."
+        "note": "USDA How to Apply page lists identification for each person enrolling, proof of address, and proof of SNAP/Medicaid/TANF enrollment or proof of income. Texas WIC apply page says the local office will list what is needed, typically proof of address, benefits programs, income and identification. The Texas WIC apply page https://www.texaswic.org/apply uses different wording and does not repeat the snippet."
       },
       "application_url": {
         "urls": [
@@ -199,19 +189,17 @@
       },
       "eligibility.income_limit_pct_fpl": {
         "urls": [
-          "https://www.tdhca.texas.gov/community-affairs-income-guidelines",
-          "https://www.tdhca.texas.gov/sites/default/files/community-affairs/docs/27-LIHEAP.pdf"
+          "https://www.tdhca.texas.gov/community-affairs-income-guidelines"
         ],
         "evidence": "CEAP at 150% of FPIG",
-        "note": "Texas CEAP threshold; the Texas LIHEAP model plan also lists 150% of USHHS poverty guidelines for heating, cooling and crisis components. Federal law lets states use up to 150% of poverty or 60% of state median income, and households receiving TANF, SSI or SNAP can also be eligible under the statute text reproduced in the plan."
+        "note": "Texas CEAP threshold; the Texas LIHEAP model plan also lists 150% of USHHS poverty guidelines for heating, cooling and crisis components. Federal law lets states use up to 150% of poverty or 60% of state median income, and households receiving TANF, SSI or SNAP can also be eligible under the statute text reproduced in the plan. The 150% eligibility threshold is also in the model plan at https://www.tdhca.texas.gov/sites/default/files/community-affairs/docs/27-LIHEAP.pdf (read, not matched against this snippet)."
       },
       "eligibility.citizenship_required": {
         "urls": [
-          "https://www.tdhca.texas.gov/sites/default/files/community-affairs/docs/27-LIHEAP.pdf",
-          "https://www.tdhca.texas.gov/comprehensive-energy-assistance-program-ceap"
+          "https://www.tdhca.texas.gov/sites/default/files/community-affairs/docs/27-LIHEAP.pdf"
         ],
         "evidence": "LIHEAP recipients are U.S. citizens or qualified non-citizens who are eligible to receive LIHEAP benefits",
-        "note": "From the Texas LIHEAP model plan section 17.3 (citizenship and legal residency verification). Verification is per household member and uses SAVE for non-citizens. The TDHCA SAVE FAQ PDF linked from its Household Status Verification page returned 404."
+        "note": "From the Texas LIHEAP model plan section 17.3 (citizenship and legal residency verification). Verification is per household member and uses SAVE for non-citizens. The TDHCA SAVE FAQ PDF linked from its Household Status Verification page returned 404. The TDHCA CEAP page https://www.tdhca.texas.gov/comprehensive-energy-assistance-program-ceap was listed earlier but does not state the citizenship rule."
       },
       "documents_needed": {
         "urls": [
@@ -260,19 +248,17 @@
       },
       "eligibility.income_limit_pct_fpl": {
         "urls": [
-          "https://secure.ssa.gov/poms.nsf/lnx/0603001020",
-          "https://www.medicare.gov/basics/costs/help/drug-costs"
+          "https://secure.ssa.gov/poms.nsf/lnx/0603001020"
         ],
         "evidence": "must be less than 150% of the FPL (based on size of the household)",
-        "note": "SSA Program Operations Manual: income after exclusions must be less than 150% of the FPL. Medicare.gov shows the 2026 dollar equivalents ($23,940 individual, $32,460 couple) but states them in dollars only, so the percent comes from POMS. Resource limits are separate and apply too."
+        "note": "SSA Program Operations Manual: income after exclusions must be less than 150% of the FPL. Medicare.gov shows the 2026 dollar equivalents ($23,940 individual, $32,460 couple) but states them in dollars only, so the percent comes from POMS. Resource limits are separate and apply too. The Medicare.gov dollar limits are at https://www.medicare.gov/basics/costs/help/drug-costs (read, not matched against this snippet)."
       },
       "eligibility.citizenship_required": {
         "urls": [
-          "https://www.medicare.gov/basics/get-started-with-medicare/get-more-coverage/joining-a-plan",
-          "https://secure.ssa.gov/poms.nsf/lnx/0603001020"
+          "https://www.medicare.gov/basics/get-started-with-medicare/get-more-coverage/joining-a-plan"
         ],
         "evidence": "Be a U.S. citizen or U.S. national, a lawful permanent resident (green card holder),",
-        "note": "Indirect: Medicare.gov states this as a condition for joining a Medicare health or drug plan, and POMS HI 03001.020 requires that the Extra Help applicant enroll with a Part D plan or MA-PD. No Extra Help page states the citizenship rule in so many words."
+        "note": "Indirect: Medicare.gov states this as a condition for joining a Medicare health or drug plan, and POMS HI 03001.020 requires that the Extra Help applicant enroll with a Part D plan or MA-PD. No Extra Help page states the citizenship rule in so many words. The POMS page https://secure.ssa.gov/poms.nsf/lnx/0603001020 was read for the enrollment point but does not repeat the snippet."
       },
       "estimated_monthly_value_usd": {
         "urls": [
@@ -330,17 +316,16 @@
       },
       "eligibility.requires_disability": {
         "urls": [
-          "https://www.ssa.gov/disability/eligibility",
-          "https://www.ssa.gov/benefits/disability/qualify.html"
+          "https://www.ssa.gov/disability/eligibility"
         ],
         "evidence": "must have a disability that affects your ability to work for a year or more",
-        "note": "Every path to SSDI requires a qualifying disability or blindness (SSA Who can get Disability)."
+        "note": "Every path to SSDI requires a qualifying disability or blindness (SSA Who can get Disability). The page https://www.ssa.gov/benefits/disability/qualify.html says the same in other words (a medical condition that meets Social Security's strict definition of disability) and does not repeat the snippet."
       },
       "estimated_monthly_value_usd": {
         "urls": [
           "https://www.ssa.gov/policy/docs/quickfacts/stat_snapshot/"
         ],
-        "evidence": "Disabled workers ... 1,635.90",
+        "evidence": "Disabled workers 6,975 9.8 11,410 1,635.90",
         "note": "Monthly Statistical Snapshot, August 2026, Table 2, Disability Insurance, Disabled workers, Average monthly benefit (dollars) 1,635.90. National average."
       },
       "processing_time_days": {
