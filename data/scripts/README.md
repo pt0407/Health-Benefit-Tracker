@@ -31,7 +31,10 @@ cd backend && pytest
   fields marked unconfirmed, and a final `SUMMARY programs=<n> problems=<n>`. It exits 1 only
   when there are problems. `--check-evidence` adds `EVIDENCE <FOUND|NOT_FOUND|NO_SNAPSHOT>
   <program_id> <field> <url>` lines and `--check-urls` adds `URL <status> <program_id> <url>`
-  lines; both are advisory and never change the exit code.
+  lines; both are advisory and never change the exit code. It also prints an advisory
+  `ESTIMATE <program_id> <field> <method> <value>` line for every sidecar field marked estimated
+  (the same list is available as `estimated_fields(data_dir)`, which returns
+  `(program_id, field, method)` tuples).
 - `index_to_chromadb.py` and `check_retrieval.py` print `Indexed <n> programs, <m> chunks into
   <dir>` (or `INDEX OK` / `INDEX STALE` with `--check`) and `PASS` / `FAIL` lines plus
   `SUMMARY pass=<n> fail=<n>`.
@@ -46,18 +49,21 @@ in that order, with nulls and `false` written out. Files are UTF-8,
   `_tx` in `texas_programs.json`. `category`: nutrition, health, cash, disability, energy or employment.
 - `description`: 60 to 180 words, plain language, paraphrased. The first sentence stands alone on a
   card. Cover who qualifies, what it provides and the caveats the source states. No advice or promises.
-- `income_limit_pct_fpl`: set only when an official page states the limit as a percent of the
-  federal poverty level; never back-calculate it from a dollar table. If limits differ by group, use
-  the highest and list every band in `description`. `null` when there is no percent test.
+- `income_limit_pct_fpl`: a percent of the federal poverty level stated by an official page, or
+  derived from an official dollar limit for the reference household and marked as an estimate (see
+  "Estimate and null markers"). If limits differ by group, use the highest and list every band in
+  `description`. `null` means there is no percent-of-poverty test; 0 is never used (the range is 1 to 500).
 - `citizenship_required`, `age_min`, `age_max`: describe the person who receives the benefit (the child
   for a children's program), not the adult filling in the quiz. Ages are inclusive whole years
   ("under 19" is `age_max: 18`). `null` when age is only one of several ways to qualify.
 - `requires_children`, `requires_disability`, `requires_pregnancy`: `true` only if required on every
   path to eligibility. When the rule is "A or B", leave them unset and say so in `description`.
-- `estimated_monthly_value_usd`: only an average or typical benefit the agency publishes. Otherwise `null`.
+- `estimated_monthly_value_usd`: an average or typical benefit the agency publishes, or an estimate
+  derived from an official figure and marked as one. Health coverage values are government spending
+  per enrollee, not cash. Otherwise `null`.
 - `application_url`: https, on an official host, never `benefits.gov`, a stable landing page.
   Allowed hosts are any `.gov` host plus `yourtexasbenefits.com` and `texaswic.org`.
-- `processing_time_days`: the upper bound the source states, 1 to 730, else `null`.
+- `processing_time_days`: the upper bound the source states in calendar days, 1 to 730, else `null`.
 - `last_updated`: the ISO date the record was verified. No em dash characters anywhere.
 
 ## Sidecar format
@@ -83,6 +89,41 @@ non-null `income_limit_pct_fpl`, `age_min`, `age_max`, `estimated_monthly_value_
 `processing_time_days`; each `requires_*` that is true; and `documents_needed` when not empty. Every
 entry needs at least one https official URL, and numeric and boolean fields need non-empty `evidence`.
 `"unconfirmed": true` is allowed only on boolean eligibility fields; it is listed in the output.
+
+## Estimate and null markers
+
+A field entry that holds an estimated or derived value keeps `urls`, `evidence` and `note` and adds
+`estimated` and `estimate`. Allowed only on `eligibility.income_limit_pct_fpl`,
+`estimated_monthly_value_usd` and `processing_time_days`:
+
+```json
+"estimated_monthly_value_usd": {
+  "urls": ["https://..."], "evidence": "verbatim snippet with the main input figure", "note": "",
+  "estimated": true,
+  "estimate": {
+    "method": "per_enrollee_spending",
+    "represents": "Government Medicaid spending per child enrollee in Texas, not cash paid to the household.",
+    "formula": "round(annual_spending_per_enrollee / 12)",
+    "inputs": [
+      {"name": "annual_spending_per_enrollee", "value": 0, "unit": "USD per year", "period": "as stated by the source", "url": "https://...", "evidence": "verbatim snippet, 15 words or fewer"}
+    ]
+  }
+}
+```
+
+- `method` is one of `dollar_limit_to_pct_fpl`, `per_enrollee_spending`, `official_average`,
+  `range_midpoint`, `unit_conversion`, `official_basis`. `represents` is one non-empty sentence.
+- `formula` uses only input names, numbers, `+ - * /`, parentheses and `round`, `floor`, `ceil`,
+  `min`, `max`. The validator parses it with `ast` (never `eval`) and the result must equal the
+  record value within 0.005. Every input name is used and every formula name is an input.
+- Each input has `name`, a numeric `value`, `unit`, `period`, an official https `url` that is also in
+  the entry's `urls`, and non-empty `evidence` of 15 words or fewer.
+- `estimated` without a valid `estimate`, or `estimate` without `estimated: true`, is a problem. A
+  record with any estimated field must have the word "estimate" in its `description`.
+- Every null in the three numeric fields needs a sidecar entry with `urls`, a non-empty `note` and
+  `null_reason`: `no_income_test` (income percent only), `not_applicable` or `no_official_basis`.
+  `null_reason` on a non-null field is a problem.
+- Consumers detect estimates with `sidecar[program_id]["fields"][field].get("estimated") is True`.
 
 ## When figures change each year
 
