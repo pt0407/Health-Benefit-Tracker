@@ -9,6 +9,7 @@ The engine only retrieves program text. It does not decide eligibility and it
 does not compute poverty-level percentages; that belongs to the matcher.
 """
 
+from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
@@ -129,19 +130,6 @@ def _where(profile: UserProfile, categories: Optional[set[str]]) -> dict:
     return clauses[0] if len(clauses) == 1 else {"$and": clauses}
 
 
-def _pick(order: list[str], program_of: dict[str, str], k: int) -> list[str]:
-    """Best chunk of each program first, then second chunks, up to k and the per-program cap."""
-    chosen: list[str] = []
-    taken: dict[str, int] = {}
-    for round_number in range(MAX_CHUNKS_PER_PROGRAM):
-        for chunk_id in order:
-            program_id = program_of[chunk_id]
-            if len(chosen) < k and chunk_id not in chosen and taken.get(program_id, 0) == round_number:
-                chosen.append(chunk_id)
-                taken[program_id] = round_number + 1
-    return chosen
-
-
 class BenefitsRAG:
     def __init__(self, persist_dir: Optional[Path] = None, embedding_function=None,
                  collection_name: str = COLLECTION_NAME) -> None:
@@ -170,12 +158,15 @@ class BenefitsRAG:
             for rank, hit in enumerate(ranked, start=1):
                 scores[hit["id"]] = scores.get(hit["id"], 0.0) + weight / (RRF_K + rank)
                 hits[hit["id"]] = hit
-        order = sorted(scores, key=lambda cid: (-scores[cid], cid))
-        chosen = _pick(order, {cid: hits[cid]["metadata"]["program_id"] for cid in order}, k)
-        chosen.sort(key=lambda cid: (-scores[cid], cid))
         chunks = []
-        for cid in chosen:
+        per_program: Counter = Counter()
+        for cid in sorted(scores, key=lambda cid: (-scores[cid], cid)):
             meta = hits[cid]["metadata"]
+            if len(chunks) == k:
+                break
+            if per_program[meta["program_id"]] == MAX_CHUNKS_PER_PROGRAM:
+                continue
+            per_program[meta["program_id"]] += 1
             chunks.append(RetrievedChunk(
                 text=hits[cid]["text"], program_id=meta["program_id"], program_name=meta["program_name"],
                 category=meta["category"], source=meta["source"], score=scores[cid],

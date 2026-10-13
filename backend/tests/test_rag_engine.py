@@ -57,8 +57,11 @@ def test_no_duplicates_and_per_program_cap(rag):
     assert len(set(rag.retrieve_relevant_programs(make_profile(**FAMILY), k=50))) == 8
 
 
-def test_best_chunk_of_each_program_comes_before_second_chunks(rag):
-    assert len(ids_of(rag.retrieve(make_profile(**FAMILY), k=4))) == 4
+def test_results_are_ranked_and_cut_off_at_k(rag):
+    everything = rag.retrieve(make_profile(**FAMILY), k=50)
+    scores = [c.score for c in everything]
+    assert scores == sorted(scores, reverse=True)
+    assert rag.retrieve(make_profile(**FAMILY), k=5) == everything[:5]
 
 
 def test_non_texas_profile_gets_no_tx_programs(rag):
