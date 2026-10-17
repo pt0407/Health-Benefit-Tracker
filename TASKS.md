@@ -5,14 +5,14 @@ check it off when the PR merges. See `docs/BUILD_PLAN.md` §8 for details.
 
 ## Week 1–2: Foundation
 - [x] Set up project structure and repo (skeleton, CLAUDE.md, contracts)
-- [ ] Scrape and parse all program data — **Person 2**
-- [ ] Build ChromaDB index — **Person 2**
+- [x] Scrape and parse all program data — **Person 2**
+- [x] Build ChromaDB index — **Person 2**
 - [ ] FastAPI skeleton with `/api/match` stub — **Person 1** (stub returns fixture; replace with real matcher)
 - [ ] React quiz wizard UI — **Person 3**
 
 ## Week 3–4: Core Logic
 - [ ] Hard-rule eligibility matcher — **Person 1**
-- [ ] RAG retrieval engine — **Person 2**
+- [x] RAG retrieval engine — **Person 2**
 - [ ] Wire quiz frontend to backend API — **Person 3**
 - [x] Insurance agent — **Person 4** (endpoint live; pass RAG context once BenefitsRAG lands)
 
