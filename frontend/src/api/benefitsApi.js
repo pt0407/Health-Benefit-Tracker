@@ -33,7 +33,8 @@ export async function exportWorksheetPdf(profile, result) {
   const url = URL.createObjectURL(new Blob([data], { type: "application/pdf" }));
   const a = document.createElement("a");
   a.href = url;
-  a.download = "benefitsfinder-worksheet.pdf";
+  a.download = "civis-worksheet.pdf";
   a.click();
-  URL.revokeObjectURL(url);
+  // Revoking right away can cancel the download in some browsers.
+  setTimeout(() => URL.revokeObjectURL(url), 60_000);
 }

@@ -66,14 +66,20 @@ def get_program(program_id: str) -> Program:
     raise HTTPException(status_code=404, detail="Program not found")
 
 
+# Far more than the catalog holds; keeps the public endpoint from rendering huge PDFs.
+MAX_EXPORT_PROGRAMS = 100
+
+
 @router.post("/export/pdf")
 def export_pdf(profile: UserProfile = Body(...),
                result: MatchResponse = Body(...)) -> Response:
+    if len(result.matched_programs) > MAX_EXPORT_PROGRAMS:
+        raise HTTPException(status_code=413, detail="Too many programs to export")
     pdf = render_worksheet_pdf(profile, result)
     return Response(
         content=pdf,
         media_type="application/pdf",
-        headers={"Content-Disposition": 'attachment; filename="benefitsfinder-worksheet.pdf"'},
+        headers={"Content-Disposition": 'attachment; filename="civis-worksheet.pdf"'},
     )
 
 

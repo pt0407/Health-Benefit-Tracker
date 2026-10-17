@@ -267,7 +267,7 @@ export default function Matches() {
                 <p role="status" className="font-semibold">Showing {visible.length} of {programs.length} programs</p>
                 {answers && (
                   <Button variant="secondary" className="mt-3" onClick={downloadPdf} disabled={exporting}>
-                    {exporting ? "Preparing…" : "Download worksheet (PDF)"}
+                    {exporting ? "Preparing your worksheet…" : "Download worksheet (PDF)"}
                   </Button>
                 )}
                 {exportError && <p role="alert" className="mt-2 text-sm text-red-700">{exportError}</p>}

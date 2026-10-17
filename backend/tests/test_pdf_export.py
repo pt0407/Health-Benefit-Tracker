@@ -53,3 +53,28 @@ def test_pdf_contains_answers_and_programs():
 def test_export_pdf_rejects_bad_payload():
     res = client.post("/api/export/pdf", json={"profile": {"state": "TX"}, "result": RESULT})
     assert res.status_code == 422
+
+
+def test_pdf_escapes_markup_and_uses_match_labels():
+    result = json.loads(json.dumps(RESULT))
+    program = result["matched_programs"][0]
+    program["source"] = "Centers for Medicare & Medicaid Services <b>"
+    program["application_url"] = "javascript:alert(1)"
+    program["confidence"] = "high"
+    for other in result["matched_programs"]:
+        other["program"] = other["program"].replace("\u2014", "-")  # the fixture's names have dashes
+    res = client.post("/api/export/pdf", json={"profile": PROFILE, "result": result})
+    assert res.status_code == 200
+    text = _pdf_text(res.content)
+    assert "Medicare & Medicaid Services <b>" in text
+    assert "Strong match" in text
+    assert "Civis" in text and "BenefitsFinder" not in text
+    assert "\u2014" not in text
+    assert b"/URI (javascript" not in res.content
+
+
+def test_export_pdf_rejects_too_many_programs():
+    result = json.loads(json.dumps(RESULT))
+    result["matched_programs"] = result["matched_programs"][:1] * 101
+    res = client.post("/api/export/pdf", json={"profile": PROFILE, "result": result})
+    assert res.status_code == 413
