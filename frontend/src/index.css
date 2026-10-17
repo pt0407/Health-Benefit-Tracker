@@ -1,1 +1,120 @@
 @import "tailwindcss";
+
+/* Design tokens. Roles, not swatches: every color below has one job.
+   Contrast on white: ink 17:1, muted 7.6:1, brand-700 8.7:1, subtle 5.9:1. */
+@theme {
+  --font-sans: "Figtree", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+
+  /* Warm paper ground, deep green ink, marigold for the moments that matter.
+     Contrast: ink on canvas 15:1, muted on canvas 6.6:1, white on brand-700 9.6:1,
+     ink on accent 9.4:1, cream on brand-900 13:1. */
+  --color-canvas: #fbf7f0;
+  --color-surface: #ffffff;
+  --color-line: #e7dfd1;
+  --color-line-strong: #b9ae9b;
+
+  --color-ink: #17221e;
+  --color-muted: #4f5b56;
+  --color-subtle: #5f6a65;
+
+  --color-brand-950: #062219;
+  --color-brand-900: #0b3d2e;
+  --color-brand-800: #0e4a38;
+  --color-brand-700: #13664c;
+  --color-brand-200: #bfe0d1;
+  --color-brand-100: #dcefe5;
+  --color-brand-50: #eff8f3;
+  --color-on-brand-muted: #b8d3c7;
+  --color-cream: #fbf7f0;
+
+  --color-accent: #f2b33d;
+  --color-accent-600: #d8961c;
+  --color-accent-100: #fdefcf;
+  --color-accent-50: #fff8e8;
+
+  --color-good-800: #13664c;
+  --color-good-100: #dcefe5;
+  --color-warn-900: #6b4a0b;
+  --color-warn-500: #c98a12;
+  --color-warn-50: #fff4db;
+  --color-danger-700: #b42318;
+  --color-danger-50: #fef1ef;
+
+  --shadow-card: 0 1px 2px rgb(23 34 30 / 0.05), 0 8px 24px -12px rgb(23 34 30 / 0.18);
+  --shadow-lift: 0 2px 4px rgb(23 34 30 / 0.06), 0 18px 40px -16px rgb(23 34 30 / 0.28);
+}
+
+@layer base {
+  html {
+    background: var(--color-canvas);
+    color: var(--color-ink);
+    -webkit-text-size-adjust: 100%;
+    scrollbar-color: var(--color-line-strong) var(--color-canvas);
+  }
+  body {
+    font-family: var(--font-sans);
+    line-height: 1.55;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3 {
+    text-wrap: balance;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+  }
+  .font-display {
+    letter-spacing: -0.025em;
+  }
+  p { text-wrap: pretty; }
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-ink);
+  }
+  input, select, textarea {
+    caret-color: var(--color-brand-700);
+    accent-color: var(--color-brand-700);
+  }
+  a {
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1px;
+  }
+  /* One focus ring for every control, visible on light and dark surfaces. */
+  :focus-visible {
+    outline: 3px solid var(--color-brand-700);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  .on-brand :focus-visible {
+    outline-color: var(--color-accent);
+  }
+  button:not(:disabled), [role="button"], summary, label:has(input) {
+    cursor: pointer;
+  }
+}
+
+/* The one authored motion: each quiz question settles in from slightly below. */
+@keyframes settle {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+.animate-settle {
+  animation: settle 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  html, body { background: #ffffff; }
+}
+
+/* While an action plan is open, print only the plan. */
+@media print {
+  body.printing-plan #root { display: none; }
+}
