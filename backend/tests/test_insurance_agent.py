@@ -12,7 +12,8 @@ from fastapi.testclient import TestClient
 from agents.insurance_agent import InsuranceAgent, InsuranceAgentError, compute_facts
 from main import app
 from models.user_profile import UserProfile
-from routers.benefits import get_insurance_agent
+from rag.rag_engine import IndexNotBuiltError
+from routers.benefits import get_insurance_agent, get_rag
 from tests.test_api import SAMPLE_PROFILE
 
 AGENT_OUTPUT = {
@@ -30,6 +31,25 @@ AGENT_OUTPUT = {
     "near_threshold_warnings": ["You're just under 100% FPL..."],
     "notes": "As an adult, you fall in the Texas coverage gap.",
 }
+
+
+class FakeRAG:
+    def __init__(self, context="Program: CHIP Perinatal [chip_perinatal_tx]", error=None):
+        self.context, self.error = context, error
+
+    def retrieve_insurance_context(self, profile):
+        if self.error:
+            raise self.error
+        return self.context
+
+
+def post_insurance_check(agent, rag=None):
+    app.dependency_overrides[get_insurance_agent] = lambda: agent
+    app.dependency_overrides[get_rag] = lambda: rag or FakeRAG()
+    try:
+        return TestClient(app).post("/api/insurance-check", json=SAMPLE_PROFILE)
+    finally:
+        app.dependency_overrides.clear()
 
 
 def fake_client(stop_reason="end_turn", text=None, status=200, captured=None):
@@ -126,33 +146,38 @@ def test_insurance_check_endpoint_maps_missing_api_key_to_502(monkeypatch):
     monkeypatch.delenv("ANTHROPIC_AUTH_TOKEN", raising=False)
     client = anthropic.Anthropic(max_retries=0, http_client=httpx2.Client(transport=httpx2.MockTransport(
         lambda request: pytest.fail("request should not be sent without a key"))))
-    app.dependency_overrides[get_insurance_agent] = lambda: InsuranceAgent(client=client, model="test-model")
-    try:
-        res = TestClient(app).post("/api/insurance-check", json=SAMPLE_PROFILE)
-    finally:
-        app.dependency_overrides.clear()
+    res = post_insurance_check(InsuranceAgent(client=client, model="test-model"))
     assert res.status_code == 502
     assert "API key" in res.json()["detail"]
 
 
-def test_insurance_check_endpoint():
-    app.dependency_overrides[get_insurance_agent] = lambda: InsuranceAgent(
-        client=fake_client(), model="test-model"
+def test_insurance_check_endpoint_sends_retrieved_records():
+    captured = []
+    res = post_insurance_check(
+        InsuranceAgent(client=fake_client(captured=captured), model="test-model"),
+        FakeRAG(context="Program: CHIP Perinatal [chip_perinatal_tx] RETRIEVED-MARKER"),
     )
-    try:
-        res = TestClient(app).post("/api/insurance-check", json=SAMPLE_PROFILE)
-    finally:
-        app.dependency_overrides.clear()
     assert res.status_code == 200
     assert res.json()["qualifies_for"][0]["confidence"] == "high"
+    prompt = captured[0]["messages"][0]["content"]
+    assert "RETRIEVED PROGRAM RECORDS" in prompt
+    assert "RETRIEVED-MARKER" in prompt
+
+
+def test_insurance_check_endpoint_maps_missing_index_to_503():
+    agent = InsuranceAgent(client=fake_client(), model="test-model")
+    res = post_insurance_check(agent, FakeRAG(error=IndexNotBuiltError("Build it with: python data/scripts/index_to_chromadb.py")))
+    assert res.status_code == 503
+    assert "index_to_chromadb" in res.json()["detail"]
+
+
+def test_run_zeroes_monthly_values():
+    output = json.loads(json.dumps(AGENT_OUTPUT))
+    output["qualifies_for"][0]["monthly_value_usd"] = 308
+    agent = InsuranceAgent(client=fake_client(text=json.dumps(output)), model="test-model")
+    assert agent.run(PROFILE).qualifies_for[0].monthly_value_usd == 0
 
 
 def test_insurance_check_endpoint_maps_errors_to_502():
-    app.dependency_overrides[get_insurance_agent] = lambda: InsuranceAgent(
-        client=fake_client(status=500), model="test-model"
-    )
-    try:
-        res = TestClient(app).post("/api/insurance-check", json=SAMPLE_PROFILE)
-    finally:
-        app.dependency_overrides.clear()
+    res = post_insurance_check(InsuranceAgent(client=fake_client(status=500), model="test-model"))
     assert res.status_code == 502

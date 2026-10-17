@@ -8,8 +8,11 @@ Design:
   dollar value of every threshold for this household size. The model is
   handed those numbers instead of computing them.
 - The model only reasons over the rules text it is given (baseline TX rules
-  plus any RAG context), and its reply is constrained to the InsuranceResult
-  schema via structured outputs.
+  plus the program records the RAG engine retrieves), and its reply is
+  constrained to the InsuranceResult schema via structured outputs.
+- Health coverage has no cash value to the household. The dollar figures in
+  the records are estimated government spending per enrollee, so
+  monthly_value_usd is forced to 0 after parsing.
 """
 
 import json
@@ -32,6 +35,7 @@ THRESHOLDS_PCT_FPL = {
     "Children's Medicaid under 1 / Medicaid for Pregnant Women": 198,
     "CHIP": 201,
     "CHIP Perinatal": 202,
+    "Medicare Extra Help": 150,
     "ACA subsidy ceiling": 400,
 }
 
@@ -60,7 +64,10 @@ You are a benefits navigator specializing in health coverage programs. You \
 help families understand which health insurance programs they likely qualify \
 for and what to do first.
 
-Use ONLY the eligibility rules in the <rules> block. Never invent programs, \
+Use ONLY the eligibility rules in the <rules> block: the baseline Texas rules \
+and, after them, official program records retrieved for this household. If a \
+retrieved record and the baseline rules disagree, follow the retrieved record. \
+Never invent programs, \
 income limits, percentages, prices, URLs, phone numbers, helplines, organizations, \
 coverage start dates or enrollment rules. This applies to every field, \
 including `notes` and `next_step`. Mention only the enrollment periods and \
@@ -90,7 +97,10 @@ it depends on their immigration status.
 who in the household it covers (e.g. "your two children"). Count adults as \
 household_size minus the number of children; if there are two or more \
 adults, don't write as if there is only one.
-- `monthly_value_usd`: 0 unless the rules give a dollar value.
+- `monthly_value_usd`: always 0. Dollar amounts labeled as an estimated or \
+monthly value in the records are government spending per enrollee or \
+program-wide averages, not money this household receives. Never mention \
+them in any field.
 - `application_url` and `next_step`: from the rules; `next_step` is the \
 single first thing to do.
 - `source`: the source named in the rules.
@@ -133,7 +143,7 @@ class InsuranceAgent:
     def build_prompt(self, profile: UserProfile, rag_context: str = "") -> str:
         rules = TX_INSURANCE_RULES
         if rag_context.strip():
-            rules += "\nADDITIONAL RETRIEVED PROGRAM TEXT:\n" + rag_context
+            rules += "\nRETRIEVED PROGRAM RECORDS (official sources):\n" + rag_context
         return (
             f"<rules>\n{rules}\n</rules>\n\n"
             f"<user_profile>\n{profile.model_dump_json(indent=2)}\n</user_profile>\n\n"
@@ -170,7 +180,13 @@ class InsuranceAgent:
             raise InsuranceAgentError("Claude declined to answer this request")
         if response.stop_reason == "max_tokens" or response.parsed_output is None:
             raise InsuranceAgentError(f"Incomplete response (stop_reason={response.stop_reason})")
-        return strip_false_claims(response.parsed_output)
+        return zero_monthly_values(strip_false_claims(response.parsed_output))
+
+
+def zero_monthly_values(result: InsuranceResult) -> InsuranceResult:
+    """Health coverage is not cash: never report a dollar value to the household."""
+    programs = [p.model_copy(update={"monthly_value_usd": 0}) for p in result.qualifies_for]
+    return result.model_copy(update={"qualifies_for": programs})
 
 
 def _strip_sentences(text: str | None) -> str | None:

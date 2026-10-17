@@ -8,6 +8,7 @@ from config import FIXTURES_DIR, PROGRAMS_DIR
 from models.match_result import InsuranceResult, MatchResponse
 from models.program import Program
 from models.user_profile import UserProfile
+from rag.rag_engine import BenefitsRAG, IndexNotBuiltError
 
 router = APIRouter()
 
@@ -44,12 +45,21 @@ def get_insurance_agent() -> InsuranceAgent:
     return InsuranceAgent()
 
 
+@lru_cache
+def get_rag() -> BenefitsRAG:
+    return BenefitsRAG()
+
+
 @router.post("/insurance-check", response_model=InsuranceResult)
 def insurance_check(
-    profile: UserProfile, agent: InsuranceAgent = Depends(get_insurance_agent)
+    profile: UserProfile,
+    agent: InsuranceAgent = Depends(get_insurance_agent),
+    rag: BenefitsRAG = Depends(get_rag),
 ) -> InsuranceResult:
-    # TODO(Person 2): pass RAG context once BenefitsRAG is implemented.
     try:
-        return agent.run(profile)
+        rag_context = rag.retrieve_insurance_context(profile)
+        return agent.run(profile, rag_context)
+    except IndexNotBuiltError as e:
+        raise HTTPException(status_code=503, detail=str(e)) from e
     except InsuranceAgentError as e:
         raise HTTPException(status_code=502, detail=str(e)) from e

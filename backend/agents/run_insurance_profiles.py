@@ -3,12 +3,16 @@
 Usage (from backend/, with ANTHROPIC_API_KEY in backend/.env):
     python -m agents.run_insurance_profiles             # live
     python -m agents.run_insurance_profiles --dry-run   # no API calls
+
+Live runs use the RAG index like the endpoint does; build it first with
+`python data/scripts/index_to_chromadb.py` from the repo root.
 """
 
 import sys
 
 from agents.insurance_agent import InsuranceAgent, compute_facts
 from models.user_profile import UserProfile
+from rag.rag_engine import BenefitsRAG
 
 BASE = dict(state="TX", is_pregnant=False, has_disability=False,
             citizenship="citizen", has_children=False, children_ages=[])
@@ -63,6 +67,7 @@ CASES = [
 def main():
     dry = "--dry-run" in sys.argv
     agent = None if dry else InsuranceAgent()
+    rag = None if dry else BenefitsRAG()
     for name, profile, expected in CASES:
         facts = compute_facts(profile)
         print(f"\n=== {name} ===  ({facts['household_income_pct_fpl']}% FPL)")
@@ -71,7 +76,7 @@ def main():
         print(f"near thresholds: {near or 'none'}")
         if dry:
             continue
-        result = agent.run(profile)
+        result = agent.run(profile, rag.retrieve_insurance_context(profile))
         for p in result.qualifies_for:
             print(f"  - [{p.confidence}] {p.program}: {p.reason}")
         for w in result.near_threshold_warnings:
