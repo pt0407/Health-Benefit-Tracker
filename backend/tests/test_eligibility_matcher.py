@@ -193,3 +193,51 @@ def test_insurance_agent_results_dedupe_by_program_id():
     ids = [p.program_id for p in result.matched_programs]
     assert ids.count("childrens_medicaid_tx") == 1
     assert "Children's Medicaid (TX)" not in [p.program for p in result.matched_programs]
+
+
+# ---- 2026-10-17 data expansion: age windows and "or" rules the schema cannot express ----
+
+SINGLE = dict(
+    state="TX", household_size=1, annual_income=14000, income_bracket="<15k",
+    employment_status="employed", age=40, has_children=False, children_ages=[],
+    is_pregnant=False, has_disability=False, insurance_status="uninsured",
+    citizenship="citizen",
+)
+
+
+def ids_for(base, **overrides):
+    profile = UserProfile(**{**base, **overrides})
+    return matched_ids(EligibilityMatcher(programs=PROGRAMS).match(profile))
+
+
+def test_child_age_programs_need_a_child_in_range():
+    kid = dict(FAMILY, annual_income=15000, household_size=3, children_ages=[4])
+    assert {"head_start_federal", "texas_prekindergarten_tx"} <= ids_for(kid)
+    assert "early_head_start_federal" not in ids_for(kid)
+    assert "school_breakfast_federal" not in ids_for(kid)
+    assert "early_head_start_federal" in ids_for(kid, children_ages=[1])
+    assert {"school_breakfast_federal", "summer_meals_federal"} <= ids_for(kid, children_ages=[9])
+    assert "head_start_federal" not in ids_for(kid, children_ages=[9])
+    assert "early_head_start_federal" in ids_for(SINGLE, is_pregnant=True)
+
+
+def test_medicare_and_ssi_need_age_or_disability():
+    assert not {"medicare_federal", "ssi_federal", "medicare_savings_programs_tx"} & ids_for(SINGLE)
+    senior = ids_for(SINGLE, age=70, annual_income=10000, insurance_status="medicaid_medicare")
+    assert {"medicare_federal", "ssi_federal", "medicare_savings_programs_tx", "social_security_retirement_federal"} <= senior
+    disabled = ids_for(SINGLE, age=45, annual_income=10000, has_disability=True)
+    assert {"ssi_federal", "medicare_savings_programs_tx"} <= disabled
+    assert "medicare_federal" not in disabled  # Medicare needs 65 or disability benefits
+    assert "medicare_federal" in ids_for(SINGLE, age=45, has_disability=True, receiving_disability_benefits=True)
+
+
+def test_work_and_age_window_programs():
+    assert "eitc_federal" in ids_for(SINGLE)
+    assert "eitc_federal" not in ids_for(SINGLE, employment_status="unemployed")
+    assert "job_corps_federal" in ids_for(SINGLE, age=20)
+    assert "job_corps_federal" not in ids_for(SINGLE, age=30)
+    assert "ticket_to_work_federal" in ids_for(SINGLE, age=40, has_disability=True, receiving_disability_benefits=True)
+    assert "ticket_to_work_federal" not in ids_for(SINGLE, age=40)
+    assert "ticket_to_work_federal" not in ids_for(SINGLE, age=66, has_disability=True, receiving_disability_benefits=True)
+    assert "family_planning_program_tx" in ids_for(SINGLE, age=30)
+    assert "family_planning_program_tx" not in ids_for(SINGLE, age=70)

@@ -106,6 +106,8 @@ def _facets(profile: UserProfile) -> list[tuple[str, float]]:
     if profile.has_disability or profile.receiving_disability_benefits:
         facets.append(("adult with a disability who cannot work and needs monthly income and health coverage",
                        SITUATION))
+        facets.append(("person with a disability who needs government health coverage and help with long-term care "
+                       "services", SITUATION))
     if profile.employment_status == "recently_unemployed":
         facets.append(("worker who recently lost a job through no fault of their own and needs weekly income replacement while "
                        "looking for new work",

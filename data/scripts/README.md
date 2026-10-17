@@ -46,7 +46,7 @@ in that order, with nulls and `false` written out. Files are UTF-8,
 `json.dumps(indent=2, ensure_ascii=False)`, with a trailing newline.
 
 - `program_id`: lowercase snake case, unique, ending `_federal` in `federal_programs.json` and
-  `_tx` in `texas_programs.json`. `category`: nutrition, health, cash, disability, energy or employment.
+  `_tx` in `texas_programs.json`. `category`: nutrition, health, cash, disability, energy, employment, education or legal.
 - `description`: 60 to 180 words, plain language, paraphrased. The first sentence stands alone on a
   card. Cover who qualifies, what it provides and the caveats the source states. No advice or promises.
 - `income_limit_pct_fpl`: a percent of the federal poverty level stated by an official page, or

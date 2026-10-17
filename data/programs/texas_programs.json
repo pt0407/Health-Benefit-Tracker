@@ -427,5 +427,137 @@
     "processing_time_days": null,
     "source": "Texas Health and Human Services",
     "last_updated": "2026-10-17"
+  },
+  {
+    "program_id": "medicare_savings_programs_tx",
+    "name": "Medicare Savings Programs (QMB, SLMB, QI-1)",
+    "type": "federal_state",
+    "category": "health",
+    "description": "Medicare Savings Programs help pay for all or some of your monthly Medicare payments, co-pays and deductibles. You must be entitled to Medicare Part A or Part B-ID. Income is tested in dollars by group: Qualified Medicare Beneficiaries have gross monthly income up to $1,330 for one person, Specified Low-Income Medicare Beneficiaries from $1,330.01 to $1,596, and the Qualifying Individuals program covers a person with income from $1,596 to less than $1,796 who is not otherwise getting Medicaid. Resource limits also apply. The top band is about 135% of the poverty level, so the percent shown is an estimate.",
+    "eligibility": {
+      "income_limit_pct_fpl": 135,
+      "citizenship_required": true,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": null,
+    "application_url": "https://www.yourtexasbenefits.com/Learn/Home",
+    "documents_needed": [],
+    "processing_time_days": 90,
+    "source": "Texas Health and Human Services",
+    "last_updated": "2026-10-17"
+  },
+  {
+    "program_id": "family_planning_program_tx",
+    "name": "Texas Family Planning Program",
+    "type": "state",
+    "category": "health",
+    "description": "The Texas Family Planning Program provides high-quality, comprehensive, low-cost and accessible family planning and reproductive health care services to eligible Texans. A man or woman is eligible if they are 64 years old or younger, live in Texas and have countable income that does not exceed 250% of the federal poverty level. Clinics must verify income, but they must waive that requirement when the verification would put the person's confidentiality at risk or be a barrier to receiving services. A person's eligibility must be assessed every year. Ask a participating clinic about fees, which depend on household income.",
+    "eligibility": {
+      "income_limit_pct_fpl": 250,
+      "citizenship_required": false,
+      "age_min": null,
+      "age_max": 64,
+      "requires_children": false,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": null,
+    "application_url": "https://www.hhs.texas.gov/services/health/women-children",
+    "documents_needed": [],
+    "processing_time_days": null,
+    "source": "Texas Health and Human Services",
+    "last_updated": "2026-10-17"
+  },
+  {
+    "program_id": "nurse_family_partnership_tx",
+    "name": "Texas Nurse-Family Partnership",
+    "type": "state",
+    "category": "health",
+    "description": "The Texas Nurse-Family Partnership is a free, voluntary program where nurses partner with first-time mothers to improve prenatal care and provide one-on-one child development education and counseling. It serves first-time, low-income mothers and their families from the 28th week of pregnancy through the child's second birthday. To enroll you must have no previous live birth, have income at or below 185% of the federal poverty level, live in Texas and enroll before the end of the 28th week of pregnancy. In some special cases exceptions are made to the eligibility criteria. Providers serve selected communities, so ask where the program is offered near you.",
+    "eligibility": {
+      "income_limit_pct_fpl": 185,
+      "citizenship_required": false,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": false,
+      "requires_pregnancy": true
+    },
+    "estimated_monthly_value_usd": null,
+    "application_url": "https://fss.hhs.texas.gov/programs/texas-nurse-family-partnership",
+    "documents_needed": [],
+    "processing_time_days": null,
+    "source": "Texas Health and Human Services",
+    "last_updated": "2026-10-17"
+  },
+  {
+    "program_id": "child_support_services_tx",
+    "name": "Child Support Services (Texas Attorney General)",
+    "type": "federal_state",
+    "category": "cash",
+    "description": "The Texas Attorney General's Child Support Division helps custodial parents with monitoring and enforcement of child support. Texas law requires a $35 annual service fee on cases that involve parents who have never received TANF. The fee is charged to custodial parents who receive full-service monitoring and enforcement and at least $550 in child support collections in a year, and it is deducted from the payment. It is not charged if TANF has ever been received in the case. The Legislature also authorized a $3 monthly State Disbursement Unit fee. There is no income test. The Attorney General's child support site explains how to get started.",
+    "eligibility": {
+      "income_limit_pct_fpl": null,
+      "citizenship_required": false,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": true,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": null,
+    "application_url": "https://www.texasattorneygeneral.gov/child-support/get-started",
+    "documents_needed": [],
+    "processing_time_days": null,
+    "source": "Texas Office of the Attorney General",
+    "last_updated": "2026-10-17"
+  },
+  {
+    "program_id": "texas_prekindergarten_tx",
+    "name": "Texas Public School Prekindergarten",
+    "type": "state",
+    "category": "education",
+    "description": "Texas public school prekindergarten serves eligible children in the year before kindergarten. A child must be four years of age on or before September 1 of the school year, or three if the district offers a three-year-old program, and must meet at least one condition. Two of them are being unable to speak and comprehend English and being educationally disadvantaged, which means eligible for the national school lunch program. Free lunch is available up to 130% and reduced-price lunch up to 185% of the federal poverty level, so the income shown is the highest band for that path. A district must offer prekindergarten if it identifies 15 or more eligible four-year-olds. Enroll through your local school district.",
+    "eligibility": {
+      "income_limit_pct_fpl": 185,
+      "citizenship_required": false,
+      "age_min": null,
+      "age_max": 4,
+      "requires_children": true,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": null,
+    "application_url": "https://tea.texas.gov/educators/early-childhood-education/early-childhood-education-faqs",
+    "documents_needed": [],
+    "processing_time_days": null,
+    "source": "Texas Education Agency",
+    "last_updated": "2026-10-17"
+  },
+  {
+    "program_id": "independent_living_services_tx",
+    "name": "Independent Living Services",
+    "type": "federal_state",
+    "category": "disability",
+    "description": "Independent Living Services help Texans with disabilities live in their own homes and communities for as long as possible. Core Services are free and are provided directly by a center for independent living, including information and referral, independent living skills training, peer counseling, advocacy and transition services. Purchased Services, such as hearing aids, home modifications, vehicle modifications, power wheelchairs and prosthetics, are provided on a sliding scale fee based on income, and evaluations that show which items would help most are provided at no cost. People with disabilities may have trouble with mobility, vision, hearing, communication, access to their home or vehicle, and daily activities.",
+    "eligibility": {
+      "income_limit_pct_fpl": null,
+      "citizenship_required": false,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": true,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": null,
+    "application_url": "https://www.hhs.texas.gov/services/disability/independent-living-services",
+    "documents_needed": [],
+    "processing_time_days": null,
+    "source": "Texas Health and Human Services",
+    "last_updated": "2026-10-17"
   }
 ]

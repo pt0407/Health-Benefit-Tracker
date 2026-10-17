@@ -18,7 +18,7 @@ Teammate-facing guide to `data/`. The scripts and their output lines are describ
 
 Each record has exactly the keys of `Program` and `Eligibility` in `backend/models/program.py`.
 
-- `program_id`, `name`, `type`, `category`: identity. Categories: nutrition, health, cash, disability, energy, employment.
+- `program_id`, `name`, `type`, `category`: identity. Categories: nutrition, health, cash, disability, energy, employment, education, legal.
 - `description`: 60 to 180 words, plain language. The first sentence stands alone on a card.
 - `eligibility.income_limit_pct_fpl`: highest percent of the federal poverty level at which anyone can qualify, or `null`.
 - `eligibility.citizenship_required`, `age_min`, `age_max`: describe the person who receives the benefit (the child for a children's program). Ages are inclusive.

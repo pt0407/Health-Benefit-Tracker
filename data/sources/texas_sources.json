@@ -1376,5 +1376,382 @@
         "null_reason": "no_official_basis"
       }
     }
+  },
+  "medicare_savings_programs_tx": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "HHSC Medicare page as read 2026-10-17 (limits effective March 1, 2026); 2026 HHS poverty guidelines.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/health/medicare"
+        ],
+        "evidence": "",
+        "note": "What the programs pay for, Medicare entitlement and the income bands: the HHSC Medicare page."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/health/medicare",
+          "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines"
+        ],
+        "evidence": "less than $1,796",
+        "note": "Estimate converting the highest band, QI-1 for one person, to a percent of the 2026 poverty guideline. The page says income must be less than $1,796 a month. 1796 * 12 / 15960 * 100 = 135.03, floored to 135. QMB is 100 percent, SLMB 120 percent. Resource limits apply and are not in this percent.",
+        "estimated": true,
+        "estimate": {
+          "method": "dollar_limit_to_pct_fpl",
+          "represents": "Maximum monthly income for one person in the Qualifying Individuals band ($1,796), as a percent of the 2026 poverty guideline for one person.",
+          "formula": "floor(monthly_limit * 12 / guideline_annual * 100)",
+          "inputs": [
+            {
+              "name": "monthly_limit",
+              "value": 1796,
+              "unit": "USD per month",
+              "period": "HHSC Medicare page, QI-1 individual limit effective March 1, 2026",
+              "url": "https://www.hhs.texas.gov/services/health/medicare",
+              "evidence": "less than $1,796"
+            },
+            {
+              "name": "guideline_annual",
+              "value": 15960,
+              "unit": "USD per year",
+              "period": "2026 HHS poverty guideline, one person, 48 contiguous states",
+              "url": "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines",
+              "evidence": "1 $15,960"
+            }
+          ]
+        }
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/a-310-general-policy"
+        ],
+        "evidence": "U.S. citizens and certain legally-admitted alien residents are eligible for benefits",
+        "note": "A-310 General Policy, All Programs. Applies to the person who gets the benefit; the HHSC Medicare page does not state it."
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/health/medicare"
+        ],
+        "evidence": "",
+        "note": "The page says the programs help pay Medicare payments, co-pays and deductibles but gives no typical amount.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://www.yourtexasbenefits.com/Learn/Home"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: http (curl) and browser. Medicaid-funded programs are applied for through Your Texas Benefits."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/handbooks/medicaid-elderly-people-disabilities-handbook/b-6400-processing-deadlines"
+        ],
+        "evidence": "Make a decision within 90 days on applications from applicants who must have disability established",
+        "note": "Upper bound. 45 days applies to applicants 65 or older. Chapter Q, Medicare Savings Program, is part of the Medicaid for the Elderly and People with Disabilities Handbook whose B-6400 deadlines are used here; no program specific deadline was found."
+      }
+    }
+  },
+  "family_planning_program_tx": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "HHSC Family Planning Program Policy Manual 4100 and Women and Children page as read 2026-10-17.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/health/women-children",
+          "https://fhb.hhs.texas.gov/handbooks/family-planning-program-policy-manual/4100-client-eligibility-screening-process"
+        ],
+        "evidence": "",
+        "note": "Program purpose: the HHSC Women and Children page. Eligibility, verification and annual reassessment: manual section 4100."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/handbooks/family-planning-program-policy-manual/4100-client-eligibility-screening-process"
+        ],
+        "evidence": "have countable income that does not exceed 250% of the federal poverty level",
+        "note": "Stated directly as a percent."
+      },
+      "eligibility.age_max": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/handbooks/family-planning-program-policy-manual/4100-client-eligibility-screening-process"
+        ],
+        "evidence": "are 64 years old or younger",
+        "note": "Applies to the person who gets services, men and women."
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/handbooks/family-planning-program-policy-manual/4100-client-eligibility-screening-process"
+        ],
+        "evidence": "",
+        "note": "The manual section names Texas residency but no citizenship test, so false is recorded but not confirmed.",
+        "unconfirmed": true
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/handbooks/family-planning-program-policy-manual/4100-client-eligibility-screening-process"
+        ],
+        "evidence": "",
+        "note": "No official per-person or average amount for this program was found in the pages read.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/health/women-children"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: browser. The HHSC page describes the Family Planning Program; clinics determine eligibility. The site blocks plain HTTP clients."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/handbooks/family-planning-program-policy-manual/4100-client-eligibility-screening-process"
+        ],
+        "evidence": "",
+        "note": "Eligibility can be determined at the clinic, and the manual section gives no deadline.",
+        "null_reason": "no_official_basis"
+      }
+    }
+  },
+  "nurse_family_partnership_tx": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "HHSC Family Support Services page and Texas NFP Grant Program Report for FY2025 as read 2026-10-17.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://fss.hhs.texas.gov/programs/texas-nurse-family-partnership",
+          "https://www.hhs.texas.gov/sites/default/files/documents/texas-nurse-family-partnership-grant-program-report-2025.pdf"
+        ],
+        "evidence": "",
+        "note": "Who it serves and what it offers: the HHSC page. Enrollment criteria: the FY2025 grant program report."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.hhs.texas.gov/sites/default/files/documents/texas-nurse-family-partnership-grant-program-report-2025.pdf"
+        ],
+        "evidence": "Income at or below 185 percent of the federal poverty level",
+        "note": "Stated directly as a percent."
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.hhs.texas.gov/sites/default/files/documents/texas-nurse-family-partnership-grant-program-report-2025.pdf"
+        ],
+        "evidence": "",
+        "note": "The criteria list Texas residency but no citizenship test, so false is recorded but not confirmed.",
+        "unconfirmed": true
+      },
+      "eligibility.requires_pregnancy": {
+        "urls": [
+          "https://fss.hhs.texas.gov/programs/texas-nurse-family-partnership"
+        ],
+        "evidence": "First-time, low-income mothers and their families from their 28th week of pregnancy",
+        "note": "Enrollment is before the end of the 28th week of pregnancy."
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://fss.hhs.texas.gov/programs/texas-nurse-family-partnership"
+        ],
+        "evidence": "",
+        "note": "No official per-person or average amount for this program was found in the pages read.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://fss.hhs.texas.gov/programs/texas-nurse-family-partnership"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: http (curl). The page has a map of providers and communities."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://fss.hhs.texas.gov/programs/texas-nurse-family-partnership"
+        ],
+        "evidence": "",
+        "note": "The pages read give no application processing time.",
+        "null_reason": "no_official_basis"
+      }
+    }
+  },
+  "child_support_services_tx": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "Texas Attorney General child support fees page and Get Started page as read 2026-10-17.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.texasattorneygeneral.gov/child-support/get-started/child-support-fees",
+          "https://www.texasattorneygeneral.gov/child-support/get-started"
+        ],
+        "evidence": "",
+        "note": "Fees and who pays them: the OAG fees page. Getting started: the OAG Get Started page."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.texasattorneygeneral.gov/child-support/get-started/child-support-fees"
+        ],
+        "evidence": "",
+        "note": "null: the fee page describes fees by case type and collections, not a poverty-level income test.",
+        "null_reason": "no_income_test"
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.texasattorneygeneral.gov/child-support/get-started/child-support-fees"
+        ],
+        "evidence": "",
+        "note": "The pages read name no citizenship test, so false is recorded but not confirmed.",
+        "unconfirmed": true
+      },
+      "eligibility.requires_children": {
+        "urls": [
+          "https://www.texasattorneygeneral.gov/child-support/get-started/child-support-fees"
+        ],
+        "evidence": "custodial parents who receive full-service monitoring and enforcement services",
+        "note": "Child support concerns a child in the custody of the parent who applies."
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.texasattorneygeneral.gov/child-support/get-started/child-support-fees"
+        ],
+        "evidence": "",
+        "note": "Child support amounts are set per case and the pages give no typical amount.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://www.texasattorneygeneral.gov/child-support/get-started"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: http (curl). The OAG Get Started page for child support."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://www.texasattorneygeneral.gov/child-support/get-started"
+        ],
+        "evidence": "",
+        "note": "The pages read give no application processing time.",
+        "null_reason": "no_official_basis"
+      }
+    }
+  },
+  "texas_prekindergarten_tx": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "TEA Early Childhood Education FAQs and USDA School Breakfast Program FAQs as read 2026-10-17.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://tea.texas.gov/educators/early-childhood-education/early-childhood-education-faqs"
+        ],
+        "evidence": "",
+        "note": "Age rule, eligibility conditions and the 15-child rule: the TEA FAQs."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://tea.texas.gov/educators/early-childhood-education/early-childhood-education-faqs",
+          "https://www.fns.usda.gov/sbp/faqs"
+        ],
+        "evidence": "educationally disadvantaged (eligible to participate in the national school lunch program",
+        "note": "The income path is eligibility for the national school lunch program. The USDA FAQ sets reduced price at 185 percent of poverty, the highest band. Other paths (English learner, military, foster care, homeless) have no income test, listed only in part in the description."
+      },
+      "eligibility.age_max": {
+        "urls": [
+          "https://tea.texas.gov/educators/early-childhood-education/early-childhood-education-faqs"
+        ],
+        "evidence": "four years of age on or before September 1 of the current school year",
+        "note": "Four-year-olds; three-year-olds only where a district offers a program."
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://tea.texas.gov/educators/early-childhood-education/early-childhood-education-faqs"
+        ],
+        "evidence": "",
+        "note": "The FAQ names no citizenship test, so false is recorded but not confirmed.",
+        "unconfirmed": true
+      },
+      "eligibility.requires_children": {
+        "urls": [
+          "https://tea.texas.gov/educators/early-childhood-education/early-childhood-education-faqs"
+        ],
+        "evidence": "four years of age on or before September 1 of the current school year",
+        "note": "The benefit is for the child."
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://tea.texas.gov/educators/early-childhood-education/early-childhood-education-faqs"
+        ],
+        "evidence": "",
+        "note": "No official per-person or average amount for this program was found in the pages read.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://tea.texas.gov/educators/early-childhood-education/early-childhood-education-faqs"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: http (curl). The TEA FAQs; families enroll through their local school district."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://tea.texas.gov/educators/early-childhood-education/early-childhood-education-faqs"
+        ],
+        "evidence": "",
+        "note": "The pages read give no application processing time.",
+        "null_reason": "no_official_basis"
+      }
+    }
+  },
+  "independent_living_services_tx": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "HHSC Independent Living Services page as read 2026-10-17.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/disability/independent-living-services"
+        ],
+        "evidence": "",
+        "note": "Core and purchased services and who they are for: the HHSC page."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/disability/independent-living-services"
+        ],
+        "evidence": "",
+        "note": "null: Core Services are free and only purchased services use a sliding scale fee based on income, so there is no poverty-level cutoff.",
+        "null_reason": "no_income_test"
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/disability/independent-living-services"
+        ],
+        "evidence": "",
+        "note": "The page names no citizenship test, so false is recorded but not confirmed.",
+        "unconfirmed": true
+      },
+      "eligibility.requires_disability": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/disability/independent-living-services"
+        ],
+        "evidence": "People with disabilities may have trouble with",
+        "note": "The services are for people with disabilities."
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/disability/independent-living-services"
+        ],
+        "evidence": "",
+        "note": "No official per-person or average amount for this program was found in the pages read.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/disability/independent-living-services"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: browser. The HHSC page; the site blocks plain HTTP clients."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/disability/independent-living-services"
+        ],
+        "evidence": "",
+        "note": "The pages read give no application processing time.",
+        "null_reason": "no_official_basis"
+      }
+    }
   }
 }
