@@ -1412,5 +1412,57 @@
         "null_reason": "no_official_basis"
       }
     }
+  },
+  "work_incentives_planning_federal": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "Choose Work! benefits counseling fact sheet as read 2026-10-17.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://choosework.ssa.gov/library/fact-sheet-benefits-counseling-and-the-path-to-employment"
+        ],
+        "evidence": "",
+        "note": "What WIPA projects are, who they serve and what counselors help with: the Choose Work! fact sheet."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://choosework.ssa.gov/library/fact-sheet-benefits-counseling-and-the-path-to-employment"
+        ],
+        "evidence": "",
+        "note": "null: the fact sheet describes a free service for Social Security beneficiaries, not a poverty-level income test.",
+        "null_reason": "no_income_test"
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://choosework.ssa.gov/library/fact-sheet-benefits-counseling-and-the-path-to-employment"
+        ],
+        "evidence": "",
+        "note": "The fact sheet names no citizenship rule, so false is recorded but not confirmed.",
+        "unconfirmed": true
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://choosework.ssa.gov/library/fact-sheet-benefits-counseling-and-the-path-to-employment"
+        ],
+        "evidence": "",
+        "note": "The service is free counseling and no dollar value is stated.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://choosework.ssa.gov/library/fact-sheet-benefits-counseling-and-the-path-to-employment"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: http (curl). The fact sheet has a Find a Service Provider section for locating a WIPA project."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://choosework.ssa.gov/library/fact-sheet-benefits-counseling-and-the-path-to-employment"
+        ],
+        "evidence": "",
+        "note": "The pages read give no application processing time.",
+        "null_reason": "no_official_basis"
+      }
+    }
   }
 }

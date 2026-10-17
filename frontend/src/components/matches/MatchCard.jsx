@@ -64,7 +64,9 @@ export default function MatchCard({ program, inTracker, onApply }) {
                   Est. {usd(program.monthly_value_usd)}<span className="text-lg font-bold">/mo</span>
                 </p>
               ) : (
-                <p className="mt-3 text-lg font-bold text-primary-dark">Health coverage</p>
+                <p className="mt-3 text-lg font-bold text-primary-dark">
+                  {program.category === "health" ? "Health coverage" : "Value varies"}
+                </p>
               )}
             </div>
           </div>

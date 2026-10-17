@@ -254,6 +254,11 @@ class EligibilityMatcher:
             return ok, "it is for ages 18 to 64 who get SSDI or SSI"
         if program_id == "family_planning_program_tx":
             return profile.age <= 64, "it is for people 64 or younger"
+        if program_id == "work_incentives_planning_federal":
+            return bool(profile.receiving_disability_benefits), "it counsels people who get Social Security disability benefits"
+        if program_id == "texas_benefits_counseling_tx":
+            ok = profile.age >= 60 or bool(profile.receiving_disability_benefits)
+            return ok, "it is for people 60 or older and Medicare-eligible people with disabilities"
         return True, ""
 
     def _reason(self, program: Program, profile: UserProfile, pct_fpl: float,

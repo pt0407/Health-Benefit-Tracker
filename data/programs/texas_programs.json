@@ -559,5 +559,27 @@
     "processing_time_days": null,
     "source": "Texas Health and Human Services",
     "last_updated": "2026-10-17"
+  },
+  {
+    "program_id": "texas_benefits_counseling_tx",
+    "name": "Texas Benefits Counseling Program",
+    "type": "state",
+    "category": "health",
+    "description": "The Texas Benefits Counseling Program aims to give all Texans aged 60 and older, and Medicare-eligible people with disabilities of any age, ready access to trained and certified benefits counselors. Regional benefits counselors, who are Area Agency on Aging employees, and volunteer counselors provide information, counseling, assistance and advocacy about benefits, entitlements and legal rights to people who are older, their families and caregivers who are Medicare-eligible. To reach your local Area Agency on Aging, call 800-252-9240. The page lists age and Medicare eligibility and no income test.",
+    "eligibility": {
+      "income_limit_pct_fpl": null,
+      "citizenship_required": false,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": null,
+    "application_url": "https://www.hhs.texas.gov/services/aging",
+    "documents_needed": [],
+    "processing_time_days": null,
+    "source": "Texas Health and Human Services",
+    "last_updated": "2026-10-17"
   }
 ]

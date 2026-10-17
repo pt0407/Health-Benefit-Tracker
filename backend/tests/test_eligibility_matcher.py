@@ -241,3 +241,11 @@ def test_work_and_age_window_programs():
     assert "ticket_to_work_federal" not in ids_for(SINGLE, age=66, has_disability=True, receiving_disability_benefits=True)
     assert "family_planning_program_tx" in ids_for(SINGLE, age=30)
     assert "family_planning_program_tx" not in ids_for(SINGLE, age=70)
+
+
+def test_counseling_programs_follow_age_and_disability_benefits():
+    assert "texas_benefits_counseling_tx" in ids_for(SINGLE, age=61, annual_income=10000)
+    assert "texas_benefits_counseling_tx" not in ids_for(SINGLE, age=45)
+    both = ids_for(SINGLE, age=45, has_disability=True, receiving_disability_benefits=True)
+    assert {"work_incentives_planning_federal", "texas_benefits_counseling_tx"} <= both
+    assert "work_incentives_planning_federal" not in ids_for(SINGLE, age=45, has_disability=True)

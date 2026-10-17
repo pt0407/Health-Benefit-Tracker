@@ -20,6 +20,7 @@ REQUIRED_IDS = {
     "title_x_family_planning_federal", "legal_aid_lsc_federal", "ticket_to_work_federal",
     "medicare_savings_programs_tx", "family_planning_program_tx", "nurse_family_partnership_tx",
     "child_support_services_tx", "texas_prekindergarten_tx", "independent_living_services_tx",
+    "work_incentives_planning_federal", "texas_benefits_counseling_tx",
 }
 
 

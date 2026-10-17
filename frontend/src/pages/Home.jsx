@@ -4,9 +4,9 @@ import Icon from "../components/shared/Icon.jsx";
 import { LinkButton } from "../components/ui/index.jsx";
 import { usePageTitle } from "../lib/usePageTitle.js";
 
-// What Civis checks, from data/programs/*.json (22 records).
+// What Civis checks, from data/programs/*.json (45 records).
 const COVERAGE = [
-  ["Food", "basket", ["SNAP", "WIC", "Senior meals"]],
+  ["Food", "basket", ["SNAP", "WIC", "School Breakfast Program", "Summer meals for kids", "Senior meals"]],
   [
     "Health coverage",
     "heart",
@@ -14,13 +14,28 @@ const COVERAGE = [
       "Medicaid", "Children's Medicaid", "CHIP", "CHIP Perinatal", "Medicaid for Pregnant Women",
       "Medicaid for Parents and Caretakers", "Emergency Medicaid",
       "Medicaid for the Elderly and People with Disabilities", "Medicaid Buy-In for Adults",
-      "Medicare Extra Help", "Primary Health Care Program",
+      "Medicare", "Medicare Extra Help", "Medicare Savings Programs", "Texas Benefits Counseling",
+      "Primary Health Care Program", "Community health centers", "Title X family planning",
+      "Texas Family Planning Program", "Texas Nurse-Family Partnership",
     ],
   ],
-  ["Cash help", "wallet", ["TANF"]],
+  [
+    "Cash help",
+    "wallet",
+    [
+      "TANF", "Social Security retirement", "Earned Income Tax Credit", "Child Tax Credit",
+      "Free tax help (VITA)", "Child support services",
+    ],
+  ],
   ["Utilities", "bolt", ["LIHEAP energy bill help", "Weatherization assistance"]],
-  ["Work and unemployment", "briefcase", ["Unemployment benefits", "Child care scholarships", "Senior community service jobs"]],
-  ["Disability", "shield", ["SSDI", "Vocational rehabilitation"]],
+  ["Work and unemployment", "briefcase", ["Unemployment benefits", "Child care scholarships", "Senior community service jobs", "Job Corps"]],
+  [
+    "Disability",
+    "shield",
+    ["SSDI", "SSI", "Vocational rehabilitation", "Ticket to Work", "Work Incentives Planning", "Independent Living Services"],
+  ],
+  ["Education and child care", "book", ["Head Start", "Early Head Start", "Texas Pre-K"]],
+  ["Legal help", "scale", ["Free civil legal aid"]],
 ];
 
 // Real output for one household from a local run of the matcher.

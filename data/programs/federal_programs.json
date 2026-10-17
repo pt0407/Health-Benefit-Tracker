@@ -500,5 +500,27 @@
     "processing_time_days": null,
     "source": "Social Security Administration",
     "last_updated": "2026-10-17"
+  },
+  {
+    "program_id": "work_incentives_planning_federal",
+    "name": "Work Incentives Planning and Assistance (WIPA)",
+    "type": "federal",
+    "category": "disability",
+    "description": "Work Incentives Planning and Assistance projects are organizations funded by Social Security to provide free benefits counseling to all Social Security beneficiaries, regardless of whether they are participating in the Ticket to Work program. The projects are staffed by Community Work Incentive Coordinators, who give individualized, in-depth counseling about working, earning more money and how working may affect your Social Security, health care and other public benefits. A counselor can help you understand specific work incentives, understand the services of your State Vocational Rehabilitation agency or an Employment Network, and decide whether the Ticket program is right for you.",
+    "eligibility": {
+      "income_limit_pct_fpl": null,
+      "citizenship_required": false,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": null,
+    "application_url": "https://choosework.ssa.gov/library/fact-sheet-benefits-counseling-and-the-path-to-employment",
+    "documents_needed": [],
+    "processing_time_days": null,
+    "source": "Social Security Administration",
+    "last_updated": "2026-10-17"
   }
 ]

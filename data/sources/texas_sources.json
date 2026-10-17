@@ -1753,5 +1753,58 @@
         "null_reason": "no_official_basis"
       }
     }
+  },
+  "texas_benefits_counseling_tx": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "HHSC Texas Benefits Counseling Program page and Aging page as read 2026-10-17.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.hhs.texas.gov/providers/long-term-care-providers/area-agencies-aging-aaa/texas-benefits-counseling-program",
+          "https://www.hhs.texas.gov/services/aging"
+        ],
+        "evidence": "",
+        "note": "Who the program is for and how counselors work: the Texas Benefits Counseling Program page. The phone number for Area Agency on Aging services: the HHSC Aging page."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.hhs.texas.gov/providers/long-term-care-providers/area-agencies-aging-aaa/texas-benefits-counseling-program"
+        ],
+        "evidence": "",
+        "note": "null: the page names age 60 or older, and Medicare-eligible people with disabilities, and no income test.",
+        "null_reason": "no_income_test"
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.hhs.texas.gov/providers/long-term-care-providers/area-agencies-aging-aaa/texas-benefits-counseling-program"
+        ],
+        "evidence": "",
+        "note": "The page names no citizenship test, so false is recorded but not confirmed.",
+        "unconfirmed": true
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.hhs.texas.gov/providers/long-term-care-providers/area-agencies-aging-aaa/texas-benefits-counseling-program"
+        ],
+        "evidence": "",
+        "note": "The service is free counseling and no dollar value is stated.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/aging"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: browser. The HHSC Aging page says to call 800-252-9240 for Area Agency on Aging services. The site blocks plain HTTP clients."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://www.hhs.texas.gov/providers/long-term-care-providers/area-agencies-aging-aaa/texas-benefits-counseling-program"
+        ],
+        "evidence": "",
+        "note": "The pages read give no application processing time.",
+        "null_reason": "no_official_basis"
+      }
+    }
   }
 }

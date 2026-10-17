@@ -159,6 +159,10 @@ export default function Matches() {
                   Health coverage is shown without a dollar amount because the figure is what the government spends per
                   person, not money you receive.
                 </p>
+                <p>
+                  Programs marked &quot;Value varies&quot; help in ways that have no single dollar figure, such as tax credits paid
+                  once a year, legal aid and early learning.
+                </p>
               </div>
             </details>
           </>
