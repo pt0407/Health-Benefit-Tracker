@@ -6,6 +6,8 @@ from fastapi import APIRouter, Depends, HTTPException
 from agents.insurance_agent import InsuranceAgent, InsuranceAgentError
 from config import PROGRAMS_DIR
 from matching.eligibility_matcher import EligibilityMatcher
+from matching.income_scenarios import build_income_scenarios
+from models.income_scenarios import IncomeScenariosResponse
 from models.match_result import InsuranceResult, MatchResponse
 from models.program import Program
 from models.user_profile import UserProfile
@@ -50,6 +52,12 @@ def get_matcher() -> EligibilityMatcher:
 def match(profile: UserProfile,
           matcher: EligibilityMatcher = Depends(get_matcher)) -> MatchResponse:
     return matcher.match(profile)
+
+
+@router.post("/income-scenarios", response_model=IncomeScenariosResponse)
+def income_scenarios(profile: UserProfile) -> IncomeScenariosResponse:
+    """What if the household's income changed? Rules-only matcher over an income grid."""
+    return build_income_scenarios(profile, load_programs())
 
 
 @router.get("/programs", response_model=list[Program])
