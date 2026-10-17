@@ -22,3 +22,19 @@ export async function checkInsurance(profile) {
   const { data } = await api.post("/insurance-check", profile);
   return data;
 }
+
+// Downloads the application-worksheet PDF for a finished match.
+export async function exportWorksheetPdf(profile, result) {
+  const { data } = await api.post(
+    "/export/pdf",
+    { profile, result },
+    { responseType: "blob" },
+  );
+  const url = URL.createObjectURL(new Blob([data], { type: "application/pdf" }));
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "civis-worksheet.pdf";
+  a.click();
+  // Revoking right away can cancel the download in some browsers.
+  setTimeout(() => URL.revokeObjectURL(url), 60_000);
+}

@@ -1,10 +1,11 @@
 import json
 from functools import lru_cache
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Body, Depends, HTTPException, Response
 
 from agents.insurance_agent import InsuranceAgent, InsuranceAgentError
 from config import PROGRAMS_DIR
+from export.pdf_export import render_worksheet_pdf
 from matching.eligibility_matcher import EligibilityMatcher
 from models.match_result import InsuranceResult, MatchResponse
 from models.program import Program
@@ -63,6 +64,23 @@ def get_program(program_id: str) -> Program:
         if program.program_id == program_id:
             return program
     raise HTTPException(status_code=404, detail="Program not found")
+
+
+# Far more than the catalog holds; keeps the public endpoint from rendering huge PDFs.
+MAX_EXPORT_PROGRAMS = 100
+
+
+@router.post("/export/pdf")
+def export_pdf(profile: UserProfile = Body(...),
+               result: MatchResponse = Body(...)) -> Response:
+    if len(result.matched_programs) > MAX_EXPORT_PROGRAMS:
+        raise HTTPException(status_code=413, detail="Too many programs to export")
+    pdf = render_worksheet_pdf(profile, result)
+    return Response(
+        content=pdf,
+        media_type="application/pdf",
+        headers={"Content-Disposition": 'attachment; filename="civis-worksheet.pdf"'},
+    )
 
 
 @router.post("/insurance-check", response_model=InsuranceResult)
