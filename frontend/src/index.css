@@ -3,31 +3,46 @@
 /* Design tokens. Roles, not swatches: every color below has one job.
    Contrast on white: ink 17:1, muted 7.6:1, brand-700 8.7:1, subtle 5.9:1. */
 @theme {
-  --font-sans: "Public Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans: "Figtree", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
 
-  --color-canvas: #f4f6fa;
+  /* Warm paper ground, deep green ink, marigold for the moments that matter.
+     Contrast: ink on canvas 15:1, muted on canvas 6.6:1, white on brand-700 9.6:1,
+     ink on accent 9.4:1, cream on brand-900 13:1. */
+  --color-canvas: #fbf7f0;
   --color-surface: #ffffff;
-  --color-line: #d6dde8;
-  --color-line-strong: #9aa8bd;
+  --color-line: #e7dfd1;
+  --color-line-strong: #b9ae9b;
 
-  --color-ink: #0f172a;
-  --color-muted: #475569;
-  --color-subtle: #5b6474;
+  --color-ink: #17221e;
+  --color-muted: #4f5b56;
+  --color-subtle: #5f6a65;
 
-  --color-brand-900: #0f2a5f;
-  --color-brand-800: #1e3a8a;
-  --color-brand-700: #1e40af;
-  --color-brand-100: #dce6fa;
-  --color-brand-50: #eef3fd;
-  --color-on-brand-muted: #c7d4ee;
+  --color-brand-950: #062219;
+  --color-brand-900: #0b3d2e;
+  --color-brand-800: #0e4a38;
+  --color-brand-700: #13664c;
+  --color-brand-200: #bfe0d1;
+  --color-brand-100: #dcefe5;
+  --color-brand-50: #eff8f3;
+  --color-on-brand-muted: #b8d3c7;
+  --color-cream: #fbf7f0;
 
-  --color-good-800: #166534;
-  --color-good-100: #dcfce7;
-  --color-warn-900: #78350f;
-  --color-warn-500: #d97706;
-  --color-warn-50: #fffbeb;
-  --color-danger-700: #b91c1c;
-  --color-danger-50: #fef2f2;
+  --color-accent: #f2b33d;
+  --color-accent-600: #d8961c;
+  --color-accent-100: #fdefcf;
+  --color-accent-50: #fff8e8;
+
+  --color-good-800: #13664c;
+  --color-good-100: #dcefe5;
+  --color-warn-900: #6b4a0b;
+  --color-warn-500: #c98a12;
+  --color-warn-50: #fff4db;
+  --color-danger-700: #b42318;
+  --color-danger-50: #fef1ef;
+
+  --shadow-card: 0 1px 2px rgb(23 34 30 / 0.05), 0 8px 24px -12px rgb(23 34 30 / 0.18);
+  --shadow-lift: 0 2px 4px rgb(23 34 30 / 0.06), 0 18px 40px -16px rgb(23 34 30 / 0.28);
 }
 
 @layer base {
@@ -44,13 +59,16 @@
   }
   h1, h2, h3 {
     text-wrap: balance;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+  }
+  .font-display {
+    letter-spacing: -0.025em;
   }
   p { text-wrap: pretty; }
   ::selection {
-    background: var(--color-brand-100);
-    color: var(--color-brand-900);
+    background: var(--color-accent);
+    color: var(--color-ink);
   }
   input, select, textarea {
     caret-color: var(--color-brand-700);
@@ -67,7 +85,7 @@
     border-radius: 6px;
   }
   .on-brand :focus-visible {
-    outline-color: #ffffff;
+    outline-color: var(--color-accent);
   }
   button:not(:disabled), [role="button"], summary, label:has(input) {
     cursor: pointer;

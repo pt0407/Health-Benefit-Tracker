@@ -59,7 +59,7 @@ export default function ActionPlan({ program, onClose }) {
 
   return createPortal(
     <div
-      className="action-plan fixed inset-0 z-50 flex items-end justify-center bg-brand-900/50 sm:items-center sm:p-4 print:static print:block print:bg-white"
+      className="action-plan fixed inset-0 z-50 flex items-end justify-center bg-brand-950/60 sm:items-center sm:p-4 print:static print:block print:bg-white"
       onClick={onClose}
     >
       <div
@@ -69,15 +69,16 @@ export default function ActionPlan({ program, onClose }) {
         aria-labelledby="action-plan-title"
         tabIndex={-1}
         onClick={(e) => e.stopPropagation()}
-        className="max-h-[92dvh] w-full max-w-lg overflow-y-auto rounded-t-2xl bg-surface p-6 shadow-[0_24px_48px_-12px_rgb(15_42_95/0.35)] outline-none sm:rounded-2xl sm:p-7 print:max-h-none print:max-w-none print:shadow-none"
+        className="max-h-[92dvh] w-full max-w-lg overflow-y-auto rounded-t-3xl bg-canvas p-6 shadow-[var(--shadow-lift)] outline-none sm:rounded-3xl sm:p-8 print:max-h-none print:max-w-none print:shadow-none"
       >
         <div className="flex items-start justify-between gap-4">
           <div>
-            <h2 id="action-plan-title" className="text-2xl font-bold text-brand-900">
-              How to apply: {program.program}
+            <h2 id="action-plan-title" className="font-display text-3xl font-semibold text-brand-900">
+              {program.program}
             </h2>
+            <p className="mt-1 text-muted">Your step-by-step plan to apply</p>
             {program.monthly_value_usd > 0 && (
-              <p className="mt-1 text-sm font-semibold text-good-800 tabular-nums">
+              <p className="mt-2 inline-block rounded-full bg-accent-100 px-3 py-1 text-sm font-bold text-warn-900 tabular-nums">
                 Est. ${Math.round(program.monthly_value_usd).toLocaleString()}/mo
               </p>
             )}
@@ -100,7 +101,7 @@ export default function ActionPlan({ program, onClose }) {
                 {done} of {documents.length} ready
               </p>
             </div>
-            <ul className="mt-2 divide-y divide-line rounded-xl border border-line">
+            <ul className="mt-2 divide-y divide-line rounded-2xl bg-surface shadow-[var(--shadow-card)]">
               {documents.map((doc) => (
                 <li key={doc}>
                   <label className="flex min-h-12 items-start gap-3 px-3 py-3 text-ink transition-colors hover:bg-brand-50/60">
@@ -124,7 +125,7 @@ export default function ActionPlan({ program, onClose }) {
             <ol className="mt-3 space-y-4">
               {actions.map((s, i) => (
                 <li key={`${s.step}-${s.action}`} className="flex gap-3">
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-700 text-sm font-bold text-white tabular-nums">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent text-sm font-bold text-brand-950 tabular-nums">
                     {i + 1}
                   </span>
                   <div className="pt-0.5">
@@ -152,7 +153,7 @@ export default function ActionPlan({ program, onClose }) {
           </p>
         )}
         {program.tip && (
-          <p className="mt-4 rounded-xl bg-brand-50 p-4 text-brand-900">{program.tip}</p>
+          <p className="mt-4 rounded-2xl bg-brand-50 p-4 text-brand-900">{program.tip}</p>
         )}
         {program.source && <p className="mt-4 text-sm text-subtle">Source: {program.source}</p>}
 
@@ -162,7 +163,7 @@ export default function ActionPlan({ program, onClose }) {
               href={program.application_url}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-brand-700 px-4 font-semibold text-white transition-colors hover:bg-brand-800"
+              className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-brand-900 px-4 font-semibold text-cream transition-colors hover:bg-brand-800"
             >
               Apply now
               <Icon name="external" className="h-4 w-4" />
@@ -172,7 +173,7 @@ export default function ActionPlan({ program, onClose }) {
           <button
             type="button"
             onClick={() => window.print()}
-            className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-line-strong px-4 font-semibold text-brand-800 transition-colors hover:border-brand-700 hover:bg-brand-50"
+            className="inline-flex min-h-11 items-center gap-2 rounded-xl border-2 border-line px-4 font-semibold text-brand-900 transition-colors hover:border-brand-700 hover:bg-brand-50"
           >
             <Icon name="printer" className="h-4 w-4" />
             Print this plan

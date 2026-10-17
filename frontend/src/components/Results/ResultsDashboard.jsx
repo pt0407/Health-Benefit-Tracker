@@ -4,31 +4,31 @@
 
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import Icon from "../shared/Icon.jsx";
 import ActionPlan from "./ActionPlan.jsx";
 
-// Match strength is shown as text plus a three-step meter, never color alone.
-const MATCH = {
-  high: { label: "Strong match", steps: 3, tone: "text-good-800", fill: "bg-good-800" },
-  medium: { label: "Possible match", steps: 2, tone: "text-brand-700", fill: "bg-brand-700" },
-  low: { label: "Worth checking", steps: 1, tone: "text-subtle", fill: "bg-subtle" },
-};
-const ORDER = { high: 0, medium: 1, low: 2 };
+// Programs are grouped by match strength; the meter repeats it as shape, not color alone.
+const GROUPS = [
+  { key: "high", title: "Strong matches", blurb: "Your answers meet every rule we can check.", steps: 3 },
+  { key: "medium", title: "Possible matches", blurb: "Depends on something the questions don't cover, like savings or each person's situation.", steps: 2 },
+  { key: "low", title: "Worth checking", blurb: "Less likely, but rules have exceptions. Applying is free.", steps: 1 },
+];
+
+// Segment colors for the value breakdown, each paired with a labeled legend row.
+const SEGMENTS = ["bg-accent", "bg-brand-200", "bg-cream", "bg-accent-600", "bg-on-brand-muted"];
 
 const usd = (v) => `$${Math.round(v).toLocaleString()}`;
-const plural = (n, word) => `${n} ${word}${n === 1 ? "" : "s"}`;
+const plural = (n, word, many = `${word}s`) => `${n} ${n === 1 ? word : many}`;
 
-function MatchMeter({ confidence }) {
-  const m = MATCH[confidence] || MATCH.low;
+function Meter({ steps, onDark = false }) {
   return (
-    <span className={`inline-flex items-center gap-2 text-sm font-semibold ${m.tone}`}>
-      <span className="flex gap-0.5" aria-hidden="true">
-        {[1, 2, 3].map((i) => (
-          <span key={i} className={`h-3 w-1.5 rounded-sm ${i <= m.steps ? m.fill : "bg-line"}`} />
-        ))}
-      </span>
-      {m.label}
+    <span className="flex gap-1" aria-hidden="true">
+      {[1, 2, 3].map((i) => (
+        <span
+          key={i}
+          className={`h-4 w-2 rounded-sm ${i <= steps ? (onDark ? "bg-accent" : "bg-brand-700") : onDark ? "bg-brand-800" : "bg-line"}`}
+        />
+      ))}
     </span>
   );
 }
@@ -36,89 +36,115 @@ function MatchMeter({ confidence }) {
 function ProgramCard({ program }) {
   const [open, setOpen] = useState(false);
   return (
-    <li className="rounded-2xl border border-line bg-surface p-5 sm:p-6">
-      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-        <h2 className="text-xl font-bold text-ink">{program.program}</h2>
-        <div className="shrink-0 sm:pt-1"><MatchMeter confidence={program.confidence} /></div>
+    <li className="flex flex-col rounded-3xl bg-surface p-6 shadow-[var(--shadow-card)]">
+      <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
+        <h3 className="max-w-[28ch] text-xl font-bold text-ink">{program.program}</h3>
+        {program.monthly_value_usd > 0 ? (
+          <span className="rounded-full bg-accent-100 px-3 py-1 text-sm font-bold text-warn-900 tabular-nums">
+            Est. {usd(program.monthly_value_usd)}/mo
+          </span>
+        ) : null}
       </div>
-      <p className="mt-3 max-w-[65ch] text-muted">{program.reason}</p>
-
-      {(program.monthly_value_usd > 0 || program.processing_time) && (
-        <dl className="mt-4 flex flex-wrap gap-x-6 gap-y-1 text-sm">
-          {program.monthly_value_usd > 0 && (
-            <div className="flex gap-1.5">
-              <dt className="text-muted">Est. value</dt>
-              <dd className="font-semibold text-ink tabular-nums">{usd(program.monthly_value_usd)}/mo</dd>
-            </div>
-          )}
-          {program.processing_time && (
-            <div className="flex gap-1.5">
-              <dt className="text-muted">Processing</dt>
-              <dd className="font-semibold text-ink">{program.processing_time}</dd>
-            </div>
-          )}
-        </dl>
+      <p className="mt-3 text-muted">{program.reason}</p>
+      {program.processing_time && (
+        <p className="mt-3 flex items-center gap-2 text-sm text-muted">
+          <Icon name="clock" className="h-4 w-4 text-brand-700" />
+          Processing time: <span className="font-semibold text-ink">{program.processing_time}</span>
+        </p>
       )}
 
-      <div className="mt-5 flex flex-wrap gap-2.5">
-        {program.application_url && (
-          <a
-            href={program.application_url}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-brand-700 px-4 font-semibold text-white transition-colors hover:bg-brand-800"
+      <div className="mt-auto pt-5">
+        <div className="flex flex-wrap gap-2.5">
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-brand-900 px-4 font-semibold text-cream transition hover:bg-brand-800"
           >
-            Apply
-            <Icon name="external" className="h-4 w-4" />
-            <span className="sr-only">(opens in a new tab)</span>
-          </a>
-        )}
-        <button
-          type="button"
-          onClick={() => setOpen(true)}
-          className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-line-strong bg-surface px-4 font-semibold text-brand-800 transition-colors hover:border-brand-700 hover:bg-brand-50"
-        >
-          See how to apply
-        </button>
+            <Icon name="list" className="h-4 w-4" />
+            How to apply
+          </button>
+          {program.application_url && (
+            <a
+              href={program.application_url}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex min-h-11 items-center gap-2 rounded-xl border-2 border-line px-4 font-semibold text-brand-900 transition-colors hover:border-brand-700 hover:bg-brand-50"
+            >
+              Apply online
+              <Icon name="external" className="h-4 w-4" />
+              <span className="sr-only">(opens in a new tab)</span>
+            </a>
+          )}
+        </div>
+        {program.source && <p className="mt-4 text-sm text-subtle">Source: {program.source}</p>}
       </div>
       {open && <ActionPlan program={program} onClose={() => setOpen(false)} />}
-
-      {(program.tip || program.source) && (
-        <div className="mt-5 space-y-1 border-t border-line pt-4 text-sm">
-          {program.tip && <p className="text-muted">{program.tip}</p>}
-          {program.source && <p className="text-subtle">Source: {program.source}</p>}
-        </div>
-      )}
     </li>
   );
 }
 
-function ValueChart({ programs }) {
-  const data = programs.map((p) => ({
-    name: p.program.length > 24 ? `${p.program.slice(0, 23)}…` : p.program,
-    full: p.program,
-    value: p.monthly_value_usd,
-  }));
+function Summary({ result }) {
+  const count = result.program_count;
+  const valued = result.matched_programs
+    .filter((p) => p.monthly_value_usd > 0)
+    .sort((a, b) => b.monthly_value_usd - a.monthly_value_usd);
+  const monthly = valued.reduce((sum, p) => sum + p.monthly_value_usd, 0);
+  const strong = result.matched_programs.filter((p) => p.confidence === "high").length;
+
   return (
-    <figure className="mt-8 rounded-2xl border border-line bg-surface p-5 sm:p-6">
-      <figcaption className="font-semibold text-ink">Estimated monthly value by program</figcaption>
-      <div className="mt-4" style={{ height: 48 * data.length + 32 }}>
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data} layout="vertical" margin={{ top: 0, right: 16, bottom: 0, left: 0 }}>
-            <CartesianGrid horizontal={false} stroke="#d6dde8" />
-            <XAxis type="number" tickFormatter={(v) => `$${v}`} tick={{ fontSize: 12, fill: "#475569" }} stroke="#9aa8bd" />
-            <YAxis type="category" dataKey="name" width={150} tick={{ fontSize: 12, fill: "#0f172a" }} stroke="#9aa8bd" />
-            <Tooltip
-              cursor={{ fill: "#eef3fd" }}
-              labelFormatter={(_, payload) => payload?.[0]?.payload.full}
-              formatter={(v) => [`${usd(v)}/mo`, "Estimated value"]}
-              contentStyle={{ borderRadius: 12, borderColor: "#d6dde8", fontFamily: "inherit" }}
-            />
-            <Bar dataKey="value" fill="#1e40af" radius={[0, 4, 4, 0]} barSize={20} isAnimationActive={false} />
-          </BarChart>
-        </ResponsiveContainer>
+    <section className="on-brand overflow-hidden rounded-[2rem] bg-brand-900 text-cream">
+      <div className="p-7 sm:p-10">
+        <h1 className="font-display max-w-[18ch] text-4xl font-semibold sm:text-6xl">
+          {plural(count, "program")} may fit your household.
+        </h1>
+        <div className="mt-6 grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-start">
+          <div>
+            {result.total_estimated_annual_value > 0 ? (
+              <p className="max-w-[48ch] text-lg text-on-brand-muted">
+                You may qualify for up to an estimated{" "}
+                <strong className="font-bold text-cream tabular-nums">{usd(result.total_estimated_annual_value)}/year</strong>{" "}
+                (about <span className="tabular-nums">{usd(result.total_estimated_monthly_value)}</span>/mo).
+                Health coverage isn't counted in that total.
+              </p>
+            ) : (
+              <p className="max-w-[48ch] text-lg text-on-brand-muted">
+                Health coverage and other non-cash programs don't have a dollar total.
+              </p>
+            )}
+            {strong > 0 && (
+              <p className="mt-6 inline-flex items-center gap-2 rounded-full bg-accent px-4 py-1.5 font-semibold text-brand-950">
+                <Icon name="check" className="h-4 w-4" />
+                {plural(strong, "strong match", "strong matches")}
+              </p>
+            )}
+          </div>
+
+          {valued.length > 0 && (
+            <figure className="min-w-0">
+              <figcaption className="text-sm font-semibold text-on-brand-muted">Where the estimate comes from</figcaption>
+              <div className="mt-3 flex h-4 gap-1 overflow-hidden rounded-full" aria-hidden="true">
+                {valued.map((p, i) => (
+                  <span
+                    key={p.program}
+                    className={`${SEGMENTS[i % SEGMENTS.length]} first:rounded-l-full last:rounded-r-full`}
+                    style={{ width: `${(p.monthly_value_usd / monthly) * 100}%` }}
+                  />
+                ))}
+              </div>
+              <ul className="mt-4 space-y-2">
+                {valued.map((p, i) => (
+                  <li key={p.program} className="flex items-center gap-3 text-sm">
+                    <span className={`h-3 w-3 shrink-0 rounded-sm ${SEGMENTS[i % SEGMENTS.length]}`} aria-hidden="true" />
+                    <span className="min-w-0 flex-1">{p.program}</span>
+                    <span className="shrink-0 font-semibold tabular-nums">Est. {usd(p.monthly_value_usd)}/mo</span>
+                  </li>
+                ))}
+              </ul>
+            </figure>
+          )}
+        </div>
       </div>
-    </figure>
+    </section>
   );
 }
 
@@ -126,14 +152,14 @@ export default function ResultsDashboard() {
   const result = useLocation().state;
   if (!result) {
     return (
-      <main className="mx-auto max-w-xl px-4 pt-16 pb-20 sm:px-6">
-        <h1 className="text-3xl font-bold text-brand-900">No results yet</h1>
-        <p className="mt-3 text-lg text-muted">
+      <main className="mx-auto max-w-2xl px-4 pt-16 pb-24 sm:px-6 sm:pt-24">
+        <h1 className="font-display text-5xl font-semibold text-brand-900">No results yet.</h1>
+        <p className="mt-4 text-lg text-muted">
           Answer the 10 questions first, and we'll show the programs your household may qualify for.
         </p>
         <Link
           to="/quiz"
-          className="mt-8 inline-flex min-h-12 items-center gap-2 rounded-xl bg-brand-700 px-6 text-lg font-semibold text-white transition-colors hover:bg-brand-800"
+          className="mt-9 inline-flex min-h-14 items-center gap-2 rounded-2xl bg-brand-900 px-7 text-lg font-semibold text-cream transition hover:bg-brand-800"
         >
           Start the questions
           <Icon name="arrowRight" />
@@ -142,83 +168,78 @@ export default function ResultsDashboard() {
     );
   }
 
-  const programs = [...result.matched_programs].sort(
-    (a, b) => (ORDER[a.confidence] ?? 3) - (ORDER[b.confidence] ?? 3),
-  );
-  const valued = programs.filter((p) => p.monthly_value_usd > 0);
   const count = result.program_count;
+  const hasValues = result.matched_programs.some((p) => p.monthly_value_usd > 0);
 
   return (
-    <main className="mx-auto max-w-3xl px-4 pt-10 pb-20 sm:px-6 sm:pt-14">
-      <h1 className="text-3xl font-bold text-brand-900 sm:text-4xl">
-        {count === 0
-          ? "We didn't find a clear match"
-          : `${plural(count, "program")} may fit your household`}
-      </h1>
-      {count > 0 && (
-        <p className="mt-3 max-w-[60ch] text-lg text-muted">
-          {result.total_estimated_annual_value > 0 ? (
-            <>
-              You may qualify for up to an estimated{" "}
-              <strong className="font-bold text-ink tabular-nums">{usd(result.total_estimated_annual_value)}/year</strong>{" "}
-              (about <span className="tabular-nums">{usd(result.total_estimated_monthly_value)}</span>/mo).
-              Health coverage and other non-cash programs aren't counted in that total.
-            </>
-          ) : (
-            "Health coverage and other non-cash programs don't have a dollar total."
-          )}{" "}
-          Strongest matches are listed first.
-        </p>
-      )}
-
-      {result.warnings?.length > 0 && (
-        <section
-          aria-labelledby="warnings-title"
-          className="mt-8 rounded-2xl border border-warn-500/40 bg-warn-50 p-5 text-warn-900"
-        >
-          <h2 id="warnings-title" className="flex items-center gap-2 font-bold">
-            <Icon name="alert" className="h-5 w-5 text-warn-500" />
-            Worth knowing
-          </h2>
-          <ul className="mt-2 space-y-2 pl-7">
-            {result.warnings.map((w) => (
-              <li key={w} className="max-w-[65ch]">{w}</li>
-            ))}
-          </ul>
+    <main className="mx-auto max-w-6xl px-4 pt-6 pb-20 sm:px-6 sm:pt-10">
+      {count > 0 ? (
+        <Summary result={result} />
+      ) : (
+        <section className="rounded-[2rem] bg-surface p-8 shadow-[var(--shadow-card)] sm:p-10">
+          <h1 className="font-display text-4xl font-semibold text-brand-900">We didn't find a clear match.</h1>
+          <p className="mt-4 max-w-[60ch] text-lg text-muted">
+            Program rules change and have exceptions, so it's still worth checking{" "}
+            <a href="https://www.usa.gov/benefits" target="_blank" rel="noreferrer" className="font-semibold text-brand-700 underline">
+              USA.gov's benefit finder
+            </a>{" "}
+            directly.
+          </p>
         </section>
       )}
 
-      {valued.length > 0 && <ValueChart programs={valued} />}
-
-      {count > 0 && (
-        <ul className="mt-8 space-y-4">
-          {programs.map((p) => (
-            <ProgramCard key={p.program_id || p.program} program={p} />
-          ))}
-        </ul>
+      {result.warnings?.length > 0 && (
+        <section aria-labelledby="warnings-title" className="mt-6 flex gap-4 rounded-3xl bg-warn-50 p-6 text-warn-900">
+          <Icon name="alert" className="mt-0.5 h-6 w-6 text-warn-500" />
+          <div>
+            <h2 id="warnings-title" className="text-lg font-bold">Worth knowing</h2>
+            <ul className="mt-1 space-y-1.5">
+              {result.warnings.map((w) => (
+                <li key={w} className="max-w-[75ch]">{w}</li>
+              ))}
+            </ul>
+          </div>
+        </section>
       )}
 
-      {count === 0 && (
-        <p className="mt-4 max-w-[60ch] text-lg text-muted">
-          Program rules change, so it's still worth checking{" "}
-          <a href="https://www.usa.gov/benefits" target="_blank" rel="noreferrer" className="font-semibold text-brand-700 underline">
-            USA.gov's benefit finder
-          </a>{" "}
-          directly.
-        </p>
-      )}
+      {GROUPS.map((g) => {
+        const programs = result.matched_programs.filter((p) => p.confidence === g.key);
+        if (!programs.length) return null;
+        return (
+          <section key={g.key} aria-labelledby={`group-${g.key}`} className="mt-14">
+            <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2 border-b border-line pb-4">
+              <div>
+                <h2 id={`group-${g.key}`} className="font-display flex items-center gap-3 text-3xl font-semibold text-brand-900">
+                  <Meter steps={g.steps} />
+                  {g.title}
+                  <span className="font-sans text-lg font-semibold text-muted tabular-nums">{programs.length}</span>
+                </h2>
+                <p className="mt-1 text-muted">{g.blurb}</p>
+              </div>
+            </div>
+            <ul className="mt-6 grid gap-5 md:grid-cols-2">
+              {programs.map((p) => (
+                <ProgramCard key={p.program_id || p.program} program={p} />
+              ))}
+            </ul>
+          </section>
+        );
+      })}
 
-      {valued.length > 0 && (
-        <p className="mt-10 max-w-[70ch] text-sm text-subtle">
+      {hasValues && (
+        <p className="mt-14 max-w-[70ch] text-sm text-subtle">
           Dollar amounts are estimates based on program averages and your answers. They are not
           a guarantee of benefits. Actual amounts depend on your full application and caseworker
           review.
         </p>
       )}
 
-      <div className="mt-10 border-t border-line pt-6">
-        <Link to="/quiz" className="inline-flex min-h-11 items-center gap-2 font-semibold text-brand-700 underline">
-          <Icon name="arrowLeft" className="h-4 w-4" />
+      <div className="mt-10 flex flex-wrap items-center gap-4 border-t border-line pt-8">
+        <Link
+          to="/quiz"
+          className="inline-flex min-h-12 items-center gap-2 rounded-2xl border-2 border-line px-5 font-semibold text-brand-900 transition-colors hover:border-brand-700 hover:bg-brand-50"
+        >
+          <Icon name="pencil" className="h-4 w-4" />
           Start over with different answers
         </Link>
       </div>
