@@ -1,8 +1,9 @@
 import json
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Body, HTTPException, Response
 
 from config import FIXTURES_DIR, PROGRAMS_DIR
+from export.pdf_export import render_worksheet_pdf
 from models.match_result import InsuranceResult, MatchResponse
 from models.program import Program
 from models.user_profile import UserProfile
@@ -35,6 +36,17 @@ def get_program(program_id: str) -> Program:
         if program.program_id == program_id:
             return program
     raise HTTPException(status_code=404, detail="Program not found")
+
+
+@router.post("/export/pdf")
+def export_pdf(profile: UserProfile = Body(...),
+               result: MatchResponse = Body(...)) -> Response:
+    pdf = render_worksheet_pdf(profile, result)
+    return Response(
+        content=pdf,
+        media_type="application/pdf",
+        headers={"Content-Disposition": 'attachment; filename="benefitsfinder-worksheet.pdf"'},
+    )
 
 
 @router.post("/insurance-check", response_model=InsuranceResult)

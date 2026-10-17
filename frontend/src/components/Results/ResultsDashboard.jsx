@@ -4,6 +4,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { exportWorksheetPdf } from "../../api/benefitsApi.js";
 
 const CONFIDENCE_STYLES = {
   high: "bg-green-100 text-green-800",
@@ -79,7 +80,24 @@ function ProgramCard({ program }) {
 }
 
 export default function ResultsDashboard() {
-  const result = useLocation().state;
+  const state = useLocation().state;
+  const result = state?.result ?? state; // tolerate bare MatchResponse state
+  const profile = state?.profile;
+  const [exporting, setExporting] = useState(false);
+  const [exportError, setExportError] = useState(null);
+
+  async function downloadPdf() {
+    setExporting(true);
+    setExportError(null);
+    try {
+      await exportWorksheetPdf(profile, result);
+    } catch {
+      setExportError("Couldn't generate the PDF. Please try again.");
+    } finally {
+      setExporting(false);
+    }
+  }
+
   if (!result) {
     return (
       <main className="mx-auto max-w-xl px-4 py-16 text-center">
@@ -148,8 +166,20 @@ export default function ResultsDashboard() {
         </p>
       )}
 
-      <div className="mt-10 text-center">
+      {exportError && <p className="mt-6 text-center text-sm text-red-600">{exportError}</p>}
+
+      <div className="mt-10 flex items-center justify-center gap-6">
         <Link to="/quiz" className="text-blue-600 underline">Start over</Link>
+        {profile && (
+          <button
+            type="button"
+            onClick={downloadPdf}
+            disabled={exporting}
+            className="rounded-lg border border-blue-600 px-5 py-2.5 font-semibold text-blue-600 hover:bg-blue-50 disabled:opacity-40"
+          >
+            {exporting ? "Preparing…" : "Download worksheet (PDF)"}
+          </button>
+        )}
       </div>
     </main>
   );

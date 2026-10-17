@@ -277,7 +277,7 @@ export default function QuizWizard() {
     const profile = { ...rest, has_children: !!form.has_children, children_ages: form.children_ages.filter((a) => a != null) };
     try {
       const result = await matchBenefits(profile);
-      navigate("/results", { state: result });
+      navigate("/results", { state: { result, profile } });
     } catch {
       setError("Something went wrong checking your benefits. Please try again.");
       setSubmitting(false);
