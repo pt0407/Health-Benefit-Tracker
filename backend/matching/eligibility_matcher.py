@@ -180,7 +180,7 @@ class EligibilityMatcher:
             next_steps=self._next_steps(program),
             processing_time=(f"Up to {program.processing_time_days} days"
                              if program.processing_time_days else "Varies"),
-            tip="Apply even if you're unsure — the agency will verify your eligibility.",
+            tip="Apply even if you're unsure. The agency will verify your eligibility.",
             source=program.source,
         )
 
@@ -234,7 +234,7 @@ class EligibilityMatcher:
         elif _is_dollar_tested(program):
             parts.append(
                 f"{program.name} tests income in dollars, not a percent of the "
-                "poverty level — the agency checks your exact monthly income.")
+                "poverty level. The agency checks your exact monthly income.")
         elif _is_banded(program):
             parts.append(
                 f"Your income (~{pct_fpl:.0f}% of the federal poverty level for "
@@ -284,8 +284,8 @@ class EligibilityMatcher:
 
     def _run_insurance_agent(self, profile: UserProfile) -> tuple[list[str], list[MatchedProgram]]:
         if self.insurance_agent is None:
-            return (["Health coverage programs weren't checked automatically — "
-                     "see /api/insurance-check or HealthCare.gov for a full review."], [])
+            return (["Health coverage programs weren't checked automatically. "
+                     "See HealthCare.gov for a full review."], [])
         rag_context = ""
         if self.rag is not None:
             try:
@@ -296,8 +296,8 @@ class EligibilityMatcher:
         try:
             result = self.insurance_agent.run(profile, rag_context)
         except Exception:
-            return (["Health coverage programs couldn't be checked automatically — "
-                     "see /api/insurance-check or HealthCare.gov for a full review."], [])
+            return (["Health coverage programs couldn't be checked automatically. "
+                     "See HealthCare.gov for a full review."], [])
         warnings = list(result.near_threshold_warnings)
         if result.notes:
             warnings.append(f"Health coverage note: {result.notes}")

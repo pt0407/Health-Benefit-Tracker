@@ -131,6 +131,18 @@ def test_run_strips_pregnancy_sep_claim():
     assert result.notes == "First paragraph.\n\nLast sentence."
 
 
+def test_run_replaces_em_dashes():
+    output = json.loads(json.dumps(AGENT_OUTPUT))
+    output["qualifies_for"][0]["reason"] = "Your children qualify \u2014 income is under the limit."
+    output["near_threshold_warnings"] = ["You're close\u2014a raise could change this."]
+    output["notes"] = "No em dashes \u2014 anywhere."
+    result = InsuranceAgent(client=fake_client(text=json.dumps(output)), model="test-model").run(PROFILE)
+
+    assert result.qualifies_for[0].reason == "Your children qualify, income is under the limit."
+    assert result.near_threshold_warnings == ["You're close, a raise could change this."]
+    assert result.notes == "No em dashes, anywhere."
+
+
 def test_run_skips_model_for_unsupported_state():
     captured = []
     profile = PROFILE.model_copy(update={"state": "CA"})

@@ -22,7 +22,7 @@ Texas has NOT expanded Medicaid under the ACA.
   to certain immigration statuses. Emergency Medicaid and CHIP Perinatal are
   the exceptions below.
 
-Children's Medicaid (TX) — children 18 or younger (some children with
+Children's Medicaid (TX): children 18 or younger (some children with
 disabilities aged 19 or 20 also qualify), by the age of the child:
 - Under age 1: income up to 198% FPL
 - Ages 1-5:    income up to 144% FPL
@@ -30,18 +30,18 @@ disabilities aged 19 or 20 also qualify), by the age of the child:
 - Free. If family income is too high, HHSC automatically checks CHIP.
 URL: https://www.yourtexasbenefits.com/Learn/Home
 
-CHIP (TX) — children 18 or younger whose family income is above the
+CHIP (TX): children 18 or younger whose family income is above the
 Children's Medicaid limit and at or below 201% FPL. A 90-day wait without
 other insurance applies unless a good-cause exemption is met. Enrollment fee
 of $50 or less per year and small copays, depending on income.
 URL: https://www.yourtexasbenefits.com/Learn/Home
 
-Medicaid for Pregnant Women (TX) — pregnant, income at or below 198% FPL.
+Medicaid for Pregnant Women (TX): pregnant, income at or below 198% FPL.
 Covers pregnancy and up to 12 months after the baby is born, including labor
 and delivery. No interview. HHSC must decide within 15 business days.
 URL: https://www.yourtexasbenefits.com/Learn/Home
 
-CHIP Perinatal (TX) — a pregnant woman with no other health insurance whose
+CHIP Perinatal (TX): a pregnant woman with no other health insurance whose
 household income is from 199% to 202% FPL, OR at or below 202% FPL if she
 cannot get Medicaid because of her immigration status. Covers prenatal care
 for the unborn child, labor and delivery, and two doctor visits after the
@@ -51,7 +51,7 @@ copays. She must apply before the baby is born. HHSC must decide within 15
 business days.
 URL: https://www.yourtexasbenefits.com/Learn/Home
 
-Emergency Medicaid (TX) — people who would qualify for Medicaid except for
+Emergency Medicaid (TX): people who would qualify for Medicaid except for
 their immigration status (non-immigrants, undocumented people, and certain
 permanent residents). Income limits follow the regular program: 198% FPL for
 pregnant women and children under 1, 144% for ages 1-5, 133% for ages 6-18;
@@ -61,7 +61,7 @@ services needed to stabilize an emergency medical condition (including labor
 and delivery), certified by the treating practitioner.
 URL: https://www.yourtexasbenefits.com/Learn/Home
 
-Medicaid for the Elderly and People with Disabilities (MEPD, TX) — age 65+ or
+Medicaid for the Elderly and People with Disabilities (MEPD, TX): age 65+ or
 meets the Social Security definition of disability, U.S. citizen or qualified
 non-citizen. Income is tested in dollars (from January 1, 2026):
 - Community programs: SSI-based limit of $994 a month for one person ($1,491
@@ -73,7 +73,7 @@ receiving SSI get Medicaid automatically. The quiz does not ask about
 resources, so unless the person receives SSI this is "medium" confidence at best.
 URL: https://www.yourtexasbenefits.com/Learn/Home
 
-ACA Marketplace premium tax credits — HealthCare.gov (Texas uses the
+ACA Marketplace premium tax credits: HealthCare.gov (Texas uses the
 federal marketplace).
 - Household income from 100% to 400% FPL.
 - Must be a U.S. citizen or lawfully present, not eligible for Medicaid/CHIP,
@@ -85,10 +85,10 @@ federal marketplace).
   baby, or moving opens a 60-day Special Enrollment Period.
 URL: https://www.healthcare.gov
 
-Medicare — age 65+, or under 65 after receiving SSDI for 24 months (or with
+Medicare: age 65+, or under 65 after receiving SSDI for 24 months (or with
 ALS/ESRD). Apply through Social Security. URL: https://www.medicare.gov
 
-Medicare Part D Extra Help (Low-Income Subsidy) — a separate program that
+Medicare Part D Extra Help (Low-Income Subsidy): a separate program that
 lowers Medicare drug plan premiums, deductibles and copays. Needs Medicare
 Part A or B and income below 150% FPL. In 2026 Medicare states the limits as
 $23,940 a year for an individual and $32,460 for a married couple, with

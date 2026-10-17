@@ -54,6 +54,21 @@ const PATHS = {
       <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
     </>
   ),
+  info: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 11v5M12 8h.01" />
+    </>
+  ),
+  menu: <path d="M4 6h16M4 12h16M4 18h16" />,
+  chevronDown: <path d="m6 9 6 6 6-6" />,
+  filter: <path d="M3 5h18l-7 8v6l-4 2v-8L3 5Z" />,
+  trash: (
+    <>
+      <path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14" />
+      <path d="M10 10v6M14 10v6" />
+    </>
+  ),
   pencil: <path d="M17 3a2.8 2.8 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />,
 };
 
