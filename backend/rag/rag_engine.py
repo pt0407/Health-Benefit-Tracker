@@ -20,6 +20,7 @@ from rag.store import COLLECTION_NAME, ChunkStore
 
 REBUILD_COMMAND = "python data/scripts/index_to_chromadb.py"
 MAX_CHUNKS_PER_PROGRAM = 2
+DEFAULT_K = 14  # chunk budget per retrieval; raised from 10 when the corpus grew from 14 to 22 programs
 HUB_PENALTY = 0.5
 SEED_BONUS = 1.0  # large enough that seeded chunks sort ahead of every unseeded chunk
 FACET_DEPTH = 8  # a facet only credits chunks ranked within its top few: deeper matches are loose and noisy
@@ -150,7 +151,7 @@ class BenefitsRAG:
     def facet_queries(self, profile) -> list[str]:
         return build_facet_queries(profile)
 
-    def retrieve(self, profile, k: int = 10, categories: Optional[set[str]] = None) -> list[RetrievedChunk]:
+    def retrieve(self, profile, k: int = DEFAULT_K, categories: Optional[set[str]] = None) -> list[RetrievedChunk]:
         profile = _as_profile(profile)
         if self._store.count() == 0:
             raise IndexNotBuiltError(
@@ -194,11 +195,11 @@ class BenefitsRAG:
                 chunk_id=cid, section=meta["section"]))
         return chunks
 
-    def retrieve_relevant_programs(self, profile, k: int = 10) -> list[str]:
+    def retrieve_relevant_programs(self, profile, k: int = DEFAULT_K) -> list[str]:
         """Chunk texts (self-describing, unique) for the best-matching programs."""
         return list(dict.fromkeys(chunk.text for chunk in self.retrieve(profile, k)))
 
-    def retrieve_context(self, profile, k: int = 10, categories: Optional[set[str]] = None) -> str:
+    def retrieve_context(self, profile, k: int = DEFAULT_K, categories: Optional[set[str]] = None) -> str:
         return "\n\n".join(chunk.text for chunk in self.retrieve(profile, k, categories))
 
     def retrieve_insurance_context(self, profile, k: int = 8) -> str:

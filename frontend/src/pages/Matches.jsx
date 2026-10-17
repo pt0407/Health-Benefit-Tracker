@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate, useSearchParams } from "react-router-do
 import { useAuth } from "../auth/AuthContext.jsx";
 import MatchCard from "../components/matches/MatchCard.jsx";
 import Icon from "../components/shared/Icon.jsx";
+import LoadingScreen from "../components/ui/LoadingScreen.jsx";
 import { Alert, Button, LinkButton } from "../components/ui/index.jsx";
 import { BUCKETS, CATEGORY_LABELS, enrich, levelMatches } from "../lib/programMeta.js";
 import { summarizeAnswers } from "../lib/quizSchema.js";
@@ -108,6 +109,9 @@ export default function Matches() {
     setTracked(r.entries.map((e) => e.id));
     setAdded(`${program.program} was added to your tracker.`);
   }
+
+  // The match list is joined with the program catalog, so keep the same loader up until it arrives.
+  if (catalog.status === "loading") return <LoadingScreen />;
 
   const count = result.program_count;
   const strong = result.matched_programs.filter((p) => p.confidence === "high").length;

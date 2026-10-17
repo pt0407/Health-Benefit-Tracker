@@ -11,6 +11,9 @@ REQUIRED_IDS = {
     "medicare_extra_help_federal", "ssdi_federal",
     "chip_tx", "childrens_medicaid_tx", "medicaid_pregnant_women_tx", "chip_perinatal_tx",
     "emergency_medicaid_tx", "medicaid_elderly_disabled_tx", "tanf_tx", "unemployment_benefits_tx",
+    "medicaid_parents_caretakers_tx", "medicaid_buy_in_tx", "primary_health_care_tx",
+    "vocational_rehabilitation_tx", "child_care_services_tx", "weatherization_assistance_tx",
+    "scsep_tx", "senior_meals_tx",
 }
 
 
@@ -71,11 +74,18 @@ FILL_LIST = [
     ("unemployment_benefits_tx", "estimated_monthly_value_usd"),
     ("liheap_federal", "processing_time_days"),
     ("medicare_extra_help_federal", "processing_time_days"),
+    ("medicaid_parents_caretakers_tx", "eligibility.income_limit_pct_fpl"),
+    ("medicaid_parents_caretakers_tx", "estimated_monthly_value_usd"),
+    ("medicaid_buy_in_tx", "eligibility.income_limit_pct_fpl"),
+    ("child_care_services_tx", "eligibility.income_limit_pct_fpl"),
+    ("weatherization_assistance_tx", "estimated_monthly_value_usd"),
+    ("scsep_tx", "estimated_monthly_value_usd"),
 ]
 
 HEALTH_COVERAGE_IDS = {
     "medicaid_federal", "chip_tx", "childrens_medicaid_tx", "medicaid_pregnant_women_tx",
     "chip_perinatal_tx", "medicaid_elderly_disabled_tx", "emergency_medicaid_tx",
+    "medicaid_parents_caretakers_tx", "medicaid_buy_in_tx", "primary_health_care_tx",
 }
 
 

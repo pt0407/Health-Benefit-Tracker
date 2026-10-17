@@ -13,6 +13,7 @@ import {
 import { clearAnswers, getAnswers, saveAnswers, saveResults, scopeFor } from "../../lib/userData.js";
 import { usePageTitle } from "../../lib/usePageTitle.js";
 import Icon from "../shared/Icon.jsx";
+import LoadingScreen from "../ui/LoadingScreen.jsx";
 import { Alert, Button } from "../ui/index.jsx";
 
 const YES_NO = [{ value: true, label: "Yes" }, { value: false, label: "No" }];
@@ -361,14 +362,12 @@ export default function QuizWizard() {
               <Icon name="arrowLeft" /> Back
             </Button>
             <Button type="submit" disabled={submitting} aria-busy={submitting}>
-              {submitting ? "Checking 14 programs..." : isLast ? <>See my benefits <Icon name="arrowRight" /></> : <>Next <Icon name="arrowRight" /></>}
+              {submitting ? "Checking programs..." : isLast ? <>See my benefits <Icon name="arrowRight" /></> : <>Next <Icon name="arrowRight" /></>}
             </Button>
           </div>
-          <p className="mt-3 min-h-6 text-right text-sm text-muted" aria-live="polite">
-            {submitting && "This can take up to a minute the first time."}
-          </p>
         </form>
       </div>
+      {submitting && <LoadingScreen />}
     </div>
   );
 }

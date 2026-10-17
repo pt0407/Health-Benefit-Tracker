@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext.jsx";
-import { DEMO_ACCOUNT, SHOW_DEMO_HINT } from "../../config/demoAccount.js";
 import { safeNext } from "../../lib/userData.js";
 import { Alert, Button, ErrorSummary, TextField } from "../ui/index.jsx";
 
@@ -53,14 +52,6 @@ export default function AuthForm({ mode }) {
   const query = next ? `?next=${encodeURIComponent(next)}` : "";
   return (
     <form onSubmit={onSubmit} noValidate className="space-y-6">
-      <Alert variant="info" title="Demo mode">
-        <p>
-          {isSignUp
-            ? "Sign up only works with the Civis demo test account details. Any other details are rejected."
-            : "Only the Civis test account is turned on."}
-          {SHOW_DEMO_HINT && ` The demo email is ${DEMO_ACCOUNT.email}.`}
-        </p>
-      </Alert>
       <ErrorSummary items={summary} />
       <TextField
         id="email"

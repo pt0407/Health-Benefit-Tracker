@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Arcade from "../brand/Arcade.jsx";
+import DotGrid from "../brand/DotGrid.jsx";
 import { CivisLogo } from "../brand/CivisLogo.jsx";
 
 const link = "text-white underline hover:text-white hover:decoration-2";
@@ -7,9 +7,9 @@ const link = "text-white underline hover:text-white hover:decoration-2";
 export default function Footer() {
   return (
     <footer className="mt-16 print:hidden">
-      <Arcade className="relative z-0 -mb-0.5 block" fill="#162e51" height={40} tile={56} />
-      <div className="relative z-10 bg-primary-dark text-white">
-        <div className="container-page grid gap-8 pb-12 pt-4 md:grid-cols-[1.4fr_1fr]">
+      <div className="relative overflow-hidden bg-primary-dark text-white">
+        <DotGrid className="pointer-events-none absolute inset-0" />
+        <div className="container-page relative grid gap-8 py-12 md:grid-cols-[1.4fr_1fr]">
           <div className="space-y-3">
             <CivisLogo markClassName="h-8 w-8" />
             <p className="max-w-[60ch]">

@@ -6,6 +6,8 @@ Expectations are about which programs surface, never exact scores or chunk text.
 
 from dataclasses import dataclass
 
+from rag.rag_engine import DEFAULT_K
+
 BASE = dict(state="TX", citizenship="citizen", is_pregnant=False, has_disability=False,
             has_children=False, children_ages=[])
 
@@ -71,7 +73,7 @@ EVAL_PROFILES = [
 ]
 
 
-def evaluate(rag, ev: EvalProfile, k: int = 10):
+def evaluate(rag, ev: EvalProfile, k: int = DEFAULT_K):
     """Return (ok, missing, unexpected, ids_in_rank_order)."""
     ids = []
     for chunk in rag.retrieve(ev.profile, k=k):

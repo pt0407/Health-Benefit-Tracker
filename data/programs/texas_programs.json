@@ -228,5 +228,204 @@
     "processing_time_days": 28,
     "source": "Texas Workforce Commission",
     "last_updated": "2026-10-13"
+  },
+  {
+    "program_id": "medicaid_parents_caretakers_tx",
+    "name": "Medicaid for Parents and Caretakers",
+    "type": "federal_state",
+    "category": "health",
+    "description": "Texas Medicaid can cover a parent or other close relative who cares for a child that already has Medicaid. The child must live with you and be 17 or younger, or 18 and in school full time. Related caretakers include parents, step-parents, siblings, grandparents, aunts, uncles, nieces, nephews and first cousins. Income is tested in dollars, before taxes, by family size and by whether one or two parents are in the home, and the limits are very low: $230 a month for a one-parent family of three and $251 for a two-parent family of three. As a percent of the poverty level that is about 10% to 11%, so the percent shown is an estimate of the highest band. Coverage includes checkups, dental care, medicine, hospital care, X-rays, vision and hearing care, and specialists. The monthly value is an estimate of government spending per adult enrollee, not cash the household receives.",
+    "eligibility": {
+      "income_limit_pct_fpl": 11,
+      "citizenship_required": true,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": true,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": 478,
+    "application_url": "https://www.yourtexasbenefits.com/Learn/Home",
+    "documents_needed": [
+      "Proof of identity (current driver's license or Texas Department of Public Safety ID)",
+      "Immigration status papers (resident card I-551, I-94 or USCIS papers), if applicable",
+      "Proof of Texas residence (utility bill, rent receipt or letter from a landlord who is not a relative)",
+      "Proof of income and other benefits (award letters or pay stubs for Social Security, SSI, pension, veterans benefits, workers' compensation or unemployment)"
+    ],
+    "processing_time_days": 45,
+    "source": "Texas Health and Human Services",
+    "last_updated": "2026-10-17"
+  },
+  {
+    "program_id": "medicaid_buy_in_tx",
+    "name": "Medicaid Buy-In for Adults (MBI)",
+    "type": "federal_state",
+    "category": "health",
+    "description": "Medicaid Buy-In gives low-cost Medicaid coverage to adults with disabilities who work. You must have a disability, work and live in Texas, and not live full time in a state institution or nursing home. People who already get Social Security disability benefits meet the disability rule, and others have their case reviewed. Income is tested in dollars: earnings from a job or self-employment must be under $3,325 a month before taxes, and countable assets can be no more than $5,000. That earnings limit is about 250% of the poverty level for one person, so the percent shown is an estimate. Some people pay a monthly fee of up to $500 based on their income. Coverage includes doctor visits, hospital care, medicine, vision and hearing care, mental health care and therapies.",
+    "eligibility": {
+      "income_limit_pct_fpl": 250,
+      "citizenship_required": true,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": true,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": null,
+    "application_url": "https://www.yourtexasbenefits.com/Learn/Home",
+    "documents_needed": [
+      "Proof of identity (current driver's license or Texas Department of Public Safety ID)",
+      "Immigration status papers (resident card I-551, I-94 or USCIS papers), if applicable",
+      "Proof of Texas residence (utility bill, rent receipt or letter from a landlord who is not a relative)",
+      "Proof of income and other benefits (award letters or pay stubs for Social Security, SSI, pension, veterans benefits, workers' compensation or unemployment)"
+    ],
+    "processing_time_days": 90,
+    "source": "Texas Health and Human Services",
+    "last_updated": "2026-10-17"
+  },
+  {
+    "program_id": "primary_health_care_tx",
+    "name": "Primary Health Care Program",
+    "type": "state",
+    "category": "health",
+    "description": "The Primary Health Care program gives low-cost checkups and basic medical care at clinics across Texas to people who cannot get the same care from another program. You qualify if you live in Texas, your income is at or below 200% of the federal poverty level, and you are not eligible for other programs or benefits that provide the same services. The program serves men, women and children. Services include diagnosis and treatment of common health problems, emergency services, family planning, immunizations and other preventive care, health education and counseling, and tests such as X-rays and lab work. You apply at a clinic site, and clinics can be found through 211 Texas. In certain cases services are available the same day you apply.",
+    "eligibility": {
+      "income_limit_pct_fpl": 200,
+      "citizenship_required": false,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": null,
+    "application_url": "https://www.hhs.texas.gov/services/health/primary-health-care-program",
+    "documents_needed": [],
+    "processing_time_days": null,
+    "source": "Texas Health and Human Services",
+    "last_updated": "2026-10-17"
+  },
+  {
+    "program_id": "vocational_rehabilitation_tx",
+    "name": "Vocational Rehabilitation Services",
+    "type": "federal_state",
+    "category": "disability",
+    "description": "Vocational Rehabilitation helps Texans with disabilities prepare for, find, keep or advance in a job. You may qualify if you have a physical or mental condition that affects your ability to work, need these services to get or keep a job, and can get, keep or advance in a job after services. Eligibility does not depend on your income. People who get SSI or SSDI because of a disability are presumed eligible, and you must show you can legally work in the United States before you are found eligible. Services depend on your needs and can include counseling, training and job search help. A counselor decides eligibility within 60 days of your application, and a plan of services is written within 90 days after that.",
+    "eligibility": {
+      "income_limit_pct_fpl": null,
+      "citizenship_required": true,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": true,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": null,
+    "application_url": "https://www.twc.texas.gov/programs/vocational-rehabilitation/adults",
+    "documents_needed": [
+      "Photo identification (driver's license, state-issued ID, school ID, passport or military ID) and your Social Security card, if you have them",
+      "Documentation showing you can legally work in the United States",
+      "Proof of income for you and your spouse, or your parents if they claim you as a dependent",
+      "Home and mailing address and the names and addresses of recent doctors, schools and employers",
+      "Names, addresses and phone numbers of two people who will always know how to contact you"
+    ],
+    "processing_time_days": 60,
+    "source": "Texas Workforce Commission",
+    "last_updated": "2026-10-17"
+  },
+  {
+    "program_id": "child_care_services_tx",
+    "name": "Child Care Services (CCS) Scholarships",
+    "type": "federal_state",
+    "category": "employment",
+    "description": "Child Care Services scholarships help Texas families pay for child care while parents work, look for work, or go to school or job training. A child must be under 13, or under 19 with a disability, and must be a U.S. citizen or have legal immigration status. Parents must need care to work or train for an average of at least 25 hours a week for a single parent, or 50 hours combined for two parents. Income is tested in dollars by family size: family income must be at or below 85% of the state median, for example $64,874 a year for a family of two, which is about 284% to 299% of the poverty level for families of two to six, so the percent shown is an estimate. Families pay a share of the cost of up to 7% of income.",
+    "eligibility": {
+      "income_limit_pct_fpl": 299,
+      "citizenship_required": true,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": true,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": null,
+    "application_url": "https://www.childcare.texas.gov/for-families/child-care-scholarships",
+    "documents_needed": [
+      "Proof of the child's age, citizenship or immigration status and household (one document can cover all three)",
+      "Proof of family income, such as pay documents or an Employment/Income Verification Form",
+      "Information showing you need child care to work, look for work, or attend school or job training"
+    ],
+    "processing_time_days": null,
+    "source": "Texas Workforce Commission",
+    "last_updated": "2026-10-17"
+  },
+  {
+    "program_id": "weatherization_assistance_tx",
+    "name": "Weatherization Assistance Program (WAP)",
+    "type": "federal_state",
+    "category": "energy",
+    "description": "The Weatherization Assistance Program makes low-income homes cheaper to heat and cool by adding insulation, sealing air leaks and repairing or replacing inefficient heating and cooling equipment. Households qualify if their income is at or below 200% of the federal poverty guidelines, or if someone in the household received assistance payments under Title IV or XVI of the Social Security Act in the past 12 months. Local agencies run the program in all 254 Texas counties, and the state housing agency does not take applications from individuals, so you apply through a local provider. A home must be able to benefit from the work. The monthly value is an estimate based on the national average yearly energy savings reported by the Department of Energy, and the work itself is a one-time repair, not a monthly payment.",
+    "eligibility": {
+      "income_limit_pct_fpl": 200,
+      "citizenship_required": false,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": 31,
+    "application_url": "https://www.tdhca.texas.gov/help-for-texans",
+    "documents_needed": [
+      "Proof of household income",
+      "Documentation showing who owns the home, collected by the local agency at the time of application"
+    ],
+    "processing_time_days": null,
+    "source": "Texas Department of Housing and Community Affairs",
+    "last_updated": "2026-10-17"
+  },
+  {
+    "program_id": "scsep_tx",
+    "name": "Senior Community Service Employment Program (SCSEP)",
+    "type": "federal_state",
+    "category": "employment",
+    "description": "The Senior Community Service Employment Program gives part-time paid work and job training to older Texans with low incomes. You must be 55 or older, unemployed and able to work in the United States, and your family income can be no more than 125% of the federal poverty level. Participants work at nonprofit and public agencies such as schools, libraries and senior centers for an average of 20 hours a week, and are paid the highest of the federal, state or local minimum wage. The goal is to build skills and move into regular jobs. Priority goes to veterans and qualified spouses, then to people over 65, with a disability or at risk of homelessness, among others. The monthly value is an estimate of 20 hours a week at the federal minimum wage.",
+    "eligibility": {
+      "income_limit_pct_fpl": 125,
+      "citizenship_required": true,
+      "age_min": 55,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": 628,
+    "application_url": "https://www.twc.texas.gov/programs/senior-community-service-employment",
+    "documents_needed": [],
+    "processing_time_days": null,
+    "source": "Texas Workforce Commission",
+    "last_updated": "2026-10-17"
+  },
+  {
+    "program_id": "senior_meals_tx",
+    "name": "Senior Meals (Older Americans Act Nutrition Services)",
+    "type": "federal_state",
+    "category": "nutrition",
+    "description": "Older Americans Act nutrition services provide meals to older Texans through local Area Agencies on Aging. Congregate meals, served in a group setting such as a senior center, are open to anyone 60 or older and to the spouse of a participant. Home-delivered meals are for people 60 or older who are frail and homebound or otherwise isolated and who score at least 20 on a needs evaluation. Spouses and, in some cases, people with disabilities who live with an eligible older person may also receive meals. The eligibility rules list no income test and there is no citizenship or residency requirement. Providers serve at least five meals a week. Call 800-252-9240 to reach your Area Agency on Aging.",
+    "eligibility": {
+      "income_limit_pct_fpl": null,
+      "citizenship_required": false,
+      "age_min": 60,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": null,
+    "application_url": "https://www.hhs.texas.gov/services/aging",
+    "documents_needed": [],
+    "processing_time_days": null,
+    "source": "Texas Health and Human Services",
+    "last_updated": "2026-10-17"
   }
 ]

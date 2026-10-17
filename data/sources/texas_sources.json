@@ -757,5 +757,624 @@
         }
       }
     }
+  },
+  "medicaid_parents_caretakers_tx": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "HHSC Medicaid for Parents and Caretakers income table as read 2026-10-17 (no effective date shown); 2026 HHS poverty guidelines; MACPAC FY 2023.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/health/medicaid-chip/medicaid-chip-programs-services/programs-children-families/medicaid-parents-caretakers",
+          "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines"
+        ],
+        "evidence": "",
+        "note": "Who qualifies, related caretaker list, covered services and the monthly income table: the HHSC page. Percent conversion: see the income field."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/health/medicaid-chip/medicaid-chip-programs-services/programs-children-families/medicaid-parents-caretakers",
+          "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines"
+        ],
+        "evidence": "3 $230 $251",
+        "note": "Estimate converting HHSC's dollar limits to a percent of the 2026 poverty guideline. Highest band across every listed family size (1 to 15, one-parent and two-parent columns): the two-parent family of three, $251 a month. 251 * 12 / 27320 * 100 = 11.02, floored to 11. The one-parent family of three limit ($230) is 10.1 percent and the one-parent family of two ($196) is 10.9 percent. Texas tests dollar income by family size, so this percent is an upper index only.",
+        "estimated": true,
+        "estimate": {
+          "method": "dollar_limit_to_pct_fpl",
+          "represents": "Maximum monthly income at which a two-parent family of three can still get Medicaid as parents or caretakers ($251), as a percent of the 2026 poverty guideline for three people.",
+          "formula": "floor(monthly_limit * 12 / guideline_annual * 100)",
+          "inputs": [
+            {
+              "name": "monthly_limit",
+              "value": 251,
+              "unit": "USD per month",
+              "period": "current HHSC table, family size 3, two-parent column",
+              "url": "https://www.hhs.texas.gov/services/health/medicaid-chip/medicaid-chip-programs-services/programs-children-families/medicaid-parents-caretakers",
+              "evidence": "3 $230 $251"
+            },
+            {
+              "name": "guideline_annual",
+              "value": 27320,
+              "unit": "USD per year",
+              "period": "2026 HHS poverty guideline, three persons, 48 contiguous states",
+              "url": "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines",
+              "evidence": "3 $27,320"
+            }
+          ]
+        }
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/a-310-general-policy"
+        ],
+        "evidence": "U.S. citizens and certain legally-admitted alien residents are eligible for benefits",
+        "note": "A-310 General Policy, All Programs. Applies to the person who gets Medicaid. The HHSC parents page does not state a citizenship rule."
+      },
+      "eligibility.requires_children": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/health/medicaid-chip/medicaid-chip-programs-services/programs-children-families/medicaid-parents-caretakers"
+        ],
+        "evidence": "The child must live with you and be age 17 or younger",
+        "note": "You must be a parent or related caretaker of a child who already has Medicaid and lives with you."
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.macpac.gov/wp-content/uploads/2026/01/EXHIBIT-22.-Medicaid-Benefit-Spending-Per-Full-Year-Equivalent-FYE-Enrollee-by-State-and-Eligibility-Group-FY-2023.pdf"
+        ],
+        "evidence": "Texas9 7,958 8,701 4,310 4,299 67,810 67,810 5,736 8,770",
+        "note": "Same MACPAC Exhibit 22 figure used for the pregnancy record: FY 2023, Texas row, Other adult group, All enrollees = $5,736 per full-year equivalent enrollee. MACPAC footnote 4 defines Other adult as adults under 65 who qualify through a pathway other than disability or the new adult group, for example parents and caretakers. 5736 / 12 = 478. Government spending, not cash paid to the household.",
+        "estimated": true,
+        "estimate": {
+          "method": "per_enrollee_spending",
+          "represents": "Government Medicaid benefit spending per full-year equivalent Texas enrollee in MACPAC's other adult group, which includes parent and caretaker coverage, per month, not cash paid to the household.",
+          "formula": "round(annual_spending_per_enrollee / 12)",
+          "inputs": [
+            {
+              "name": "annual_spending_per_enrollee",
+              "value": 5736,
+              "unit": "USD per year",
+              "period": "FY 2023",
+              "url": "https://www.macpac.gov/wp-content/uploads/2026/01/EXHIBIT-22.-Medicaid-Benefit-Spending-Per-Full-Year-Equivalent-FYE-Enrollee-by-State-and-Eligibility-Group-FY-2023.pdf",
+              "evidence": "Texas9 7,958 8,701 4,310 4,299 67,810 67,810 5,736 8,770"
+            }
+          ]
+        }
+      },
+      "application_url": {
+        "urls": [
+          "https://www.yourtexasbenefits.com/Learn/Home"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: http (curl) and browser. The Apply for Medicaid link on the HHSC page leads to Your Texas Benefits."
+      },
+      "documents_needed": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/questions-about-your-benefits/benefits-application-next-steps"
+        ],
+        "evidence": "",
+        "note": "From the Documents We May Need list on the Next Steps page, which says to send only what HHSC asks for based on the application. The Medicaid-for-an-adult accordion on that page was not expanded when read."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/b-110-applications"
+        ],
+        "evidence": "by the 45th day after the file date.",
+        "note": "B-112 Deadlines, TANF and Medical Programs: notice of case action by the 45th day after the file date. Parent and caretaker Medicaid is a Texas Works medical program."
+      }
+    }
+  },
+  "medicaid_buy_in_tx": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "HHSC Medicaid Buy-In for Adults page as read 2026-10-17 (no effective date shown); 2026 HHS poverty guidelines.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/health/medicaid-chip/medicaid-chip-programs-services/programs-children-adults-disabilities/medicaid-buy-adults",
+          "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines"
+        ],
+        "evidence": "",
+        "note": "Who it is for, disability rule, earnings and asset limits, monthly fee and covered services: the HHSC page. Another HHSC page seen in search results showed older limits ($2,453 earned, $2,000 assets); the page used here is the current one and states $3,325 and $5,000."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/health/medicaid-chip/medicaid-chip-programs-services/programs-children-adults-disabilities/medicaid-buy-adults",
+          "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines"
+        ],
+        "evidence": "must be less than $3,325 before any taxes, deductions or exclusions",
+        "note": "Estimate converting the HHSC earned income limit to a percent of the 2026 poverty guideline for one person. 3325 * 12 / 15960 * 100 = 250. The page says earnings must be less than $3,325, so the true cutoff sits just under this figure, and it counts the worker's own earnings, not household income.",
+        "estimated": true,
+        "estimate": {
+          "method": "dollar_limit_to_pct_fpl",
+          "represents": "Maximum monthly earnings at which an adult with a disability can still use Medicaid Buy-In ($3,325), as a percent of the 2026 poverty guideline for one person.",
+          "formula": "floor(monthly_limit * 12 / guideline_annual * 100)",
+          "inputs": [
+            {
+              "name": "monthly_limit",
+              "value": 3325,
+              "unit": "USD per month",
+              "period": "current HHSC page, earnings from a job or self-employment before taxes",
+              "url": "https://www.hhs.texas.gov/services/health/medicaid-chip/medicaid-chip-programs-services/programs-children-adults-disabilities/medicaid-buy-adults",
+              "evidence": "must be less than $3,325 before any taxes, deductions or exclusions"
+            },
+            {
+              "name": "guideline_annual",
+              "value": 15960,
+              "unit": "USD per year",
+              "period": "2026 HHS poverty guideline, one person, 48 contiguous states",
+              "url": "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines",
+              "evidence": "1 $15,960"
+            }
+          ]
+        }
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/a-310-general-policy"
+        ],
+        "evidence": "U.S. citizens and certain legally-admitted alien residents are eligible for benefits",
+        "note": "A-310 General Policy, All Programs. Applies to the person who gets Medicaid. The Buy-In page does not state a citizenship rule."
+      },
+      "eligibility.requires_disability": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/health/medicaid-chip/medicaid-chip-programs-services/programs-children-adults-disabilities/medicaid-buy-adults"
+        ],
+        "evidence": "Have a disability.",
+        "note": "First item in the You might be able to get MBI, if you list. HHSC uses the Social Security disability guidelines."
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/health/medicaid-chip/medicaid-chip-programs-services/programs-children-adults-disabilities/medicaid-buy-adults"
+        ],
+        "evidence": "",
+        "note": "No official Medicaid Buy-In spending per enrollee was found. The HHSC aged-and-disabled average ($2,228) mixes in nursing facility and long-term care users and would overstate coverage for working adults, so it is not used as a stand-in.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://www.yourtexasbenefits.com/Learn/Home"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: http (curl) and browser. The MBI page says to apply online at YourTexasBenefits.com."
+      },
+      "documents_needed": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/questions-about-your-benefits/benefits-application-next-steps"
+        ],
+        "evidence": "",
+        "note": "From the Documents We May Need list on the Next Steps page, which says to send only what HHSC asks for based on the application. The Medicaid-for-an-adult accordion on that page was not expanded when read."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/handbooks/medicaid-elderly-people-disabilities-handbook/b-6400-processing-deadlines"
+        ],
+        "evidence": "Make a decision within 90 days on applications from applicants who must have disability established",
+        "note": "Upper bound. 45 days applies to applicants whose disability is already established by Social Security criteria. Medicaid Buy-In (A-3500) sits in the Medicaid for the Elderly and People with Disabilities Handbook, whose B-6400 deadlines are used here; no Buy-In specific deadline was found."
+      }
+    }
+  },
+  "primary_health_care_tx": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "HHSC Primary Health Care Program page as read 2026-10-17 (no effective date shown).",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/health/primary-health-care-program"
+        ],
+        "evidence": "",
+        "note": "Who is eligible, services and how to apply: the HHSC page."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/health/primary-health-care-program"
+        ],
+        "evidence": "has an income level at or below 200% of the federal poverty level",
+        "note": "Stated directly as a percent of the federal poverty level."
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/health/primary-health-care-program"
+        ],
+        "evidence": "",
+        "note": "The page lists Texas residency, income and not being eligible for other programs, and names no citizenship test, so false is recorded but not confirmed.",
+        "unconfirmed": true
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/health/primary-health-care-program"
+        ],
+        "evidence": "",
+        "note": "The program pays clinics for services, and the page gives no per-person amount or average.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/health/primary-health-care-program"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: browser. Page loaded in a browser; the site blocks plain HTTP clients. The page says to find a provider through 211 Texas."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/health/primary-health-care-program"
+        ],
+        "evidence": "",
+        "note": "The page says only that in certain cases services are available the same day you apply, which is not an upper bound.",
+        "null_reason": "no_official_basis"
+      }
+    }
+  },
+  "vocational_rehabilitation_tx": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "TWC Vocational Rehabilitation adults page and applicant guide as read 2026-10-17 (no effective date shown).",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.twc.texas.gov/programs/vocational-rehabilitation/adults",
+          "https://www.twc.texas.gov/sites/default/files/vr/pub/vr-guide-for-applicants-twc.pdf"
+        ],
+        "evidence": "",
+        "note": "Eligibility criteria, no income test, SSI and SSDI presumption, work authorization and timelines: the TWC page and applicant guide."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.twc.texas.gov/sites/default/files/vr/pub/vr-guide-for-applicants-twc.pdf"
+        ],
+        "evidence": "",
+        "note": "null: the applicant guide says eligibility for the services does not depend on your income.",
+        "null_reason": "no_income_test"
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.twc.texas.gov/sites/default/files/vr/pub/vr-guide-for-applicants-twc.pdf"
+        ],
+        "evidence": "verifying that you can legally work in the United States",
+        "note": "This is a work authorization rule, recorded as true because the matcher treats true as citizen or qualifying status. Documents are required before eligibility is determined."
+      },
+      "eligibility.requires_disability": {
+        "urls": [
+          "https://www.twc.texas.gov/programs/vocational-rehabilitation/adults"
+        ],
+        "evidence": "Have a disability which results in barriers to employment",
+        "note": "First item in the Eligibility Criteria list."
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.twc.texas.gov/programs/vocational-rehabilitation/adults"
+        ],
+        "evidence": "",
+        "note": "Services depend on each person's plan and no typical or average cost is published.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://www.twc.texas.gov/programs/vocational-rehabilitation/adults"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: http (curl) and browser. Apply through Start My VR, the online referral form, or a local VR office, both linked on this page."
+      },
+      "documents_needed": {
+        "urls": [
+          "https://www.twc.texas.gov/sites/default/files/vr/pub/vr-guide-for-applicants-twc.pdf"
+        ],
+        "evidence": "",
+        "note": "From the applicant guide section Do I need to bring documents with me when I apply for services. Items are helpful to bring; only work authorization is required before eligibility."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://www.twc.texas.gov/programs/vocational-rehabilitation/adults"
+        ],
+        "evidence": "Within 60 days or less from application, your VR counselor determines eligibility",
+        "note": "Upper bound for the eligibility decision. The next step, a plan of services, is due within 90 days of eligibility."
+      }
+    }
+  },
+  "child_care_services_tx": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "TWC Board Contract Year 2027 income limits, effective Oct. 1, 2026 through Sept. 30, 2027; 2026 HHS poverty guidelines.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.childcare.texas.gov/for-families/child-care-scholarships",
+          "https://www.twc.texas.gov/sites/default/files/ccel/docs/bcy27-income-eligibility-and-maximum-psoc.pdf",
+          "https://www.twc.texas.gov/sites/default/files/wf/docs/child-care-services-guide-twc.pdf"
+        ],
+        "evidence": "",
+        "note": "Child ages, citizenship, hours and the 7 percent cap: the Child Care Scholarships page. The 85 percent of state median income rule and income table: the TWC guide and BCY27 table. The 284 percent figure is family of six (125932 / 44360 * 100 = 283.9)."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.twc.texas.gov/sites/default/files/ccel/docs/bcy27-income-eligibility-and-maximum-psoc.pdf",
+          "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines"
+        ],
+        "evidence": "2 $64,874 $5,406 $1,248",
+        "note": "Estimate converting the BCY27 annual income limit to a percent of the 2026 poverty guideline. Reference household: family of two, the smallest family with a child. 64874 / 21640 * 100 = 299.8, floored to 299. Other sizes: three 293, four 289, five 286, six 284 percent. Texas tests dollar income by family size at 85 percent of state median income, so the percent is an upper index only.",
+        "estimated": true,
+        "estimate": {
+          "method": "dollar_limit_to_pct_fpl",
+          "represents": "Maximum annual family income at which a family of two can still get a child care scholarship ($64,874), as a percent of the 2026 poverty guideline for two people.",
+          "formula": "floor(annual_limit / guideline_annual * 100)",
+          "inputs": [
+            {
+              "name": "annual_limit",
+              "value": 64874,
+              "unit": "USD per year",
+              "period": "BCY27 table effective Oct. 1, 2026 through Sept. 30, 2027, family size 2",
+              "url": "https://www.twc.texas.gov/sites/default/files/ccel/docs/bcy27-income-eligibility-and-maximum-psoc.pdf",
+              "evidence": "2 $64,874 $5,406 $1,248"
+            },
+            {
+              "name": "guideline_annual",
+              "value": 21640,
+              "unit": "USD per year",
+              "period": "2026 HHS poverty guideline, two persons, 48 contiguous states",
+              "url": "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines",
+              "evidence": "2 $21,640"
+            }
+          ]
+        }
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.childcare.texas.gov/for-families/child-care-scholarships"
+        ],
+        "evidence": "Your child is a U.S. citizen or has legal immigration status",
+        "note": "Applies to the child who gets care, not the parent."
+      },
+      "eligibility.requires_children": {
+        "urls": [
+          "https://www.childcare.texas.gov/for-families/child-care-scholarships"
+        ],
+        "evidence": "Your child is under age 13 (or under age 19 with a disability)",
+        "note": "The age rule has two paths, so age_max is left null."
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.childcare.texas.gov/for-families/child-care-scholarships"
+        ],
+        "evidence": "",
+        "note": "Local workforce boards set maximum payment rates by area, child age and provider type, so no single statewide benefit amount applies.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://www.childcare.texas.gov/for-families/child-care-scholarships"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: http (curl) and browser. The page says to create a Parent Central account and complete the Eligibility Screener and Waitlist Application."
+      },
+      "documents_needed": {
+        "urls": [
+          "https://www.twc.texas.gov/sites/default/files/wf/docs/child-care-services-guide-twc.pdf"
+        ],
+        "evidence": "",
+        "note": "Child Care Services Guide, D-101 area: boards may request one document that proves the child's age, citizenship or immigration status and household. Income verification: D-106.e. Activity: the CCS page need-care rule."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://www.childcare.texas.gov/for-families/child-care-scholarships"
+        ],
+        "evidence": "",
+        "note": "The page describes a waitlist application and an initial review but gives no deadline for a decision.",
+        "null_reason": "no_official_basis"
+      }
+    }
+  },
+  "weatherization_assistance_tx": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "TDHCA 2026 DOE Weatherization State Plan (dated Feb. 9, 2026); DOE WAP page as read 2026-10-17.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.tdhca.texas.gov/weatherization-assistance-program",
+          "https://www.tdhca.texas.gov/sites/default/files/community-affairs/wap/docs/26-DOE-WAP-StatePlan.pdf",
+          "https://www.energy.gov/cmei/scep/wap/weatherization-assistance-program"
+        ],
+        "evidence": "",
+        "note": "Measures and county coverage: the TDHCA program page. Income and categorical eligibility: the state plan. Savings figure: the DOE page."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.tdhca.texas.gov/sites/default/files/community-affairs/wap/docs/26-DOE-WAP-StatePlan.pdf"
+        ],
+        "evidence": "income is at or below 200% of the Federal Poverty",
+        "note": "DOE-funded weatherization. A separate LIHEAP-funded track uses 150 percent in TDHCA's LIHEAP plan; the higher DOE figure is stored."
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.tdhca.texas.gov/weatherization-assistance-program"
+        ],
+        "evidence": "",
+        "note": "The program page and the state plan sections read name no citizenship test, so false is recorded but not confirmed.",
+        "unconfirmed": true
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.energy.gov/cmei/scep/wap/weatherization-assistance-program"
+        ],
+        "evidence": "save on average $372 or more every year",
+        "note": "DOE says weatherized households save on average $372 or more every year according to a national evaluation. 372 / 12 = 31. This is a national average of energy savings, not a payment, and it is not a Texas figure.",
+        "estimated": true,
+        "estimate": {
+          "method": "official_average",
+          "represents": "Average yearly household energy savings from weatherization, as reported by DOE's national evaluation, per month. Savings, not cash paid to the household.",
+          "formula": "round(annual_savings / 12)",
+          "inputs": [
+            {
+              "name": "annual_savings",
+              "value": 372,
+              "unit": "USD per year",
+              "period": "national evaluation cited on the DOE WAP page (year not stated)",
+              "url": "https://www.energy.gov/cmei/scep/wap/weatherization-assistance-program",
+              "evidence": "save on average $372 or more every year"
+            }
+          ]
+        }
+      },
+      "application_url": {
+        "urls": [
+          "https://www.tdhca.texas.gov/help-for-texans"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: http (curl) and browser. The TDHCA page says TDHCA does not accept applications from individuals and points to local providers. The program page links here."
+      },
+      "documents_needed": {
+        "urls": [
+          "https://www.tdhca.texas.gov/sites/default/files/community-affairs/wap/docs/26-DOE-WAP-StatePlan.pdf"
+        ],
+        "evidence": "",
+        "note": "State plan: the subrecipient establishes dwelling ownership through collected documentation at application and determines income eligibility. No fuller list was found."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://www.tdhca.texas.gov/weatherization-assistance-program"
+        ],
+        "evidence": "",
+        "note": "Local agencies run the program and the sources read give no processing time.",
+        "null_reason": "no_official_basis"
+      }
+    }
+  },
+  "scsep_tx": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "TWC SCSEP page and DOL SCSEP page as read 2026-10-17 (no effective date shown); federal minimum wage per DOL.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.twc.texas.gov/programs/senior-community-service-employment",
+          "https://www.dol.gov/agencies/eta/seniors"
+        ],
+        "evidence": "",
+        "note": "Who qualifies, where participants work, average hours, wage rule and priority groups: the TWC and DOL pages."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.twc.texas.gov/programs/senior-community-service-employment",
+          "https://www.dol.gov/agencies/eta/seniors"
+        ],
+        "evidence": "earn 125 percent or less of the federal poverty level each year",
+        "note": "Stated directly as a percent. The TWC dollar table on the same page is out of date and is not used."
+      },
+      "eligibility.age_min": {
+        "urls": [
+          "https://www.twc.texas.gov/programs/senior-community-service-employment"
+        ],
+        "evidence": "older job seekers, age 55 and above",
+        "note": "DOL: participants must be at least 55."
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.twc.texas.gov/programs/senior-community-service-employment"
+        ],
+        "evidence": "able to work in the United States",
+        "note": "A work authorization rule, recorded as true because the matcher treats true as citizen or qualifying status."
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.dol.gov/agencies/eta/seniors",
+          "https://www.dol.gov/general/topic/wages/minimumwage"
+        ],
+        "evidence": "Participants work an average of 20 hours a week",
+        "note": "DOL: participants work an average of 20 hours a week and are paid the highest of federal, state or local minimum wage. The federal rate of $7.25 is used, so a higher local minimum wage would raise the figure. 20 * 7.25 * 52 / 12 = 628.33, rounded to 628. A stipend for work, not a benefit with no work attached.",
+        "estimated": true,
+        "estimate": {
+          "method": "unit_conversion",
+          "represents": "Pay for an average of 20 hours a week at the federal minimum wage, converted to a month.",
+          "formula": "round(hours_per_week * hourly_wage * 52 / 12)",
+          "inputs": [
+            {
+              "name": "hours_per_week",
+              "value": 20,
+              "unit": "hours per week",
+              "period": "DOL SCSEP page, average participant hours",
+              "url": "https://www.dol.gov/agencies/eta/seniors",
+              "evidence": "Participants work an average of 20 hours a week"
+            },
+            {
+              "name": "hourly_wage",
+              "value": 7.25,
+              "unit": "USD per hour",
+              "period": "DOL federal minimum wage page",
+              "url": "https://www.dol.gov/general/topic/wages/minimumwage",
+              "evidence": "The federal minimum wage for covered nonexempt employees is $7.25 per hour."
+            }
+          ]
+        }
+      },
+      "application_url": {
+        "urls": [
+          "https://www.twc.texas.gov/programs/senior-community-service-employment"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: http (curl) and browser. The page lists the SCSEP providers by county, and local providers decide eligibility."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://www.twc.texas.gov/programs/senior-community-service-employment"
+        ],
+        "evidence": "",
+        "note": "Local providers enroll participants and the sources read give no processing time.",
+        "null_reason": "no_official_basis"
+      }
+    }
+  },
+  "senior_meals_tx": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "HHSC Area Agency on Aging Policies and Procedures Manual F-1120 and F-1220 (Revision 22-1, effective March 1, 2022); Aging page as read 2026-10-17.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/handbooks/area-agency-aging-policies-procedures-manual/f-1100-congregate-meals",
+          "https://fhb.hhs.texas.gov/handbooks/area-agency-aging-policies-procedures-manual/f-1200-home-delivered-meals",
+          "https://www.hhs.texas.gov/services/aging"
+        ],
+        "evidence": "",
+        "note": "Congregate and home-delivered eligibility and frequency: handbook F-1100 and F-1200. Phone number for Area Agency on Aging services: the HHSC Aging page."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/handbooks/area-agency-aging-policies-procedures-manual/f-1100-congregate-meals",
+          "https://fhb.hhs.texas.gov/handbooks/area-agency-aging-policies-procedures-manual/f-1200-home-delivered-meals"
+        ],
+        "evidence": "",
+        "note": "null: the eligibility sections for both meal types list age, spouse, volunteer and need rules and no income test.",
+        "null_reason": "no_income_test"
+      },
+      "eligibility.age_min": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/handbooks/area-agency-aging-policies-procedures-manual/f-1100-congregate-meals"
+        ],
+        "evidence": "a person must be: 60 or over",
+        "note": "Congregate meals. Home-delivered meals also require age 60 or over."
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/handbooks/area-agency-aging-policies-procedures-manual/f-1100-congregate-meals"
+        ],
+        "evidence": "There are no citizenship or residency requirements for OAA services.",
+        "note": "Also stated in F-1200 for home-delivered meals."
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/handbooks/area-agency-aging-policies-procedures-manual/f-1100-congregate-meals"
+        ],
+        "evidence": "",
+        "note": "The handbook counts meals but states no dollar value per person or per meal.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/aging"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: browser. Page loaded in a browser; the site blocks plain HTTP clients. It says to call 800-252-9240 for Area Agency on Aging services."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/handbooks/area-agency-aging-policies-procedures-manual/f-1200-home-delivered-meals"
+        ],
+        "evidence": "",
+        "note": "The handbook sections read give no application processing time.",
+        "null_reason": "no_official_basis"
+      }
+    }
   }
 }

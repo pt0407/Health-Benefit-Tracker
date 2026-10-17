@@ -40,7 +40,7 @@ export default function MatchCard({ program, inTracker, onApply }) {
         <div className="flex gap-4 p-5">
           <span
             aria-hidden="true"
-            className="arch-badge flex h-16 w-12 shrink-0 items-end justify-center bg-primary-dark pb-3 text-white"
+            className="num-badge flex h-12 w-12 shrink-0 items-center justify-center bg-primary-dark text-white"
           >
             <Icon name={CATEGORY_ICONS[program.category] ?? "list"} className="h-5 w-5" />
           </span>
