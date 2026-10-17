@@ -38,3 +38,9 @@ export async function exportWorksheetPdf(profile, result) {
   // Revoking right away can cancel the download in some browsers.
   setTimeout(() => URL.revokeObjectURL(url), 60_000);
 }
+
+// "What if my income changes?": the rules-only matcher at a grid of incomes.
+export async function getIncomeScenarios(profile) {
+  const { data } = await api.post("/income-scenarios", profile);
+  return data;
+}
