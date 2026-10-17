@@ -8,7 +8,8 @@ import Icon from "../components/shared/Icon.jsx";
 import LoadingScreen from "../components/ui/LoadingScreen.jsx";
 import { Alert, Button, LinkButton } from "../components/ui/index.jsx";
 import { BUCKETS, CATEGORY_LABELS, enrich, levelMatches } from "../lib/programMeta.js";
-import { summarizeAnswers } from "../lib/quizSchema.js";
+import { summarizeAnswers, toProfile } from "../lib/quizSchema.js";
+import { exportWorksheetPdf } from "../api/benefitsApi.js";
 import { useProgramCatalog } from "../lib/useProgramCatalog.js";
 import { usePageTitle } from "../lib/usePageTitle.js";
 import { addTrackerEntry, getAnswers, getResults, getTracker, scopeFor, setPendingApply } from "../lib/userData.js";
@@ -46,6 +47,8 @@ export default function Matches() {
   const catalog = useProgramCatalog();
   const [flash, setFlash] = useState(location.state?.flash ?? null);
   const [added, setAdded] = useState(null);
+  const [exporting, setExporting] = useState(false);
+  const [exportError, setExportError] = useState(null);
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [tracked, setTracked] = useState(() => (user ? getTracker(user.email).map((e) => e.id) : []));
 
@@ -119,6 +122,19 @@ export default function Matches() {
   const catCounts = programs.reduce((acc, p) => ({ ...acc, [p.category]: (acc[p.category] || 0) + 1 }), {});
   const bucketCounts = programs.reduce((acc, p) => ({ ...acc, [p.bucket]: (acc[p.bucket] || 0) + 1 }), {});
   const message = flash || added;
+
+  async function downloadPdf() {
+    if (!result || !answers) return;
+    setExporting(true);
+    setExportError(null);
+    try {
+      await exportWorksheetPdf(toProfile(answers), result);
+    } catch {
+      setExportError("We couldn't create your worksheet. Check your connection and try again.");
+    } finally {
+      setExporting(false);
+    }
+  }
 
   return (
     <div className="container-page py-8 lg:py-12">
@@ -247,7 +263,15 @@ export default function Matches() {
 
           <section aria-label="Matched programs">
             <div className="flex flex-wrap items-end justify-between gap-4">
-              <p role="status" className="font-semibold">Showing {visible.length} of {programs.length} programs</p>
+              <div>
+                <p role="status" className="font-semibold">Showing {visible.length} of {programs.length} programs</p>
+                {answers && (
+                  <Button variant="secondary" className="mt-3" onClick={downloadPdf} disabled={exporting}>
+                    {exporting ? "Preparing your worksheet…" : "Download worksheet (PDF)"}
+                  </Button>
+                )}
+                {exportError && <p role="alert" className="mt-2 text-sm text-red-700">{exportError}</p>}
+              </div>
               <div>
                 <label htmlFor="sort" className="block font-semibold">Sort by</label>
                 <select id="sort" className="input mt-1 min-w-64" value={sort} onChange={(e) => setParam("sort", e.target.value)}>
