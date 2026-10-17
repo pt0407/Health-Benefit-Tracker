@@ -172,7 +172,7 @@ export default function QuizWizard() {
       valid: () =>
         form.has_children === false ||
         (form.has_children === true && form.children_ages.length >= 1 &&
-          form.children_ages.every((a) => Number.isInteger(a) && a >= 0 && a <= 19)),
+          form.children_ages.every((a) => Number.isInteger(a) && a >= 0 && a <= 18)),
       body: (
         <>
           <OptionButtons
@@ -201,7 +201,7 @@ export default function QuizWizard() {
                     key={i}
                     type="number"
                     min={0}
-                    max={19}
+                    max={18}
                     value={age ?? ""}
                     placeholder={`Child ${i + 1} age`}
                     onChange={(e) => {
