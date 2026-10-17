@@ -1,12 +1,73 @@
 [
   {
     "program_id": "snap_federal",
-    "name": "SNAP (Food Stamps)",
+    "name": "Supplemental Nutrition Assistance Program (SNAP)",
     "type": "federal",
     "category": "nutrition",
-    "description": "Monthly food assistance loaded onto an EBT card for low-income households.",
+    "description": "SNAP gives eligible low-income households a monthly benefit on an EBT card (the Lone Star Card in Texas) to buy groceries. Households must meet income and resource limits and apply in the state where they live. In Texas, households with gross monthly income up to 165% of the federal poverty level can qualify through categorical eligibility; the federal baseline is 130% gross and 100% net. Households with an elderly or disabled member only have to meet the net income test. Federal resource limits are $3,000, or $4,750 if a member is 60 or older or disabled, though many states relax them. Immigration rules and work rules apply, and USDA notes they changed under 2025 legislation. For October 1, 2026 through September 30, 2027, the maximum monthly benefit is $306 for one person and $1,023 for four. Applications are normally decided within 30 days, and some households in urgent need can get benefits within 7 days.",
     "eligibility": {
-      "income_limit_pct_fpl": 130,
+      "income_limit_pct_fpl": 165,
+      "citizenship_required": true,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": 348.89,
+    "application_url": "https://www.yourtexasbenefits.com/Learn/Home",
+    "documents_needed": [
+      "Proof of identity",
+      "Proof of residence",
+      "Proof of income",
+      "Bank account statements",
+      "Proof of citizenship or immigration status",
+      "Housing expense records",
+      "Medical expense bills or statements",
+      "Household size information",
+      "Dependent care expense records",
+      "Child support records"
+    ],
+    "processing_time_days": 30,
+    "source": "USDA Food and Nutrition Administration; Texas Health and Human Services",
+    "last_updated": "2026-10-12"
+  },
+  {
+    "program_id": "medicaid_federal",
+    "name": "Medicaid",
+    "type": "federal_state",
+    "category": "health",
+    "description": "Medicaid is a joint federal and state program that provides free or low-cost health coverage to some low-income people, including families and children, pregnant women, older adults, and people with disabilities. Income limits differ by group. The Medicaid.gov Texas profile, with a table dated December 1, 2023, lists 198% of the federal poverty level for children ages 0 to 1 and for pregnant women, 144% for ages 1 to 5, 133% for ages 6 to 18, and 12% for parents and caretakers, with no expansion to other adults; separate CHIP is 201%. The figure recorded here is the highest Medicaid band. Texas runs separate programs for children, pregnant women, parents and caretakers, and older adults and people with disabilities. HealthCare.gov says a recent law change limits full Medicaid and CHIP to certain immigration statuses. States must decide most applications within 45 days, or 90 days when based on disability. The monthly value shown is an estimate of government spending, not cash you receive: Medicaid benefit spending per Texas enrollee in fiscal year 2023, divided by 12.",
+    "eligibility": {
+      "income_limit_pct_fpl": 198,
+      "citizenship_required": true,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": 663,
+    "application_url": "https://www.yourtexasbenefits.com/Learn/Home",
+    "documents_needed": [
+      "Proof of identity",
+      "Proof of income",
+      "Proof of citizenship or immigration status",
+      "Proof of Texas residence",
+      "Medical bills from the past three months"
+    ],
+    "processing_time_days": 90,
+    "source": "Centers for Medicare & Medicaid Services; Texas Health and Human Services",
+    "last_updated": "2026-10-13"
+  },
+  {
+    "program_id": "wic_federal",
+    "name": "Special Supplemental Nutrition Program for Women, Infants, and Children (WIC)",
+    "type": "federal",
+    "category": "nutrition",
+    "description": "WIC provides healthy foods, nutrition counseling, breastfeeding support, and health referrals for pregnant, postpartum, and breastfeeding women, infants, and children up to age 5. Applicants must live in the state where they apply, be found at nutritional risk through a free health screening, and have household income at or below 185% of the federal poverty level, unless they or their children already get Medicaid, SNAP, or TANF, which can meet the income test. Texas uses the federal maximum: from July 2026 through June 2027 that is $2,461 a month for one person and $5,088 for a household of four. U.S. citizenship is not required. Texas applicants start online or by phone with a local WIC office and then attend an appointment. If a WIC office is full, a priority system decides who is served first. Pregnant women stay on WIC until the end of pregnancy, and infants and children until they turn 5.",
+    "eligibility": {
+      "income_limit_pct_fpl": 185,
       "citizenship_required": false,
       "age_min": null,
       "age_max": null,
@@ -14,11 +75,100 @@
       "requires_disability": false,
       "requires_pregnancy": false
     },
-    "estimated_monthly_value_usd": 281,
-    "application_url": "https://www.benefits.gov/benefit/361",
-    "documents_needed": ["ID", "Proof of income", "Utility bills"],
-    "processing_time_days": 30,
-    "source": "USDA FNS",
-    "last_updated": "2025-01-01"
+    "estimated_monthly_value_usd": 50.49,
+    "application_url": "https://www.texaswic.org/apply",
+    "documents_needed": [
+      "Identification for each person applying",
+      "Proof of address",
+      "Proof of income",
+      "Proof of SNAP, Medicaid, or TANF participation"
+    ],
+    "processing_time_days": 20,
+    "source": "USDA Food and Nutrition Administration; Texas Health and Human Services",
+    "last_updated": "2026-10-12"
+  },
+  {
+    "program_id": "liheap_federal",
+    "name": "Low Income Home Energy Assistance Program (LIHEAP)",
+    "type": "federal",
+    "category": "energy",
+    "description": "LIHEAP is a federal program that helps low-income households with home energy costs, including heating and cooling bills, energy crises, weatherization, and minor energy-related repairs. In Texas it runs as the Comprehensive Energy Assistance Program (CEAP) through the Texas Department of Housing and Community Affairs, which funds local providers in all 254 counties and does not take applications from individuals. Texas calculates CEAP eligibility at 150% of the federal poverty income guidelines; for 2026 that is $23,940 a year for a one-person household and $49,500 for a household of four. Providers verify that household members are U.S. citizens or qualified non-citizens. Crisis help is provided within 48 hours for extreme weather or disasters and within 18 hours for life-threatening situations. Providers can run out of funds. LIHEAP does not charge a fee. The monthly value shown is an estimate: the lower of Texas's fiscal year 2023 average yearly household benefits ($1,751 cooling, $2,750 heating), spread over 12 months. Actual help is seasonal or one-time.",
+    "eligibility": {
+      "income_limit_pct_fpl": 150,
+      "citizenship_required": true,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": 146,
+    "application_url": "https://www.tdhca.texas.gov/help-for-texans",
+    "documents_needed": [
+      "Government-issued identification",
+      "Income documents for all adult household members",
+      "Current utility bill",
+      "Proof of citizenship or qualified immigration status"
+    ],
+    "processing_time_days": null,
+    "source": "ACF Office of Community Services; Texas Department of Housing and Community Affairs",
+    "last_updated": "2026-10-13"
+  },
+  {
+    "program_id": "medicare_extra_help_federal",
+    "name": "Medicare Part D Extra Help (Low-Income Subsidy)",
+    "type": "federal",
+    "category": "health",
+    "description": "Extra Help is a Medicare program that lowers Medicare drug plan (Part D) premiums, deductibles, and copays for people with limited income and resources. To qualify you generally need Medicare Part A or Part B, must live in one of the 50 states or the District of Columbia, and must have income below 150% of the federal poverty level. In 2026 Medicare lists the limits as $23,940 of income for an individual and $32,460 for a married couple, with resource limits of $18,090 and $36,100. You get Extra Help automatically if you have full Medicaid, help from a Medicare Savings Program, or SSI. Others can apply through the Social Security Administration online or by phone. To join a Medicare drug plan you must be a U.S. citizen or have a qualifying immigration status. Extra Help is not available in the U.S. territories. The monthly value shown is an estimate: SSA's stated yearly worth of Extra Help, about $5,700, divided by 12. It is an average, not your own amount.",
+    "eligibility": {
+      "income_limit_pct_fpl": 150,
+      "citizenship_required": true,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": 475,
+    "application_url": "https://www.ssa.gov/medicare/part-d-extra-help",
+    "documents_needed": [
+      "Bank statements and tax returns",
+      "IRA or 401(k) account balances",
+      "Pension, Veterans' benefits, annuity, and Railroad Retirement Board statements"
+    ],
+    "processing_time_days": null,
+    "source": "Centers for Medicare & Medicaid Services; Social Security Administration",
+    "last_updated": "2026-10-13"
+  },
+  {
+    "program_id": "ssdi_federal",
+    "name": "Social Security Disability Insurance (SSDI)",
+    "type": "federal",
+    "category": "disability",
+    "description": "SSDI, which the Social Security Administration also calls Disability, pays a monthly benefit and, later, Medicare to people who cannot work because of a medical condition. You need a disability or blindness that affects your ability to work for a year or more or will result in death, and enough work history under Social Security. Generally that means working at least 5 of the last 10 years, with exceptions for people under 24. In 2026, you generally cannot qualify if you earn more than $1,690 a month ($2,830 if blind). There is usually a five-month waiting period before payments start, and Medicare begins 2 years after entitlement. The average disabled-worker benefit was $1,635.90 a month in August 2026, but your own amount depends on your earnings record. SSA says an initial decision generally takes 6 to 8 months. You must be a U.S. citizen or a lawfully present noncitizen. Disability benefits convert to retirement benefits at full retirement age. The 240 day processing figure is an estimate that converts 8 months at 30 days each.",
+    "eligibility": {
+      "income_limit_pct_fpl": null,
+      "citizenship_required": true,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": true,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": 1635.9,
+    "application_url": "https://www.ssa.gov/apply?benefits=disability&age=adult",
+    "documents_needed": [
+      "Social Security number",
+      "Doctor, hospital, and clinic names and phone numbers",
+      "Medical tests and medications list",
+      "Earnings history and recent employer details",
+      "Marriage and divorce details",
+      "Bank routing and account number for direct deposit",
+      "Names of children",
+      "Workers' compensation claim details, if any"
+    ],
+    "processing_time_days": 240,
+    "source": "Social Security Administration",
+    "last_updated": "2026-10-13"
   }
 ]

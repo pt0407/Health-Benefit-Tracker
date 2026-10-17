@@ -1,0 +1,761 @@
+{
+  "chip_tx": {
+    "verified_on": "2026-10-13",
+    "figures_effective": "Income limit from Texas Works Handbook C-131.1 (Revision 26-2, effective April 1, 2026) with dollar figures dated March 1, 2026. HHSC CHIP page, read 2026-10-12.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/health/medicaid-chip/medicaid-chip-members/chip",
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/c-130-medical-programs",
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/d-120-eligibility-qualifications",
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/c-1150-type-programs-tp-type-assistance-ta"
+        ],
+        "evidence": "",
+        "note": "Who qualifies, services, enrollment fee, copays and Medicaid Buy-In for Children come from the HHSC CHIP page. The 201% limit comes from C-131.1 (TA 84 is labelled CHIP). The 90-day wait and the rule that the child is ineligible for Children's Medicaid come from D-121. C-1150 defines TA 84 as coverage for children under 19 who are ineligible for Medicaid due to income."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/c-130-medical-programs"
+        ],
+        "evidence": "201% FPL March 1, 2026 TA 84",
+        "note": "Column header in the C-131.1 table headed TA 41, TA 84 (CHIP), TA 85 (CHIP-P), TA 77 and TP 70; handbook section C-1150 defines TA 84 as CI - CHIP. Ceiling for CHIP; only children above the Children's Medicaid limit qualify. The HHSC CHIP page dollar table (family of one $2,622) is older than the handbook table (family of one $2,674)."
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/health/medicaid-chip/medicaid-chip-members/chip"
+        ],
+        "evidence": "a U.S. citizen or qualified non-citizen",
+        "note": "Applies to the child who gets CHIP. Handbook section D-121 agrees: be a U.S. citizen or non-citizen with valid proof of immigration/alien status."
+      },
+      "eligibility.age_max": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/health/medicaid-chip/medicaid-chip-members/chip"
+        ],
+        "evidence": "18 years old or younger",
+        "note": "Inclusive. Handbook section D-121 says be under age 19."
+      },
+      "eligibility.requires_children": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/health/medicaid-chip/medicaid-chip-members/chip"
+        ],
+        "evidence": "low-cost health care coverage to children whose families earn too much money",
+        "note": "Coverage is for the child, so the household must include a child."
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.hhs.texas.gov/sites/default/files/documents/texas-medicaid-chip-reference-guide-15th-edition.pdf"
+        ],
+        "evidence": "81K people enrolled in CHIP in 2023",
+        "note": "Texas Medicaid and CHIP Reference Guide, 15th edition, Chapter 4 growth trends: CHIP annual expenditures 2023 are $299 million and CHIP caseload is 81 thousand (both rounded as published). 299000000 / 81000 / 12 = 307.6, stored as 308. The two figures are on the same page of the guide but are rounded and may cover slightly different 2023 periods (federal fiscal year spending, annual caseload).",
+        "estimated": true,
+        "estimate": {
+          "method": "per_enrollee_spending",
+          "represents": "Texas government CHIP spending per month for each enrollee, not cash paid to the household.",
+          "formula": "round(annual_chip_spending / chip_enrollment / 12)",
+          "inputs": [
+            {
+              "name": "annual_chip_spending",
+              "value": 299000000,
+              "unit": "USD per year",
+              "period": "CHIP annual expenditures, 2023, as shown in the guide chart",
+              "url": "https://www.hhs.texas.gov/sites/default/files/documents/texas-medicaid-chip-reference-guide-15th-edition.pdf",
+              "evidence": "$299 million"
+            },
+            {
+              "name": "chip_enrollment",
+              "value": 81000,
+              "unit": "enrollees",
+              "period": "CHIP enrollment, 2023",
+              "url": "https://www.hhs.texas.gov/sites/default/files/documents/texas-medicaid-chip-reference-guide-15th-edition.pdf",
+              "evidence": "81K people enrolled in CHIP in 2023"
+            }
+          ]
+        }
+      },
+      "application_url": {
+        "urls": [
+          "https://www.yourtexasbenefits.com/Learn/Home"
+        ],
+        "evidence": "HTTP 200 on 2026-10-12",
+        "note": "method: http (curl) and browser. The Apply for CHIP link on the HHSC CHIP page points here."
+      },
+      "documents_needed": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/questions-about-your-benefits/benefits-application-next-steps"
+        ],
+        "evidence": "Last two pay stubs or paychecks, a statement from your employer or self-employment records.",
+        "note": "From the CHIP or Children's Medicaid section (income, unpaid medical bills of the past three months, citizenship) plus the general Documents We May Need list (identity, immigration status, residence)."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/d-230-application-processing-time-frames"
+        ],
+        "evidence": "45th day after the file date for an application requesting health care for children.",
+        "note": "Deadline to send the notice of case action for a children's application; stored as 45 days."
+      }
+    }
+  },
+  "childrens_medicaid_tx": {
+    "verified_on": "2026-10-13",
+    "figures_effective": "Income limits from Texas Works Handbook C-131.1 (Revision 26-2, effective April 1, 2026) with dollar figures dated March 1, 2026. HHSC Children's Medicaid page, read 2026-10-12.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/health/medicaid-chip/medicaid-chip-programs-services/programs-children-adults-disabilities/programs-children-families/childrens-medicaid-star",
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/c-130-medical-programs",
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/a-240-medical-programs"
+        ],
+        "evidence": "",
+        "note": "Eligibility, coverage, long-term services and the automatic CHIP check come from the HHSC Children's Medicaid page. The three age bands come from C-131.1 column headers: 198% FPL (TP 40, 42, 43, 36, 35, TA 74), 144% FPL (TP 48, 33, TA 75) and 133% FPL (TP 44, 34, TA 76), mapped to ages by A-240: TP 43 children under age 1, TP 48 ages 1 to 5, TP 44 ages 6 to 18."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/c-130-medical-programs"
+        ],
+        "evidence": "198% FPL March 1, 2026 TP 40, 42, 43, 36, 35, TA 74",
+        "note": "Highest band: children under 1 (TP 43, 198%, per handbook section A-240). Ages 1 to 5 (TP 48) 144%; ages 6 to 18 (TP 44) 133%. Every band is listed in the description. The HHSC page dollar table (family of one $1,735) is older than the handbook table (family of one $1,769 at 133%)."
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/health/medicaid-chip/medicaid-chip-programs-services/programs-children-adults-disabilities/programs-children-families/childrens-medicaid-star"
+        ],
+        "evidence": "a U.S. citizen or qualified non-citizen",
+        "note": "Applies to the child who gets Medicaid."
+      },
+      "eligibility.age_max": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/health/medicaid-chip/medicaid-chip-programs-services/programs-children-adults-disabilities/programs-children-families/childrens-medicaid-star"
+        ],
+        "evidence": "18 years old or younger",
+        "note": "Inclusive. The page adds that some children with disabilities aged 19 or 20 can get Medicaid; handbook section A-240 says children under age 19."
+      },
+      "eligibility.requires_children": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/health/medicaid-chip/medicaid-chip-programs-services/programs-children-adults-disabilities/programs-children-families/childrens-medicaid-star"
+        ],
+        "evidence": "provides free health coverage for children in low-income families",
+        "note": "Coverage is for the child, so the household must include a child."
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.hhs.texas.gov/sites/default/files/documents/texas-medicaid-chip-reference-guide-15th-edition.pdf"
+        ],
+        "evidence": "Average cost per client per month is based on full-benefit clients only.",
+        "note": "Texas HHSC Medicaid and CHIP Reference Guide, 15th edition, Quick Facts (page 3 of the guide), chart \"Trends in Caseload and Spending for Major Medicaid Client Categories\". Re-audit 2026-10-13: the chart rows are labeled in the PDF and the cost-per-client values sit on the same rows as their labels (Non-Disabled Children $261, Non-Disabled Adults $588, Age & Disability-Related $2,228; the Cost per Client column is footnoted full-benefit clients only). The chart labels no year for the cost column; the caseload shares in it (73, 13, 14 percent) match the guide's text for 2023. Used here: the Non-Disabled Children row, $261.",
+        "estimated": true,
+        "estimate": {
+          "method": "per_enrollee_spending",
+          "represents": "Texas government Medicaid spending per month for each non-disabled child enrollee, not cash paid to the household.",
+          "formula": "round(avg_cost_per_client_per_month)",
+          "inputs": [
+            {
+              "name": "avg_cost_per_client_per_month",
+              "value": 261,
+              "unit": "USD per month",
+              "period": "Quick Facts trend table, 15th edition (data current as of August 2024); year not labeled in the page text read, caseload figures in the guide are for 2023",
+              "url": "https://www.hhs.texas.gov/sites/default/files/documents/texas-medicaid-chip-reference-guide-15th-edition.pdf",
+              "evidence": "Average cost per client per month is based on full-benefit clients only."
+            }
+          ]
+        }
+      },
+      "application_url": {
+        "urls": [
+          "https://www.yourtexasbenefits.com/Learn/Home"
+        ],
+        "evidence": "HTTP 200 on 2026-10-12",
+        "note": "method: http (curl) and browser. The Apply for Medicaid link on the HHSC page leads to Your Texas Benefits."
+      },
+      "documents_needed": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/questions-about-your-benefits/benefits-application-next-steps"
+        ],
+        "evidence": "Last two pay stubs or paychecks, a statement from your employer or self-employment records.",
+        "note": "From the CHIP or Children's Medicaid section (income, unpaid medical bills of the past three months, citizenship) plus the general Documents We May Need list (identity, immigration status, residence)."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/b-110-applications"
+        ],
+        "evidence": "including those with spend down by the 45th day from the file date.",
+        "note": "B-112 Deadlines, Medical Programs: notice of case action by the 45th day from the file date."
+      }
+    }
+  },
+  "medicaid_pregnant_women_tx": {
+    "verified_on": "2026-10-13",
+    "figures_effective": "Income limit from Texas Works Handbook C-131.1 (Revision 26-2, effective April 1, 2026) with dollar figures dated March 1, 2026. HHSC pregnant women page, read 2026-10-12.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/health/medicaid-chip/medicaid-chip-programs-services/medicaid-pregnant-women-chip-perinatal",
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/c-130-medical-programs",
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/a-140-expedited-service",
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/a-820-regular-medicaid-coverage"
+        ],
+        "evidence": "",
+        "note": "Coverage period, residency, citizenship, benefits and the CHIP Perinatal fallback come from the HHSC page. The 198% limit and the $2,634 figure for one person come from C-131.1 and match the HHSC page table. The 15 business days and no-interview rule are in A-140. A-820 confirms continuous eligibility through the 12th month after the pregnancy ends."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/c-130-medical-programs"
+        ],
+        "evidence": "198% FPL March 1, 2026 TP 40, 42, 43, 36, 35, TA 74",
+        "note": "TP 40 is the pregnant women Medicaid type program (handbook sections A-240: minor or adult pregnant woman; C-1150: MA Pregnant Women). The same 198% column covers children under 1."
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/health/medicaid-chip/medicaid-chip-programs-services/medicaid-pregnant-women-chip-perinatal"
+        ],
+        "evidence": "To get Medicaid, you must be a U.S. citizen or a qualified non-citizen.",
+        "note": "Applies to the pregnant woman. Women who fail this test may qualify for CHIP Perinatal."
+      },
+      "eligibility.requires_pregnancy": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/health/medicaid-chip/medicaid-chip-programs-services/medicaid-pregnant-women-chip-perinatal"
+        ],
+        "evidence": "Medicaid gives health coverage to low-income pregnant women.",
+        "note": "Pregnancy is required."
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.macpac.gov/wp-content/uploads/2026/01/EXHIBIT-22.-Medicaid-Benefit-Spending-Per-Full-Year-Equivalent-FYE-Enrollee-by-State-and-Eligibility-Group-FY-2023.pdf"
+        ],
+        "evidence": "Texas9 7,958 8,701 4,310 4,299 67,810 67,810 5,736 8,770",
+        "note": "MACPAC MACStats Exhibit 22 (Medicaid and CHIP Data Book, February 2026), FY 2023, Texas row, Other adult group, All enrollees column = $5,736 per full-year equivalent enrollee (Full-benefit enrollees column is $8,770; the lower All enrollees figure is used per the tie-break). MACPAC footnote 4 defines Other adult as adults under 65 who qualify through a pathway other than disability or the new adult group, e.g. parents and caretakers, pregnancy. No pregnancy-only figure is published. 5736 / 12 = 478. Replaces the earlier Texas HHSC Quick Facts non-disabled adults figure ($588 a month), whose group definition did not name pregnancy. Government spending, not cash paid to the household.",
+        "estimated": true,
+        "estimate": {
+          "method": "per_enrollee_spending",
+          "represents": "Government Medicaid benefit spending per full-year equivalent Texas enrollee in MACPAC's other adult group (includes pregnancy-related and parent and caretaker coverage; no pregnancy-only figure is published), per month, not cash paid to the household.",
+          "formula": "round(annual_spending_per_enrollee / 12)",
+          "inputs": [
+            {
+              "name": "annual_spending_per_enrollee",
+              "value": 5736,
+              "unit": "USD per year",
+              "period": "FY 2023",
+              "url": "https://www.macpac.gov/wp-content/uploads/2026/01/EXHIBIT-22.-Medicaid-Benefit-Spending-Per-Full-Year-Equivalent-FYE-Enrollee-by-State-and-Eligibility-Group-FY-2023.pdf",
+              "evidence": "Texas9 7,958 8,701 4,310 4,299 67,810 67,810 5,736 8,770"
+            }
+          ]
+        }
+      },
+      "application_url": {
+        "urls": [
+          "https://www.yourtexasbenefits.com/Learn/Home"
+        ],
+        "evidence": "HTTP 200 on 2026-10-12",
+        "note": "method: http (curl) and browser. The Apply for Medicaid and CHIP Perinatal link on the HHSC page leads to Your Texas Benefits."
+      },
+      "documents_needed": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/questions-about-your-benefits/benefits-application-next-steps"
+        ],
+        "evidence": "Two pay stubs or paychecks from the last 60 days",
+        "note": "From the Medicaid for an Adult or Pregnant Woman section (income, unpaid medical bills of the past three months, citizenship) plus the general Documents We May Need list (identity, immigration status, residence)."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/a-140-expedited-service"
+        ],
+        "evidence": "eligibility determined no later than 15 business days from the date HHSC receives the application",
+        "note": "Stored as 21 calendar days. The handbook states 15 business days (original wording: '15 business days'); converted as 15 * 7 / 5 = 21, rounded up, because processing_time_days means calendar days. Handbook section D-230 says the 15th working day after the file date for a pregnant woman's application.",
+        "estimated": true,
+        "estimate": {
+          "method": "unit_conversion",
+          "represents": "The stated 15 business day standard converted to calendar days (5 business days = 7 calendar days), rounded up.",
+          "formula": "ceil(business_days * 7 / 5)",
+          "inputs": [
+            {
+              "name": "business_days",
+              "value": 15,
+              "unit": "business days",
+              "period": "current agency standard",
+              "url": "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/a-140-expedited-service",
+              "evidence": "eligibility determined no later than 15 business days from the date HHSC receives the application"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "chip_perinatal_tx": {
+    "verified_on": "2026-10-13",
+    "figures_effective": "Income limit from Texas Works Handbook C-131.1 (Revision 26-2, effective April 1, 2026) with dollar figures dated March 1, 2026. HHSC CHIP Perinatal FAQs, read 2026-10-12.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.hhs.texas.gov/providers/health-services-providers/chip-perinatal-providers/chip-perinatal-faqs",
+          "https://www.hhs.texas.gov/services/health/medicaid-chip/medicaid-chip-programs-services/medicaid-pregnant-women-chip-perinatal",
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/d-120-eligibility-qualifications",
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/c-130-medical-programs"
+        ],
+        "evidence": "",
+        "note": "Income paths, immigration-status path, benefits, no waiting period/fees/copays, documents and the 15 business days come from the CHIP Perinatal FAQs. 'No other health insurance', the two post-pregnancy visits and the pregnancy requirement are on the HHSC pregnant women page. The rule that a woman who applies after the baby is born is not eligible is D-122.1."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.hhs.texas.gov/providers/health-services-providers/chip-perinatal-providers/chip-perinatal-faqs"
+        ],
+        "evidence": "household income up to 202% of the federal poverty level (FPL)",
+        "note": "Handbook section C-131.1 column header agrees: 202% FPL March 1, 2026 TA 85 (labelled CHIP-P)."
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.hhs.texas.gov/providers/health-services-providers/chip-perinatal-providers/chip-perinatal-faqs"
+        ],
+        "evidence": "but do not qualify for Medicaid because of immigration status",
+        "note": "false: the program covers the unborn child of a woman who is ineligible for Medicaid or CHIP due to income or immigration status (handbook section C-1150, TA 85), so citizenship is not required."
+      },
+      "eligibility.requires_pregnancy": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/health/medicaid-chip/medicaid-chip-programs-services/medicaid-pregnant-women-chip-perinatal"
+        ],
+        "evidence": "CHIP Perinatal is for pregnant women who:",
+        "note": "Pregnancy is required (handbook section D-122: be pregnant)."
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.hhs.texas.gov/sites/default/files/documents/texas-medicaid-chip-reference-guide-15th-edition.pdf"
+        ],
+        "evidence": "81K people enrolled in CHIP in 2023",
+        "note": "Texas Medicaid and CHIP Reference Guide, 15th edition, Chapter 4 growth trends: CHIP annual expenditures 2023 are $299 million and CHIP caseload is 81 thousand (both rounded as published). 299000000 / 81000 / 12 = 307.6, stored as 308. The two figures are on the same page of the guide but are rounded and may cover slightly different 2023 periods (federal fiscal year spending, annual caseload).",
+        "estimated": true,
+        "estimate": {
+          "method": "per_enrollee_spending",
+          "represents": "General Texas CHIP spending per month for each enrollee (HHSC publishes no CHIP Perinatal-specific figure; CHIP Perinatal is part of the CHIP total), not cash paid to the household.",
+          "formula": "round(annual_chip_spending / chip_enrollment / 12)",
+          "inputs": [
+            {
+              "name": "annual_chip_spending",
+              "value": 299000000,
+              "unit": "USD per year",
+              "period": "CHIP annual expenditures, 2023, as shown in the guide chart",
+              "url": "https://www.hhs.texas.gov/sites/default/files/documents/texas-medicaid-chip-reference-guide-15th-edition.pdf",
+              "evidence": "$299 million"
+            },
+            {
+              "name": "chip_enrollment",
+              "value": 81000,
+              "unit": "enrollees",
+              "period": "CHIP enrollment, 2023",
+              "url": "https://www.hhs.texas.gov/sites/default/files/documents/texas-medicaid-chip-reference-guide-15th-edition.pdf",
+              "evidence": "81K people enrolled in CHIP in 2023"
+            }
+          ]
+        }
+      },
+      "application_url": {
+        "urls": [
+          "https://www.yourtexasbenefits.com/Learn/Home"
+        ],
+        "evidence": "HTTP 200 on 2026-10-12",
+        "note": "method: http (curl) and browser. The FAQs say women can apply online at Your Texas Benefits."
+      },
+      "documents_needed": {
+        "urls": [
+          "https://www.hhs.texas.gov/providers/health-services-providers/chip-perinatal-providers/chip-perinatal-faqs"
+        ],
+        "evidence": "A paycheck stub from the last 60 days",
+        "note": "FAQ section 'What other documents do women need to send with their application?' lists proof of income and proof of expenses."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://www.hhs.texas.gov/providers/health-services-providers/chip-perinatal-providers/chip-perinatal-faqs"
+        ],
+        "evidence": "staff have 15 business days to process the application from the day it is received",
+        "note": "Stored as 21 calendar days. The page states 15 business days (original wording: '15 business days'); converted as 15 * 7 / 5 = 21, rounded up, because processing_time_days means calendar days. Handbook section D-230: 15th working day.",
+        "estimated": true,
+        "estimate": {
+          "method": "unit_conversion",
+          "represents": "The stated 15 business day standard converted to calendar days (5 business days = 7 calendar days), rounded up.",
+          "formula": "ceil(business_days * 7 / 5)",
+          "inputs": [
+            {
+              "name": "business_days",
+              "value": 15,
+              "unit": "business days",
+              "period": "current agency standard",
+              "url": "https://www.hhs.texas.gov/providers/health-services-providers/chip-perinatal-providers/chip-perinatal-faqs",
+              "evidence": "staff have 15 business days to process the application from the day it is received"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "emergency_medicaid_tx": {
+    "verified_on": "2026-10-13",
+    "figures_effective": "Income limits from Texas Works Handbook C-131.1 (Revision 26-2, effective April 1, 2026) with dollar figures dated March 1, 2026.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/a-240-medical-programs",
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/a-310-general-policy",
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/a-820-regular-medicaid-coverage",
+          "https://fhb.hhs.texas.gov/handbooks/medicaid-elderly-people-disabilities-handbook/a-2200-emergency-medicaid-coverage-aliens",
+          "https://fhb.hhs.texas.gov/forms/3000-3999/form-h3038-emergency-medical-services-certification",
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/c-1150-type-programs-tp-type-assistance-ta",
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/c-130-medical-programs"
+        ],
+        "evidence": "",
+        "note": "Covered groups and immigration categories: A-242 (in A-240) and C-1150. Citizenship exception: A-310. Stabilization-only coverage and 12-month periods: A-820. Form H3038 and practitioner certification: the H3038 instructions page. Elderly and disabled adults: MEPD A-2200 (meet all SSI criteria except citizenship). Income bands: C-131.1 headers 198% (TP 40, 42, 43, 36, 35, TA 74), 144% (TP 48, 33, TA 75), 133% (TP 44, 34, TA 76); C-1150 defines TP 35 as children under 1 emergency, TP 36 as pregnant women emergency, TP 33 as children 1 to 5 emergency and TP 34 as children 6 to 18 emergency."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/c-130-medical-programs"
+        ],
+        "evidence": "198% FPL March 1, 2026 TP 40, 42, 43, 36, 35, TA 74",
+        "note": "Highest band, which covers TP 35 (children under 1 emergency) and TP 36 (pregnant women emergency) per handbook section C-1150. TP 33 (ages 1 to 5) is 144% and TP 34 (ages 6 to 18) is 133%. Elderly or disabled adults (TP 30) are tested against SSI criteria, not a poverty percentage."
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/a-310-general-policy"
+        ],
+        "evidence": "Undocumented aliens applying for Emergency Medicaid do not have to meet citizenship status eligibility requirements.",
+        "note": "false: Exception noted in A-310 General Policy. A-242 lists non-immigrants, undocumented aliens and certain legal permanent residents who do not meet citizenship rules as the certified group."
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.hhs.texas.gov/sites/default/files/documents/texas-medicaid-chip-reference-guide-15th-edition.pdf"
+        ],
+        "evidence": "",
+        "note": "No official per-person or per-event spending figure for Texas Emergency Medicaid was found in the 15th edition Reference Guide (which only describes the program) or elsewhere. Coverage lasts only for the emergency, and a full-benefit adult figure would overstate it, so it is not used as a stand-in.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://www.yourtexasbenefits.com/Learn/Home"
+        ],
+        "evidence": "HTTP 200 on 2026-10-12",
+        "note": "method: http (curl) and browser. No consumer page for Emergency Medicaid was found; the Next Steps page says documents go to Your Texas Benefits, the HHSC application portal. Route flagged in the needs-human-check file."
+      },
+      "documents_needed": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/forms/3000-3999/form-h3038-emergency-medical-services-certification"
+        ],
+        "evidence": "Complete Form H3038 to verify a nonimmigrant, an undocumented alien",
+        "note": "Form H3038 instructions (updated 1/2026) require the attending practitioner's handwritten signature. Other items are from the general Documents We May Need list on the HHSC Benefits Application Next Steps page."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/b-110-applications"
+        ],
+        "evidence": "including those with spend down by the 45th day from the file date.",
+        "note": "B-112 Deadlines, Medical Programs: notice by the 45th day from the file date. Time spent obtaining Form H3038 is not counted."
+      }
+    }
+  },
+  "medicaid_elderly_disabled_tx": {
+    "verified_on": "2026-10-13",
+    "figures_effective": "Income and resource limits effective Jan. 1, 2026 (G-1300 Revision 26-1, Appendix XI dated 6-2026).",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/health/medicaid-chip/medicaid-chip-programs-services/programs-children-adults-disabilities/medicaid-elderly-people-disabilities",
+          "https://fhb.hhs.texas.gov/handbooks/medicaid-elderly-people-disabilities-handbook/g-1300-income-limits",
+          "https://fhb.hhs.texas.gov/handbooks/community-care-services-eligibility-handbook/appendix-xi-income-resource-limits",
+          "https://fhb.hhs.texas.gov/handbooks/medicaid-elderly-people-disabilities-handbook/b-6400-processing-deadlines",
+          "https://fhb.hhs.texas.gov/handbooks/medicaid-elderly-people-disabilities-handbook/d-1400-disability"
+        ],
+        "evidence": "",
+        "note": "Who it serves, citizenship and covered services: HHSC MEPD page. 65 or older and the 45 and 90 day deadlines: B-6400. Social Security disability definition: D-1400. Dollar limits: G-1310 ($994 and $1,491), G-1320 ($2,982 and $5,964) and Appendix XI (resources $2,000 and $3,000)."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/handbooks/medicaid-elderly-people-disabilities-handbook/g-1300-income-limits",
+          "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines"
+        ],
+        "evidence": "Jan. 1, 2026 to Present $2,982 $5,964",
+        "note": "Estimate converting a dollar limit to a percent of the 2026 poverty guideline for one person. Uses the special income limit (300% of the SSI federal benefit rate, G-1320, Revision 26-1), the highest individual limit, used for nursing facility, waiver and attendant care programs. The SSI-based limit for community programs (G-1310) is $994 a month for one person, which is 74 percent by the same formula ($1,491 for a couple). Couple limits: $5,964 special, $1,491 SSI-based. 2982 * 12 / 15960 * 100 = 224.2, floored.",
+        "estimated": true,
+        "estimate": {
+          "method": "dollar_limit_to_pct_fpl",
+          "represents": "Highest individual monthly income limit (special income limit, $2,982) as a percent of the 2026 poverty guideline for one person; community programs use the lower SSI-based limit.",
+          "formula": "floor(monthly_limit * 12 / guideline_annual * 100)",
+          "inputs": [
+            {
+              "name": "monthly_limit",
+              "value": 2982,
+              "unit": "USD per month",
+              "period": "Jan. 1, 2026 to present (G-1320 Revision 26-1)",
+              "url": "https://fhb.hhs.texas.gov/handbooks/medicaid-elderly-people-disabilities-handbook/g-1300-income-limits",
+              "evidence": "Jan. 1, 2026 to Present $2,982 $5,964"
+            },
+            {
+              "name": "guideline_annual",
+              "value": 15960,
+              "unit": "USD per year",
+              "period": "2026 HHS poverty guideline, one person, 48 contiguous states",
+              "url": "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines",
+              "evidence": "Poverty guideline 1 $15,960"
+            }
+          ]
+        }
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/health/medicaid-chip/medicaid-chip-programs-services/programs-children-adults-disabilities/medicaid-elderly-people-disabilities"
+        ],
+        "evidence": "you must be a Texas resident and a U.S. citizen or a qualified non-citizen",
+        "note": "Applies to the applicant."
+      },
+      "eligibility.age_min": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/handbooks/medicaid-elderly-people-disabilities-handbook/b-6400-processing-deadlines"
+        ],
+        "evidence": "",
+        "note": "null: age 65 or older is one of two alternative paths (the other is disability), so no single minimum age is recorded."
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.hhs.texas.gov/sites/default/files/documents/texas-medicaid-chip-reference-guide-15th-edition.pdf"
+        ],
+        "evidence": "Average cost per client per month is based on full-benefit clients only.",
+        "note": "Texas HHSC Medicaid and CHIP Reference Guide, 15th edition, Quick Facts (page 3 of the guide), chart \"Trends in Caseload and Spending for Major Medicaid Client Categories\". Re-audit 2026-10-13: the chart rows are labeled in the PDF and the cost-per-client values sit on the same rows as their labels (Non-Disabled Children $261, Non-Disabled Adults $588, Age & Disability-Related $2,228; the Cost per Client column is footnoted full-benefit clients only). The chart labels no year for the cost column; the caseload shares in it (73, 13, 14 percent) match the guide's text for 2023. Used here: the Age & Disability-Related row, $2,228 (aged and disabled combined).",
+        "estimated": true,
+        "estimate": {
+          "method": "per_enrollee_spending",
+          "represents": "Texas government Medicaid spending per month for each age-and-disability-related enrollee (aged and disabled combined in one published figure), not cash paid to the household.",
+          "formula": "round(avg_cost_per_client_per_month)",
+          "inputs": [
+            {
+              "name": "avg_cost_per_client_per_month",
+              "value": 2228,
+              "unit": "USD per month",
+              "period": "Quick Facts trend table, 15th edition (data current as of August 2024); year not labeled in the page text read, caseload figures in the guide are for 2023",
+              "url": "https://www.hhs.texas.gov/sites/default/files/documents/texas-medicaid-chip-reference-guide-15th-edition.pdf",
+              "evidence": "Average cost per client per month is based on full-benefit clients only."
+            }
+          ]
+        }
+      },
+      "application_url": {
+        "urls": [
+          "https://www.yourtexasbenefits.com/Learn/Home"
+        ],
+        "evidence": "HTTP 200 on 2026-10-12",
+        "note": "method: http (curl) and browser. The Apply for MEPD link on the HHSC page leads to Your Texas Benefits."
+      },
+      "documents_needed": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/questions-about-your-benefits/benefits-application-next-steps"
+        ],
+        "evidence": "Resident card (I-551), arrival/departure form (I-94) or papers from United States Citizenship and Immigration Services.",
+        "note": "General Documents We May Need list on the Next Steps page, which applies to any benefit program. No MEPD-specific section exists on that page."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/handbooks/medicaid-elderly-people-disabilities-handbook/b-6400-processing-deadlines"
+        ],
+        "evidence": "Make a decision within 90 days on applications from applicants who must have disability established",
+        "note": "Upper bound. 45 days applies to applicants 65 or older and to applicants whose disability is already established by Social Security criteria."
+      }
+    }
+  },
+  "tanf_tx": {
+    "verified_on": "2026-10-13",
+    "figures_effective": "HHSC TANF page read 2026-10-12; handbook C-111 budgetary allowances effective Oct. 1, 2026 (Revision 26-4).",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/financial/cash/tanf-cash-help",
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/a-1220-limits",
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/c-110-tanf",
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/a-310-general-policy"
+        ],
+        "evidence": "",
+        "note": "Who it is for, what it offers, income and grant charts, program rules and One-Time TANF: HHSC TANF page. The $1,000 resource limit: A-1220. Grant range: the HHSC page Maximum Monthly TANF Amount chart (lowest $130, highest $545). The handbook C-111 table effective Oct. 1, 2026 has an empty Max Grant column, so the HHSC chart is the only published grant schedule read."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/financial/cash/tanf-cash-help",
+          "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines"
+        ],
+        "evidence": "3 $130 $188 $206",
+        "note": "Estimate converting a dollar limit to a percent of the 2026 poverty guideline. Reference household: family of three with one caretaker (one parent, two children), HHSC Maximum Monthly Income Limit $188 a month. 188 * 12 / 27320 * 100 = 8.26, floored. Same formula for other published sizes with one caretaker: family of 1 with one caretaker: $78 a month = 5 percent (guideline $15,960); family of 2 with one caretaker: $163 a month = 9 percent (guideline $21,640); family of 4 with one caretaker: $226 a month = 8 percent (guideline $33,000); family of 5 with one caretaker: $251 a month = 7 percent (guideline $38,680). TANF actually tests dollar budgetary and recognizable needs, so this percent is a rough index only.",
+        "estimated": true,
+        "estimate": {
+          "method": "dollar_limit_to_pct_fpl",
+          "represents": "Maximum monthly income at which a family of three with one caretaker can still get TANF cash help ($188), as a percent of the 2026 poverty guideline for three people.",
+          "formula": "floor(monthly_limit * 12 / guideline_annual * 100)",
+          "inputs": [
+            {
+              "name": "monthly_limit",
+              "value": 188,
+              "unit": "USD per month",
+              "period": "current HHSC chart, family size 3, home with 1 parent or 1 caretaker",
+              "url": "https://www.hhs.texas.gov/services/financial/cash/tanf-cash-help",
+              "evidence": "3 $130 $188 $206"
+            },
+            {
+              "name": "guideline_annual",
+              "value": 27320,
+              "unit": "USD per year",
+              "period": "2026 HHS poverty guideline, three persons, 48 contiguous states",
+              "url": "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines",
+              "evidence": "2 $21,640 3 $27,320 4 $33,000"
+            }
+          ]
+        }
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/a-310-general-policy"
+        ],
+        "evidence": "U.S. citizens and certain legally-admitted alien residents are eligible for benefits",
+        "note": "A-310 General Policy, All Programs. A-313: for TANF, a child without verified eligible alien status is ineligible."
+      },
+      "eligibility.requires_children": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/financial/cash/tanf-cash-help"
+        ],
+        "evidence": "Families with children ages 18 and younger.",
+        "note": "Marked true from the HHSC page. No page read rules out an unborn-child-only path; flagged in the needs-human-check file."
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/financial/cash/tanf-cash-help"
+        ],
+        "evidence": "1 $130 $159 --------",
+        "note": "Midpoint of the lowest and highest maximum monthly TANF amounts on the HHSC chart: lowest $130 (child-only, family size 1), highest $545 (two caretakers, family size 5, row \"5 $403 $510 $545\"). (130 + 545) / 2 = 337.5, rounded to 338. This is not an average grant. ACF TANF FY2024 characteristics (Table 37, https://acf.gov/ofa/data/characteristics-and-financial-circumstances-tanf-recipients-fiscal-year-2024) shows a Texas monthly average of $613 per family, flagged \"TX policy on foster care policy\"; it exceeds the highest maximum grant on the HHSC page, so it was not used.",
+        "estimated": true,
+        "estimate": {
+          "method": "range_midpoint",
+          "represents": "Midpoint between the lowest ($130) and highest ($545) maximum monthly TANF grants Texas publishes; it is not an average actual grant.",
+          "formula": "round((lowest_max_grant + highest_max_grant) / 2)",
+          "inputs": [
+            {
+              "name": "lowest_max_grant",
+              "value": 130,
+              "unit": "USD per month",
+              "period": "current HHSC Maximum Monthly TANF Amount chart",
+              "url": "https://www.hhs.texas.gov/services/financial/cash/tanf-cash-help",
+              "evidence": "1 $130 $159 --------"
+            },
+            {
+              "name": "highest_max_grant",
+              "value": 545,
+              "unit": "USD per month",
+              "period": "current HHSC Maximum Monthly TANF Amount chart",
+              "url": "https://www.hhs.texas.gov/services/financial/cash/tanf-cash-help",
+              "evidence": "5 $403 $510 $545"
+            }
+          ]
+        }
+      },
+      "application_url": {
+        "urls": [
+          "https://www.yourtexasbenefits.com/Learn/Home"
+        ],
+        "evidence": "HTTP 200 on 2026-10-12",
+        "note": "method: http (curl) and browser. The TANF page says to apply at Your Texas Benefits."
+      },
+      "documents_needed": {
+        "urls": [
+          "https://www.hhs.texas.gov/services/questions-about-your-benefits/benefits-application-next-steps"
+        ],
+        "evidence": "Proof a child is related to you",
+        "note": "From the TANF Cash Help section of the Next Steps page. Items for child support and health insurance apply only if relevant."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://fhb.hhs.texas.gov/handbooks/texas-works-handbook/b-110-applications"
+        ],
+        "evidence": "by the 45th day after the file date.",
+        "note": "B-112 Deadlines, TANF and Medical Programs: notice of case action by the 45th day after the file date."
+      }
+    }
+  },
+  "unemployment_benefits_tx": {
+    "verified_on": "2026-10-13",
+    "figures_effective": "Weekly benefit amounts for claims starting October 4, 2026 (TWC table row).",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.twc.texas.gov/programs/unemployment-benefits",
+          "https://www.twc.texas.gov/programs/unemployment-benefits/eligibility-benefit-amounts",
+          "https://www.twc.texas.gov/programs/unemployment-benefits/ongoing-eligibility-requirement",
+          "https://www.twc.texas.gov/programs/unemployment-benefits/application-results"
+        ],
+        "evidence": "",
+        "note": "Program definition and eligibility tests: TWC overview and Eligibility and Benefit Amounts pages. Weekly benefit range ($76 minimum and $619 maximum for October 4, 2026) and the 26 times / 27 percent cap: Eligibility and Benefit Amounts. Non-citizen rule: Ongoing Eligibility Requirements. About four weeks to learn the result: Learning the Result of Your Application."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.twc.texas.gov/programs/unemployment-benefits/eligibility-benefit-amounts"
+        ],
+        "evidence": "",
+        "note": "null: eligibility rests on past wages, job separation and ongoing requirements, not a poverty-level income test.",
+        "null_reason": "no_income_test"
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.twc.texas.gov/programs/unemployment-benefits/ongoing-eligibility-requirement"
+        ],
+        "evidence": "If you are not a U.S. citizen, you may be eligible for unemployment benefits",
+        "note": "true: a worker must be a U.S. citizen or, if not, legally residing in the U.S. and authorized to work (page lists Legally residing in the U.S. and Authorized to work in the U.S.). Non-citizens can qualify, so this is a status requirement, not citizenship only; flagged in the needs-human-check file."
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.dol.gov/sites/dolgov/files/ETA/advisories/UIPL/2026/UIPL%2016-26/UIPL%2016-26.pdf"
+        ],
+        "evidence": "Texas $516.11 $258.06 $259.00",
+        "note": "U.S. Department of Labor UIPL 16-26 lists the Texas average weekly benefit amount (AWBA) as $516.11, calculated from ETA 5159 data, published for disasters declared Oct. 1 to Dec. 31, 2026. 516.11 * 52 / 12 = 2236.48, rounded to 2236. TWC itself publishes only the minimum and maximum ($76 and $619 for claims starting Oct. 4, 2026).",
+        "estimated": true,
+        "estimate": {
+          "method": "official_average",
+          "represents": "Average weekly unemployment benefit paid in Texas (U.S. Department of Labor figure) converted to a monthly amount; individual benefits range from $76 to $619 a week.",
+          "formula": "round(awba * 52 / 12)",
+          "inputs": [
+            {
+              "name": "awba",
+              "value": 516.11,
+              "unit": "USD per week",
+              "period": "Oct. 1 to Dec. 31, 2026 listing (UIPL 16-26)",
+              "url": "https://www.dol.gov/sites/dolgov/files/ETA/advisories/UIPL/2026/UIPL%2016-26/UIPL%2016-26.pdf",
+              "evidence": "Texas $516.11 $258.06 $259.00"
+            }
+          ]
+        }
+      },
+      "application_url": {
+        "urls": [
+          "https://www.twc.texas.gov/services/apply-benefits"
+        ],
+        "evidence": "HTTP 200 on 2026-10-12",
+        "note": "method: http (curl with a browser User-Agent) and browser; the page loaded in the browser pane with the title Apply for Unemployment Benefits."
+      },
+      "documents_needed": {
+        "urls": [
+          "https://www.twc.texas.gov/services/apply-benefits"
+        ],
+        "evidence": "Valid (unexpired) state Driver License number or state Identification Card number",
+        "note": "Information You Need to Apply section on the TWC Apply for Unemployment Benefits page."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://www.twc.texas.gov/programs/unemployment-benefits/application-results"
+        ],
+        "evidence": "It takes about four weeks from the date you apply for benefits",
+        "note": "Four weeks converted at 7 days to 28.",
+        "estimated": true,
+        "estimate": {
+          "method": "unit_conversion",
+          "represents": "TWC's stated time of about four weeks converted to days.",
+          "formula": "weeks * 7",
+          "inputs": [
+            {
+              "name": "weeks",
+              "value": 4,
+              "unit": "weeks",
+              "period": "current TWC statement",
+              "url": "https://www.twc.texas.gov/programs/unemployment-benefits/application-results",
+              "evidence": "It takes about four weeks from the date you apply for benefits"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
