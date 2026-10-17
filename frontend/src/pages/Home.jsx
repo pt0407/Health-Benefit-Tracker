@@ -1,24 +1,41 @@
 import { useAuth } from "../auth/AuthContext.jsx";
-import Arcade from "../components/brand/Arcade.jsx";
+import DotGrid from "../components/brand/DotGrid.jsx";
 import Icon from "../components/shared/Icon.jsx";
 import { LinkButton } from "../components/ui/index.jsx";
 import { usePageTitle } from "../lib/usePageTitle.js";
 
-// What Civis checks, from data/programs/*.json (14 records).
+// What Civis checks, from data/programs/*.json (51 records).
 const COVERAGE = [
-  ["Food", "basket", ["SNAP", "WIC"]],
+  ["Food", "basket", ["SNAP", "WIC", "School lunch", "School Breakfast Program", "Summer meals for kids", "Senior meals", "Commodity Supplemental Food Program"]],
   [
     "Health coverage",
     "heart",
     [
       "Medicaid", "Children's Medicaid", "CHIP", "CHIP Perinatal", "Medicaid for Pregnant Women",
-      "Emergency Medicaid", "Medicaid for the Elderly and People with Disabilities", "Medicare Extra Help",
+      "Medicaid for Parents and Caretakers", "Emergency Medicaid",
+      "Medicaid for the Elderly and People with Disabilities", "Medicaid Buy-In for Adults",
+      "Medicare", "Medicare Extra Help", "Medicare Savings Programs", "Texas Benefits Counseling",
+      "Primary Health Care Program", "Community health centers", "Title X family planning",
+      "Texas Family Planning Program", "Texas Nurse-Family Partnership", "Texas Vaccines for Children",
     ],
   ],
-  ["Cash help", "wallet", ["TANF"]],
-  ["Utilities", "bolt", ["LIHEAP energy bill help"]],
-  ["Work and unemployment", "briefcase", ["Unemployment benefits"]],
-  ["Disability", "shield", ["SSDI"]],
+  [
+    "Cash help",
+    "wallet",
+    [
+      "TANF", "Social Security retirement", "Earned Income Tax Credit", "Child Tax Credit",
+      "Free tax help (VITA)", "Child and Dependent Care Credit", "Credit for Other Dependents", "Child support services",
+    ],
+  ],
+  ["Utilities", "bolt", ["LIHEAP energy bill help", "Weatherization assistance", "Lifeline phone and internet"]],
+  ["Work and unemployment", "briefcase", ["Unemployment benefits", "Child care scholarships", "Senior community service jobs", "Job Corps"]],
+  [
+    "Disability",
+    "shield",
+    ["SSDI", "SSI", "Vocational rehabilitation", "Ticket to Work", "Work Incentives Planning", "Independent Living Services"],
+  ],
+  ["Education and child care", "book", ["Head Start", "Early Head Start", "Texas Pre-K"]],
+  ["Legal help", "scale", ["Free civil legal aid"]],
 ];
 
 // Real output for one household from a local run of the matcher.
@@ -40,8 +57,8 @@ export default function Home() {
   return (
     <>
       <section className="relative overflow-hidden bg-primary-dark text-white">
-        <Arcade className="pointer-events-none absolute inset-x-0 bottom-0" fill="#1d3a66" height={72} tile={88} />
-        <div className="container-page relative grid gap-12 pt-12 pb-28 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:pt-16 lg:pb-32">
+        <DotGrid className="pointer-events-none absolute inset-0" />
+        <div className="container-page relative grid gap-12 py-14 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:py-20">
           <div>
             <h1 className="max-w-[18ch] text-4xl text-white md:text-6xl">
               Find out which benefits your household may qualify for
@@ -56,8 +73,8 @@ export default function Home() {
             </div>
           </div>
 
-          <figure className="arch-panel bg-white text-ink">
-            <figcaption className="bg-accent px-8 pt-9 pb-3 font-bold text-primary-dark">
+          <figure className="panel overflow-hidden bg-white text-ink">
+            <figcaption className="bg-accent px-6 py-3 font-bold text-primary-dark">
               Example: a family of 4 in Texas earning about $22,500
             </figcaption>
             <div className="p-6">
@@ -113,7 +130,7 @@ export default function Home() {
               <li key={title} className="flex gap-4 md:block">
                 <span
                   aria-hidden="true"
-                  className="arch-badge flex h-16 w-12 shrink-0 items-end justify-center bg-primary-dark pb-2 text-3xl font-extrabold text-white"
+                  className="num-badge flex h-12 w-12 shrink-0 items-center justify-center bg-primary-dark text-2xl font-extrabold text-white"
                 >
                   {i + 1}
                 </span>

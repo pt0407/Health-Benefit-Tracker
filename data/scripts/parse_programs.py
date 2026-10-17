@@ -39,7 +39,7 @@ from pydantic import ValidationError  # noqa: E402
 from models.program import Eligibility, Program  # noqa: E402
 
 USER_AGENT = "BenefitsFinder-data-snapshot/0.1 (+https://github.com/pt0407/Health-Benefit-Tracker)"
-CATEGORIES = {"nutrition", "health", "cash", "disability", "energy", "employment"}
+CATEGORIES = {"nutrition", "health", "cash", "disability", "energy", "employment", "education", "legal"}
 EXTRA_HOSTS = {"yourtexasbenefits.com", "www.yourtexasbenefits.com", "texaswic.org", "www.texaswic.org"}
 SUFFIX = {"federal_programs.json": "_federal", "texas_programs.json": "_tx"}
 BOOL_FIELDS = {f"eligibility.{k}" for k in ("citizenship_required", "requires_children", "requires_disability", "requires_pregnancy")}

@@ -11,6 +11,18 @@ REQUIRED_IDS = {
     "medicare_extra_help_federal", "ssdi_federal",
     "chip_tx", "childrens_medicaid_tx", "medicaid_pregnant_women_tx", "chip_perinatal_tx",
     "emergency_medicaid_tx", "medicaid_elderly_disabled_tx", "tanf_tx", "unemployment_benefits_tx",
+    "medicaid_parents_caretakers_tx", "medicaid_buy_in_tx", "primary_health_care_tx",
+    "vocational_rehabilitation_tx", "child_care_services_tx", "weatherization_assistance_tx",
+    "scsep_tx", "senior_meals_tx",
+    "head_start_federal", "early_head_start_federal", "school_breakfast_federal", "summer_meals_federal",
+    "medicare_federal", "social_security_retirement_federal", "ssi_federal", "eitc_federal",
+    "child_tax_credit_federal", "vita_free_tax_help_federal", "health_centers_federal", "job_corps_federal",
+    "title_x_family_planning_federal", "legal_aid_lsc_federal", "ticket_to_work_federal",
+    "medicare_savings_programs_tx", "family_planning_program_tx", "nurse_family_partnership_tx",
+    "child_support_services_tx", "texas_prekindergarten_tx", "independent_living_services_tx",
+    "work_incentives_planning_federal", "texas_benefits_counseling_tx",
+    "lifeline_federal", "csfp_federal", "child_dependent_care_credit_federal",
+    "national_school_lunch_federal", "credit_for_other_dependents_federal", "texas_vaccines_for_children_tx",
 }
 
 
@@ -71,11 +83,21 @@ FILL_LIST = [
     ("unemployment_benefits_tx", "estimated_monthly_value_usd"),
     ("liheap_federal", "processing_time_days"),
     ("medicare_extra_help_federal", "processing_time_days"),
+    ("medicaid_parents_caretakers_tx", "eligibility.income_limit_pct_fpl"),
+    ("medicaid_parents_caretakers_tx", "estimated_monthly_value_usd"),
+    ("medicaid_buy_in_tx", "eligibility.income_limit_pct_fpl"),
+    ("child_care_services_tx", "eligibility.income_limit_pct_fpl"),
+    ("weatherization_assistance_tx", "estimated_monthly_value_usd"),
+    ("scsep_tx", "estimated_monthly_value_usd"),
 ]
 
 HEALTH_COVERAGE_IDS = {
     "medicaid_federal", "chip_tx", "childrens_medicaid_tx", "medicaid_pregnant_women_tx",
     "chip_perinatal_tx", "medicaid_elderly_disabled_tx", "emergency_medicaid_tx",
+    "medicaid_parents_caretakers_tx", "medicaid_buy_in_tx", "primary_health_care_tx",
+    "medicare_federal", "health_centers_federal", "title_x_family_planning_federal",
+    "medicare_savings_programs_tx", "family_planning_program_tx", "nurse_family_partnership_tx",
+    "texas_vaccines_for_children_tx",
 }
 
 

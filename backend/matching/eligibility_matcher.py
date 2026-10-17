@@ -223,6 +223,52 @@ class EligibilityMatcher:
         if program_id == "unemployment_benefits_tx":
             ok = profile.employment_status in {"recently_unemployed", "unemployed"}
             return ok, "it also requires enough past Texas wages and a qualifying job loss"
+        return self._extra_conditions_2(program_id, profile)
+
+    def _extra_conditions_2(self, program_id: str, profile: UserProfile) -> tuple[bool, str]:
+        """Age windows and "or" rules for the programs added in the 2026-10-17 data expansion."""
+        ages = profile.children_ages
+        disabled = bool(profile.has_disability or profile.receiving_disability_benefits)
+        if program_id == "head_start_federal":
+            return any(3 <= a <= 5 for a in ages), "Head Start Preschool serves mainly 3- and 4-year-olds"
+        if program_id == "early_head_start_federal":
+            return profile.is_pregnant or any(a < 3 for a in ages), "it serves pregnant women and children under 3"
+        if program_id == "school_breakfast_federal":
+            return any(5 <= a <= 18 for a in ages), "it serves children at participating schools"
+        if program_id == "texas_prekindergarten_tx":
+            return any(3 <= a <= 4 for a in ages), "the child must be 4 by September 1, or 3 where a district offers it"
+        if program_id == "medicare_federal":
+            ok = profile.age >= 65 or bool(profile.receiving_disability_benefits)
+            return ok, "you qualify at 65 or with Social Security Disability benefits"
+        if program_id == "ssi_federal":
+            return profile.age >= 65 or disabled, "it is for people who are 65 or older, blind or disabled"
+        if program_id == "medicare_savings_programs_tx":
+            ok = profile.age >= 65 or disabled or profile.insurance_status == "medicaid_medicare"
+            return ok, "you must be entitled to Medicare Part A or Part B-ID"
+        if program_id == "eitc_federal":
+            return profile.employment_status in {"employed", "self_employed"}, "you need earned income from work"
+        if program_id == "job_corps_federal":
+            return 16 <= profile.age <= 24, "it is for ages 16 to 24"
+        if program_id == "ticket_to_work_federal":
+            ok = bool(profile.receiving_disability_benefits) and 18 <= profile.age <= 64
+            return ok, "it is for ages 18 to 64 who get SSDI or SSI"
+        if program_id == "family_planning_program_tx":
+            return profile.age <= 64, "it is for people 64 or younger"
+        if program_id == "national_school_lunch_federal":
+            return any(5 <= a <= 18 for a in ages), "it serves children at participating schools"
+        if program_id == "child_dependent_care_credit_federal":
+            ok = profile.employment_status in {"employed", "self_employed"} and any(a <= 12 for a in ages)
+            return ok, "you need work-related child care costs for a child under 13"
+        if program_id == "credit_for_other_dependents_federal":
+            return any(a >= 17 for a in ages), "it is for dependents who do not qualify for the Child Tax Credit, such as a child 17 or older"
+        if program_id == "texas_vaccines_for_children_tx":
+            ok = any(a <= 18 for a in ages) and profile.insurance_status in {"uninsured", "medicaid_medicare"}
+            return ok, "it covers children who are uninsured or on Medicaid or CHIP, and some who are underinsured"
+        if program_id == "work_incentives_planning_federal":
+            return bool(profile.receiving_disability_benefits), "it counsels people who get Social Security disability benefits"
+        if program_id == "texas_benefits_counseling_tx":
+            ok = profile.age >= 60 or bool(profile.receiving_disability_benefits)
+            return ok, "it is for people 60 or older and Medicare-eligible people with disabilities"
         return True, ""
 
     def _reason(self, program: Program, profile: UserProfile, pct_fpl: float,

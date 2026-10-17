@@ -20,6 +20,7 @@ from rag.store import COLLECTION_NAME, ChunkStore
 
 REBUILD_COMMAND = "python data/scripts/index_to_chromadb.py"
 MAX_CHUNKS_PER_PROGRAM = 2
+DEFAULT_K = 14  # chunk budget per retrieval; raised from 10 when the corpus grew from 14 to 22 programs
 HUB_PENALTY = 0.5
 SEED_BONUS = 1.0  # large enough that seeded chunks sort ahead of every unseeded chunk
 FACET_DEPTH = 8  # a facet only credits chunks ranked within its top few: deeper matches are loose and noisy
@@ -92,8 +93,8 @@ def _facets(profile: UserProfile) -> list[tuple[str, float]]:
         facets.append((f"family with {kids} who needs free or low-cost health coverage for the children", SITUATION))
         facets.append((f"family with {kids} who needs monthly cash help to pay for basic expenses", SITUATION))
         if any(a < 5 for a in ages):
-            facets.append(("baby or young child under age 5 who needs healthy food, formula and nutrition support",
-                           SITUATION))
+            facets.append(("baby or toddler under age 5 at home who needs infant formula, baby food and nutrition "
+                           "support for a young child", SITUATION))
     if profile.is_pregnant:
         facets.append(("pregnant woman who needs prenatal care, delivery costs and health coverage during pregnancy",
                        SITUATION))
@@ -105,6 +106,8 @@ def _facets(profile: UserProfile) -> list[tuple[str, float]]:
     if profile.has_disability or profile.receiving_disability_benefits:
         facets.append(("adult with a disability who cannot work and needs monthly income and health coverage",
                        SITUATION))
+        facets.append(("person with a disability who needs government health coverage and help with long-term care "
+                       "services", SITUATION))
     if profile.employment_status == "recently_unemployed":
         facets.append(("worker who recently lost a job through no fault of their own and needs weekly income replacement while "
                        "looking for new work",
@@ -150,7 +153,7 @@ class BenefitsRAG:
     def facet_queries(self, profile) -> list[str]:
         return build_facet_queries(profile)
 
-    def retrieve(self, profile, k: int = 10, categories: Optional[set[str]] = None) -> list[RetrievedChunk]:
+    def retrieve(self, profile, k: int = DEFAULT_K, categories: Optional[set[str]] = None) -> list[RetrievedChunk]:
         profile = _as_profile(profile)
         if self._store.count() == 0:
             raise IndexNotBuiltError(
@@ -194,11 +197,11 @@ class BenefitsRAG:
                 chunk_id=cid, section=meta["section"]))
         return chunks
 
-    def retrieve_relevant_programs(self, profile, k: int = 10) -> list[str]:
+    def retrieve_relevant_programs(self, profile, k: int = DEFAULT_K) -> list[str]:
         """Chunk texts (self-describing, unique) for the best-matching programs."""
         return list(dict.fromkeys(chunk.text for chunk in self.retrieve(profile, k)))
 
-    def retrieve_context(self, profile, k: int = 10, categories: Optional[set[str]] = None) -> str:
+    def retrieve_context(self, profile, k: int = DEFAULT_K, categories: Optional[set[str]] = None) -> str:
         return "\n\n".join(chunk.text for chunk in self.retrieve(profile, k, categories))
 
     def retrieve_insurance_context(self, profile, k: int = 8) -> str:
