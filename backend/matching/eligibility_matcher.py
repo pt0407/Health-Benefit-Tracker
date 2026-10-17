@@ -330,8 +330,7 @@ class EligibilityMatcher:
 
     def _run_insurance_agent(self, profile: UserProfile) -> tuple[list[str], list[MatchedProgram]]:
         if self.insurance_agent is None:
-            return (["Health coverage programs weren't checked automatically. "
-                     "See HealthCare.gov for a full review."], [])
+            return [], []
         rag_context = ""
         if self.rag is not None:
             try:
@@ -342,8 +341,7 @@ class EligibilityMatcher:
         try:
             result = self.insurance_agent.run(profile, rag_context)
         except Exception:
-            return (["Health coverage programs couldn't be checked automatically. "
-                     "See HealthCare.gov for a full review."], [])
+            return [], []
         warnings = list(result.near_threshold_warnings)
         if result.notes:
             warnings.append(f"Health coverage note: {result.notes}")

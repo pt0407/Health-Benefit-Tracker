@@ -167,7 +167,7 @@ def test_insurance_agent_results_merge_and_dedupe():
     assert "near a threshold" in result.warnings
 
 
-def test_broken_agent_degrades_to_warning():
+def test_broken_agent_degrades_silently():
     class BrokenAgent:
         def run(self, profile, rag_context):
             raise RuntimeError("no api key")
@@ -176,7 +176,7 @@ def test_broken_agent_degrades_to_warning():
     matcher.insurance_agent = BrokenAgent()
     result = matcher.match(UserProfile(**FAMILY))
     assert result.program_count > 0  # deterministic matches still return
-    assert any("Health coverage" in w for w in result.warnings)
+    assert not any("Health coverage" in w for w in result.warnings)
 
 
 def test_insurance_agent_results_dedupe_by_program_id():
