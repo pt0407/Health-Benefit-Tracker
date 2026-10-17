@@ -1,12 +1,16 @@
 import json
+from functools import lru_cache
 
-from fastapi import APIRouter, Body, HTTPException, Response
+from fastapi import APIRouter, Body, Depends, HTTPException, Response
 
-from config import FIXTURES_DIR, PROGRAMS_DIR
+from agents.insurance_agent import InsuranceAgent, InsuranceAgentError
+from config import PROGRAMS_DIR
 from export.pdf_export import render_worksheet_pdf
+from matching.eligibility_matcher import EligibilityMatcher
 from models.match_result import InsuranceResult, MatchResponse
 from models.program import Program
 from models.user_profile import UserProfile
+from rag.rag_engine import BenefitsRAG, IndexNotBuiltError
 
 router = APIRouter()
 
@@ -18,11 +22,35 @@ def load_programs() -> list[Program]:
     return programs
 
 
+@lru_cache
+def get_rag() -> BenefitsRAG:
+    return BenefitsRAG()
+
+
+@lru_cache
+def get_insurance_agent() -> InsuranceAgent:
+    return InsuranceAgent()
+
+
+@lru_cache
+def get_matcher() -> EligibilityMatcher:
+    # The insurance agent may be an unimplemented stub or unconstructable
+    # without ANTHROPIC_API_KEY; the matcher degrades gracefully either way.
+    try:
+        agent = get_insurance_agent()
+    except Exception:
+        agent = None
+    return EligibilityMatcher(
+        rag_engine=get_rag(),
+        insurance_agent=agent,
+        programs=load_programs(),
+    )
+
+
 @router.post("/match", response_model=MatchResponse)
-def match(profile: UserProfile) -> MatchResponse:
-    # TODO(Person 1): replace with EligibilityMatcher once it lands.
-    # Returns a fixed sample so the frontend can be built in parallel.
-    return MatchResponse(**json.loads((FIXTURES_DIR / "sample_match_response.json").read_text()))
+def match(profile: UserProfile,
+          matcher: EligibilityMatcher = Depends(get_matcher)) -> MatchResponse:
+    return matcher.match(profile)
 
 
 @router.get("/programs", response_model=list[Program])
@@ -50,6 +78,15 @@ def export_pdf(profile: UserProfile = Body(...),
 
 
 @router.post("/insurance-check", response_model=InsuranceResult)
-def insurance_check(profile: UserProfile) -> InsuranceResult:
-    # TODO(Person 4): call the insurance agent.
-    raise HTTPException(status_code=501, detail="Insurance agent not implemented yet")
+def insurance_check(
+    profile: UserProfile,
+    agent: InsuranceAgent = Depends(get_insurance_agent),
+    rag: BenefitsRAG = Depends(get_rag),
+) -> InsuranceResult:
+    try:
+        rag_context = rag.retrieve_insurance_context(profile)
+        return agent.run(profile, rag_context)
+    except IndexNotBuiltError as e:
+        raise HTTPException(status_code=503, detail=str(e)) from e
+    except InsuranceAgentError as e:
+        raise HTTPException(status_code=502, detail=str(e)) from e
