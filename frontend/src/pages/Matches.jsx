@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext.jsx";
+import IncomeWhatIf from "../components/matches/IncomeWhatIf.jsx";
 import MatchCard from "../components/matches/MatchCard.jsx";
 import Icon from "../components/shared/Icon.jsx";
 import LoadingScreen from "../components/ui/LoadingScreen.jsx";
@@ -212,6 +213,8 @@ export default function Matches() {
           </Alert>
         )}
       </section>
+
+      {answers && <IncomeWhatIf profile={toProfile(answers)} />}
 
       {count > 0 && (
         <div className="mt-8 grid gap-8 lg:grid-cols-[17rem_1fr]">
