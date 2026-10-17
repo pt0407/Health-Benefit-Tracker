@@ -323,7 +323,7 @@ export default function QuizWizard() {
       label: "Citizenship",
       summary: () => CITIZENSHIP.find((o) => o.value === form.citizenship)?.label,
       title: "Are you a US citizen or legal permanent resident?",
-      hint: "Some programs are open regardless of your answer — we check those too.",
+      hint: "Some programs are open regardless of your answer, and we check those too.",
       valid: () => !!form.citizenship,
       body: <OptionButtons options={CITIZENSHIP} value={form.citizenship}
                            onChange={(v) => set("citizenship", v)} />,

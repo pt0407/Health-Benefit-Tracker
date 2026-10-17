@@ -35,6 +35,7 @@ FALSE_CLAIM_PATTERNS = [
     re.compile(r"pregnan[^.!?]*special enrollment|special enrollment[^.!?]*pregnan", re.IGNORECASE),
 ]
 _SENTENCE_END = re.compile(r"(?<=[.!?])(\s+)")
+_EM_DASH = re.compile(r"\s*\u2014\s*")
 
 # States TX_INSURANCE_RULES covers. Other states get an explanatory note
 # instead of a model call.
@@ -59,7 +60,7 @@ coverage start dates or enrollment rules. This applies to every field, \
 including `notes` and `next_step`. Mention only the enrollment periods and \
 Special Enrollment Period triggers the rules list, and no other dates. If the rules don't cover a situation, say \
 so in `notes` rather than guessing. Use the precomputed numbers in \
-<computed_facts> — do not redo the arithmetic.
+<computed_facts>; do not redo the arithmetic.
 
 <computed_facts> also screens the programs for this household. \
 `qualifies_for` may list ONLY programs in `programs_to_consider`, and only \
@@ -106,7 +107,8 @@ past it. Use `coverage_gap` in <computed_facts>: if "yes", explain the Texas \
 coverage gap in `notes` along with the alternatives the rules list; if it \
 names a condition, explain the gap only as applying under that condition; \
 if "no", don't mention it. Write to the user as \
-"you", for someone who may be stressed about money: clear, kind, no jargon."""
+"you", for someone who may be stressed about money: clear, kind, no jargon. \
+Never use em dashes; use a comma, colon or new sentence instead."""
 
 
 class InsuranceAgentError(RuntimeError):
@@ -182,7 +184,7 @@ class InsuranceAgent:
         if response.stop_reason == "max_tokens" or response.parsed_output is None:
             raise InsuranceAgentError(f"Incomplete response (stop_reason={response.stop_reason})")
         result = drop_ruled_out(profile, response.parsed_output)
-        return zero_monthly_values(strip_false_claims(result))
+        return remove_em_dashes(zero_monthly_values(strip_false_claims(result)))
 
 
 def drop_ruled_out(profile: UserProfile, result: InsuranceResult) -> InsuranceResult:
@@ -197,6 +199,24 @@ def zero_monthly_values(result: InsuranceResult) -> InsuranceResult:
     """Health coverage is not cash: never report a dollar value to the household."""
     programs = [p.model_copy(update={"monthly_value_usd": 0}) for p in result.qualifies_for]
     return result.model_copy(update={"qualifies_for": programs})
+
+
+def _no_em_dash(text: str | None) -> str | None:
+    # The prompt forbids em dashes; this catches any the model still writes.
+    return _EM_DASH.sub(", ", text) if text else text
+
+
+def remove_em_dashes(result: InsuranceResult) -> InsuranceResult:
+    """Replace em dashes in every user-facing text field with a comma."""
+    programs = [
+        p.model_copy(update={f: _no_em_dash(getattr(p, f)) for f in ("program", "reason", "next_step", "tip")})
+        for p in result.qualifies_for
+    ]
+    return result.model_copy(update={
+        "qualifies_for": programs,
+        "near_threshold_warnings": [_no_em_dash(w) for w in result.near_threshold_warnings],
+        "notes": _no_em_dash(result.notes),
+    })
 
 
 def _strip_sentences(text: str | None) -> str | None:
