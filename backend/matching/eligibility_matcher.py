@@ -254,6 +254,16 @@ class EligibilityMatcher:
             return ok, "it is for ages 18 to 64 who get SSDI or SSI"
         if program_id == "family_planning_program_tx":
             return profile.age <= 64, "it is for people 64 or younger"
+        if program_id == "national_school_lunch_federal":
+            return any(5 <= a <= 18 for a in ages), "it serves children at participating schools"
+        if program_id == "child_dependent_care_credit_federal":
+            ok = profile.employment_status in {"employed", "self_employed"} and any(a <= 12 for a in ages)
+            return ok, "you need work-related child care costs for a child under 13"
+        if program_id == "credit_for_other_dependents_federal":
+            return any(a >= 17 for a in ages), "it is for dependents who do not qualify for the Child Tax Credit, such as a child 17 or older"
+        if program_id == "texas_vaccines_for_children_tx":
+            ok = any(a <= 18 for a in ages) and profile.insurance_status in {"uninsured", "medicaid_medicare"}
+            return ok, "it covers children who are uninsured or on Medicaid or CHIP, and some who are underinsured"
         if program_id == "work_incentives_planning_federal":
             return bool(profile.receiving_disability_benefits), "it counsels people who get Social Security disability benefits"
         if program_id == "texas_benefits_counseling_tx":

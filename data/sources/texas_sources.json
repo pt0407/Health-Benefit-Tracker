@@ -1806,5 +1806,71 @@
         "null_reason": "no_official_basis"
       }
     }
+  },
+  "texas_vaccines_for_children_tx": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "Texas DSHS Immunization Programs page as read 2026-10-17 (no effective date shown).",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.dshs.texas.gov/immunizations/what-we-do/programs"
+        ],
+        "evidence": "",
+        "note": "Who is offered low-cost vaccines and the age range: the DSHS programs page. The line about private insurance that covers vaccines follows from the listed groups."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.dshs.texas.gov/immunizations/what-we-do/programs"
+        ],
+        "evidence": "",
+        "note": "null: the page lists insurance status and heritage groups, not an income test.",
+        "null_reason": "no_income_test"
+      },
+      "eligibility.age_max": {
+        "urls": [
+          "https://www.dshs.texas.gov/immunizations/what-we-do/programs"
+        ],
+        "evidence": "children 0-18 years old",
+        "note": "Ages 0 through 18."
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.dshs.texas.gov/immunizations/what-we-do/programs"
+        ],
+        "evidence": "",
+        "note": "The page names no citizenship rule, so false is recorded but not confirmed.",
+        "unconfirmed": true
+      },
+      "eligibility.requires_children": {
+        "urls": [
+          "https://www.dshs.texas.gov/immunizations/what-we-do/programs"
+        ],
+        "evidence": "we offer low-cost vaccines to children who are uninsured, underinsured, covered by CHIP",
+        "note": "The benefit is for children."
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.dshs.texas.gov/immunizations/what-we-do/programs"
+        ],
+        "evidence": "",
+        "note": "No official per-person or average amount for this program was found in the pages read.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://www.dshs.texas.gov/immunizations/what-we-do/programs"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: browser. The DSHS page has a Find a Provider link. The site was read in a browser."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://www.dshs.texas.gov/immunizations/what-we-do/programs"
+        ],
+        "evidence": "",
+        "note": "Vaccines are given at a provider visit and the page gives no processing time.",
+        "null_reason": "not_applicable"
+      }
+    }
   }
 }

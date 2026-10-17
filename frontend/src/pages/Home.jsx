@@ -4,9 +4,9 @@ import Icon from "../components/shared/Icon.jsx";
 import { LinkButton } from "../components/ui/index.jsx";
 import { usePageTitle } from "../lib/usePageTitle.js";
 
-// What Civis checks, from data/programs/*.json (45 records).
+// What Civis checks, from data/programs/*.json (51 records).
 const COVERAGE = [
-  ["Food", "basket", ["SNAP", "WIC", "School Breakfast Program", "Summer meals for kids", "Senior meals"]],
+  ["Food", "basket", ["SNAP", "WIC", "School lunch", "School Breakfast Program", "Summer meals for kids", "Senior meals", "Commodity Supplemental Food Program"]],
   [
     "Health coverage",
     "heart",
@@ -16,7 +16,7 @@ const COVERAGE = [
       "Medicaid for the Elderly and People with Disabilities", "Medicaid Buy-In for Adults",
       "Medicare", "Medicare Extra Help", "Medicare Savings Programs", "Texas Benefits Counseling",
       "Primary Health Care Program", "Community health centers", "Title X family planning",
-      "Texas Family Planning Program", "Texas Nurse-Family Partnership",
+      "Texas Family Planning Program", "Texas Nurse-Family Partnership", "Texas Vaccines for Children",
     ],
   ],
   [
@@ -24,10 +24,10 @@ const COVERAGE = [
     "wallet",
     [
       "TANF", "Social Security retirement", "Earned Income Tax Credit", "Child Tax Credit",
-      "Free tax help (VITA)", "Child support services",
+      "Free tax help (VITA)", "Child and Dependent Care Credit", "Credit for Other Dependents", "Child support services",
     ],
   ],
-  ["Utilities", "bolt", ["LIHEAP energy bill help", "Weatherization assistance"]],
+  ["Utilities", "bolt", ["LIHEAP energy bill help", "Weatherization assistance", "Lifeline phone and internet"]],
   ["Work and unemployment", "briefcase", ["Unemployment benefits", "Child care scholarships", "Senior community service jobs", "Job Corps"]],
   [
     "Disability",

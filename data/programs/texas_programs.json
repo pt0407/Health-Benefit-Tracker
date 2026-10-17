@@ -581,5 +581,27 @@
     "processing_time_days": null,
     "source": "Texas Health and Human Services",
     "last_updated": "2026-10-17"
+  },
+  {
+    "program_id": "texas_vaccines_for_children_tx",
+    "name": "Texas Vaccines for Children",
+    "type": "federal_state",
+    "category": "health",
+    "description": "Texas Vaccines for Children makes it easier for children 0 to 18 years old to get vaccinated by offering low-cost vaccines to children who are uninsured, underinsured, covered by CHIP, of Native American or Native Alaskan heritage, or on Medicaid. The Texas Department of State Health Services runs the program and keeps a find-a-provider tool for families. Eligibility depends on the child's insurance status, not on household income, so a child with private insurance that covers vaccines is not in the program. Ask your child's doctor or clinic whether they are a Texas Vaccines for Children provider.",
+    "eligibility": {
+      "income_limit_pct_fpl": null,
+      "citizenship_required": false,
+      "age_min": null,
+      "age_max": 18,
+      "requires_children": true,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": null,
+    "application_url": "https://www.dshs.texas.gov/immunizations/what-we-do/programs",
+    "documents_needed": [],
+    "processing_time_days": null,
+    "source": "Texas Department of State Health Services",
+    "last_updated": "2026-10-17"
   }
 ]

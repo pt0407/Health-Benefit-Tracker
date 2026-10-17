@@ -522,5 +522,115 @@
     "processing_time_days": null,
     "source": "Social Security Administration",
     "last_updated": "2026-10-17"
+  },
+  {
+    "program_id": "lifeline_federal",
+    "name": "Lifeline (Phone and Internet Discount)",
+    "type": "federal",
+    "category": "energy",
+    "description": "Lifeline is an FCC program that helps make phone and internet service more affordable. You qualify if your household income is at or below 135% of the Federal Poverty Guidelines or if you participate in programs such as SNAP, Medicaid, Federal Public Housing Assistance, SSI, Veterans Pension Benefits or certain Tribal assistance programs. Lifeline provides up to a $9.25 monthly discount on service for eligible low-income subscribers. Only one Lifeline benefit is allowed per household, and the discount can be applied to either a wireline or wireless service. The Universal Service Administrative Company administers the program. The monthly value is the maximum discount, an estimate of what you save.",
+    "eligibility": {
+      "income_limit_pct_fpl": 135,
+      "citizenship_required": false,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": 9.25,
+    "application_url": "https://www.fcc.gov/lifeline-consumers",
+    "documents_needed": [],
+    "processing_time_days": null,
+    "source": "Federal Communications Commission",
+    "last_updated": "2026-10-17"
+  },
+  {
+    "program_id": "csfp_federal",
+    "name": "Commodity Supplemental Food Program (CSFP)",
+    "type": "federal",
+    "category": "nutrition",
+    "description": "The Commodity Supplemental Food Program works to improve the health of people with low income who are at least 60 years of age by supplementing their diets with nutritious USDA Foods. The maximum income limit is 150% of the Federal Poverty Guidelines, up from 130% before a rule that took effect in December 2024, and state agencies may also accept participation in programs such as SNAP, SSI, the Low Income Subsidy or Medicare Savings Programs as showing eligibility. States operate the program, so Texas applicants should use the state contact listed by USDA.",
+    "eligibility": {
+      "income_limit_pct_fpl": 150,
+      "citizenship_required": false,
+      "age_min": 60,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": null,
+    "application_url": "https://www.fns.usda.gov/csfp/program-contacts",
+    "documents_needed": [],
+    "processing_time_days": null,
+    "source": "U.S. Department of Agriculture",
+    "last_updated": "2026-10-17"
+  },
+  {
+    "program_id": "child_dependent_care_credit_federal",
+    "name": "Child and Dependent Care Credit",
+    "type": "federal",
+    "category": "cash",
+    "description": "The child and dependent care credit helps with the cost of caring for a qualifying person so that you, and your spouse if you file jointly, can work or actively look for work. A qualifying individual includes your dependent qualifying child who was under age 13 when the care was provided. The credit is a percentage of the work-related expenses you paid to a care provider, and the percentage depends on your adjusted gross income. The expenses you can use are limited to $3,000 for one qualifying individual or $6,000 for two or more, and generally cannot exceed the smaller of your or your spouse's earned income. You claim it on your federal tax return.",
+    "eligibility": {
+      "income_limit_pct_fpl": null,
+      "citizenship_required": false,
+      "age_min": null,
+      "age_max": 12,
+      "requires_children": true,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": null,
+    "application_url": "https://www.irs.gov/taxtopics/tc602",
+    "documents_needed": [],
+    "processing_time_days": null,
+    "source": "Internal Revenue Service",
+    "last_updated": "2026-10-17"
+  },
+  {
+    "program_id": "national_school_lunch_federal",
+    "name": "National School Lunch Program",
+    "type": "federal",
+    "category": "nutrition",
+    "description": "The National School Lunch Program gives children lunch at school at a free or reduced price. USDA sets the income guidelines each year by multiplying the federal poverty guidelines by 1.30 for free meals and by 1.85 for reduced-price meals, so children in households at or below 130% of poverty get free lunches and those between 130% and 185% get reduced-price lunches. If you receive Supplemental Nutrition Assistance Program benefits, all of your children who attend school automatically qualify for free school meals. You may apply for school meals any time during the school year by submitting an application directly to your school or district.",
+    "eligibility": {
+      "income_limit_pct_fpl": 185,
+      "citizenship_required": false,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": true,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": null,
+    "application_url": "https://www.fns.usda.gov/cn/applying-free-and-reduced-price-school-meals",
+    "documents_needed": [],
+    "processing_time_days": null,
+    "source": "U.S. Department of Agriculture",
+    "last_updated": "2026-10-17"
+  },
+  {
+    "program_id": "credit_for_other_dependents_federal",
+    "name": "Credit for Other Dependents",
+    "type": "federal",
+    "category": "cash",
+    "description": "The Credit for Other Dependents is a non-refundable federal tax credit for taxpayers with dependents who are not eligible for the Child Tax Credit or Additional Child Tax Credit, such as a child who is 17 or older. The child or dependent must be claimed as a dependent on your tax return, be a U.S. citizen, U.S. national or U.S. resident alien, and have a Social Security number, Individual Taxpayer Identification Number or Adoption Taxpayer Identification Number. The maximum credit is $500 for each dependent, and it begins to decrease in value if your adjusted gross income exceeds $200,000 ($400,000 for married filing jointly). The monthly value is an estimate of the maximum credit for one dependent spread over a year.",
+    "eligibility": {
+      "income_limit_pct_fpl": null,
+      "citizenship_required": true,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": true,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": 42,
+    "application_url": "https://www.irs.gov/credits-deductions/individuals/child-tax-credit",
+    "documents_needed": [],
+    "processing_time_days": null,
+    "source": "Internal Revenue Service",
+    "last_updated": "2026-10-17"
   }
 ]

@@ -21,6 +21,8 @@ REQUIRED_IDS = {
     "medicare_savings_programs_tx", "family_planning_program_tx", "nurse_family_partnership_tx",
     "child_support_services_tx", "texas_prekindergarten_tx", "independent_living_services_tx",
     "work_incentives_planning_federal", "texas_benefits_counseling_tx",
+    "lifeline_federal", "csfp_federal", "child_dependent_care_credit_federal",
+    "national_school_lunch_federal", "credit_for_other_dependents_federal", "texas_vaccines_for_children_tx",
 }
 
 
@@ -95,6 +97,7 @@ HEALTH_COVERAGE_IDS = {
     "medicaid_parents_caretakers_tx", "medicaid_buy_in_tx", "primary_health_care_tx",
     "medicare_federal", "health_centers_federal", "title_x_family_planning_federal",
     "medicare_savings_programs_tx", "family_planning_program_tx", "nurse_family_partnership_tx",
+    "texas_vaccines_for_children_tx",
 }
 
 

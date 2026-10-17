@@ -249,3 +249,17 @@ def test_counseling_programs_follow_age_and_disability_benefits():
     both = ids_for(SINGLE, age=45, has_disability=True, receiving_disability_benefits=True)
     assert {"work_incentives_planning_federal", "texas_benefits_counseling_tx"} <= both
     assert "work_incentives_planning_federal" not in ids_for(SINGLE, age=45, has_disability=True)
+
+
+def test_2026_10_17_second_batch_rules():
+    kid = dict(FAMILY, annual_income=15000, household_size=3, children_ages=[8], insurance_status="uninsured")
+    got = ids_for(kid)
+    assert {"national_school_lunch_federal", "texas_vaccines_for_children_tx", "lifeline_federal"} <= got
+    assert "texas_vaccines_for_children_tx" not in ids_for(kid, insurance_status="employer")
+    assert "child_dependent_care_credit_federal" in got and "child_dependent_care_credit_federal" not in ids_for(kid, employment_status="unemployed")
+    assert "credit_for_other_dependents_federal" not in got
+    assert "credit_for_other_dependents_federal" in ids_for(kid, children_ages=[17])
+    assert "national_school_lunch_federal" not in ids_for(kid, children_ages=[2])
+    assert "csfp_federal" in ids_for(SINGLE, age=65, annual_income=15000)
+    assert "csfp_federal" not in ids_for(SINGLE, age=50, annual_income=15000)
+    assert "csfp_federal" not in ids_for(SINGLE, age=65, annual_income=40000)

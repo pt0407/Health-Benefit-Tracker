@@ -1464,5 +1464,329 @@
         "null_reason": "no_official_basis"
       }
     }
+  },
+  "lifeline_federal": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "FCC Lifeline consumer page as read 2026-10-17 (no effective date shown).",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.fcc.gov/lifeline-consumers"
+        ],
+        "evidence": "",
+        "note": "Who qualifies, the discount, the one-per-household rule and who administers it: the FCC page."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.fcc.gov/lifeline-consumers"
+        ],
+        "evidence": "household income is at or below 135% of the Federal Poverty Guidelines",
+        "note": "Stated directly as a percent. Participation in listed programs also qualifies."
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.fcc.gov/lifeline-consumers"
+        ],
+        "evidence": "",
+        "note": "The page names no citizenship rule, so false is recorded but not confirmed.",
+        "unconfirmed": true
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.fcc.gov/lifeline-consumers"
+        ],
+        "evidence": "up to a $9.25 monthly discount on service for eligible low-income subscribers",
+        "note": "The standard maximum monthly discount. Subscribers on Tribal lands can get up to $34.25, which is not used here.",
+        "estimated": true,
+        "estimate": {
+          "method": "official_basis",
+          "represents": "The maximum standard Lifeline discount per month; actual savings depend on the service plan.",
+          "formula": "monthly_discount",
+          "inputs": [
+            {
+              "name": "monthly_discount",
+              "value": 9.25,
+              "unit": "USD per month",
+              "period": "FCC Lifeline page, standard discount",
+              "url": "https://www.fcc.gov/lifeline-consumers",
+              "evidence": "up to a $9.25 monthly discount on service for eligible low-income subscribers"
+            }
+          ]
+        }
+      },
+      "application_url": {
+        "urls": [
+          "https://www.fcc.gov/lifeline-consumers"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: browser. The FCC page links to lifelinesupport.org, which is not on the official-host list, so the FCC page is the landing page. The site blocks plain HTTP clients."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://www.fcc.gov/lifeline-consumers"
+        ],
+        "evidence": "",
+        "note": "The pages read give no application processing time.",
+        "null_reason": "no_official_basis"
+      }
+    }
+  },
+  "csfp_federal": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "USDA CSFP page and the Federal Register final rule of Oct. 31, 2024 (effective Dec. 30, 2024) as read 2026-10-17.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.fns.usda.gov/csfp",
+          "https://www.federalregister.gov/documents/2024/10/31/2024-24966/food-distribution-programs-improving-access-and-parity",
+          "https://www.fns.usda.gov/csfp/program-contacts"
+        ],
+        "evidence": "",
+        "note": "Who it serves: the FNS CSFP page. The 150 percent limit and program-based eligibility: the Federal Register rule. State contacts, with Texas listed: the FNS contacts page."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.federalregister.gov/documents/2024/10/31/2024-24966/food-distribution-programs-improving-access-and-parity"
+        ],
+        "evidence": "maximum income eligibility guidelines to 150 percent of the U.S. Federal Poverty Guidelines",
+        "note": "The rule says states had to implement within 12 months of publication, so it should apply now."
+      },
+      "eligibility.age_min": {
+        "urls": [
+          "https://www.fns.usda.gov/csfp"
+        ],
+        "evidence": "at least 60 years of age",
+        "note": "Persons with low income at least 60 years of age."
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.fns.usda.gov/csfp"
+        ],
+        "evidence": "",
+        "note": "The page names no citizenship rule, so false is recorded but not confirmed.",
+        "unconfirmed": true
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.fns.usda.gov/csfp"
+        ],
+        "evidence": "",
+        "note": "No official per-person or average amount for this program was found in the pages read.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://www.fns.usda.gov/csfp/program-contacts"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: http (curl). USDA lists the state agency contacts, including Texas."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://www.fns.usda.gov/csfp"
+        ],
+        "evidence": "",
+        "note": "The pages read give no application processing time.",
+        "null_reason": "no_official_basis"
+      }
+    }
+  },
+  "child_dependent_care_credit_federal": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "IRS Tax Topic 602 as read 2026-10-17 (no tax year stated).",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.irs.gov/taxtopics/tc602"
+        ],
+        "evidence": "",
+        "note": "Who qualifies, expense limits and the earned income rule: IRS Tax Topic 602."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.irs.gov/taxtopics/tc602"
+        ],
+        "evidence": "",
+        "note": "null: the credit percentage depends on adjusted gross income but there is no poverty-level cutoff.",
+        "null_reason": "no_income_test"
+      },
+      "eligibility.age_max": {
+        "urls": [
+          "https://www.irs.gov/taxtopics/tc602"
+        ],
+        "evidence": "Your dependent qualifying child who was under age 13 when the care was provided",
+        "note": "Under 13 means age 12 or younger."
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.irs.gov/taxtopics/tc602"
+        ],
+        "evidence": "",
+        "note": "The page requires a taxpayer identification number for each qualifying person but states no citizenship rule, so false is recorded but not confirmed.",
+        "unconfirmed": true
+      },
+      "eligibility.requires_children": {
+        "urls": [
+          "https://www.irs.gov/taxtopics/tc602"
+        ],
+        "evidence": "Your dependent qualifying child who was under age 13 when the care was provided",
+        "note": "A qualifying person can also be a spouse or other dependent incapable of self-care, so children are not the only path; recorded true because this program is matched here for families with a child under 13."
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.irs.gov/taxtopics/tc602"
+        ],
+        "evidence": "",
+        "note": "The credit is a percentage of expenses that depends on income, and the page gives no typical amount.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://www.irs.gov/taxtopics/tc602"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: http (curl). Claimed on a federal tax return; the IRS topic page explains the rules."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://www.irs.gov/taxtopics/tc602"
+        ],
+        "evidence": "",
+        "note": "The pages read give no application processing time.",
+        "null_reason": "no_official_basis"
+      }
+    }
+  },
+  "national_school_lunch_federal": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "USDA Child Nutrition Programs Income Eligibility Guidelines notice (effective July 1, 2026 to June 30, 2027) and school meals application page as read 2026-10-17.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.federalregister.gov/documents/2026/04/09/2026-06842/child-nutrition-programs-income-eligibility-guidelines",
+          "https://www.fns.usda.gov/cn/applying-free-and-reduced-price-school-meals"
+        ],
+        "evidence": "",
+        "note": "The 1.30 and 1.85 multipliers and which programs use them: the Federal Register notice. Automatic eligibility and when to apply: the FNS application page."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.federalregister.gov/documents/2026/04/09/2026-06842/child-nutrition-programs-income-eligibility-guidelines"
+        ],
+        "evidence": "multiplying the year 2026 Federal income poverty guidelines by 1.30 and 1.85",
+        "note": "Free is 130 percent and reduced price is 185 percent. Highest band stored: 185. The notice names the National School Lunch Program among the programs that use the guidelines."
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.fns.usda.gov/cn/applying-free-and-reduced-price-school-meals"
+        ],
+        "evidence": "",
+        "note": "The page names no citizenship rule, so false is recorded but not confirmed.",
+        "unconfirmed": true
+      },
+      "eligibility.requires_children": {
+        "urls": [
+          "https://www.fns.usda.gov/cn/applying-free-and-reduced-price-school-meals"
+        ],
+        "evidence": "all of your children who attend school automatically qualify for free school meals",
+        "note": "The benefit goes to school children."
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.federalregister.gov/documents/2026/04/09/2026-06842/child-nutrition-programs-income-eligibility-guidelines"
+        ],
+        "evidence": "",
+        "note": "No official per-person or average amount for this program was found in the pages read.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://www.fns.usda.gov/cn/applying-free-and-reduced-price-school-meals"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: http (curl). Apply through your school or district; this FNS page explains how."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://www.fns.usda.gov/cn/applying-free-and-reduced-price-school-meals"
+        ],
+        "evidence": "",
+        "note": "The pages read give no application processing time.",
+        "null_reason": "no_official_basis"
+      }
+    }
+  },
+  "credit_for_other_dependents_federal": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "IRS Child Tax Credit page, Credit for Other Dependents section, as read 2026-10-17 (tax year 2025 rules).",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.irs.gov/credits-deductions/individuals/child-tax-credit"
+        ],
+        "evidence": "",
+        "note": "Who qualifies and the $500 amount: the IRS page."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.irs.gov/credits-deductions/individuals/child-tax-credit"
+        ],
+        "evidence": "",
+        "note": "null: there is no poverty-level test. The credit begins to decrease above $200,000 ($400,000 joint).",
+        "null_reason": "no_income_test"
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.irs.gov/credits-deductions/individuals/child-tax-credit"
+        ],
+        "evidence": "Be a U.S. citizen, U.S. national, or U.S. resident alien",
+        "note": "Applies to the dependent."
+      },
+      "eligibility.requires_children": {
+        "urls": [
+          "https://www.irs.gov/credits-deductions/individuals/child-tax-credit"
+        ],
+        "evidence": "Credit for Other Dependents (ODC) is a non-refundable credit for taxpayers with dependents who are not eligible for the CTC/ACTC",
+        "note": "Other dependents can include relatives, so children are not the only path; recorded true because this program is matched here for families with a child 17 or older."
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.irs.gov/credits-deductions/individuals/child-tax-credit"
+        ],
+        "evidence": "The maximum credit amount is $500 for each dependent",
+        "note": "Maximum credit for one dependent spread over 12 months: 500 / 12 = 41.7, rounded to 42. The credit is claimed once a year.",
+        "estimated": true,
+        "estimate": {
+          "method": "unit_conversion",
+          "represents": "The maximum Credit for Other Dependents for one dependent, per month.",
+          "formula": "round(credit_per_dependent / 12)",
+          "inputs": [
+            {
+              "name": "credit_per_dependent",
+              "value": 500,
+              "unit": "USD per year",
+              "period": "IRS page, tax year 2025",
+              "url": "https://www.irs.gov/credits-deductions/individuals/child-tax-credit",
+              "evidence": "The maximum credit amount is $500 for each dependent"
+            }
+          ]
+        }
+      },
+      "application_url": {
+        "urls": [
+          "https://www.irs.gov/credits-deductions/individuals/child-tax-credit"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: http (curl). Claimed on a federal tax return; the IRS page explains the rules."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://www.irs.gov/credits-deductions/individuals/child-tax-credit"
+        ],
+        "evidence": "",
+        "note": "The pages read give no application processing time.",
+        "null_reason": "no_official_basis"
+      }
+    }
   }
 }

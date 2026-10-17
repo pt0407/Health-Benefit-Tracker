@@ -93,8 +93,8 @@ def _facets(profile: UserProfile) -> list[tuple[str, float]]:
         facets.append((f"family with {kids} who needs free or low-cost health coverage for the children", SITUATION))
         facets.append((f"family with {kids} who needs monthly cash help to pay for basic expenses", SITUATION))
         if any(a < 5 for a in ages):
-            facets.append(("baby or young child under age 5 who needs healthy food, formula and nutrition support",
-                           SITUATION))
+            facets.append(("baby or toddler under age 5 at home who needs infant formula, baby food and nutrition "
+                           "support for a young child", SITUATION))
     if profile.is_pregnant:
         facets.append(("pregnant woman who needs prenatal care, delivery costs and health coverage during pregnancy",
                        SITUATION))
