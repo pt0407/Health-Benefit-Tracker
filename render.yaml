@@ -1,0 +1,18 @@
+# Render Blueprint for the BenefitsFinder backend (FastAPI + RAG index).
+# Render dashboard: New > Blueprint > pick this repo. It asks for the two
+# secret values below. The frontend is deployed separately on Vercel.
+services:
+  - type: web
+    name: benefitsfinder-api
+    runtime: python
+    plan: free
+    buildCommand: pip install -r backend/requirements.txt && python data/scripts/index_to_chromadb.py
+    startCommand: cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false

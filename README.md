@@ -40,3 +40,15 @@ App: http://localhost:5173 (calls to `/api` are proxied to the backend).
 cd backend && pytest
 cd frontend && npm run build
 ```
+
+## Deploying
+
+- **Backend → Render** (`render.yaml`): Render dashboard → New → Blueprint →
+  this repo. Set `ANTHROPIC_API_KEY` (your key) and `CORS_ORIGINS` (your Vercel
+  URL, no trailing slash). The build installs requirements and builds the RAG
+  index. Check `https://<render-url>/health`.
+- **Frontend → Vercel**: import this repo with Root Directory `frontend` and set
+  `VITE_API_URL` to `https://<render-url>/api`. `frontend/vercel.json` keeps
+  `/quiz` and `/results` working on refresh.
+- Never put `ANTHROPIC_API_KEY` in Vercel: every `VITE_` variable is visible in
+  the browser. The key lives only on the backend.
