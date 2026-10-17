@@ -79,11 +79,11 @@ PROFILE = UserProfile(**SAMPLE_PROFILE)
 
 def test_compute_facts_family_of_four():
     facts = compute_facts(PROFILE)
-    assert facts["federal_poverty_level_usd"] == 32150
-    assert facts["household_income_pct_fpl"] == 99.5
+    assert facts["federal_poverty_level_usd"] == 33000
+    assert facts["household_income_pct_fpl"] == 97.0
     by_name = {t["threshold"]: t for t in facts["thresholds"]}
     floor = by_name["ACA subsidy floor"]
-    assert floor["annual_income_limit_usd"] == 32150
+    assert floor["annual_income_limit_usd"] == 33000
     assert floor["household_is_below"] and floor["near"]
     assert not by_name["ACA subsidy ceiling"]["near"]
 
@@ -99,7 +99,7 @@ def test_run_parses_structured_output_and_sends_grounding():
     prompt = body["messages"][0]["content"]
     assert "TEXAS HEALTH COVERAGE RULES" in prompt
     assert "RAG TEXT" in prompt
-    assert '"household_income_pct_fpl": 99.5' in prompt
+    assert '"household_income_pct_fpl": 97.0' in prompt
     assert body["output_config"]["format"]["type"] == "json_schema"
 
 

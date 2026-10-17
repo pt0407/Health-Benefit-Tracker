@@ -102,9 +102,13 @@ class EligibilityMatcher:
 
         insurance_warnings, insurance_matches = self._run_insurance_agent(profile)
         warnings.extend(insurance_warnings)
+        matched_ids = {m.program_id for m in matches if m.program_id}
         matched_names = {m.program.lower() for m in matches}
         for m in insurance_matches:
-            # The agent owns richer health results; skip anything we already matched.
+            # Skip programs already matched from the records. The agent names
+            # programs differently ("CHIP (TX)"), so compare ids first.
+            if m.program_id and m.program_id in matched_ids:
+                continue
             if not any(m.program.lower() in name or name in m.program.lower()
                        for name in matched_names):
                 matches.append(m)

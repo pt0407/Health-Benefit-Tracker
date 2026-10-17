@@ -80,6 +80,9 @@ for a situation such as the coverage gap. If no program applies, leave \
 `qualifies_for` empty and explain in `notes`. For each program the household \
 likely qualifies for, add one entry:
 - `program`: the program name as written in the rules.
+- `program_id`: the id in square brackets after "Program:" in the retrieved \
+record for this program (e.g. "chip_tx"). Leave it out if no retrieved \
+record matches.
 - `confidence`: "high" only when the profile clearly meets every stated \
 rule. "medium" when a stated rule depends on something the profile doesn't \
 include, such as a resource/asset limit (the quiz never asks about savings \
