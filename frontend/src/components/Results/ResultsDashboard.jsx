@@ -5,6 +5,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import ActionPlan from "./ActionPlan.jsx";
 
 const CONFIDENCE_STYLES = {
   high: "bg-green-100 text-green-800",
@@ -42,37 +43,15 @@ function ProgramCard({ program }) {
             Apply
           </a>
         )}
-        {program.next_steps?.length > 0 && (
-          <button
-            type="button"
-            onClick={() => setOpen((o) => !o)}
-            className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium hover:bg-gray-50"
-          >
-            {open ? "Hide steps" : "Next steps"}
-          </button>
-        )}
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium hover:bg-gray-50"
+        >
+          Action plan
+        </button>
       </div>
-      {open && (
-        <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm text-gray-700">
-          {program.next_steps.map((s) => (
-            <li key={s.step}>
-              <span>{s.action}</span>
-              {s.url && (
-                <a href={s.url} target="_blank" rel="noreferrer" className="ml-1 text-blue-600 underline">
-                  {s.url.replace(/^https?:\/\//, "")}
-                </a>
-              )}
-              {s.time_required && <span className="text-gray-500"> ({s.time_required})</span>}
-              {s.documents && (
-                <ul className="mt-1 list-disc pl-5 text-gray-600">
-                  {s.documents.map((d) => <li key={d}>{d}</li>)}
-                </ul>
-              )}
-              {s.note && <p className="text-gray-500">{s.note}</p>}
-            </li>
-          ))}
-        </ol>
-      )}
+      {open && <ActionPlan program={program} onClose={() => setOpen(false)} />}
       {program.tip && <p className="mt-3 text-xs italic text-gray-500">{program.tip}</p>}
       {program.source && <p className="mt-1 text-xs text-gray-400">Source: {program.source}</p>}
     </div>
