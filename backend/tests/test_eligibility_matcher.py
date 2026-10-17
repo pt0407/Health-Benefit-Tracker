@@ -177,3 +177,19 @@ def test_broken_agent_degrades_to_warning():
     result = matcher.match(UserProfile(**FAMILY))
     assert result.program_count > 0  # deterministic matches still return
     assert any("Health coverage" in w for w in result.warnings)
+
+
+def test_insurance_agent_results_dedupe_by_program_id():
+    class FakeAgent:
+        def run(self, profile, rag_context):
+            # The agent names programs as the rules text does, not as the records do.
+            return InsuranceResult(qualifies_for=[MatchedProgram(
+                program_id="childrens_medicaid_tx", program="Children's Medicaid (TX)",
+                confidence="high", reason="dup")])
+
+    _, matcher = make_matcher()
+    matcher.insurance_agent = FakeAgent()
+    result = matcher.match(UserProfile(**FAMILY))
+    ids = [p.program_id for p in result.matched_programs]
+    assert ids.count("childrens_medicaid_tx") == 1
+    assert "Children's Medicaid (TX)" not in [p.program for p in result.matched_programs]

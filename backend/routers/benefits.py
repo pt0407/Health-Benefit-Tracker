@@ -3,13 +3,13 @@ from functools import lru_cache
 
 from fastapi import APIRouter, Depends, HTTPException
 
-from agents.insurance_agent import InsuranceAgent
+from agents.insurance_agent import InsuranceAgent, InsuranceAgentError
 from config import PROGRAMS_DIR
 from matching.eligibility_matcher import EligibilityMatcher
 from models.match_result import InsuranceResult, MatchResponse
 from models.program import Program
 from models.user_profile import UserProfile
-from rag.rag_engine import BenefitsRAG
+from rag.rag_engine import BenefitsRAG, IndexNotBuiltError
 
 router = APIRouter()
 
@@ -66,6 +66,15 @@ def get_program(program_id: str) -> Program:
 
 
 @router.post("/insurance-check", response_model=InsuranceResult)
-def insurance_check(profile: UserProfile) -> InsuranceResult:
-    # TODO(Person 4): call the insurance agent. See PR #1.
-    raise HTTPException(status_code=501, detail="Insurance agent not implemented yet")
+def insurance_check(
+    profile: UserProfile,
+    agent: InsuranceAgent = Depends(get_insurance_agent),
+    rag: BenefitsRAG = Depends(get_rag),
+) -> InsuranceResult:
+    try:
+        rag_context = rag.retrieve_insurance_context(profile)
+        return agent.run(profile, rag_context)
+    except IndexNotBuiltError as e:
+        raise HTTPException(status_code=503, detail=str(e)) from e
+    except InsuranceAgentError as e:
+        raise HTTPException(status_code=502, detail=str(e)) from e
