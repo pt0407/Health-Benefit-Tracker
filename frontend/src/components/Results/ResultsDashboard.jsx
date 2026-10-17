@@ -1,5 +1,6 @@
 // Owner: Person 3. See docs/BUILD_PLAN.md §3 Component 7.
 // Receives the MatchResponse (backend/models/match_result.py) via router state.
+// Dollar values are estimates, labeled as Person 3 chose (see PR #18).
 
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -19,7 +20,7 @@ function ProgramCard({ program }) {
         <div>
           <h3 className="text-lg font-semibold">{program.program}</h3>
           {program.monthly_value_usd > 0 && (
-            <p className="text-green-700 font-medium">~${Math.round(program.monthly_value_usd).toLocaleString()}/month</p>
+            <p className="text-green-700 font-medium">Est. ${Math.round(program.monthly_value_usd).toLocaleString()}/mo</p>
           )}
         </div>
         <span className={`shrink-0 rounded-full px-3 py-1 text-xs font-semibold capitalize ${CONFIDENCE_STYLES[program.confidence] || CONFIDENCE_STYLES.low}`}>
@@ -99,11 +100,13 @@ export default function ResultsDashboard() {
       <div className="rounded-2xl bg-blue-600 p-8 text-center text-white">
         {result.total_estimated_annual_value > 0 ? (
           <>
-            <p className="text-lg opacity-90">You may qualify for up to</p>
+            <p className="text-lg opacity-90">You may qualify for up to an estimated</p>
             <p className="mt-1 text-4xl font-bold">
               ${Math.round(result.total_estimated_annual_value).toLocaleString()}/year
             </p>
-            <p className="mt-1 opacity-90">across {result.program_count} program{result.program_count === 1 ? "" : "s"}</p>
+            <p className="mt-1 opacity-90">
+              (~${Math.round(result.total_estimated_monthly_value).toLocaleString()}/mo) across {result.program_count} program{result.program_count === 1 ? "" : "s"}
+            </p>
           </>
         ) : (
           <>
@@ -144,7 +147,15 @@ export default function ResultsDashboard() {
       {result.program_count === 0 && (
         <p className="mt-8 text-center text-gray-600">
           We didn't find a clear match — but program rules change, so it's still worth checking{" "}
-          <a href="https://www.benefits.gov" target="_blank" rel="noreferrer" className="text-blue-600 underline">Benefits.gov</a> directly.
+          <a href="https://www.usa.gov/benefits" target="_blank" rel="noreferrer" className="text-blue-600 underline">USA.gov</a> directly.
+        </p>
+      )}
+
+      {valued.length > 0 && (
+        <p className="mt-8 text-xs leading-relaxed text-gray-400">
+          Dollar amounts are estimates based on program averages and your answers. They are not
+          a guarantee of benefits. Actual amounts depend on your full application and caseworker
+          review.
         </p>
       )}
 
