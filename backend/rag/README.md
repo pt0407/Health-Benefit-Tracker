@@ -31,16 +31,16 @@ Rebuild whenever anything in `data/programs/` changes.
 from rag.rag_engine import BenefitsRAG, IndexNotBuiltError
 
 rag = BenefitsRAG()                         # default dir: config.CHROMA_DIR
-ids = rag.retrieve(profile, k=10)           # list[RetrievedChunk]
+ids = rag.retrieve(profile, k=14)           # list[RetrievedChunk]
 texts = rag.retrieve_relevant_programs(profile)   # list[str], unique chunk texts, best first
 context = rag.retrieve_insurance_context(profile) # one string, category "health" only
 ```
 
 `profile` is a `UserProfile` or a dict. Methods:
 
-- `retrieve(profile, k=10, categories=None)`: `RetrievedChunk` objects (`text`, `program_id`, `program_name`, `category`, `source`, `score`, plus `chunk_id`, `section`).
-- `retrieve_relevant_programs(profile, k=10)`: `list[str]`, at most `k` non-empty, unique chunk texts.
-- `retrieve_context(profile, k=10, categories=None)`: chunks joined by a blank line.
+- `retrieve(profile, k=14, categories=None)`: `RetrievedChunk` objects (`text`, `program_id`, `program_name`, `category`, `source`, `score`, plus `chunk_id`, `section`).
+- `retrieve_relevant_programs(profile, k=14)`: `list[str]`, at most `k` non-empty, unique chunk texts.
+- `retrieve_context(profile, k=14, categories=None)`: chunks joined by a blank line.
 - `retrieve_insurance_context(profile, k=8)`: health programs only, one string.
 - `index_programs(programs)`: full rebuild, idempotent.
 - `facet_queries(profile)`: the exact query texts sent to the index.

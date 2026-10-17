@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate, useSearchParams } from "react-router-do
 import { useAuth } from "../auth/AuthContext.jsx";
 import MatchCard from "../components/matches/MatchCard.jsx";
 import Icon from "../components/shared/Icon.jsx";
+import LoadingScreen from "../components/ui/LoadingScreen.jsx";
 import { Alert, Button, LinkButton } from "../components/ui/index.jsx";
 import { BUCKETS, CATEGORY_LABELS, enrich, levelMatches } from "../lib/programMeta.js";
 import { summarizeAnswers, toProfile } from "../lib/quizSchema.js";
@@ -112,6 +113,9 @@ export default function Matches() {
     setAdded(`${program.program} was added to your tracker.`);
   }
 
+  // The match list is joined with the program catalog, so keep the same loader up until it arrives.
+  if (catalog.status === "loading") return <LoadingScreen />;
+
   const count = result.program_count;
   const strong = result.matched_programs.filter((p) => p.confidence === "high").length;
   const hasValues = result.matched_programs.some((p) => p.monthly_value_usd > 0);
@@ -170,6 +174,10 @@ export default function Matches() {
                 <p>
                   Health coverage is shown without a dollar amount because the figure is what the government spends per
                   person, not money you receive.
+                </p>
+                <p>
+                  Programs marked &quot;Value varies&quot; help in ways that have no single dollar figure, such as tax credits paid
+                  once a year, legal aid and early learning.
                 </p>
               </div>
             </details>

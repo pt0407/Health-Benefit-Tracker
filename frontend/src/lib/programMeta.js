@@ -9,6 +9,8 @@ export const CATEGORY_LABELS = {
   disability: "Disability",
   cash: "Cash help",
   employment: "Work and unemployment",
+  education: "Education and child care",
+  legal: "Legal help",
   other: "Other",
 };
 
@@ -20,6 +22,8 @@ export const CATEGORY_ICONS = {
   disability: "shield",
   cash: "wallet",
   employment: "briefcase",
+  education: "book",
+  legal: "scale",
   other: "list",
 };
 

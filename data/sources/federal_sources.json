@@ -439,5 +439,1354 @@
         "note": "method: browser (plain HTTP gets 403 from ssa.gov). Page has 'Start an application' for adult disability benefits."
       }
     }
+  },
+  "head_start_federal": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "HHS Head Start answer page and HeadStart.gov Head Start page as read 2026-10-17 (no effective date shown).",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.hhs.gov/answers/programs-for-families-and-children/how-can-i-get-my-child-into-head-start/index.html",
+          "https://headstart.gov/programs/article/head-start-programs"
+        ],
+        "evidence": "",
+        "note": "Who may qualify, other qualifying circumstances and how to apply: the HHS answer page. Age focus of preschool programs: HeadStart.gov."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.hhs.gov/answers/programs-for-families-and-children/how-can-i-get-my-child-into-head-start/index.html"
+        ],
+        "evidence": "income is at or below the federal poverty level",
+        "note": "Stated as the federal poverty level, which is 100 percent."
+      },
+      "eligibility.age_max": {
+        "urls": [
+          "https://www.hhs.gov/answers/programs-for-families-and-children/how-can-i-get-my-child-into-head-start/index.html"
+        ],
+        "evidence": "pregnant women and children ages 0-5",
+        "note": "The HHS page covers Head Start and Early Head Start together, ages 0-5. HeadStart.gov says Head Start Preschool mainly serves 3- and 4-year-olds."
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.hhs.gov/answers/programs-for-families-and-children/how-can-i-get-my-child-into-head-start/index.html"
+        ],
+        "evidence": "",
+        "note": "The pages read name no citizenship test, so false is recorded but not confirmed.",
+        "unconfirmed": true
+      },
+      "eligibility.requires_children": {
+        "urls": [
+          "https://www.hhs.gov/answers/programs-for-families-and-children/how-can-i-get-my-child-into-head-start/index.html"
+        ],
+        "evidence": "children ages 0-5 and their families",
+        "note": "The program serves children and their families."
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.hhs.gov/answers/programs-for-families-and-children/how-can-i-get-my-child-into-head-start/index.html"
+        ],
+        "evidence": "",
+        "note": "No official per-person or average amount for this program was found in the pages read.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://headstart.gov/programs/article/head-start-programs"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: browser. The HeadStart.gov page has a How to Apply section; the site blocks plain HTTP clients."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://www.hhs.gov/answers/programs-for-families-and-children/how-can-i-get-my-child-into-head-start/index.html"
+        ],
+        "evidence": "",
+        "note": "The pages read give no application processing time.",
+        "null_reason": "no_official_basis"
+      }
+    }
+  },
+  "early_head_start_federal": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "HHS Head Start answer page and HeadStart.gov Early Head Start page as read 2026-10-17 (no effective date shown).",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.hhs.gov/answers/programs-for-families-and-children/how-can-i-get-my-child-into-head-start/index.html",
+          "https://headstart.gov/programs/article/early-head-start-programs"
+        ],
+        "evidence": "",
+        "note": "Who may qualify and how to apply: the HHS answer page. Who Early Head Start serves: HeadStart.gov."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.hhs.gov/answers/programs-for-families-and-children/how-can-i-get-my-child-into-head-start/index.html"
+        ],
+        "evidence": "income is at or below the federal poverty level",
+        "note": "Stated as the federal poverty level, which is 100 percent."
+      },
+      "eligibility.age_max": {
+        "urls": [
+          "https://headstart.gov/programs/article/early-head-start-programs"
+        ],
+        "evidence": "infants and toddlers under the age of 3",
+        "note": "Under 3 means age 2 or younger. Pregnant women are also served, so requires_children stays false."
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.hhs.gov/answers/programs-for-families-and-children/how-can-i-get-my-child-into-head-start/index.html"
+        ],
+        "evidence": "",
+        "note": "The pages read name no citizenship test, so false is recorded but not confirmed.",
+        "unconfirmed": true
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.hhs.gov/answers/programs-for-families-and-children/how-can-i-get-my-child-into-head-start/index.html"
+        ],
+        "evidence": "",
+        "note": "No official per-person or average amount for this program was found in the pages read.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://headstart.gov/programs/article/early-head-start-programs"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: browser. The HeadStart.gov Early Head Start page; the site blocks plain HTTP clients. The HHS page says to contact the program closest to you."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://www.hhs.gov/answers/programs-for-families-and-children/how-can-i-get-my-child-into-head-start/index.html"
+        ],
+        "evidence": "",
+        "note": "The pages read give no application processing time.",
+        "null_reason": "no_official_basis"
+      }
+    }
+  },
+  "school_breakfast_federal": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "USDA School Breakfast Program FAQs and school meals application page as read 2026-10-17.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.fns.usda.gov/sbp/faqs",
+          "https://www.fns.usda.gov/cn/applying-free-and-reduced-price-school-meals"
+        ],
+        "evidence": "",
+        "note": "Income tiers and who may buy a meal: the SBP FAQ. When to apply: the school meals application page."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.fns.usda.gov/sbp/faqs"
+        ],
+        "evidence": "Those with incomes between 130 percent and 185 percent of the poverty level are eligible for reduced-price meals",
+        "note": "Highest band stored: 185 for reduced price. Free meals are 130 percent and below; both bands are listed in the description."
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.fns.usda.gov/sbp/faqs"
+        ],
+        "evidence": "",
+        "note": "The FAQ names no citizenship test, so false is recorded but not confirmed.",
+        "unconfirmed": true
+      },
+      "eligibility.requires_children": {
+        "urls": [
+          "https://www.fns.usda.gov/sbp/faqs"
+        ],
+        "evidence": "Any child at a participating school may purchase a meal",
+        "note": "The benefit goes to school children."
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.fns.usda.gov/sbp/faqs"
+        ],
+        "evidence": "",
+        "note": "No official per-person or average amount for this program was found in the pages read.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://www.fns.usda.gov/cn/applying-free-and-reduced-price-school-meals"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: http (curl). Apply through your school or district; this FNS page explains how."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://www.fns.usda.gov/cn/applying-free-and-reduced-price-school-meals"
+        ],
+        "evidence": "",
+        "note": "The pages read give no application processing time.",
+        "null_reason": "no_official_basis"
+      }
+    }
+  },
+  "summer_meals_federal": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "USDA Summer Food Service Program pages as read 2026-10-17.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.fns.usda.gov/summer/sunmeals",
+          "https://www.fns.usda.gov/sfsp/faqs"
+        ],
+        "evidence": "",
+        "note": "Who can eat and where: the FNS summer meals page. Open site rule and rural options: the SFSP FAQ."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.fns.usda.gov/sfsp/faqs"
+        ],
+        "evidence": "",
+        "note": "null: eligibility is by site area, where at least half the children come from families at or below 185 percent of poverty, and meals at open sites are free to any child. The household is not income tested.",
+        "null_reason": "no_income_test"
+      },
+      "eligibility.age_max": {
+        "urls": [
+          "https://www.fns.usda.gov/summer/sunmeals"
+        ],
+        "evidence": "kids aged 18 and under can get free meals and snacks during the summer",
+        "note": "Ages are inclusive, so age_max is 18."
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.fns.usda.gov/summer/sunmeals"
+        ],
+        "evidence": "",
+        "note": "The pages read name no citizenship test, so false is recorded but not confirmed.",
+        "unconfirmed": true
+      },
+      "eligibility.requires_children": {
+        "urls": [
+          "https://www.fns.usda.gov/summer/sunmeals"
+        ],
+        "evidence": "kids aged 18 and under can get free meals and snacks during the summer",
+        "note": "The benefit goes to children and teens."
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.fns.usda.gov/summer/sunmeals"
+        ],
+        "evidence": "",
+        "note": "No official per-person or average amount for this program was found in the pages read.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://www.fns.usda.gov/summer/sunmeals"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: http (curl). The page links to the Summer Meals for Kids Site Finder."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://www.fns.usda.gov/summer/sunmeals"
+        ],
+        "evidence": "",
+        "note": "No application is described; children eat at an open site.",
+        "null_reason": "not_applicable"
+      }
+    }
+  },
+  "medicare_federal": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "SSA Sign up for Medicare page as read 2026-10-17 (no effective date shown).",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.ssa.gov/medicare/sign-up"
+        ],
+        "evidence": "",
+        "note": "Who is eligible, how to sign up and the Part B delay: the SSA page."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.ssa.gov/medicare/sign-up"
+        ],
+        "evidence": "",
+        "note": "null: the page lists age, permanent kidney failure and receiving disability benefits as the ways in, and no poverty-level income test.",
+        "null_reason": "no_income_test"
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.ssa.gov/medicare/sign-up"
+        ],
+        "evidence": "",
+        "note": "The page names no citizenship rule, so false is recorded but not confirmed.",
+        "unconfirmed": true
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.ssa.gov/medicare/sign-up"
+        ],
+        "evidence": "",
+        "note": "No official per-person or average amount for this program was found in the pages read.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://www.ssa.gov/medicare/sign-up"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: browser. The page says you sign up for Part A and Part B through Social Security."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://www.ssa.gov/medicare/sign-up"
+        ],
+        "evidence": "",
+        "note": "The pages read give no application processing time.",
+        "null_reason": "no_official_basis"
+      }
+    }
+  },
+  "social_security_retirement_federal": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "SSA Retirement benefits page as read 2026-10-17 (no effective date shown).",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.ssa.gov/retirement"
+        ],
+        "evidence": "",
+        "note": "Starting age, work history, applying while working and the planning tools: the SSA page."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.ssa.gov/retirement"
+        ],
+        "evidence": "",
+        "note": "null: the page ties benefits to age and 10 years of work, not to a poverty-level income test.",
+        "null_reason": "no_income_test"
+      },
+      "eligibility.age_min": {
+        "urls": [
+          "https://www.ssa.gov/retirement"
+        ],
+        "evidence": "monthly Retirement benefits starting at age 62",
+        "note": "You can typically get benefits starting at 62 if you have worked and paid Social Security taxes for 10 years or more."
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.ssa.gov/retirement"
+        ],
+        "evidence": "",
+        "note": "The page names no citizenship rule, so false is recorded but not confirmed.",
+        "unconfirmed": true
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.ssa.gov/retirement"
+        ],
+        "evidence": "",
+        "note": "The amount depends on each person's earnings record and the page gives no typical figure.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://www.ssa.gov/retirement"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: browser. The page has a Learn how to apply link."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://www.ssa.gov/retirement"
+        ],
+        "evidence": "",
+        "note": "The pages read give no application processing time.",
+        "null_reason": "no_official_basis"
+      }
+    }
+  },
+  "ssi_federal": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "SSA SSI page as read 2026-10-17; SSI Federal Payment Amounts table (2026 unrounded annual amount); 2026 HHS poverty guidelines.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.ssa.gov/ssi",
+          "https://www.ssa.gov/oact/cola/SSI.html"
+        ],
+        "evidence": "",
+        "note": "Who might be eligible and what the payment depends on: the SSA SSI page. The 2026 rate: the SSA payment amounts table."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.ssa.gov/oact/cola/SSI.html",
+          "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines"
+        ],
+        "evidence": "Eligible individual $11,929.46 $12,358.92 $1,029",
+        "note": "Estimate: the 2026 federal payment rate for one person as a percent of the 2026 poverty guideline. 11929.46 / 15960 * 100 = 74.7, floored to 74. SSI counts income in dollars and excludes part of earnings, so some working people with higher income still qualify; this percent is a rough index only.",
+        "estimated": true,
+        "estimate": {
+          "method": "dollar_limit_to_pct_fpl",
+          "represents": "The 2026 SSI federal payment rate for one eligible person, as a percent of the 2026 poverty guideline for one person.",
+          "formula": "floor(annual_federal_rate / guideline_annual * 100)",
+          "inputs": [
+            {
+              "name": "annual_federal_rate",
+              "value": 11929.46,
+              "unit": "USD per year",
+              "period": "SSI federal payment rate for an eligible individual, 2026 unrounded annual amount",
+              "url": "https://www.ssa.gov/oact/cola/SSI.html",
+              "evidence": "Eligible individual $11,929.46 $12,358.92 $1,029"
+            },
+            {
+              "name": "guideline_annual",
+              "value": 15960,
+              "unit": "USD per year",
+              "period": "2026 HHS poverty guideline, one person, 48 contiguous states",
+              "url": "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines",
+              "evidence": "1 $15,960"
+            }
+          ]
+        }
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.ssa.gov/ssi"
+        ],
+        "evidence": "",
+        "note": "SSI rules require citizen or qualified non-citizen status, but the SSA page read does not state it, so true is recorded but not confirmed.",
+        "unconfirmed": true
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.ssa.gov/oact/cola/SSI.html"
+        ],
+        "evidence": "Eligible individual $11,929.46 $12,358.92 $1,029",
+        "note": "Maximum federal monthly SSI payment for one eligible person in 2026: 11929.46 / 12 = 994.1, rounded to 994. Actual payments are lower when income counts against them.",
+        "estimated": true,
+        "estimate": {
+          "method": "unit_conversion",
+          "represents": "The maximum 2026 federal SSI payment for one eligible person, per month; many people receive less.",
+          "formula": "round(annual_federal_rate / 12)",
+          "inputs": [
+            {
+              "name": "annual_federal_rate",
+              "value": 11929.46,
+              "unit": "USD per year",
+              "period": "SSI federal payment rate for an eligible individual, 2026 unrounded annual amount",
+              "url": "https://www.ssa.gov/oact/cola/SSI.html",
+              "evidence": "Eligible individual $11,929.46 $12,358.92 $1,029"
+            }
+          ]
+        }
+      },
+      "application_url": {
+        "urls": [
+          "https://www.ssa.gov/ssi"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: browser. The page has a Learn how to apply link."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://www.ssa.gov/ssi"
+        ],
+        "evidence": "",
+        "note": "The pages read give no application processing time.",
+        "null_reason": "no_official_basis"
+      }
+    }
+  },
+  "eitc_federal": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "IRS EITC income limits and maximum credit amounts, tax year 2025; 2026 HHS poverty guidelines.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.irs.gov/credits-deductions/individuals/earned-income-tax-credit-eitc",
+          "https://www.irs.gov/credits-deductions/individuals/earned-income-tax-credit/eitc-income-limits-maximum-credit-amounts"
+        ],
+        "evidence": "",
+        "note": "Credit amounts, income limits and the investment income limit: the IRS tax year 2025 table."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.irs.gov/credits-deductions/individuals/earned-income-tax-credit/eitc-income-limits-maximum-credit-amounts",
+          "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines"
+        ],
+        "evidence": "One $50,434 $57,554",
+        "note": "Estimate converting the IRS maximum AGI to a percent of the 2026 poverty guideline. Highest band across household types: a single filer with one qualifying child (household of two), $50,434. 50434 / 21640 * 100 = 233.07, floored to 233. Other types: single with no children 119, two children 209 and three or more 186 percent; married filing jointly with one child 210 percent.",
+        "estimated": true,
+        "estimate": {
+          "method": "dollar_limit_to_pct_fpl",
+          "represents": "Maximum adjusted gross income at which a single parent with one qualifying child can still claim the EITC ($50,434), as a percent of the 2026 poverty guideline for two people.",
+          "formula": "floor(agi_limit / guideline_annual * 100)",
+          "inputs": [
+            {
+              "name": "agi_limit",
+              "value": 50434,
+              "unit": "USD per year",
+              "period": "tax year 2025 table, one child, single or head of household",
+              "url": "https://www.irs.gov/credits-deductions/individuals/earned-income-tax-credit/eitc-income-limits-maximum-credit-amounts",
+              "evidence": "One $50,434 $57,554"
+            },
+            {
+              "name": "guideline_annual",
+              "value": 21640,
+              "unit": "USD per year",
+              "period": "2026 HHS poverty guideline, two persons, 48 contiguous states",
+              "url": "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines",
+              "evidence": "2 $21,640"
+            }
+          ]
+        }
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.irs.gov/credits-deductions/individuals/earned-income-tax-credit-eitc"
+        ],
+        "evidence": "",
+        "note": "Claimants need a valid Social Security number and the IRS page read does not state it, so true is recorded but not confirmed.",
+        "unconfirmed": true
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.irs.gov/credits-deductions/individuals/earned-income-tax-credit/eitc-income-limits-maximum-credit-amounts"
+        ],
+        "evidence": "",
+        "note": "The IRS publishes maximum credits by number of children, not a typical amount, and the credit is paid once at tax time.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://www.irs.gov/credits-deductions/individuals/earned-income-tax-credit-eitc"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: http (curl). Claimed on a federal tax return; the IRS page explains how to claim it."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://www.irs.gov/credits-deductions/individuals/earned-income-tax-credit-eitc"
+        ],
+        "evidence": "",
+        "note": "The pages read give no application processing time.",
+        "null_reason": "no_official_basis"
+      }
+    }
+  },
+  "child_tax_credit_federal": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "IRS Child Tax Credit page as read 2026-10-17 (tax year 2025 rules).",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.irs.gov/credits-deductions/individuals/child-tax-credit"
+        ],
+        "evidence": "",
+        "note": "Amounts, age limit, earned income rule and income thresholds: the IRS page."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.irs.gov/credits-deductions/individuals/child-tax-credit"
+        ],
+        "evidence": "",
+        "note": "null: there is no poverty-level income test. The full credit phases out above $200,000 ($400,000 joint).",
+        "null_reason": "no_income_test"
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.irs.gov/credits-deductions/individuals/child-tax-credit"
+        ],
+        "evidence": "Be a U.S. citizen, U.S. National or a U.S. resident alien",
+        "note": "Applies to the qualifying child."
+      },
+      "eligibility.age_max": {
+        "urls": [
+          "https://www.irs.gov/credits-deductions/individuals/child-tax-credit"
+        ],
+        "evidence": "Be under 17 at the end of the tax year",
+        "note": "Under 17 means age 16 or younger, so age_max is 16."
+      },
+      "eligibility.requires_children": {
+        "urls": [
+          "https://www.irs.gov/credits-deductions/individuals/child-tax-credit"
+        ],
+        "evidence": "worth up to $2,200 per qualifying child",
+        "note": "The credit is claimed for qualifying children."
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.irs.gov/credits-deductions/individuals/child-tax-credit"
+        ],
+        "evidence": "The Child Tax Credit is worth up to $2,200 per qualifying child",
+        "note": "Maximum credit for one child spread over 12 months: 2200 / 12 = 183.3, rounded to 183. The credit is claimed once a year and the amount can be lower; the refundable part is up to $1,700 per child.",
+        "estimated": true,
+        "estimate": {
+          "method": "unit_conversion",
+          "represents": "The maximum Child Tax Credit for one qualifying child, per month.",
+          "formula": "round(credit_per_child / 12)",
+          "inputs": [
+            {
+              "name": "credit_per_child",
+              "value": 2200,
+              "unit": "USD per year",
+              "period": "IRS page, tax year 2025",
+              "url": "https://www.irs.gov/credits-deductions/individuals/child-tax-credit",
+              "evidence": "worth up to $2,200 per qualifying child"
+            }
+          ]
+        }
+      },
+      "application_url": {
+        "urls": [
+          "https://www.irs.gov/credits-deductions/individuals/child-tax-credit"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: http (curl). Claimed on a federal tax return; the IRS page explains the rules."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://www.irs.gov/credits-deductions/individuals/child-tax-credit"
+        ],
+        "evidence": "",
+        "note": "The pages read give no application processing time.",
+        "null_reason": "no_official_basis"
+      }
+    }
+  },
+  "vita_free_tax_help_federal": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "IRS VITA and TCE page as read 2026-10-17 (no tax year stated for the income figure); 2026 HHS poverty guidelines.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.irs.gov/individuals/free-tax-return-preparation-for-qualifying-taxpayers"
+        ],
+        "evidence": "",
+        "note": "Who VITA and TCE serve and who runs the sites: the IRS page."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.irs.gov/individuals/free-tax-return-preparation-for-qualifying-taxpayers",
+          "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines"
+        ],
+        "evidence": "People who generally make about $ 70,244 or less",
+        "note": "Estimate: the IRS guideline of about $70,244 as a percent of the 2026 poverty guideline for one person. 70244 / 15960 * 100 = 440.1, floored to 440. This is a general guideline and sites may set their own limits.",
+        "estimated": true,
+        "estimate": {
+          "method": "dollar_limit_to_pct_fpl",
+          "represents": "The income level most VITA taxpayers are at or below ($70,244), as a percent of the 2026 poverty guideline for one person.",
+          "formula": "floor(income_limit / guideline_annual * 100)",
+          "inputs": [
+            {
+              "name": "income_limit",
+              "value": 70244,
+              "unit": "USD per year",
+              "period": "IRS VITA page, no tax year stated",
+              "url": "https://www.irs.gov/individuals/free-tax-return-preparation-for-qualifying-taxpayers",
+              "evidence": "People who generally make about $ 70,244 or less"
+            },
+            {
+              "name": "guideline_annual",
+              "value": 15960,
+              "unit": "USD per year",
+              "period": "2026 HHS poverty guideline, one person, 48 contiguous states",
+              "url": "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines",
+              "evidence": "1 $15,960"
+            }
+          ]
+        }
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.irs.gov/individuals/free-tax-return-preparation-for-qualifying-taxpayers"
+        ],
+        "evidence": "",
+        "note": "The page names no citizenship rule, so false is recorded but not confirmed.",
+        "unconfirmed": true
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.irs.gov/individuals/free-tax-return-preparation-for-qualifying-taxpayers"
+        ],
+        "evidence": "",
+        "note": "The service is free tax preparation and the page gives no dollar value.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://www.irs.gov/individuals/free-tax-return-preparation-for-qualifying-taxpayers"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: http (curl). The IRS page explains how to find a VITA or TCE site."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://www.irs.gov/individuals/free-tax-return-preparation-for-qualifying-taxpayers"
+        ],
+        "evidence": "",
+        "note": "Tax returns are prepared at a site visit; the page gives no processing time.",
+        "null_reason": "not_applicable"
+      }
+    }
+  },
+  "health_centers_federal": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "HRSA Health Center Program Site Visit Protocol, Chapter 7, as read 2026-10-17.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://bphc.hrsa.gov/compliance/site-visits/site-visit-protocol/sliding-fee-discount-program"
+        ],
+        "evidence": "",
+        "note": "Sliding fee discount classes between 101 and 200 percent of the poverty guideline: the HRSA protocol chapter."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://bphc.hrsa.gov/compliance/site-visits/site-visit-protocol/sliding-fee-discount-program"
+        ],
+        "evidence": "176 percent to 200 percent of the FPG",
+        "note": "Top discount class in HRSA's example schedule. Centers can discount above this line only with other funding."
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://bphc.hrsa.gov/compliance/site-visits/site-visit-protocol/sliding-fee-discount-program"
+        ],
+        "evidence": "",
+        "note": "The chapter names no citizenship rule, so false is recorded but not confirmed.",
+        "unconfirmed": true
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://bphc.hrsa.gov/compliance/site-visits/site-visit-protocol/sliding-fee-discount-program"
+        ],
+        "evidence": "",
+        "note": "Discounts apply to each visit and the page gives no average value.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://findahealthcenter.hrsa.gov"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: http (curl). HRSA's Find a Health Center tool."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://bphc.hrsa.gov/compliance/site-visits/site-visit-protocol/sliding-fee-discount-program"
+        ],
+        "evidence": "",
+        "note": "Care is delivered at visits and the page gives no processing time.",
+        "null_reason": "not_applicable"
+      }
+    }
+  },
+  "job_corps_federal": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "MyJobCorps Applicant Help Center article (updated about 9 months before 2026-10-17) and Job Corps FAQ as read 2026-10-17.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://enrollmenthelp.jobcorps.gov/hc/en-us/articles/38111853723917-Am-I-eligible-for-Job-Corps",
+          "https://www.jobcorps.gov/faqs"
+        ],
+        "evidence": "",
+        "note": "Who may be eligible, who may not and the cost: the Job Corps help article and FAQ."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://enrollmenthelp.jobcorps.gov/hc/en-us/articles/38111853723917-Am-I-eligible-for-Job-Corps"
+        ],
+        "evidence": "",
+        "note": "The article says low-income applicants but gives no dollar or percent figure.",
+        "null_reason": "no_official_basis"
+      },
+      "eligibility.age_min": {
+        "urls": [
+          "https://enrollmenthelp.jobcorps.gov/hc/en-us/articles/38111853723917-Am-I-eligible-for-Job-Corps"
+        ],
+        "evidence": "Are low-income 16–24 years old",
+        "note": "Ages 16 to 24; the upper limit can be waived for some people with a disability."
+      },
+      "eligibility.age_max": {
+        "urls": [
+          "https://enrollmenthelp.jobcorps.gov/hc/en-us/articles/38111853723917-Am-I-eligible-for-Job-Corps"
+        ],
+        "evidence": "Are low-income 16–24 years old",
+        "note": "Ages 16 to 24 inclusive."
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://enrollmenthelp.jobcorps.gov/hc/en-us/articles/38111853723917-Am-I-eligible-for-Job-Corps"
+        ],
+        "evidence": "legal U.S. resident or resident of a U.S. territory",
+        "note": "A U.S. citizen, legal U.S. resident, territory resident or person authorized to work in the United States."
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.jobcorps.gov/faqs"
+        ],
+        "evidence": "",
+        "note": "The FAQ lists a living allowance and training as free benefits but states no amount.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://www.jobcorps.gov"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: http (curl). Applicants create a MyJobCorps account from the Job Corps site."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://enrollmenthelp.jobcorps.gov/hc/en-us/articles/38111853723917-Am-I-eligible-for-Job-Corps"
+        ],
+        "evidence": "",
+        "note": "The pages read give no application processing time.",
+        "null_reason": "no_official_basis"
+      }
+    }
+  },
+  "title_x_family_planning_federal": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "HHS Office of Population Affairs Title X Program Handbook, December 2024, as read 2026-10-17.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://opa.hhs.gov/sites/default/files/2025-03/title-x-program-handbook-dec-2024.pdf"
+        ],
+        "evidence": "",
+        "note": "Priority for low-income families, no-charge rule, the 250 percent line and dual schedules: the Title X handbook."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://opa.hhs.gov/sites/default/files/2025-03/title-x-program-handbook-dec-2024.pdf"
+        ],
+        "evidence": "annual income exceeds 250 percent of the levels set forth in the most recent Poverty Guidelines",
+        "note": "Above 250 percent clients pay a fee schedule; at or below it they pay nothing or a sliding amount. Services are open to anyone, so this is the line where full fees begin."
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://opa.hhs.gov/sites/default/files/2025-03/title-x-program-handbook-dec-2024.pdf"
+        ],
+        "evidence": "",
+        "note": "The handbook sections read name no citizenship test, so false is recorded but not confirmed.",
+        "unconfirmed": true
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://opa.hhs.gov/sites/default/files/2025-03/title-x-program-handbook-dec-2024.pdf"
+        ],
+        "evidence": "",
+        "note": "No official per-person or average amount for this program was found in the pages read.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://opa.hhs.gov"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: http (curl). The OPA site links to Title X clinic locators."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://opa.hhs.gov/sites/default/files/2025-03/title-x-program-handbook-dec-2024.pdf"
+        ],
+        "evidence": "",
+        "note": "Services are delivered at clinic visits and the handbook gives no processing time.",
+        "null_reason": "not_applicable"
+      }
+    }
+  },
+  "legal_aid_lsc_federal": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "LSC Advisory Opinion 2020-003 and Get Legal Help page as read 2026-10-17.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.lsc.gov/about-lsc/laws-regulations-and-guidance/advisory-opinions/advisory-opinion-2020-003",
+          "https://www.lsc.gov/about-lsc/what-legal-aid/get-legal-help"
+        ],
+        "evidence": "",
+        "note": "The 125 and 200 percent rules: the LSC advisory opinion. Finding a provider: the Get Legal Help page."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.lsc.gov/about-lsc/laws-regulations-and-guidance/advisory-opinions/advisory-opinion-2020-003"
+        ],
+        "evidence": "households with a net income that does not exceed 125% of the Federal Poverty Guidelines",
+        "note": "Base ceiling. Exceptions up to 200 percent are possible under grantee policies, noted in the description."
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.lsc.gov/about-lsc/laws-regulations-and-guidance/advisory-opinions/advisory-opinion-2020-003"
+        ],
+        "evidence": "",
+        "note": "The pages read name no citizenship rule, so false is recorded but not confirmed.",
+        "unconfirmed": true
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.lsc.gov/about-lsc/what-legal-aid/get-legal-help"
+        ],
+        "evidence": "",
+        "note": "Legal aid is delivered case by case and the pages give no dollar value.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://www.lsc.gov/about-lsc/what-legal-aid/get-legal-help"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: http (curl). The page's search tool finds an LSC-funded legal aid organization near you."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://www.lsc.gov/about-lsc/what-legal-aid/get-legal-help"
+        ],
+        "evidence": "",
+        "note": "The pages read give no application processing time.",
+        "null_reason": "no_official_basis"
+      }
+    }
+  },
+  "ticket_to_work_federal": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "Choose Work! Ticket to Work fact sheet and How It Works page as read 2026-10-17.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://choosework.ssa.gov/library/fact-sheet-what-is-ticket-to-work"
+        ],
+        "evidence": "",
+        "note": "Who the program is for, that it is free and voluntary, and the kinds of providers and services: the fact sheet."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://choosework.ssa.gov/library/fact-sheet-what-is-ticket-to-work"
+        ],
+        "evidence": "",
+        "note": "null: eligibility depends on receiving SSDI or SSI because of a disability, not on a poverty-level income test.",
+        "null_reason": "no_income_test"
+      },
+      "eligibility.age_min": {
+        "urls": [
+          "https://choosework.ssa.gov/library/fact-sheet-what-is-ticket-to-work"
+        ],
+        "evidence": "people ages 18 through 64 who receive Social Security disability benefits",
+        "note": "Ages 18 through 64."
+      },
+      "eligibility.age_max": {
+        "urls": [
+          "https://choosework.ssa.gov/library/fact-sheet-what-is-ticket-to-work"
+        ],
+        "evidence": "people ages 18 through 64 who receive Social Security disability benefits",
+        "note": "Ages 18 through 64 inclusive."
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://choosework.ssa.gov/library/fact-sheet-what-is-ticket-to-work"
+        ],
+        "evidence": "",
+        "note": "The fact sheet names no citizenship rule, so false is recorded but not confirmed.",
+        "unconfirmed": true
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://choosework.ssa.gov/library/fact-sheet-what-is-ticket-to-work"
+        ],
+        "evidence": "",
+        "note": "Services are free and no dollar value is stated.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://choosework.ssa.gov"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: http (curl). Choose Work! site; the Ticket provider verifies eligibility."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://choosework.ssa.gov/library/fact-sheet-what-is-ticket-to-work"
+        ],
+        "evidence": "",
+        "note": "The pages read give no application processing time.",
+        "null_reason": "no_official_basis"
+      }
+    }
+  },
+  "work_incentives_planning_federal": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "Choose Work! benefits counseling fact sheet as read 2026-10-17.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://choosework.ssa.gov/library/fact-sheet-benefits-counseling-and-the-path-to-employment"
+        ],
+        "evidence": "",
+        "note": "What WIPA projects are, who they serve and what counselors help with: the Choose Work! fact sheet."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://choosework.ssa.gov/library/fact-sheet-benefits-counseling-and-the-path-to-employment"
+        ],
+        "evidence": "",
+        "note": "null: the fact sheet describes a free service for Social Security beneficiaries, not a poverty-level income test.",
+        "null_reason": "no_income_test"
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://choosework.ssa.gov/library/fact-sheet-benefits-counseling-and-the-path-to-employment"
+        ],
+        "evidence": "",
+        "note": "The fact sheet names no citizenship rule, so false is recorded but not confirmed.",
+        "unconfirmed": true
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://choosework.ssa.gov/library/fact-sheet-benefits-counseling-and-the-path-to-employment"
+        ],
+        "evidence": "",
+        "note": "The service is free counseling and no dollar value is stated.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://choosework.ssa.gov/library/fact-sheet-benefits-counseling-and-the-path-to-employment"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: http (curl). The fact sheet has a Find a Service Provider section for locating a WIPA project."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://choosework.ssa.gov/library/fact-sheet-benefits-counseling-and-the-path-to-employment"
+        ],
+        "evidence": "",
+        "note": "The pages read give no application processing time.",
+        "null_reason": "no_official_basis"
+      }
+    }
+  },
+  "lifeline_federal": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "FCC Lifeline consumer page as read 2026-10-17 (no effective date shown).",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.fcc.gov/lifeline-consumers"
+        ],
+        "evidence": "",
+        "note": "Who qualifies, the discount, the one-per-household rule and who administers it: the FCC page."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.fcc.gov/lifeline-consumers"
+        ],
+        "evidence": "household income is at or below 135% of the Federal Poverty Guidelines",
+        "note": "Stated directly as a percent. Participation in listed programs also qualifies."
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.fcc.gov/lifeline-consumers"
+        ],
+        "evidence": "",
+        "note": "The page names no citizenship rule, so false is recorded but not confirmed.",
+        "unconfirmed": true
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.fcc.gov/lifeline-consumers"
+        ],
+        "evidence": "up to a $9.25 monthly discount on service for eligible low-income subscribers",
+        "note": "The standard maximum monthly discount. Subscribers on Tribal lands can get up to $34.25, which is not used here.",
+        "estimated": true,
+        "estimate": {
+          "method": "official_basis",
+          "represents": "The maximum standard Lifeline discount per month; actual savings depend on the service plan.",
+          "formula": "monthly_discount",
+          "inputs": [
+            {
+              "name": "monthly_discount",
+              "value": 9.25,
+              "unit": "USD per month",
+              "period": "FCC Lifeline page, standard discount",
+              "url": "https://www.fcc.gov/lifeline-consumers",
+              "evidence": "up to a $9.25 monthly discount on service for eligible low-income subscribers"
+            }
+          ]
+        }
+      },
+      "application_url": {
+        "urls": [
+          "https://www.fcc.gov/lifeline-consumers"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: browser. The FCC page links to lifelinesupport.org, which is not on the official-host list, so the FCC page is the landing page. The site blocks plain HTTP clients."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://www.fcc.gov/lifeline-consumers"
+        ],
+        "evidence": "",
+        "note": "The pages read give no application processing time.",
+        "null_reason": "no_official_basis"
+      }
+    }
+  },
+  "csfp_federal": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "USDA CSFP page and the Federal Register final rule of Oct. 31, 2024 (effective Dec. 30, 2024) as read 2026-10-17.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.fns.usda.gov/csfp",
+          "https://www.federalregister.gov/documents/2024/10/31/2024-24966/food-distribution-programs-improving-access-and-parity",
+          "https://www.fns.usda.gov/csfp/program-contacts"
+        ],
+        "evidence": "",
+        "note": "Who it serves: the FNS CSFP page. The 150 percent limit and program-based eligibility: the Federal Register rule. State contacts, with Texas listed: the FNS contacts page."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.federalregister.gov/documents/2024/10/31/2024-24966/food-distribution-programs-improving-access-and-parity"
+        ],
+        "evidence": "maximum income eligibility guidelines to 150 percent of the U.S. Federal Poverty Guidelines",
+        "note": "The rule says states had to implement within 12 months of publication, so it should apply now."
+      },
+      "eligibility.age_min": {
+        "urls": [
+          "https://www.fns.usda.gov/csfp"
+        ],
+        "evidence": "at least 60 years of age",
+        "note": "Persons with low income at least 60 years of age."
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.fns.usda.gov/csfp"
+        ],
+        "evidence": "",
+        "note": "The page names no citizenship rule, so false is recorded but not confirmed.",
+        "unconfirmed": true
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.fns.usda.gov/csfp"
+        ],
+        "evidence": "",
+        "note": "No official per-person or average amount for this program was found in the pages read.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://www.fns.usda.gov/csfp/program-contacts"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: http (curl). USDA lists the state agency contacts, including Texas."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://www.fns.usda.gov/csfp"
+        ],
+        "evidence": "",
+        "note": "The pages read give no application processing time.",
+        "null_reason": "no_official_basis"
+      }
+    }
+  },
+  "child_dependent_care_credit_federal": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "IRS Tax Topic 602 as read 2026-10-17 (no tax year stated).",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.irs.gov/taxtopics/tc602"
+        ],
+        "evidence": "",
+        "note": "Who qualifies, expense limits and the earned income rule: IRS Tax Topic 602."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.irs.gov/taxtopics/tc602"
+        ],
+        "evidence": "",
+        "note": "null: the credit percentage depends on adjusted gross income but there is no poverty-level cutoff.",
+        "null_reason": "no_income_test"
+      },
+      "eligibility.age_max": {
+        "urls": [
+          "https://www.irs.gov/taxtopics/tc602"
+        ],
+        "evidence": "Your dependent qualifying child who was under age 13 when the care was provided",
+        "note": "Under 13 means age 12 or younger."
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.irs.gov/taxtopics/tc602"
+        ],
+        "evidence": "",
+        "note": "The page requires a taxpayer identification number for each qualifying person but states no citizenship rule, so false is recorded but not confirmed.",
+        "unconfirmed": true
+      },
+      "eligibility.requires_children": {
+        "urls": [
+          "https://www.irs.gov/taxtopics/tc602"
+        ],
+        "evidence": "Your dependent qualifying child who was under age 13 when the care was provided",
+        "note": "A qualifying person can also be a spouse or other dependent incapable of self-care, so children are not the only path; recorded true because this program is matched here for families with a child under 13."
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.irs.gov/taxtopics/tc602"
+        ],
+        "evidence": "",
+        "note": "The credit is a percentage of expenses that depends on income, and the page gives no typical amount.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://www.irs.gov/taxtopics/tc602"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: http (curl). Claimed on a federal tax return; the IRS topic page explains the rules."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://www.irs.gov/taxtopics/tc602"
+        ],
+        "evidence": "",
+        "note": "The pages read give no application processing time.",
+        "null_reason": "no_official_basis"
+      }
+    }
+  },
+  "national_school_lunch_federal": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "USDA Child Nutrition Programs Income Eligibility Guidelines notice (effective July 1, 2026 to June 30, 2027) and school meals application page as read 2026-10-17.",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.federalregister.gov/documents/2026/04/09/2026-06842/child-nutrition-programs-income-eligibility-guidelines",
+          "https://www.fns.usda.gov/cn/applying-free-and-reduced-price-school-meals"
+        ],
+        "evidence": "",
+        "note": "The 1.30 and 1.85 multipliers and which programs use them: the Federal Register notice. Automatic eligibility and when to apply: the FNS application page."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.federalregister.gov/documents/2026/04/09/2026-06842/child-nutrition-programs-income-eligibility-guidelines"
+        ],
+        "evidence": "multiplying the year 2026 Federal income poverty guidelines by 1.30 and 1.85",
+        "note": "Free is 130 percent and reduced price is 185 percent. Highest band stored: 185. The notice names the National School Lunch Program among the programs that use the guidelines."
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.fns.usda.gov/cn/applying-free-and-reduced-price-school-meals"
+        ],
+        "evidence": "",
+        "note": "The page names no citizenship rule, so false is recorded but not confirmed.",
+        "unconfirmed": true
+      },
+      "eligibility.requires_children": {
+        "urls": [
+          "https://www.fns.usda.gov/cn/applying-free-and-reduced-price-school-meals"
+        ],
+        "evidence": "all of your children who attend school automatically qualify for free school meals",
+        "note": "The benefit goes to school children."
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.federalregister.gov/documents/2026/04/09/2026-06842/child-nutrition-programs-income-eligibility-guidelines"
+        ],
+        "evidence": "",
+        "note": "No official per-person or average amount for this program was found in the pages read.",
+        "null_reason": "no_official_basis"
+      },
+      "application_url": {
+        "urls": [
+          "https://www.fns.usda.gov/cn/applying-free-and-reduced-price-school-meals"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: http (curl). Apply through your school or district; this FNS page explains how."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://www.fns.usda.gov/cn/applying-free-and-reduced-price-school-meals"
+        ],
+        "evidence": "",
+        "note": "The pages read give no application processing time.",
+        "null_reason": "no_official_basis"
+      }
+    }
+  },
+  "credit_for_other_dependents_federal": {
+    "verified_on": "2026-10-17",
+    "figures_effective": "IRS Child Tax Credit page, Credit for Other Dependents section, as read 2026-10-17 (tax year 2025 rules).",
+    "fields": {
+      "description": {
+        "urls": [
+          "https://www.irs.gov/credits-deductions/individuals/child-tax-credit"
+        ],
+        "evidence": "",
+        "note": "Who qualifies and the $500 amount: the IRS page."
+      },
+      "eligibility.income_limit_pct_fpl": {
+        "urls": [
+          "https://www.irs.gov/credits-deductions/individuals/child-tax-credit"
+        ],
+        "evidence": "",
+        "note": "null: there is no poverty-level test. The credit begins to decrease above $200,000 ($400,000 joint).",
+        "null_reason": "no_income_test"
+      },
+      "eligibility.citizenship_required": {
+        "urls": [
+          "https://www.irs.gov/credits-deductions/individuals/child-tax-credit"
+        ],
+        "evidence": "Be a U.S. citizen, U.S. national, or U.S. resident alien",
+        "note": "Applies to the dependent."
+      },
+      "eligibility.requires_children": {
+        "urls": [
+          "https://www.irs.gov/credits-deductions/individuals/child-tax-credit"
+        ],
+        "evidence": "Credit for Other Dependents (ODC) is a non-refundable credit for taxpayers with dependents who are not eligible for the CTC/ACTC",
+        "note": "Other dependents can include relatives, so children are not the only path; recorded true because this program is matched here for families with a child 17 or older."
+      },
+      "estimated_monthly_value_usd": {
+        "urls": [
+          "https://www.irs.gov/credits-deductions/individuals/child-tax-credit"
+        ],
+        "evidence": "The maximum credit amount is $500 for each dependent",
+        "note": "Maximum credit for one dependent spread over 12 months: 500 / 12 = 41.7, rounded to 42. The credit is claimed once a year.",
+        "estimated": true,
+        "estimate": {
+          "method": "unit_conversion",
+          "represents": "The maximum Credit for Other Dependents for one dependent, per month.",
+          "formula": "round(credit_per_dependent / 12)",
+          "inputs": [
+            {
+              "name": "credit_per_dependent",
+              "value": 500,
+              "unit": "USD per year",
+              "period": "IRS page, tax year 2025",
+              "url": "https://www.irs.gov/credits-deductions/individuals/child-tax-credit",
+              "evidence": "The maximum credit amount is $500 for each dependent"
+            }
+          ]
+        }
+      },
+      "application_url": {
+        "urls": [
+          "https://www.irs.gov/credits-deductions/individuals/child-tax-credit"
+        ],
+        "evidence": "HTTP 200 on 2026-10-17",
+        "note": "method: http (curl). Claimed on a federal tax return; the IRS page explains the rules."
+      },
+      "processing_time_days": {
+        "urls": [
+          "https://www.irs.gov/credits-deductions/individuals/child-tax-credit"
+        ],
+        "evidence": "",
+        "note": "The pages read give no application processing time.",
+        "null_reason": "no_official_basis"
+      }
+    }
   }
 }
