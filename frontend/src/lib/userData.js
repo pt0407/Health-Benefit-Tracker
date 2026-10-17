@@ -32,9 +32,20 @@ export function saveAnswers(scope, answers, { complete = false } = {}) {
 export function clearAnswers(scope) {
   removeKey(`answers:${scope}`);
 }
+// Results saved before the backend stopped sending these two notices still hold
+// them, and Matches shows saved results without asking the backend again.
+const RETIRED_WARNINGS = new Set([
+  "Health coverage programs couldn't be checked automatically. See HealthCare.gov for a full review.",
+  "Health coverage programs weren't checked automatically. See HealthCare.gov for a full review.",
+]);
+
 export function getResults(scope) {
   const e = readEntry(`results:${scope}`);
-  return e ? { result: e.data, savedAt: e.savedAt } : null;
+  if (!e) return null;
+  const warnings = Array.isArray(e.data?.warnings)
+    ? e.data.warnings.filter((w) => !RETIRED_WARNINGS.has(w))
+    : e.data?.warnings;
+  return { result: { ...e.data, warnings }, savedAt: e.savedAt };
 }
 export function saveResults(scope, result) {
   return writeJSON(`results:${scope}`, result);
