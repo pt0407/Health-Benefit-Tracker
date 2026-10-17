@@ -1,4 +1,4 @@
-# BenefitsFinder
+# Civis
 
 *Find the benefits you're owed. In minutes.*
 

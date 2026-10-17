@@ -10,7 +10,7 @@ function Logo() {
       <span className="flex h-8 w-8 items-center justify-center rounded-[9px] bg-brand-900 text-accent">
         <Icon name="check" className="h-4.5 w-4.5" />
       </span>
-      BenefitsFinder
+      Civis
     </Link>
   );
 }
@@ -33,7 +33,7 @@ function Layout({ children }) {
       <div id="main" className="flex-1">{children}</div>
       <footer className="border-t border-line print:hidden">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-8 text-sm text-muted sm:flex-row sm:justify-between sm:px-6">
-          <p>BenefitsFinder is not a government website.</p>
+          <p>Civis is not a government website.</p>
           <p className="max-w-[60ch]">
             Results are estimates from your answers. Only the agency that runs a program can decide
             if you qualify.

@@ -40,7 +40,7 @@ _SENTENCE_END = re.compile(r"(?<=[.!?])(\s+)")
 # instead of a model call.
 SUPPORTED_STATES = {"TX"}
 UNSUPPORTED_STATE_NOTE = (
-    "BenefitsFinder can only check health coverage for Texas right now, so we "
+    "Civis can only check health coverage for Texas right now, so we "
     "can't tell which programs you qualify for in your state yet. You can "
     "compare Marketplace plans and savings at https://www.healthcare.gov."
 )
