@@ -22,22 +22,11 @@ import anthropic
 import pydantic
 
 from agents.insurance_rules import TX_INSURANCE_RULES
+from agents.screening import NEAR_THRESHOLD_PCT, identify, screen
 from config import CLAUDE_MODEL
 from matching.eligibility_matcher import fpl_for_household
 from models.match_result import InsuranceResult
 from models.user_profile import UserProfile
-
-# Thresholds (as % FPL) the model needs dollar figures for.
-THRESHOLDS_PCT_FPL = {
-    "ACA subsidy floor": 100,
-    "Children's Medicaid ages 6-18": 133,
-    "Children's Medicaid ages 1-5": 144,
-    "Children's Medicaid under 1 / Medicaid for Pregnant Women": 198,
-    "CHIP": 201,
-    "CHIP Perinatal": 202,
-    "Medicare Extra Help": 150,
-    "ACA subsidy ceiling": 400,
-}
 
 # False claims the model keeps making despite the prompt. Any sentence that
 # matches is removed from the result after parsing.
@@ -56,9 +45,6 @@ UNSUPPORTED_STATE_NOTE = (
     "compare Marketplace plans and savings at https://www.healthcare.gov."
 )
 
-# How close (in % FPL points) income must be to a threshold to warn about it.
-NEAR_THRESHOLD_PCT = 10
-
 SYSTEM_PROMPT = """\
 You are a benefits navigator specializing in health coverage programs. You \
 help families understand which health insurance programs they likely qualify \
@@ -75,9 +61,12 @@ Special Enrollment Period triggers the rules list, and no other dates. If the ru
 so in `notes` rather than guessing. Use the precomputed numbers in \
 <computed_facts> — do not redo the arithmetic.
 
-`qualifies_for` lists only programs named in the rules. Never add an entry \
-for a situation such as the coverage gap. If no program applies, leave \
-`qualifies_for` empty and explain in `notes`. For each program the household \
+<computed_facts> also screens the programs for this household. \
+`qualifies_for` may list ONLY programs in `programs_to_consider`, and only \
+those the rules say this household likely qualifies for. Never list a program \
+from `ruled_out`; you may mention one in `notes` using the reason given. Never \
+add an entry for a situation such as the coverage gap. If no program applies, \
+leave `qualifies_for` empty and explain in `notes`. For each program the household \
 likely qualifies for, add one entry:
 - `program`: the program name as written in the rules.
 - `program_id`: the id in square brackets after "Program:" in the retrieved \
@@ -91,11 +80,14 @@ credits specifically: "medium" if employment_status is "employed" (we don't \
 know whether they have an affordable employer plan), otherwise "high" when \
 income is 100-400% FPL. An employer plan never affects Medicaid or CHIP \
 confidence.
-- `citizenship`: "not_citizen" means not a US citizen or green-card holder. \
-The person may still be lawfully present (e.g. on a visa), so never say they \
-aren't. Treat lawful presence as unknown for "not_citizen" and \
-"prefer_not_to_say": programs that require it are "medium" at most, and say \
-it depends on their immigration status.
+- Citizenship: "not_citizen" means not a U.S. citizen or green-card holder. \
+The screening already accounts for it. Programs for children depend on each \
+child's own status (children born in the U.S. are citizens). For \
+"prefer_not_to_say", programs that require a qualifying status are "medium" \
+at most, and say it depends on immigration status. If the household is \
+"not_citizen", add a sentence to `notes` that some immigration statuses can \
+still qualify for regular Medicaid and CHIP (the rules say a recent law change \
+limited which ones), so they can apply and Texas HHSC will check.
 - `reason`: one or two plain-English sentences a non-expert can follow. Say \
 who in the household it covers (e.g. "your two children"). Count adults as \
 household_size minus the number of children; if there are two or more \
@@ -110,8 +102,10 @@ single first thing to do.
 
 Put a sentence in `near_threshold_warnings` for every threshold listed as \
 "near" in <computed_facts>, explaining what would change if income moved \
-past it. If the household falls in the Texas coverage gap, explain that in \
-`notes` along with the alternatives the rules list. Write to the user as \
+past it. Use `coverage_gap` in <computed_facts>: if "yes", explain the Texas \
+coverage gap in `notes` along with the alternatives the rules list; if it \
+names a condition, explain the gap only as applying under that condition; \
+if "no", don't mention it. Write to the user as \
 "you", for someone who may be stressed about money: clear, kind, no jargon."""
 
 
@@ -122,8 +116,9 @@ class InsuranceAgentError(RuntimeError):
 def compute_facts(profile: UserProfile) -> dict:
     fpl = fpl_for_household(profile.household_size)
     pct_fpl = round(profile.annual_income / fpl * 100, 1)
+    sc = screen(profile, pct_fpl)
     thresholds = []
-    for name, pct in THRESHOLDS_PCT_FPL.items():
+    for name, pct in sc.thresholds.items():
         thresholds.append({
             "threshold": name,
             "pct_fpl": pct,
@@ -134,6 +129,9 @@ def compute_facts(profile: UserProfile) -> dict:
     return {
         "federal_poverty_level_usd": fpl,
         "household_income_pct_fpl": pct_fpl,
+        "programs_to_consider": [{"program": p, "why": why} for p, why in sc.consider.items()],
+        "ruled_out": [{"program": p, "why": why} for p, why in sc.ruled_out.items()],
+        "coverage_gap": sc.coverage_gap,
         "thresholds": thresholds,
     }
 
@@ -183,7 +181,16 @@ class InsuranceAgent:
             raise InsuranceAgentError("Claude declined to answer this request")
         if response.stop_reason == "max_tokens" or response.parsed_output is None:
             raise InsuranceAgentError(f"Incomplete response (stop_reason={response.stop_reason})")
-        return zero_monthly_values(strip_false_claims(response.parsed_output))
+        result = drop_ruled_out(profile, response.parsed_output)
+        return zero_monthly_values(strip_false_claims(result))
+
+
+def drop_ruled_out(profile: UserProfile, result: InsuranceResult) -> InsuranceResult:
+    """Remove programs the deterministic screen ruled out for this household."""
+    facts = compute_facts(profile)
+    ruled_out = {r["program"] for r in facts["ruled_out"]}
+    kept = [p for p in result.qualifies_for if identify(p.program, p.program_id) not in ruled_out]
+    return result.model_copy(update={"qualifies_for": kept})
 
 
 def zero_monthly_values(result: InsuranceResult) -> InsuranceResult:
