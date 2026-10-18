@@ -22,6 +22,7 @@ export default function Footer() {
             <ul className="mt-2 space-y-1.5">
               <li><Link to="/quiz" className={link}>Check benefits</Link></li>
               <li><Link to="/matches" className={link}>Your matches</Link></li>
+              <li><Link to="/ask" className={link}>Ask Civis</Link></li>
               <li><Link to="/tracker" className={link}>Tracker</Link></li>
               <li><Link to="/signin" className={link}>Sign in</Link></li>
             </ul>

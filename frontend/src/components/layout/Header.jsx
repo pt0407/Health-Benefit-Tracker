@@ -7,6 +7,7 @@ import Icon from "../shared/Icon.jsx";
 const NAV = [
   { to: "/quiz", label: "Check benefits" },
   { to: "/matches", label: "Your matches" },
+  { to: "/ask", label: "Ask Civis" },
   { to: "/tracker", label: "Tracker" },
 ];
 

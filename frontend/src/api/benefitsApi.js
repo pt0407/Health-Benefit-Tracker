@@ -44,3 +44,9 @@ export async function getIncomeScenarios(profile) {
   const { data } = await api.post("/income-scenarios", profile);
   return data;
 }
+
+// Ask Civis: a question answered from the program records, with sources.
+export async function askCivis({ question, history = [], profile }) {
+  const { data } = await api.post("/ask", { question, history, ...(profile ? { profile } : {}) });
+  return data;
+}
