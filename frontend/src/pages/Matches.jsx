@@ -163,6 +163,7 @@ export default function Matches() {
               )}
             </p>
             {strong > 0 && <p className="mt-3 font-semibold">{plural(strong, "strong match", "strong matches")}</p>}
+            <p className="mt-3">Have a question about a program? <Link to="/ask">Ask Civis</Link></p>
             <details className="mt-5 max-w-[70ch]">
               <summary className="font-semibold text-primary underline">What these estimates mean</summary>
               <div className="mt-3 space-y-3 border-l-4 border-border pl-4">

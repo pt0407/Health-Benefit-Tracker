@@ -1,13 +1,16 @@
 import json
 from functools import lru_cache
 
-from fastapi import APIRouter, Body, Depends, HTTPException, Response
+from fastapi import APIRouter, Body, Depends, HTTPException, Request, Response
 
+from agents.ask_agent import AskAgent, AskAgentError
 from agents.insurance_agent import InsuranceAgent, InsuranceAgentError
+from agents.rate_limit import RateLimiter, client_ip
 from config import PROGRAMS_DIR
 from export.pdf_export import render_worksheet_pdf
 from matching.eligibility_matcher import EligibilityMatcher
 from matching.income_scenarios import build_income_scenarios
+from models.ask import AskRequest, AskResponse
 from models.income_scenarios import IncomeScenariosResponse
 from models.match_result import InsuranceResult, MatchResponse
 from models.program import Program
@@ -89,6 +92,28 @@ def export_pdf(profile: UserProfile = Body(...),
         media_type="application/pdf",
         headers={"Content-Disposition": 'attachment; filename="civis-worksheet.pdf"'},
     )
+
+
+@lru_cache
+def get_ask_agent() -> AskAgent:
+    return AskAgent()
+
+
+# Every question spends API credit: 10 per person per 10 minutes, 300 an hour overall.
+ask_limiter = RateLimiter(per_client=10, client_window_s=600, total=300, total_window_s=3600)
+
+
+@router.post("/ask", response_model=AskResponse)
+def ask(body: AskRequest, request: Request, agent: AskAgent = Depends(get_ask_agent)) -> AskResponse:
+    """Ask Civis: answer a benefits question from the program records only."""
+    if not ask_limiter.allow(client_ip(request.headers, request.client.host if request.client else "?")):
+        raise HTTPException(status_code=429, detail="Too many questions right now. Please wait a few minutes.")
+    try:
+        return agent.run(body)
+    except IndexNotBuiltError as e:
+        raise HTTPException(status_code=503, detail=str(e)) from e
+    except AskAgentError as e:
+        raise HTTPException(status_code=502, detail=str(e)) from e
 
 
 @router.post("/insurance-check", response_model=InsuranceResult)

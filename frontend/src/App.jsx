@@ -3,6 +3,7 @@ import { RequireAuth } from "./auth/AuthContext.jsx";
 import Layout from "./components/layout/Layout.jsx";
 import QuizWizard from "./components/Quiz/QuizWizard.jsx";
 import ErrorBoundary from "./components/shared/ErrorBoundary.jsx";
+import Ask from "./pages/Ask.jsx";
 import Home from "./pages/Home.jsx";
 import Matches from "./pages/Matches.jsx";
 import NotFound from "./pages/NotFound.jsx";
@@ -19,6 +20,7 @@ export default function App() {
           <Route path="/quiz" element={<QuizWizard />} />
           <Route path="/matches" element={<Matches />} />
           <Route path="/results" element={<Navigate to="/matches" replace />} />
+          <Route path="/ask" element={<Ask />} />
           <Route path="/tracker" element={<RequireAuth><Tracker /></RequireAuth>} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
