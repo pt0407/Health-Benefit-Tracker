@@ -5,7 +5,7 @@ check it off when the PR merges. See `docs/BUILD_PLAN.md` §8 for details.
 
 ## Week 1–2: Foundation
 - [x] Set up project structure and repo (skeleton, CLAUDE.md, contracts)
-- [ ] Scrape and parse all program data — **Person 2**
+- [x] Scrape and parse all program data — **Person 2** (hand-curated w/ citations, PR #32)
 - [ ] Build ChromaDB index — **Person 2**
 - [ ] FastAPI skeleton with `/api/match` stub — **Person 1** (stub returns fixture; replace with real matcher)
 - [ ] React quiz wizard UI — **Person 3**
