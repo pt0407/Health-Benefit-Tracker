@@ -1,1 +1,222 @@
-[]
+[
+  {
+    "program_id": "tx_childrens_medicaid",
+    "name": "Texas Children's Medicaid",
+    "type": "federal_state",
+    "category": "healthcare",
+    "description": "Free health coverage for children under 19. Income limits are TIERED by the child's age (schema stores the base ceiling): infants under 1 qualify up to 198% FPL, ages 1-5 up to 144% FPL, ages 6-18 up to 133% FPL — each plus a 5% MAGI disregard. The matcher should use children_ages from the profile to pick the right tier; the 133% stored here is the conservative floor.",
+    "eligibility": {
+      "income_limit_pct_fpl": 133,
+      "citizenship_required": false,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": true,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": 300,
+    "application_url": "https://www.yourtexasbenefits.com",
+    "documents_needed": ["Child's Social Security number or immigration documents", "Proof of household income", "Proof of Texas residency"],
+    "processing_time_days": 45,
+    "source": "Texas HHSC Texas Works Handbook C-131 (eff. March 2026)",
+    "last_updated": "2026-09-27"
+  },
+  {
+    "program_id": "tx_chip",
+    "name": "Texas CHIP (Children's Health Insurance Program)",
+    "type": "federal_state",
+    "category": "healthcare",
+    "description": "Low-cost coverage for children under 19 whose family income is too high for Children's Medicaid but at or below 201% FPL. Requires the child to be UNINSURED — matcher must check insurance_status. Enrollment fee up to $50/family/year plus small copays. Designed to catch the 133-201% FPL band where Children's Medicaid ends.",
+    "eligibility": {
+      "income_limit_pct_fpl": 201,
+      "citizenship_required": false,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": true,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": 250,
+    "application_url": "https://www.yourtexasbenefits.com",
+    "documents_needed": ["Child's Social Security number or immigration documents", "Proof of household income", "Proof of Texas residency"],
+    "processing_time_days": 45,
+    "source": "Texas HHSC Texas Works Handbook C-131 (eff. March 2026)",
+    "last_updated": "2026-09-27"
+  },
+  {
+    "program_id": "tx_medicaid_pregnancy",
+    "name": "Texas Medicaid for Pregnant Women",
+    "type": "federal_state",
+    "category": "healthcare",
+    "description": "Full Medicaid coverage during pregnancy and 12 months postpartum at up to 198% FPL. Notably generous relative to Texas's otherwise strict adult Medicaid — a key match for expecting mothers. Covers prenatal care, delivery, and postpartum care.",
+    "eligibility": {
+      "income_limit_pct_fpl": 198,
+      "citizenship_required": false,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": false,
+      "requires_pregnancy": true
+    },
+    "estimated_monthly_value_usd": 300,
+    "application_url": "https://www.yourtexasbenefits.com",
+    "documents_needed": ["Proof of pregnancy (clinic verification)", "Proof of household income", "Proof of Texas residency"],
+    "processing_time_days": 15,
+    "source": "Texas HHSC Texas Works Handbook C-131 (eff. March 2026)",
+    "last_updated": "2026-09-27"
+  },
+  {
+    "program_id": "tx_chip_perinatal",
+    "name": "CHIP Perinatal (Texas)",
+    "type": "federal_state",
+    "category": "healthcare",
+    "description": "Prenatal care and delivery coverage for the unborn child of pregnant people up to 202% FPL who do NOT qualify for Medicaid — including because of immigration status. The key pathway for non-citizen expecting mothers; pair with tx_emergency_medicaid for the delivery itself.",
+    "eligibility": {
+      "income_limit_pct_fpl": 202,
+      "citizenship_required": false,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": false,
+      "requires_pregnancy": true
+    },
+    "estimated_monthly_value_usd": 250,
+    "application_url": "https://www.yourtexasbenefits.com",
+    "documents_needed": ["Proof of pregnancy", "Proof of household income"],
+    "processing_time_days": 15,
+    "source": "Texas HHSC Texas Works Handbook C-131 (eff. March 2026)",
+    "last_updated": "2026-09-27"
+  },
+  {
+    "program_id": "tx_medicaid_parent",
+    "name": "Texas Medicaid for Parents & Caretaker Relatives",
+    "type": "federal_state",
+    "category": "healthcare",
+    "description": "Medicaid for parents/caretakers of a dependent child — but Texas has NOT expanded Medicaid, so the income ceiling is extremely low (roughly 16% FPL, only a few hundred dollars a month). Treat matches as low confidence and always note that most childless adults and most working parents do NOT qualify in Texas. The ACA marketplace (100%+ FPL) is the fallback.",
+    "eligibility": {
+      "income_limit_pct_fpl": 16,
+      "citizenship_required": false,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": true,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": 300,
+    "application_url": "https://www.yourtexasbenefits.com",
+    "documents_needed": ["Proof of relationship to dependent child", "Proof of household income", "Proof of Texas residency"],
+    "processing_time_days": 45,
+    "source": "Texas HHSC; KFF Medicaid eligibility limits (Jan 2026)",
+    "last_updated": "2026-09-27"
+  },
+  {
+    "program_id": "tx_emergency_medicaid",
+    "name": "Texas Emergency Medicaid",
+    "type": "federal_state",
+    "category": "healthcare",
+    "description": "Medicaid coverage for emergency medical conditions (including labor and delivery) for people who meet Medicaid rules except for immigration status. The safety net for non-citizens — pair with CHIP Perinatal for prenatal coverage. Covers the emergency condition only, not ongoing care.",
+    "eligibility": {
+      "income_limit_pct_fpl": null,
+      "citizenship_required": false,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": null,
+    "application_url": "https://www.yourtexasbenefits.com",
+    "documents_needed": ["Emergency medical documentation from a provider", "Proof of income"],
+    "processing_time_days": 15,
+    "source": "Texas HHSC",
+    "last_updated": "2026-09-27"
+  },
+  {
+    "program_id": "tx_medicaid_aged_disabled",
+    "name": "Texas Medicaid for the Elderly & People with Disabilities",
+    "type": "federal_state",
+    "category": "healthcare",
+    "description": "Medicaid for Texans who are 65+, blind, or disabled, at SSI-level income (~75% FPL for an individual) with resources under $2,000 ($3,000 for couples). SSI recipients are enrolled automatically. Community-based long-term care waivers have separate, higher limits.",
+    "eligibility": {
+      "income_limit_pct_fpl": 75,
+      "citizenship_required": false,
+      "age_min": 65,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": 350,
+    "application_url": "https://www.yourtexasbenefits.com",
+    "documents_needed": ["Proof of age or disability determination", "Proof of income and resources", "Proof of Texas residency"],
+    "processing_time_days": 45,
+    "source": "Texas HHSC MEPD handbook",
+    "last_updated": "2026-09-27"
+  },
+  {
+    "program_id": "ceap_liheap_texas",
+    "name": "CEAP — Comprehensive Energy Assistance Program (Texas LIHEAP)",
+    "type": "federal_state",
+    "category": "utilities",
+    "description": "Help paying electricity and gas bills (up to 6 months for non-vulnerable households, longer for elderly/disabled households), plus crisis assistance and HVAC repair. Income at or below 150% FPL; categorical eligibility for households receiving SNAP, TANF, or SSI. Administered by local subrecipients in all 254 Texas counties.",
+    "eligibility": {
+      "income_limit_pct_fpl": 150,
+      "citizenship_required": false,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": 120,
+    "application_url": "https://www.tdhca.texas.gov/comprehensive-energy-assistance-program-ceap",
+    "documents_needed": ["Recent utility bills", "Proof of household income for all members", "Photo ID"],
+    "processing_time_days": 30,
+    "source": "TDHCA; 10 TAC 6.307-6.309",
+    "last_updated": "2026-09-27"
+  },
+  {
+    "program_id": "tx_tanf",
+    "name": "Texas TANF Cash Assistance",
+    "type": "federal_state",
+    "category": "cash",
+    "description": "Monthly cash help for families with children 18 or younger — but Texas limits are among the lowest in the country. The recognizable-needs screen is ~$188/month for a one-parent family of three (~8% FPL), so only families in deep poverty pass. Max grant $382/month for that family. Requires children; 'child-only' cases (relative caregivers of a child) have their own track and are worth flagging to grandparents/kinship caregivers.",
+    "eligibility": {
+      "income_limit_pct_fpl": 8,
+      "citizenship_required": false,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": true,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": 382,
+    "application_url": "https://www.yourtexasbenefits.com",
+    "documents_needed": ["Proof of children in the household", "Proof of all household income", "Photo ID", "Social Security numbers"],
+    "processing_time_days": 30,
+    "source": "Texas HHSC Texas Works Handbook C-110/C-111 (rev. Oct 2025)",
+    "last_updated": "2026-09-27"
+  },
+  {
+    "program_id": "tx_unemployment",
+    "name": "Texas Unemployment Benefits (TWC)",
+    "type": "federal_state",
+    "category": "cash",
+    "description": "Weekly payments for workers who lost their job through no fault of their own. Not poverty-tested — eligibility is based on wage history during the base period. Matcher should key on employment_status 'recently_unemployed' or 'unemployed', not the FPL field. Average benefit replaces roughly half of prior wages, capped at ~$577/week.",
+    "eligibility": {
+      "income_limit_pct_fpl": null,
+      "citizenship_required": false,
+      "age_min": 16,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": 1600,
+    "application_url": "https://www.twc.texas.gov/jobseekers/unemployment-benefits",
+    "documents_needed": ["Work history for the last 18 months", "Employer names and dates", "Reason for separation"],
+    "processing_time_days": 21,
+    "source": "Texas Workforce Commission",
+    "last_updated": "2026-09-27"
+  }
+]

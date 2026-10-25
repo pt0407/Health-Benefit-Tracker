@@ -1,12 +1,12 @@
 [
   {
     "program_id": "snap_federal",
-    "name": "SNAP (Food Stamps)",
+    "name": "SNAP (Supplemental Nutrition Assistance Program)",
     "type": "federal",
     "category": "nutrition",
-    "description": "Monthly food assistance loaded onto an EBT card for low-income households.",
+    "description": "Monthly food assistance on a Lone Star EBT card. IMPORTANT for Texas: under Broad-Based Categorical Eligibility (BBCE), most Texas households are screened against a 165% FPL gross-income limit, not the federal 130% baseline. Households with an elderly (60+) or disabled member must instead pass a 100% FPL net-income test. Qualified noncitizens may be eligible; many children qualify regardless of their parents' status.",
     "eligibility": {
-      "income_limit_pct_fpl": 130,
+      "income_limit_pct_fpl": 165,
       "citizenship_required": false,
       "age_min": null,
       "age_max": null,
@@ -14,11 +14,187 @@
       "requires_disability": false,
       "requires_pregnancy": false
     },
-    "estimated_monthly_value_usd": 281,
-    "application_url": "https://www.benefits.gov/benefit/361",
-    "documents_needed": ["ID", "Proof of income", "Utility bills"],
+    "estimated_monthly_value_usd": 360,
+    "application_url": "https://www.yourtexasbenefits.com",
+    "documents_needed": ["Photo ID", "Social Security numbers for all household members", "Proof of income (last 30 days of pay stubs)", "Proof of address (utility bill or lease)", "Rent/mortgage and utility expense records"],
     "processing_time_days": 30,
-    "source": "USDA FNS",
-    "last_updated": "2025-01-01"
+    "source": "Texas HHSC Texas Works Handbook C-121 (rev. Oct 2025); USDA FNS",
+    "last_updated": "2026-09-27"
+  },
+  {
+    "program_id": "wic_federal",
+    "name": "WIC (Women, Infants, and Children)",
+    "type": "federal_state",
+    "category": "nutrition",
+    "description": "Food benefits, nutrition education, and breastfeeding support. CATEGORICAL requirement the schema can't express: the household must include a pregnant woman, a postpartum/breastfeeding woman (up to 1 year), an infant, or a child under age 5. Income limit is 185% FPL, and households on SNAP, Medicaid, or TANF are adjunctively income-eligible automatically. No citizenship requirement.",
+    "eligibility": {
+      "income_limit_pct_fpl": 185,
+      "citizenship_required": false,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": 60,
+    "application_url": "https://texaswic.com",
+    "documents_needed": ["Proof of identity", "Proof of address", "Proof of income (or SNAP/Medicaid/TANF enrollment)", "Immunization records for children"],
+    "processing_time_days": 14,
+    "source": "Texas WIC Policy CS:12.0; USDA WIC 2025/26 income guidelines (90 FR, eff. July 1, 2025)",
+    "last_updated": "2026-09-27"
+  },
+  {
+    "program_id": "nslp_meals",
+    "name": "Free & Reduced-Price School Meals (NSLP/SBP)",
+    "type": "federal",
+    "category": "nutrition",
+    "description": "Free or reduced-price breakfast and lunch at school. Free meals at or below 130% FPL; reduced-price at or below 185% FPL. Children in SNAP/TANF households are directly certified — no application needed. Requires a child enrolled in a participating school.",
+    "eligibility": {
+      "income_limit_pct_fpl": 185,
+      "citizenship_required": false,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": true,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": 75,
+    "application_url": "https://www.fns.usda.gov/nslp",
+    "documents_needed": ["School meal application via the child's school district", "Household income information", "SNAP/TANF case number if applicable"],
+    "processing_time_days": 10,
+    "source": "USDA FNS income eligibility guidelines 2025-26 (eff. July 1, 2025)",
+    "last_updated": "2026-09-27"
+  },
+  {
+    "program_id": "lifeline",
+    "name": "Lifeline Phone & Internet Benefit",
+    "type": "federal",
+    "category": "utilities",
+    "description": "Up to $9.25/month off phone or internet service ($34.25 on Tribal lands). Income at or below 135% FPL, or automatic eligibility through SNAP, Medicaid, SSI, WIC, or other qualifying programs.",
+    "eligibility": {
+      "income_limit_pct_fpl": 135,
+      "citizenship_required": false,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": 9.25,
+    "application_url": "https://www.lifelinesupport.org",
+    "documents_needed": ["Proof of income or program participation (SNAP/Medicaid/SSI award letter)", "Identity verification"],
+    "processing_time_days": 7,
+    "source": "FCC / USAC Lifeline program rules",
+    "last_updated": "2026-09-27"
+  },
+  {
+    "program_id": "medicare_savings",
+    "name": "Medicare Savings Programs (QMB/SLMB/QI)",
+    "type": "federal_state",
+    "category": "healthcare",
+    "description": "Pays Medicare Part B premiums (and sometimes deductibles/copays) for Medicare enrollees with limited income: QMB ~100% FPL, SLMB ~120%, QI ~135%. Requires being on Medicare — typically age 65+ or disability + 24 months of SSDI. Texas resource limits also apply.",
+    "eligibility": {
+      "income_limit_pct_fpl": 135,
+      "citizenship_required": false,
+      "age_min": 65,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": 200,
+    "application_url": "https://www.yourtexasbenefits.com",
+    "documents_needed": ["Medicare card", "Proof of income", "Resource/asset information"],
+    "processing_time_days": 45,
+    "source": "Texas HHSC MEPD bulletin; Medicare.gov",
+    "last_updated": "2026-09-27"
+  },
+  {
+    "program_id": "extra_help_lis",
+    "name": "Medicare Extra Help (Part D Low-Income Subsidy)",
+    "type": "federal",
+    "category": "healthcare",
+    "description": "Covers most Medicare Part D prescription drug costs — worth about $5,300/year. Income limit ~150% FPL with resource limits. Must be enrolled in Medicare. Automatic for people who also get Medicaid, SSI, or a Medicare Savings Program.",
+    "eligibility": {
+      "income_limit_pct_fpl": 150,
+      "citizenship_required": false,
+      "age_min": 65,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": 442,
+    "application_url": "https://www.ssa.gov/extrahelp",
+    "documents_needed": ["Medicare information", "Proof of income and resources"],
+    "processing_time_days": 30,
+    "source": "Social Security Administration / CMS",
+    "last_updated": "2026-09-27"
+  },
+  {
+    "program_id": "ssi",
+    "name": "Supplemental Security Income (SSI)",
+    "type": "federal",
+    "category": "cash",
+    "description": "Monthly cash benefit (~$967/mo individual, $1,450/mo couple in 2026) for people who are 65+, blind, or disabled with very limited income and resources. Requires age 65+ OR a qualifying disability — the schema can't express OR, so screen on the disability flag. In Texas, SSI recipients are automatically enrolled in Medicaid.",
+    "eligibility": {
+      "income_limit_pct_fpl": null,
+      "citizenship_required": false,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": true,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": 967,
+    "application_url": "https://www.ssa.gov/ssi",
+    "documents_needed": ["Proof of age and citizenship/immigration status", "Medical records (if under 65)", "Income and resource documentation", "Bank account information"],
+    "processing_time_days": 120,
+    "source": "Social Security Administration",
+    "last_updated": "2026-09-27"
+  },
+  {
+    "program_id": "ssdi",
+    "name": "Social Security Disability Insurance (SSDI)",
+    "type": "federal",
+    "category": "cash",
+    "description": "Monthly benefit for workers who become disabled and have sufficient work credits. Not income-tested — based on work history and a qualifying disability. Beneficiaries get Medicare after a 24-month waiting period.",
+    "eligibility": {
+      "income_limit_pct_fpl": null,
+      "citizenship_required": false,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": true,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": 1500,
+    "application_url": "https://www.ssa.gov/disability",
+    "documents_needed": ["Work history", "Medical records and treatment history", "W-2s or tax returns"],
+    "processing_time_days": 180,
+    "source": "Social Security Administration",
+    "last_updated": "2026-09-27"
+  },
+  {
+    "program_id": "aca_premium_tax_credit",
+    "name": "ACA Marketplace Premium Tax Credits",
+    "type": "federal",
+    "category": "healthcare",
+    "description": "Subsidized health insurance through HealthCare.gov (Texas uses the federal marketplace). Requires household income of at least 100% FPL — the schema only stores a ceiling, so the matcher must also apply the floor. CRITICAL TEXAS NOTE: adults under 100% FPL fall in the coverage gap (Texas did not expand Medicaid) — flag this instead of matching. Must be lawfully present and not eligible for Medicaid/CHIP or affordable employer coverage.",
+    "eligibility": {
+      "income_limit_pct_fpl": 400,
+      "citizenship_required": true,
+      "age_min": null,
+      "age_max": null,
+      "requires_children": false,
+      "requires_disability": false,
+      "requires_pregnancy": false
+    },
+    "estimated_monthly_value_usd": 500,
+    "application_url": "https://www.healthcare.gov",
+    "documents_needed": ["Income estimate for the coverage year", "Social Security numbers or immigration documents", "Employer coverage information if applicable"],
+    "processing_time_days": 1,
+    "source": "HealthCare.gov; IRS premium tax credit rules (26 U.S.C. 36B)",
+    "last_updated": "2026-09-27"
   }
 ]
